@@ -585,580 +585,755 @@ namespace TempAR
 
     private void InitializeComponent()
     {
-      this.pnlConvertFormat = new Panel();
-      this.rdbTempAR = new RadioButton();
-      this.rdbR4CCE = new RadioButton();
-      this.rdbNitePR = new RadioButton();
-      this.rdbCWCheatPOPS = new RadioButton();
-      this.pnlConvertFile = new Panel();
-      this.btnOutputBrowse = new Button();
-      this.btnInputBrowse = new Button();
-      this.txtOutputPath = new TextBox();
-      this.txtInputPath = new TextBox();
-      this.lblOutputPath = new Label();
-      this.lblInputPath = new Label();
-      this.frmStatusStrip = new StatusStrip();
-      this.lblStatus = new ToolStripStatusLabel();
-      this.tctrlTabs = new TabControl();
-      this.tabConverter = new TabPage();
-      this.btnConvert = new Button();
-      this.pnlConvertType = new Panel();
-      this.rdbConvertText = new RadioButton();
-      this.rdbConvertFile = new RadioButton();
-      this.pnlConvertText = new Panel();
-      this.txtTextOutput = new TextBox();
-      this.txtTextInput = new TextBox();
-      this.tabPointerSearcher = new TabPage();
-      this.txtBaseAddress = new TextBox();
-      this.lblBaseAddress = new Label();
-      this.comboPointerSearcherMode = new ComboBox();
-      this.pnlPointerSearcherCodeType = new Panel();
-            this.rdbPointerSearcherCodeTypeVitaCheat = new RadioButton();
-            this.rdbPointerSearcherCodeTypeCWCheat = new RadioButton();
-            this.rdbPointerSearcherCodeTypeAR = new RadioButton();
-      this.pnlPointerSearcherBitType = new Panel();
-      this.rdbPointerSearcherBitType32 = new RadioButton();
-      this.rdbPointerSearcherBitType8 = new RadioButton();
-      this.rdbPointerSearcherBitType16 = new RadioButton();
-      this.chkPointerSearcherRealAddresses = new CheckBox();
-      this.txtPointerSearcherCode = new TextBox();
-      this.chkPointerSearcherOptimizePointerPaths = new CheckBox();
-      this.chkPointerSearcherRAWCode = new CheckBox();
-      this.chkPointerSearcherIncludeNegatives = new CheckBox();
-      this.btnPointerSearcherClear = new Button();
-      this.btnPointerSearcherFindPointers = new Button();
-      this.treePointerSearcherPointers = new TreeView();
-      this.lblPointerSearcherValue = new Label();
-      this.lblPointerSearcherMaxOffset = new Label();
-      this.txtPointerSearcherValue = new TextBox();
-      this.txtPointerSearcherMaxOffset = new TextBox();
-      this.lblPointerSearcherMemDump2 = new Label();
-      this.lblPointerSearcherMemDump1 = new Label();
-      this.lblPointerSearcherMode = new Label();
-      this.lblPointerSearcherAddress2 = new Label();
-      this.lblPointerSearcherAddress1 = new Label();
-      this.txtPointerSearcherMemDump2 = new TextBox();
-      this.txtPointerSearcherMemDump1 = new TextBox();
-      this.txtPointerSearcherAddress2 = new TextBox();
-      this.txtPointerSearcherAddress1 = new TextBox();
-      this.pnlConvertFormat.SuspendLayout();
-      this.pnlConvertFile.SuspendLayout();
-      this.frmStatusStrip.SuspendLayout();
-      this.tctrlTabs.SuspendLayout();
-      this.tabConverter.SuspendLayout();
-      this.pnlConvertType.SuspendLayout();
-      this.pnlConvertText.SuspendLayout();
-      this.tabPointerSearcher.SuspendLayout();
-      this.pnlPointerSearcherCodeType.SuspendLayout();
-      this.pnlPointerSearcherBitType.SuspendLayout();
-      this.SuspendLayout();
-      this.pnlConvertFormat.Controls.Add((Control) this.rdbTempAR);
-      this.pnlConvertFormat.Controls.Add((Control) this.rdbR4CCE);
-      this.pnlConvertFormat.Controls.Add((Control) this.rdbNitePR);
-      this.pnlConvertFormat.Controls.Add((Control) this.rdbCWCheatPOPS);
-      this.pnlConvertFormat.Location = new Point(6, 6);
-      this.pnlConvertFormat.Name = "pnlConvertFormat";
-      this.pnlConvertFormat.Size = new Size(440, 24);
-      this.pnlConvertFormat.TabIndex = 7;
-      this.rdbTempAR.AutoSize = true;
-      this.rdbTempAR.Location = new Point(300, 4);
-      this.rdbTempAR.Name = "rdbTempAR";
-      this.rdbTempAR.Size = new Size(117, 17);
-      this.rdbTempAR.TabIndex = 2;
-      this.rdbTempAR.Text = "TempAR to R4CCE";
-      this.rdbTempAR.UseVisualStyleBackColor = true;
-      this.rdbTempAR.Visible = false;
-      this.rdbTempAR.CheckedChanged += new EventHandler(this.rdbR4CCE_CheckedChanged);
-      this.rdbR4CCE.AutoSize = true;
-      this.rdbR4CCE.Location = new Point(177, 4);
-      this.rdbR4CCE.Name = "rdbR4CCE";
-      this.rdbR4CCE.Size = new Size(117, 17);
-      this.rdbR4CCE.TabIndex = 2;
-      this.rdbR4CCE.Text = "R4CCE to TempAR";
-      this.rdbR4CCE.UseVisualStyleBackColor = true;
-      this.rdbR4CCE.CheckedChanged += new EventHandler(this.rdbR4CCE_CheckedChanged);
-      this.rdbNitePR.AutoSize = true;
-      this.rdbNitePR.Location = new Point(112, 4);
-      this.rdbNitePR.Name = "rdbNitePR";
-      this.rdbNitePR.Size = new Size(59, 17);
-      this.rdbNitePR.TabIndex = 1;
-      this.rdbNitePR.Text = "NitePR";
-      this.rdbNitePR.UseVisualStyleBackColor = true;
-      this.rdbNitePR.CheckedChanged += new EventHandler(this.rdbNitePR_CheckedChanged);
-      this.rdbCWCheatPOPS.AutoSize = true;
-      this.rdbCWCheatPOPS.Checked = true;
-      this.rdbCWCheatPOPS.Location = new Point(3, 4);
-      this.rdbCWCheatPOPS.Name = "rdbCWCheatPOPS";
-      this.rdbCWCheatPOPS.Size = new Size(103, 17);
-      this.rdbCWCheatPOPS.TabIndex = 0;
-      this.rdbCWCheatPOPS.TabStop = true;
-      this.rdbCWCheatPOPS.Text = "CWCheat POPS";
-      this.rdbCWCheatPOPS.UseVisualStyleBackColor = true;
-      this.rdbCWCheatPOPS.CheckedChanged += new EventHandler(this.rdbCWCheatPOPS_CheckedChanged);
-      this.pnlConvertFile.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      this.pnlConvertFile.Controls.Add((Control) this.btnOutputBrowse);
-      this.pnlConvertFile.Controls.Add((Control) this.btnInputBrowse);
-      this.pnlConvertFile.Controls.Add((Control) this.txtOutputPath);
-      this.pnlConvertFile.Controls.Add((Control) this.txtInputPath);
-      this.pnlConvertFile.Controls.Add((Control) this.lblOutputPath);
-      this.pnlConvertFile.Controls.Add((Control) this.lblInputPath);
-      this.pnlConvertFile.Location = new Point(5, 40);
-      this.pnlConvertFile.Name = "pnlConvertFile";
-      this.pnlConvertFile.Size = new Size(751, 347);
-      this.pnlConvertFile.TabIndex = 8;
-      this.btnOutputBrowse.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.btnOutputBrowse.Location = new Point(676, 172);
-      this.btnOutputBrowse.Name = "btnOutputBrowse";
-      this.btnOutputBrowse.Size = new Size(72, 23);
-      this.btnOutputBrowse.TabIndex = 8;
-      this.btnOutputBrowse.Text = "Browse";
-      this.btnOutputBrowse.UseVisualStyleBackColor = true;
-      this.btnOutputBrowse.Click += new EventHandler(this.btnOutputBrowse_Click);
-      this.btnInputBrowse.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.btnInputBrowse.Location = new Point(676, 146);
-      this.btnInputBrowse.Name = "btnInputBrowse";
-      this.btnInputBrowse.Size = new Size(72, 23);
-      this.btnInputBrowse.TabIndex = 7;
-      this.btnInputBrowse.Text = "Browse";
-      this.btnInputBrowse.UseVisualStyleBackColor = true;
-      this.btnInputBrowse.Click += new EventHandler(this.btnInputBrowse_Click);
-      this.txtOutputPath.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.txtOutputPath.Location = new Point(82, 174);
-      this.txtOutputPath.Name = "txtOutputPath";
-      this.txtOutputPath.ReadOnly = true;
-      this.txtOutputPath.Size = new Size(588, 20);
-      this.txtOutputPath.TabIndex = 3;
-      this.txtOutputPath.Click += new EventHandler(this.btnOutputBrowse_Click);
-      this.txtInputPath.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.txtInputPath.Location = new Point(82, 148);
-      this.txtInputPath.Name = "txtInputPath";
-      this.txtInputPath.ReadOnly = true;
-      this.txtInputPath.Size = new Size(588, 20);
-      this.txtInputPath.TabIndex = 2;
-      this.txtInputPath.Click += new EventHandler(this.btnInputBrowse_Click);
-      this.lblOutputPath.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.lblOutputPath.AutoSize = true;
-      this.lblOutputPath.Location = new Point(9, 177);
-      this.lblOutputPath.Name = "lblOutputPath";
-      this.lblOutputPath.Size = new Size(67, 13);
-      this.lblOutputPath.TabIndex = 1;
-      this.lblOutputPath.Text = "Output Path:";
-      this.lblInputPath.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.lblInputPath.AutoSize = true;
-      this.lblInputPath.Location = new Point(9, 151);
-      this.lblInputPath.Name = "lblInputPath";
-      this.lblInputPath.Size = new Size(59, 13);
-      this.lblInputPath.TabIndex = 0;
-      this.lblInputPath.Text = "Input Path:";
-      this.frmStatusStrip.Items.AddRange(new ToolStripItem[1]
-      {
-        (ToolStripItem) this.lblStatus
-      });
-      this.frmStatusStrip.Location = new Point(0, 427);
-      this.frmStatusStrip.Name = "frmStatusStrip";
-      this.frmStatusStrip.Size = new Size(769, 22);
-      this.frmStatusStrip.SizingGrip = false;
-      this.frmStatusStrip.TabIndex = 1;
-      this.frmStatusStrip.Text = "statusStrip1";
-      this.lblStatus.BackColor = SystemColors.Control;
-      this.lblStatus.Name = "lblStatus";
-      this.lblStatus.Size = new Size(39, 17);
-      this.lblStatus.Text = "Status";
-      this.lblStatus.Visible = false;
-      this.tctrlTabs.Controls.Add((Control) this.tabConverter);
-      this.tctrlTabs.Controls.Add((Control) this.tabPointerSearcher);
-      this.tctrlTabs.Location = new Point(5, 5);
-      this.tctrlTabs.Name = "tctrlTabs";
-      this.tctrlTabs.SelectedIndex = 0;
-      this.tctrlTabs.Size = new Size(765, 419);
-      this.tctrlTabs.TabIndex = 0;
-      this.tabConverter.Controls.Add((Control) this.btnConvert);
-      this.tabConverter.Controls.Add((Control) this.pnlConvertType);
-      this.tabConverter.Controls.Add((Control) this.pnlConvertFormat);
-      this.tabConverter.Controls.Add((Control) this.pnlConvertText);
-      this.tabConverter.Controls.Add((Control) this.pnlConvertFile);
-      this.tabConverter.Location = new Point(4, 22);
-      this.tabConverter.Name = "tabConverter";
-      this.tabConverter.Padding = new Padding(3);
-      this.tabConverter.Size = new Size(757, 393);
-      this.tabConverter.TabIndex = 0;
-      this.tabConverter.Text = "Code Converter";
-      this.tabConverter.UseVisualStyleBackColor = true;
-      this.btnConvert.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.btnConvert.Location = new Point(666, 4);
-      this.btnConvert.Name = "btnConvert";
-      this.btnConvert.Size = new Size(75, 23);
-      this.btnConvert.TabIndex = 4;
-      this.btnConvert.Text = "Convert";
-      this.btnConvert.UseVisualStyleBackColor = true;
-      this.btnConvert.Click += new EventHandler(this.btnConvert_Click);
-      this.pnlConvertType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.pnlConvertType.Controls.Add((Control) this.rdbConvertText);
-      this.pnlConvertType.Controls.Add((Control) this.rdbConvertFile);
-      this.pnlConvertType.Location = new Point(473, 6);
-      this.pnlConvertType.Name = "pnlConvertType";
-      this.pnlConvertType.Size = new Size(187, 24);
-      this.pnlConvertType.TabIndex = 6;
-      this.rdbConvertText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbConvertText.AutoSize = true;
-      this.rdbConvertText.Checked = true;
-      this.rdbConvertText.Location = new Point(3, 4);
-      this.rdbConvertText.Name = "rdbConvertText";
-      this.rdbConvertText.Size = new Size(86, 17);
-      this.rdbConvertText.TabIndex = 1;
-      this.rdbConvertText.TabStop = true;
-      this.rdbConvertText.Text = "Convert Text";
-      this.rdbConvertText.UseVisualStyleBackColor = true;
-      this.rdbConvertText.CheckedChanged += new EventHandler(this.rdbConvertText_CheckedChanged);
-      this.rdbConvertFile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbConvertFile.AutoSize = true;
-      this.rdbConvertFile.Location = new Point(95, 4);
-      this.rdbConvertFile.Name = "rdbConvertFile";
-      this.rdbConvertFile.Size = new Size(81, 17);
-      this.rdbConvertFile.TabIndex = 0;
-      this.rdbConvertFile.Text = "Convert File";
-      this.rdbConvertFile.UseVisualStyleBackColor = true;
-      this.rdbConvertFile.CheckedChanged += new EventHandler(this.rdbConvertFile_CheckedChanged);
-      this.pnlConvertText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      this.pnlConvertText.Controls.Add((Control) this.txtTextOutput);
-      this.pnlConvertText.Controls.Add((Control) this.txtTextInput);
-      this.pnlConvertText.ImeMode = ImeMode.Off;
-      this.pnlConvertText.Location = new Point(3, 40);
-      this.pnlConvertText.Name = "pnlConvertText";
-      this.pnlConvertText.Size = new Size(751, 347);
-      this.pnlConvertText.TabIndex = 5;
-      this.txtTextOutput.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-      this.txtTextOutput.Location = new Point(383, 3);
-      this.txtTextOutput.Multiline = true;
-      this.txtTextOutput.Name = "txtTextOutput";
-      this.txtTextOutput.ReadOnly = true;
-      this.txtTextOutput.ScrollBars = ScrollBars.Vertical;
-      this.txtTextOutput.Size = new Size(365, 341);
-      this.txtTextOutput.TabIndex = 2;
-      this.txtTextOutput.WordWrap = false;
-      this.txtTextOutput.KeyDown += new KeyEventHandler(this.textFieldSelectAll);
-      this.txtTextInput.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-      this.txtTextInput.Location = new Point(3, 3);
-      this.txtTextInput.Multiline = true;
-      this.txtTextInput.Name = "txtTextInput";
-      this.txtTextInput.ScrollBars = ScrollBars.Vertical;
-      this.txtTextInput.Size = new Size(365, 341);
-      this.txtTextInput.TabIndex = 1;
-      this.txtTextInput.WordWrap = false;
-      this.txtTextInput.TextChanged += new EventHandler(this.txtTextInput_TextChanged);
-      this.txtTextInput.KeyDown += new KeyEventHandler(this.textFieldSelectAll);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtBaseAddress);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblBaseAddress);
-      this.tabPointerSearcher.Controls.Add((Control) this.comboPointerSearcherMode);
-      this.tabPointerSearcher.Controls.Add((Control) this.pnlPointerSearcherCodeType);
-      this.tabPointerSearcher.Controls.Add((Control) this.pnlPointerSearcherBitType);
-      this.tabPointerSearcher.Controls.Add((Control) this.chkPointerSearcherRealAddresses);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherCode);
-      this.tabPointerSearcher.Controls.Add((Control) this.chkPointerSearcherOptimizePointerPaths);
-      this.tabPointerSearcher.Controls.Add((Control) this.chkPointerSearcherRAWCode);
-      this.tabPointerSearcher.Controls.Add((Control) this.chkPointerSearcherIncludeNegatives);
-      this.tabPointerSearcher.Controls.Add((Control) this.btnPointerSearcherClear);
-      this.tabPointerSearcher.Controls.Add((Control) this.btnPointerSearcherFindPointers);
-      this.tabPointerSearcher.Controls.Add((Control) this.treePointerSearcherPointers);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherValue);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherMaxOffset);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherValue);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherMaxOffset);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherMemDump2);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherMemDump1);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherMode);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherAddress2);
-      this.tabPointerSearcher.Controls.Add((Control) this.lblPointerSearcherAddress1);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherMemDump2);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherMemDump1);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherAddress2);
-      this.tabPointerSearcher.Controls.Add((Control) this.txtPointerSearcherAddress1);
-      this.tabPointerSearcher.Location = new Point(4, 22);
-      this.tabPointerSearcher.Name = "tabPointerSearcher";
-      this.tabPointerSearcher.Padding = new Padding(3);
-      this.tabPointerSearcher.Size = new Size(757, 393);
-      this.tabPointerSearcher.TabIndex = 1;
-      this.tabPointerSearcher.Text = "Pointer Searcher";
-      this.tabPointerSearcher.UseVisualStyleBackColor = true;
-      this.txtBaseAddress.Location = new Point(97, 141);
-      this.txtBaseAddress.MaxLength = 10;
-      this.txtBaseAddress.Name = "txtBaseAddress";
-      this.txtBaseAddress.Size = new Size(189, 20);
-      this.txtBaseAddress.TabIndex = 11;
-      this.txtBaseAddress.KeyPress += new KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-      this.lblBaseAddress.AutoSize = true;
-      this.lblBaseAddress.Location = new Point(6, 144);
-      this.lblBaseAddress.Name = "lblBaseAddress";
-      this.lblBaseAddress.Size = new Size(75, 13);
-      this.lblBaseAddress.TabIndex = 10;
-      this.lblBaseAddress.Text = "Base Address:";
-      this.comboPointerSearcherMode.DisplayMember = "1";
-      this.comboPointerSearcherMode.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.comboPointerSearcherMode.FormattingEnabled = true;
-      this.comboPointerSearcherMode.Items.AddRange(new object[4]
-      {
-        (object) "Sony Vita",
-        (object) "Sony PSP",
-        (object) "Nintendo DS",
-        (object) "Other..."
-      });
-      this.comboPointerSearcherMode.Location = new Point(97, 114);
-      this.comboPointerSearcherMode.Name = "comboPointerSearcherMode";
-      this.comboPointerSearcherMode.Size = new Size(189, 21);
-      this.comboPointerSearcherMode.TabIndex = 9;
-      this.comboPointerSearcherMode.SelectedIndexChanged += new EventHandler(this.comboPointerSearcherMode_SelectedIndexChanged);
-      this.pnlPointerSearcherCodeType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeVitaCheat);
-            this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeCWCheat);
-            this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeAR);
-            this.pnlPointerSearcherCodeType.Location = new Point(292, 256);
-      this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
-            this.pnlPointerSearcherCodeType.Size = new Size(700, 24);
+            this.pnlConvertFormat = new System.Windows.Forms.Panel();
+            this.rdbTempAR = new System.Windows.Forms.RadioButton();
+            this.rdbR4CCE = new System.Windows.Forms.RadioButton();
+            this.rdbNitePR = new System.Windows.Forms.RadioButton();
+            this.rdbCWCheatPOPS = new System.Windows.Forms.RadioButton();
+            this.pnlConvertFile = new System.Windows.Forms.Panel();
+            this.btnOutputBrowse = new System.Windows.Forms.Button();
+            this.btnInputBrowse = new System.Windows.Forms.Button();
+            this.txtOutputPath = new System.Windows.Forms.TextBox();
+            this.txtInputPath = new System.Windows.Forms.TextBox();
+            this.lblOutputPath = new System.Windows.Forms.Label();
+            this.lblInputPath = new System.Windows.Forms.Label();
+            this.frmStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tctrlTabs = new System.Windows.Forms.TabControl();
+            this.tabConverter = new System.Windows.Forms.TabPage();
+            this.btnConvert = new System.Windows.Forms.Button();
+            this.pnlConvertType = new System.Windows.Forms.Panel();
+            this.rdbConvertText = new System.Windows.Forms.RadioButton();
+            this.rdbConvertFile = new System.Windows.Forms.RadioButton();
+            this.pnlConvertText = new System.Windows.Forms.Panel();
+            this.txtTextOutput = new System.Windows.Forms.TextBox();
+            this.txtTextInput = new System.Windows.Forms.TextBox();
+            this.tabPointerSearcher = new System.Windows.Forms.TabPage();
+            this.txtBaseAddress = new System.Windows.Forms.TextBox();
+            this.lblBaseAddress = new System.Windows.Forms.Label();
+            this.comboPointerSearcherMode = new System.Windows.Forms.ComboBox();
+            this.pnlPointerSearcherCodeType = new System.Windows.Forms.Panel();
+            this.rdbPointerSearcherCodeTypeVitaCheat = new System.Windows.Forms.RadioButton();
+            this.rdbPointerSearcherCodeTypeCWCheat = new System.Windows.Forms.RadioButton();
+            this.rdbPointerSearcherCodeTypeAR = new System.Windows.Forms.RadioButton();
+            this.pnlPointerSearcherBitType = new System.Windows.Forms.Panel();
+            this.rdbPointerSearcherBitType32 = new System.Windows.Forms.RadioButton();
+            this.rdbPointerSearcherBitType8 = new System.Windows.Forms.RadioButton();
+            this.rdbPointerSearcherBitType16 = new System.Windows.Forms.RadioButton();
+            this.chkPointerSearcherRealAddresses = new System.Windows.Forms.CheckBox();
+            this.txtPointerSearcherCode = new System.Windows.Forms.TextBox();
+            this.chkPointerSearcherOptimizePointerPaths = new System.Windows.Forms.CheckBox();
+            this.chkPointerSearcherRAWCode = new System.Windows.Forms.CheckBox();
+            this.chkPointerSearcherIncludeNegatives = new System.Windows.Forms.CheckBox();
+            this.btnPointerSearcherClear = new System.Windows.Forms.Button();
+            this.btnPointerSearcherFindPointers = new System.Windows.Forms.Button();
+            this.treePointerSearcherPointers = new System.Windows.Forms.TreeView();
+            this.lblPointerSearcherValue = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMaxOffset = new System.Windows.Forms.Label();
+            this.txtPointerSearcherValue = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherMaxOffset = new System.Windows.Forms.TextBox();
+            this.lblPointerSearcherMemDump2 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMemDump1 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMode = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress2 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress1 = new System.Windows.Forms.Label();
+            this.txtPointerSearcherMemDump2 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherMemDump1 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
+            this.pnlConvertFormat.SuspendLayout();
+            this.pnlConvertFile.SuspendLayout();
+            this.frmStatusStrip.SuspendLayout();
+            this.tctrlTabs.SuspendLayout();
+            this.tabConverter.SuspendLayout();
+            this.pnlConvertType.SuspendLayout();
+            this.pnlConvertText.SuspendLayout();
+            this.tabPointerSearcher.SuspendLayout();
+            this.pnlPointerSearcherCodeType.SuspendLayout();
+            this.pnlPointerSearcherBitType.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // pnlConvertFormat
+            // 
+            this.pnlConvertFormat.Controls.Add(this.rdbTempAR);
+            this.pnlConvertFormat.Controls.Add(this.rdbR4CCE);
+            this.pnlConvertFormat.Controls.Add(this.rdbNitePR);
+            this.pnlConvertFormat.Controls.Add(this.rdbCWCheatPOPS);
+            this.pnlConvertFormat.Location = new System.Drawing.Point(6, 6);
+            this.pnlConvertFormat.Name = "pnlConvertFormat";
+            this.pnlConvertFormat.Size = new System.Drawing.Size(440, 24);
+            this.pnlConvertFormat.TabIndex = 7;
+            // 
+            // rdbTempAR
+            // 
+            this.rdbTempAR.AutoSize = true;
+            this.rdbTempAR.Location = new System.Drawing.Point(300, 4);
+            this.rdbTempAR.Name = "rdbTempAR";
+            this.rdbTempAR.Size = new System.Drawing.Size(117, 17);
+            this.rdbTempAR.TabIndex = 2;
+            this.rdbTempAR.Text = "TempAR to R4CCE";
+            this.rdbTempAR.UseVisualStyleBackColor = true;
+            this.rdbTempAR.Visible = false;
+            this.rdbTempAR.CheckedChanged += new System.EventHandler(this.rdbR4CCE_CheckedChanged);
+            // 
+            // rdbR4CCE
+            // 
+            this.rdbR4CCE.AutoSize = true;
+            this.rdbR4CCE.Location = new System.Drawing.Point(177, 4);
+            this.rdbR4CCE.Name = "rdbR4CCE";
+            this.rdbR4CCE.Size = new System.Drawing.Size(117, 17);
+            this.rdbR4CCE.TabIndex = 2;
+            this.rdbR4CCE.Text = "R4CCE to TempAR";
+            this.rdbR4CCE.UseVisualStyleBackColor = true;
+            this.rdbR4CCE.CheckedChanged += new System.EventHandler(this.rdbR4CCE_CheckedChanged);
+            // 
+            // rdbNitePR
+            // 
+            this.rdbNitePR.AutoSize = true;
+            this.rdbNitePR.Location = new System.Drawing.Point(112, 4);
+            this.rdbNitePR.Name = "rdbNitePR";
+            this.rdbNitePR.Size = new System.Drawing.Size(59, 17);
+            this.rdbNitePR.TabIndex = 1;
+            this.rdbNitePR.Text = "NitePR";
+            this.rdbNitePR.UseVisualStyleBackColor = true;
+            this.rdbNitePR.CheckedChanged += new System.EventHandler(this.rdbNitePR_CheckedChanged);
+            // 
+            // rdbCWCheatPOPS
+            // 
+            this.rdbCWCheatPOPS.AutoSize = true;
+            this.rdbCWCheatPOPS.Checked = true;
+            this.rdbCWCheatPOPS.Location = new System.Drawing.Point(3, 4);
+            this.rdbCWCheatPOPS.Name = "rdbCWCheatPOPS";
+            this.rdbCWCheatPOPS.Size = new System.Drawing.Size(103, 17);
+            this.rdbCWCheatPOPS.TabIndex = 0;
+            this.rdbCWCheatPOPS.TabStop = true;
+            this.rdbCWCheatPOPS.Text = "CWCheat POPS";
+            this.rdbCWCheatPOPS.UseVisualStyleBackColor = true;
+            this.rdbCWCheatPOPS.CheckedChanged += new System.EventHandler(this.rdbCWCheatPOPS_CheckedChanged);
+            // 
+            // pnlConvertFile
+            // 
+            this.pnlConvertFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlConvertFile.Controls.Add(this.btnOutputBrowse);
+            this.pnlConvertFile.Controls.Add(this.btnInputBrowse);
+            this.pnlConvertFile.Controls.Add(this.txtOutputPath);
+            this.pnlConvertFile.Controls.Add(this.txtInputPath);
+            this.pnlConvertFile.Controls.Add(this.lblOutputPath);
+            this.pnlConvertFile.Controls.Add(this.lblInputPath);
+            this.pnlConvertFile.Location = new System.Drawing.Point(5, 40);
+            this.pnlConvertFile.Name = "pnlConvertFile";
+            this.pnlConvertFile.Size = new System.Drawing.Size(751, 347);
+            this.pnlConvertFile.TabIndex = 8;
+            // 
+            // btnOutputBrowse
+            // 
+            this.btnOutputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOutputBrowse.Location = new System.Drawing.Point(676, 172);
+            this.btnOutputBrowse.Name = "btnOutputBrowse";
+            this.btnOutputBrowse.Size = new System.Drawing.Size(72, 23);
+            this.btnOutputBrowse.TabIndex = 8;
+            this.btnOutputBrowse.Text = "Browse";
+            this.btnOutputBrowse.UseVisualStyleBackColor = true;
+            this.btnOutputBrowse.Click += new System.EventHandler(this.btnOutputBrowse_Click);
+            // 
+            // btnInputBrowse
+            // 
+            this.btnInputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInputBrowse.Location = new System.Drawing.Point(676, 146);
+            this.btnInputBrowse.Name = "btnInputBrowse";
+            this.btnInputBrowse.Size = new System.Drawing.Size(72, 23);
+            this.btnInputBrowse.TabIndex = 7;
+            this.btnInputBrowse.Text = "Browse";
+            this.btnInputBrowse.UseVisualStyleBackColor = true;
+            this.btnInputBrowse.Click += new System.EventHandler(this.btnInputBrowse_Click);
+            // 
+            // txtOutputPath
+            // 
+            this.txtOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutputPath.Location = new System.Drawing.Point(82, 174);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.ReadOnly = true;
+            this.txtOutputPath.Size = new System.Drawing.Size(588, 20);
+            this.txtOutputPath.TabIndex = 3;
+            this.txtOutputPath.Click += new System.EventHandler(this.btnOutputBrowse_Click);
+            // 
+            // txtInputPath
+            // 
+            this.txtInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInputPath.Location = new System.Drawing.Point(82, 148);
+            this.txtInputPath.Name = "txtInputPath";
+            this.txtInputPath.ReadOnly = true;
+            this.txtInputPath.Size = new System.Drawing.Size(588, 20);
+            this.txtInputPath.TabIndex = 2;
+            this.txtInputPath.Click += new System.EventHandler(this.btnInputBrowse_Click);
+            // 
+            // lblOutputPath
+            // 
+            this.lblOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOutputPath.AutoSize = true;
+            this.lblOutputPath.Location = new System.Drawing.Point(9, 177);
+            this.lblOutputPath.Name = "lblOutputPath";
+            this.lblOutputPath.Size = new System.Drawing.Size(67, 13);
+            this.lblOutputPath.TabIndex = 1;
+            this.lblOutputPath.Text = "Output Path:";
+            // 
+            // lblInputPath
+            // 
+            this.lblInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInputPath.AutoSize = true;
+            this.lblInputPath.Location = new System.Drawing.Point(9, 151);
+            this.lblInputPath.Name = "lblInputPath";
+            this.lblInputPath.Size = new System.Drawing.Size(59, 13);
+            this.lblInputPath.TabIndex = 0;
+            this.lblInputPath.Text = "Input Path:";
+            // 
+            // frmStatusStrip
+            // 
+            this.frmStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.frmStatusStrip.Location = new System.Drawing.Point(0, 427);
+            this.frmStatusStrip.Name = "frmStatusStrip";
+            this.frmStatusStrip.Size = new System.Drawing.Size(769, 22);
+            this.frmStatusStrip.SizingGrip = false;
+            this.frmStatusStrip.TabIndex = 1;
+            this.frmStatusStrip.Text = "statusStrip1";
+            this.frmStatusStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FrmStatusStrip_ItemClicked);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.BackColor = System.Drawing.SystemColors.Control;
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(39, 17);
+            this.lblStatus.Text = "Status";
+            this.lblStatus.Visible = false;
+            // 
+            // tctrlTabs
+            // 
+            this.tctrlTabs.Controls.Add(this.tabConverter);
+            this.tctrlTabs.Controls.Add(this.tabPointerSearcher);
+            this.tctrlTabs.Location = new System.Drawing.Point(5, 5);
+            this.tctrlTabs.Name = "tctrlTabs";
+            this.tctrlTabs.SelectedIndex = 1;
+            this.tctrlTabs.Size = new System.Drawing.Size(765, 419);
+            this.tctrlTabs.TabIndex = 0;
+            // 
+            // tabConverter
+            // 
+            this.tabConverter.Controls.Add(this.btnConvert);
+            this.tabConverter.Controls.Add(this.pnlConvertType);
+            this.tabConverter.Controls.Add(this.pnlConvertFormat);
+            this.tabConverter.Controls.Add(this.pnlConvertText);
+            this.tabConverter.Controls.Add(this.pnlConvertFile);
+            this.tabConverter.Location = new System.Drawing.Point(4, 22);
+            this.tabConverter.Name = "tabConverter";
+            this.tabConverter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabConverter.Size = new System.Drawing.Size(757, 393);
+            this.tabConverter.TabIndex = 0;
+            this.tabConverter.Text = "Code Converter";
+            this.tabConverter.UseVisualStyleBackColor = true;
+            // 
+            // btnConvert
+            // 
+            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConvert.Location = new System.Drawing.Point(666, 4);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(75, 23);
+            this.btnConvert.TabIndex = 4;
+            this.btnConvert.Text = "Convert";
+            this.btnConvert.UseVisualStyleBackColor = true;
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // pnlConvertType
+            // 
+            this.pnlConvertType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlConvertType.Controls.Add(this.rdbConvertText);
+            this.pnlConvertType.Controls.Add(this.rdbConvertFile);
+            this.pnlConvertType.Location = new System.Drawing.Point(473, 6);
+            this.pnlConvertType.Name = "pnlConvertType";
+            this.pnlConvertType.Size = new System.Drawing.Size(187, 24);
+            this.pnlConvertType.TabIndex = 6;
+            // 
+            // rdbConvertText
+            // 
+            this.rdbConvertText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbConvertText.AutoSize = true;
+            this.rdbConvertText.Checked = true;
+            this.rdbConvertText.Location = new System.Drawing.Point(3, 4);
+            this.rdbConvertText.Name = "rdbConvertText";
+            this.rdbConvertText.Size = new System.Drawing.Size(86, 17);
+            this.rdbConvertText.TabIndex = 1;
+            this.rdbConvertText.TabStop = true;
+            this.rdbConvertText.Text = "Convert Text";
+            this.rdbConvertText.UseVisualStyleBackColor = true;
+            this.rdbConvertText.CheckedChanged += new System.EventHandler(this.rdbConvertText_CheckedChanged);
+            // 
+            // rdbConvertFile
+            // 
+            this.rdbConvertFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbConvertFile.AutoSize = true;
+            this.rdbConvertFile.Location = new System.Drawing.Point(95, 4);
+            this.rdbConvertFile.Name = "rdbConvertFile";
+            this.rdbConvertFile.Size = new System.Drawing.Size(81, 17);
+            this.rdbConvertFile.TabIndex = 0;
+            this.rdbConvertFile.Text = "Convert File";
+            this.rdbConvertFile.UseVisualStyleBackColor = true;
+            this.rdbConvertFile.CheckedChanged += new System.EventHandler(this.rdbConvertFile_CheckedChanged);
+            // 
+            // pnlConvertText
+            // 
+            this.pnlConvertText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlConvertText.Controls.Add(this.txtTextOutput);
+            this.pnlConvertText.Controls.Add(this.txtTextInput);
+            this.pnlConvertText.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.pnlConvertText.Location = new System.Drawing.Point(3, 40);
+            this.pnlConvertText.Name = "pnlConvertText";
+            this.pnlConvertText.Size = new System.Drawing.Size(751, 347);
+            this.pnlConvertText.TabIndex = 5;
+            // 
+            // txtTextOutput
+            // 
+            this.txtTextOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.txtTextOutput.Location = new System.Drawing.Point(383, 3);
+            this.txtTextOutput.Multiline = true;
+            this.txtTextOutput.Name = "txtTextOutput";
+            this.txtTextOutput.ReadOnly = true;
+            this.txtTextOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtTextOutput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextOutput.TabIndex = 2;
+            this.txtTextOutput.WordWrap = false;
+            this.txtTextOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
+            // 
+            // txtTextInput
+            // 
+            this.txtTextInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.txtTextInput.Location = new System.Drawing.Point(3, 3);
+            this.txtTextInput.Multiline = true;
+            this.txtTextInput.Name = "txtTextInput";
+            this.txtTextInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtTextInput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextInput.TabIndex = 1;
+            this.txtTextInput.WordWrap = false;
+            this.txtTextInput.TextChanged += new System.EventHandler(this.txtTextInput_TextChanged);
+            this.txtTextInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
+            // 
+            // tabPointerSearcher
+            // 
+            this.tabPointerSearcher.Controls.Add(this.txtBaseAddress);
+            this.tabPointerSearcher.Controls.Add(this.lblBaseAddress);
+            this.tabPointerSearcher.Controls.Add(this.comboPointerSearcherMode);
+            this.tabPointerSearcher.Controls.Add(this.pnlPointerSearcherCodeType);
+            this.tabPointerSearcher.Controls.Add(this.pnlPointerSearcherBitType);
+            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherRealAddresses);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherCode);
+            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherOptimizePointerPaths);
+            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherRAWCode);
+            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherIncludeNegatives);
+            this.tabPointerSearcher.Controls.Add(this.btnPointerSearcherClear);
+            this.tabPointerSearcher.Controls.Add(this.btnPointerSearcherFindPointers);
+            this.tabPointerSearcher.Controls.Add(this.treePointerSearcherPointers);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherValue);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMaxOffset);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherValue);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMaxOffset);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump2);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump1);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMode);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress2);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress1);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump2);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump1);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress2);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress1);
+            this.tabPointerSearcher.Location = new System.Drawing.Point(4, 22);
+            this.tabPointerSearcher.Name = "tabPointerSearcher";
+            this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 393);
+            this.tabPointerSearcher.TabIndex = 1;
+            this.tabPointerSearcher.Text = "Pointer Searcher";
+            this.tabPointerSearcher.UseVisualStyleBackColor = true;
+            // 
+            // txtBaseAddress
+            // 
+            this.txtBaseAddress.Location = new System.Drawing.Point(97, 141);
+            this.txtBaseAddress.MaxLength = 10;
+            this.txtBaseAddress.Name = "txtBaseAddress";
+            this.txtBaseAddress.Size = new System.Drawing.Size(189, 20);
+            this.txtBaseAddress.TabIndex = 11;
+            this.txtBaseAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // lblBaseAddress
+            // 
+            this.lblBaseAddress.AutoSize = true;
+            this.lblBaseAddress.Location = new System.Drawing.Point(6, 144);
+            this.lblBaseAddress.Name = "lblBaseAddress";
+            this.lblBaseAddress.Size = new System.Drawing.Size(75, 13);
+            this.lblBaseAddress.TabIndex = 10;
+            this.lblBaseAddress.Text = "Base Address:";
+            // 
+            // comboPointerSearcherMode
+            // 
+            this.comboPointerSearcherMode.DisplayMember = "1";
+            this.comboPointerSearcherMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPointerSearcherMode.FormattingEnabled = true;
+            this.comboPointerSearcherMode.Items.AddRange(new object[] {
+            "Sony Vita",
+            "Sony PSP",
+            "Nintendo DS",
+            "Other..."});
+            this.comboPointerSearcherMode.Location = new System.Drawing.Point(97, 114);
+            this.comboPointerSearcherMode.Name = "comboPointerSearcherMode";
+            this.comboPointerSearcherMode.Size = new System.Drawing.Size(189, 21);
+            this.comboPointerSearcherMode.TabIndex = 9;
+            this.comboPointerSearcherMode.SelectedIndexChanged += new System.EventHandler(this.comboPointerSearcherMode_SelectedIndexChanged);
+            // 
+            // pnlPointerSearcherCodeType
+            // 
+            this.pnlPointerSearcherCodeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeVitaCheat);
+            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeCWCheat);
+            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeAR);
+            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(292, 256);
+            this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
+            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(700, 24);
             this.pnlPointerSearcherCodeType.TabIndex = 24;
-      this.rdbPointerSearcherCodeTypeCWCheat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
-      this.rdbPointerSearcherCodeTypeCWCheat.Checked = false;
-      this.rdbPointerSearcherCodeTypeCWCheat.Location = new Point(100, 3);
-      this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
-      this.rdbPointerSearcherCodeTypeCWCheat.Size = new Size(71, 17);
-      this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
-      this.rdbPointerSearcherCodeTypeCWCheat.TabStop = false;
-      this.rdbPointerSearcherCodeTypeCWCheat.Text = "CWCheat";
-      this.rdbPointerSearcherCodeTypeCWCheat.UseVisualStyleBackColor = true;
-      this.rdbPointerSearcherCodeTypeVitaCheat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
-      this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
-      this.rdbPointerSearcherCodeTypeVitaCheat.Location = new Point(35, 3);
-      this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
-      this.rdbPointerSearcherCodeTypeVitaCheat.Size = new Size(40, 17);
-      this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
-      this.rdbPointerSearcherCodeTypeVitaCheat.TabStop = false;
-      this.rdbPointerSearcherCodeTypeVitaCheat.Text = "VitaCheat";
-      this.rdbPointerSearcherCodeTypeVitaCheat.UseVisualStyleBackColor = true;
-            this.rdbPointerSearcherCodeTypeAR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            // 
+            // rdbPointerSearcherCodeTypeVitaCheat
+            // 
+            this.rdbPointerSearcherCodeTypeVitaCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
+            this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
+            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(4, 3);
+            this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
+            this.rdbPointerSearcherCodeTypeVitaCheat.Size = new System.Drawing.Size(71, 17);
+            this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
+            this.rdbPointerSearcherCodeTypeVitaCheat.TabStop = true;
+            this.rdbPointerSearcherCodeTypeVitaCheat.Text = "VitaCheat";
+            this.rdbPointerSearcherCodeTypeVitaCheat.UseVisualStyleBackColor = true;
+            // 
+            // rdbPointerSearcherCodeTypeCWCheat
+            // 
+            this.rdbPointerSearcherCodeTypeCWCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
+            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(100, 3);
+            this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
+            this.rdbPointerSearcherCodeTypeCWCheat.Size = new System.Drawing.Size(71, 17);
+            this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
+            this.rdbPointerSearcherCodeTypeCWCheat.Text = "CWCheat";
+            this.rdbPointerSearcherCodeTypeCWCheat.UseVisualStyleBackColor = true;
+            // 
+            // rdbPointerSearcherCodeTypeAR
+            // 
+            this.rdbPointerSearcherCodeTypeAR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeAR.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeAR.Checked = false;
-            this.rdbPointerSearcherCodeTypeAR.Location = new Point(170, 3);
+            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(201, 3);
             this.rdbPointerSearcherCodeTypeAR.Name = "rdbPointerSearcherCodeTypeAR";
-            this.rdbPointerSearcherCodeTypeAR.Size = new Size(71, 17);
+            this.rdbPointerSearcherCodeTypeAR.Size = new System.Drawing.Size(40, 17);
             this.rdbPointerSearcherCodeTypeAR.TabIndex = 2;
-            this.rdbPointerSearcherCodeTypeAR.TabStop = false;
             this.rdbPointerSearcherCodeTypeAR.Text = "AR";
             this.rdbPointerSearcherCodeTypeAR.UseVisualStyleBackColor = true;
-            this.pnlPointerSearcherBitType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.pnlPointerSearcherBitType.Controls.Add((Control) this.rdbPointerSearcherBitType32);
-      this.pnlPointerSearcherBitType.Controls.Add((Control) this.rdbPointerSearcherBitType8);
-      this.pnlPointerSearcherBitType.Controls.Add((Control) this.rdbPointerSearcherBitType16);
-      this.pnlPointerSearcherBitType.Location = new Point(97, 219);
-      this.pnlPointerSearcherBitType.Name = "pnlPointerSearcherBitType";
-      this.pnlPointerSearcherBitType.Size = new Size(189, 24);
-      this.pnlPointerSearcherBitType.TabIndex = 16;
-      this.rdbPointerSearcherBitType32.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbPointerSearcherBitType32.AutoSize = true;
-      this.rdbPointerSearcherBitType32.Checked = true;
-      this.rdbPointerSearcherBitType32.Location = new Point(111, 3);
-      this.rdbPointerSearcherBitType32.Name = "rdbPointerSearcherBitType32";
-      this.rdbPointerSearcherBitType32.Size = new Size(51, 17);
-      this.rdbPointerSearcherBitType32.TabIndex = 0;
-      this.rdbPointerSearcherBitType32.TabStop = true;
-      this.rdbPointerSearcherBitType32.Text = "32-bit";
-      this.rdbPointerSearcherBitType32.UseVisualStyleBackColor = true;
-      this.rdbPointerSearcherBitType8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbPointerSearcherBitType8.AutoSize = true;
-      this.rdbPointerSearcherBitType8.Location = new Point(3, 3);
-      this.rdbPointerSearcherBitType8.Name = "rdbPointerSearcherBitType8";
-      this.rdbPointerSearcherBitType8.Size = new Size(45, 17);
-      this.rdbPointerSearcherBitType8.TabIndex = 1;
-      this.rdbPointerSearcherBitType8.Text = "8-bit";
-      this.rdbPointerSearcherBitType8.UseVisualStyleBackColor = true;
-      this.rdbPointerSearcherBitType16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      this.rdbPointerSearcherBitType16.AutoSize = true;
-      this.rdbPointerSearcherBitType16.Location = new Point(54, 3);
-      this.rdbPointerSearcherBitType16.Name = "rdbPointerSearcherBitType16";
-      this.rdbPointerSearcherBitType16.Size = new Size(51, 17);
-      this.rdbPointerSearcherBitType16.TabIndex = 2;
-      this.rdbPointerSearcherBitType16.Text = "16-bit";
-      this.rdbPointerSearcherBitType16.UseVisualStyleBackColor = true;
-      this.chkPointerSearcherRealAddresses.AutoSize = true;
-      this.chkPointerSearcherRealAddresses.Checked = true;
-      this.chkPointerSearcherRealAddresses.Location = new Point(97, 318);
-      this.chkPointerSearcherRealAddresses.Name = "chkPointerSearcherRealAddresses";
-      this.chkPointerSearcherRealAddresses.Size = new Size(100, 17);
-      this.chkPointerSearcherRealAddresses.TabIndex = 20;
-      this.chkPointerSearcherRealAddresses.Text = "Real Addresses";
-      this.chkPointerSearcherRealAddresses.UseVisualStyleBackColor = true;
-      this.txtPointerSearcherCode.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-      this.txtPointerSearcherCode.Location = new Point(292, 286);
-      this.txtPointerSearcherCode.Multiline = true;
-      this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
-      this.txtPointerSearcherCode.ReadOnly = true;
-      this.txtPointerSearcherCode.ScrollBars = ScrollBars.Vertical;
-      this.txtPointerSearcherCode.Size = new Size(462, 101);
-      this.txtPointerSearcherCode.TabIndex = 25;
-      this.txtPointerSearcherCode.WordWrap = false;
-      this.chkPointerSearcherOptimizePointerPaths.AutoSize = true;
-      this.chkPointerSearcherOptimizePointerPaths.Checked = true;
-      this.chkPointerSearcherOptimizePointerPaths.CheckState = CheckState.Checked;
-      this.chkPointerSearcherOptimizePointerPaths.Location = new Point(97, 249);
-      this.chkPointerSearcherOptimizePointerPaths.Name = "chkPointerSearcherOptimizePointerPaths";
-      this.chkPointerSearcherOptimizePointerPaths.Size = new Size(191, 17);
-      this.chkPointerSearcherOptimizePointerPaths.TabIndex = 17;
-      this.chkPointerSearcherOptimizePointerPaths.Text = "Only Display Optimal  Pointer Paths";
-      this.chkPointerSearcherOptimizePointerPaths.UseVisualStyleBackColor = true;
-      this.chkPointerSearcherRAWCode.AutoSize = true;
-      this.chkPointerSearcherRAWCode.Location = new Point(97, 272);
-      this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
-      this.chkPointerSearcherRAWCode.Size = new Size(80, 17);
-      this.chkPointerSearcherRAWCode.TabIndex = 18;
-      this.chkPointerSearcherRAWCode.Text = "RAW Code";
-      this.chkPointerSearcherRAWCode.UseVisualStyleBackColor = true;
-      this.chkPointerSearcherIncludeNegatives.AutoSize = true;
-      this.chkPointerSearcherIncludeNegatives.Location = new Point(97, 295);
-      this.chkPointerSearcherIncludeNegatives.Name = "chkPointerSearcherIncludeNegatives";
-      this.chkPointerSearcherIncludeNegatives.Size = new Size(112, 17);
-      this.chkPointerSearcherIncludeNegatives.TabIndex = 19;
-      this.chkPointerSearcherIncludeNegatives.Text = "Include Negatives";
-      this.chkPointerSearcherIncludeNegatives.UseVisualStyleBackColor = true;
-      this.btnPointerSearcherClear.Location = new Point(97, 351);
-      this.btnPointerSearcherClear.Name = "btnPointerSearcherClear";
-      this.btnPointerSearcherClear.Size = new Size(62, 23);
-      this.btnPointerSearcherClear.TabIndex = 21;
-      this.btnPointerSearcherClear.Text = "Clear";
-      this.btnPointerSearcherClear.UseVisualStyleBackColor = true;
-      this.btnPointerSearcherClear.Click += new EventHandler(this.btnPointerSearcherClear_Click);
-      this.btnPointerSearcherFindPointers.Location = new Point(165, 351);
-      this.btnPointerSearcherFindPointers.Name = "btnPointerSearcherFindPointers";
-      this.btnPointerSearcherFindPointers.Size = new Size(100, 23);
-      this.btnPointerSearcherFindPointers.TabIndex = 22;
-      this.btnPointerSearcherFindPointers.Text = "Find Pointers";
-      this.btnPointerSearcherFindPointers.UseVisualStyleBackColor = true;
-      this.btnPointerSearcherFindPointers.Click += new EventHandler(this.btnPointerSearcherFindPointers_Click);
-      this.treePointerSearcherPointers.Location = new Point(292, 6);
-      this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-      this.treePointerSearcherPointers.Size = new Size(462, 244);
-      this.treePointerSearcherPointers.TabIndex = 23;
-      this.treePointerSearcherPointers.AfterSelect += new TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
-      this.treePointerSearcherPointers.DoubleClick += new EventHandler(this.treePointerSearcherPointers_DoubleClick);
-      this.treePointerSearcherPointers.KeyUp += new KeyEventHandler(this.treePointerSearcherPointers_KeyUp);
-      this.lblPointerSearcherValue.AutoSize = true;
-      this.lblPointerSearcherValue.Location = new Point(6, 196);
-      this.lblPointerSearcherValue.Name = "lblPointerSearcherValue";
-      this.lblPointerSearcherValue.Size = new Size(37, 13);
-      this.lblPointerSearcherValue.TabIndex = 14;
-      this.lblPointerSearcherValue.Text = "Desired Value:";
-      this.lblPointerSearcherMaxOffset.AutoSize = true;
-      this.lblPointerSearcherMaxOffset.Location = new Point(6, 170);
-      this.lblPointerSearcherMaxOffset.Name = "lblPointerSearcherMaxOffset";
-      this.lblPointerSearcherMaxOffset.Size = new Size(85, 13);
-      this.lblPointerSearcherMaxOffset.TabIndex = 12;
-      this.lblPointerSearcherMaxOffset.Text = "Maximum Offset:";
-      this.txtPointerSearcherValue.Location = new Point(97, 193);
-      this.txtPointerSearcherValue.MaxLength = 10;
-      this.txtPointerSearcherValue.Name = "txtPointerSearcherValue";
-      this.txtPointerSearcherValue.Size = new Size(189, 20);
-      this.txtPointerSearcherValue.TabIndex = 15;
-      this.txtPointerSearcherValue.Text = "0x00000000";
-      this.txtPointerSearcherValue.KeyPress += new KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-      this.txtPointerSearcherMaxOffset.Location = new Point(97, 167);
-      this.txtPointerSearcherMaxOffset.MaxLength = 10;
-      this.txtPointerSearcherMaxOffset.Name = "txtPointerSearcherMaxOffset";
-      this.txtPointerSearcherMaxOffset.Size = new Size(189, 20);
-      this.txtPointerSearcherMaxOffset.TabIndex = 13;
-      this.txtPointerSearcherMaxOffset.Text = "0x1000";
-      this.txtPointerSearcherMaxOffset.KeyPress += new KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-      this.lblPointerSearcherMemDump2.AutoSize = true;
-      this.lblPointerSearcherMemDump2.Location = new Point(6, 61);
-      this.lblPointerSearcherMemDump2.Name = "lblPointerSearcherMemDump2";
-      this.lblPointerSearcherMemDump2.Size = new Size(78, 13);
-      this.lblPointerSearcherMemDump2.TabIndex = 4;
-      this.lblPointerSearcherMemDump2.Text = "Memory Dump:";
-      this.lblPointerSearcherMemDump1.AutoSize = true;
-      this.lblPointerSearcherMemDump1.Location = new Point(6, 9);
-      this.lblPointerSearcherMemDump1.Name = "lblPointerSearcherMemDump1";
-      this.lblPointerSearcherMemDump1.Size = new Size(78, 13);
-      this.lblPointerSearcherMemDump1.TabIndex = 0;
-      this.lblPointerSearcherMemDump1.Text = "Memory Dump:";
-      this.lblPointerSearcherMode.AutoSize = true;
-      this.lblPointerSearcherMode.Location = new Point(6, 117);
-      this.lblPointerSearcherMode.Name = "lblPointerSearcherMode";
-      this.lblPointerSearcherMode.Size = new Size(37, 13);
-      this.lblPointerSearcherMode.TabIndex = 8;
-      this.lblPointerSearcherMode.Text = "Mode:";
-      this.lblPointerSearcherAddress2.AutoSize = true;
-      this.lblPointerSearcherAddress2.Location = new Point(6, 87);
-      this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
-      this.lblPointerSearcherAddress2.Size = new Size(48, 13);
-      this.lblPointerSearcherAddress2.TabIndex = 6;
-      this.lblPointerSearcherAddress2.Text = "Address:";
-      this.lblPointerSearcherAddress1.AutoSize = true;
-      this.lblPointerSearcherAddress1.Location = new Point(6, 35);
-      this.lblPointerSearcherAddress1.Name = "lblPointerSearcherAddress1";
-      this.lblPointerSearcherAddress1.Size = new Size(48, 13);
-      this.lblPointerSearcherAddress1.TabIndex = 2;
-      this.lblPointerSearcherAddress1.Text = "Address:";
-      this.txtPointerSearcherMemDump2.AllowDrop = true;
-      this.txtPointerSearcherMemDump2.Location = new Point(97, 58);
-      this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
-      this.txtPointerSearcherMemDump2.ReadOnly = true;
-      this.txtPointerSearcherMemDump2.Size = new Size(189, 20);
-      this.txtPointerSearcherMemDump2.TabIndex = 5;
-      this.txtPointerSearcherMemDump2.Click += new EventHandler(this.txtPointerSearcherMemDump2_Click);
-      this.txtPointerSearcherMemDump2.DragDrop += new DragEventHandler(this.txtFileDragDrop_DragDrop);
-      this.txtPointerSearcherMemDump2.DragEnter += new DragEventHandler(this.txtFileDragDrop_DragEnter);
-      this.txtPointerSearcherMemDump1.AllowDrop = true;
-      this.txtPointerSearcherMemDump1.Location = new Point(97, 6);
-      this.txtPointerSearcherMemDump1.Name = "txtPointerSearcherMemDump1";
-      this.txtPointerSearcherMemDump1.ReadOnly = true;
-      this.txtPointerSearcherMemDump1.Size = new Size(189, 20);
-      this.txtPointerSearcherMemDump1.TabIndex = 1;
-      this.txtPointerSearcherMemDump1.Click += new EventHandler(this.txtPointerSearcherMemDump1_Click);
-      this.txtPointerSearcherMemDump1.DragDrop += new DragEventHandler(this.txtFileDragDrop_DragDrop);
-      this.txtPointerSearcherMemDump1.DragEnter += new DragEventHandler(this.txtFileDragDrop_DragEnter);
-      this.txtPointerSearcherAddress2.Location = new Point(97, 84);
-      this.txtPointerSearcherAddress2.MaxLength = 10;
-      this.txtPointerSearcherAddress2.Name = "txtPointerSearcherAddress2";
-      this.txtPointerSearcherAddress2.Size = new Size(189, 20);
-      this.txtPointerSearcherAddress2.TabIndex = 7;
-      this.txtPointerSearcherAddress2.KeyPress += new KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-      this.txtPointerSearcherAddress1.Location = new Point(97, 32);
-      this.txtPointerSearcherAddress1.MaxLength = 10;
-      this.txtPointerSearcherAddress1.Name = "txtPointerSearcherAddress1";
-      this.txtPointerSearcherAddress1.Size = new Size(189, 20);
-      this.txtPointerSearcherAddress1.TabIndex = 3;
-      this.txtPointerSearcherAddress1.KeyPress += new KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.BackColor = SystemColors.ControlLightLight;
-      this.ClientSize = new Size(769, 449);
-      this.Controls.Add((Control) this.tctrlTabs);
-      this.Controls.Add((Control) this.frmStatusStrip);
-      this.DoubleBuffered = true;
-      this.FormBorderStyle = FormBorderStyle.FixedSingle;
-      this.MaximizeBox = false;
-      this.Name = nameof (frmMain);
-      this.StartPosition = FormStartPosition.CenterScreen;
-      this.Text = "TempAR - Vita Edition  V1.0";
-      this.Load += new EventHandler(this.frmMain_Load);
-      this.pnlConvertFormat.ResumeLayout(false);
-      this.pnlConvertFormat.PerformLayout();
-      this.pnlConvertFile.ResumeLayout(false);
-      this.pnlConvertFile.PerformLayout();
-      this.frmStatusStrip.ResumeLayout(false);
-      this.frmStatusStrip.PerformLayout();
-      this.tctrlTabs.ResumeLayout(false);
-      this.tabConverter.ResumeLayout(false);
-      this.pnlConvertType.ResumeLayout(false);
-      this.pnlConvertType.PerformLayout();
-      this.pnlConvertText.ResumeLayout(false);
-      this.pnlConvertText.PerformLayout();
-      this.tabPointerSearcher.ResumeLayout(false);
-      this.tabPointerSearcher.PerformLayout();
-      this.pnlPointerSearcherCodeType.ResumeLayout(false);
-      this.pnlPointerSearcherCodeType.PerformLayout();
-      this.pnlPointerSearcherBitType.ResumeLayout(false);
-      this.pnlPointerSearcherBitType.PerformLayout();
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            // 
+            // pnlPointerSearcherBitType
+            // 
+            this.pnlPointerSearcherBitType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType32);
+            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType8);
+            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType16);
+            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(97, 219);
+            this.pnlPointerSearcherBitType.Name = "pnlPointerSearcherBitType";
+            this.pnlPointerSearcherBitType.Size = new System.Drawing.Size(189, 24);
+            this.pnlPointerSearcherBitType.TabIndex = 16;
+            // 
+            // rdbPointerSearcherBitType32
+            // 
+            this.rdbPointerSearcherBitType32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbPointerSearcherBitType32.AutoSize = true;
+            this.rdbPointerSearcherBitType32.Checked = true;
+            this.rdbPointerSearcherBitType32.Location = new System.Drawing.Point(111, 3);
+            this.rdbPointerSearcherBitType32.Name = "rdbPointerSearcherBitType32";
+            this.rdbPointerSearcherBitType32.Size = new System.Drawing.Size(51, 17);
+            this.rdbPointerSearcherBitType32.TabIndex = 0;
+            this.rdbPointerSearcherBitType32.TabStop = true;
+            this.rdbPointerSearcherBitType32.Text = "32-bit";
+            this.rdbPointerSearcherBitType32.UseVisualStyleBackColor = true;
+            // 
+            // rdbPointerSearcherBitType8
+            // 
+            this.rdbPointerSearcherBitType8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbPointerSearcherBitType8.AutoSize = true;
+            this.rdbPointerSearcherBitType8.Location = new System.Drawing.Point(3, 3);
+            this.rdbPointerSearcherBitType8.Name = "rdbPointerSearcherBitType8";
+            this.rdbPointerSearcherBitType8.Size = new System.Drawing.Size(45, 17);
+            this.rdbPointerSearcherBitType8.TabIndex = 1;
+            this.rdbPointerSearcherBitType8.Text = "8-bit";
+            this.rdbPointerSearcherBitType8.UseVisualStyleBackColor = true;
+            // 
+            // rdbPointerSearcherBitType16
+            // 
+            this.rdbPointerSearcherBitType16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdbPointerSearcherBitType16.AutoSize = true;
+            this.rdbPointerSearcherBitType16.Location = new System.Drawing.Point(54, 3);
+            this.rdbPointerSearcherBitType16.Name = "rdbPointerSearcherBitType16";
+            this.rdbPointerSearcherBitType16.Size = new System.Drawing.Size(51, 17);
+            this.rdbPointerSearcherBitType16.TabIndex = 2;
+            this.rdbPointerSearcherBitType16.Text = "16-bit";
+            this.rdbPointerSearcherBitType16.UseVisualStyleBackColor = true;
+            // 
+            // chkPointerSearcherRealAddresses
+            // 
+            this.chkPointerSearcherRealAddresses.AutoSize = true;
+            this.chkPointerSearcherRealAddresses.Checked = true;
+            this.chkPointerSearcherRealAddresses.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(97, 318);
+            this.chkPointerSearcherRealAddresses.Name = "chkPointerSearcherRealAddresses";
+            this.chkPointerSearcherRealAddresses.Size = new System.Drawing.Size(100, 17);
+            this.chkPointerSearcherRealAddresses.TabIndex = 20;
+            this.chkPointerSearcherRealAddresses.Text = "Real Addresses";
+            this.chkPointerSearcherRealAddresses.UseVisualStyleBackColor = true;
+            // 
+            // txtPointerSearcherCode
+            // 
+            this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.txtPointerSearcherCode.Location = new System.Drawing.Point(292, 286);
+            this.txtPointerSearcherCode.Multiline = true;
+            this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
+            this.txtPointerSearcherCode.ReadOnly = true;
+            this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtPointerSearcherCode.Size = new System.Drawing.Size(462, 101);
+            this.txtPointerSearcherCode.TabIndex = 25;
+            this.txtPointerSearcherCode.WordWrap = false;
+            // 
+            // chkPointerSearcherOptimizePointerPaths
+            // 
+            this.chkPointerSearcherOptimizePointerPaths.AutoSize = true;
+            this.chkPointerSearcherOptimizePointerPaths.Checked = true;
+            this.chkPointerSearcherOptimizePointerPaths.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(97, 249);
+            this.chkPointerSearcherOptimizePointerPaths.Name = "chkPointerSearcherOptimizePointerPaths";
+            this.chkPointerSearcherOptimizePointerPaths.Size = new System.Drawing.Size(191, 17);
+            this.chkPointerSearcherOptimizePointerPaths.TabIndex = 17;
+            this.chkPointerSearcherOptimizePointerPaths.Text = "Only Display Optimal  Pointer Paths";
+            this.chkPointerSearcherOptimizePointerPaths.UseVisualStyleBackColor = true;
+            // 
+            // chkPointerSearcherRAWCode
+            // 
+            this.chkPointerSearcherRAWCode.AutoSize = true;
+            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(97, 272);
+            this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
+            this.chkPointerSearcherRAWCode.Size = new System.Drawing.Size(80, 17);
+            this.chkPointerSearcherRAWCode.TabIndex = 18;
+            this.chkPointerSearcherRAWCode.Text = "RAW Code";
+            this.chkPointerSearcherRAWCode.UseVisualStyleBackColor = true;
+            // 
+            // chkPointerSearcherIncludeNegatives
+            // 
+            this.chkPointerSearcherIncludeNegatives.AutoSize = true;
+            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(97, 295);
+            this.chkPointerSearcherIncludeNegatives.Name = "chkPointerSearcherIncludeNegatives";
+            this.chkPointerSearcherIncludeNegatives.Size = new System.Drawing.Size(112, 17);
+            this.chkPointerSearcherIncludeNegatives.TabIndex = 19;
+            this.chkPointerSearcherIncludeNegatives.Text = "Include Negatives";
+            this.chkPointerSearcherIncludeNegatives.UseVisualStyleBackColor = true;
+            // 
+            // btnPointerSearcherClear
+            // 
+            this.btnPointerSearcherClear.Location = new System.Drawing.Point(97, 351);
+            this.btnPointerSearcherClear.Name = "btnPointerSearcherClear";
+            this.btnPointerSearcherClear.Size = new System.Drawing.Size(62, 23);
+            this.btnPointerSearcherClear.TabIndex = 21;
+            this.btnPointerSearcherClear.Text = "Clear";
+            this.btnPointerSearcherClear.UseVisualStyleBackColor = true;
+            this.btnPointerSearcherClear.Click += new System.EventHandler(this.btnPointerSearcherClear_Click);
+            // 
+            // btnPointerSearcherFindPointers
+            // 
+            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(165, 351);
+            this.btnPointerSearcherFindPointers.Name = "btnPointerSearcherFindPointers";
+            this.btnPointerSearcherFindPointers.Size = new System.Drawing.Size(100, 23);
+            this.btnPointerSearcherFindPointers.TabIndex = 22;
+            this.btnPointerSearcherFindPointers.Text = "Find Pointers";
+            this.btnPointerSearcherFindPointers.UseVisualStyleBackColor = true;
+            this.btnPointerSearcherFindPointers.Click += new System.EventHandler(this.btnPointerSearcherFindPointers_Click);
+            // 
+            // treePointerSearcherPointers
+            // 
+            this.treePointerSearcherPointers.Location = new System.Drawing.Point(292, 6);
+            this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 244);
+            this.treePointerSearcherPointers.TabIndex = 23;
+            this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
+            this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.treePointerSearcherPointers_DoubleClick);
+            this.treePointerSearcherPointers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treePointerSearcherPointers_KeyUp);
+            // 
+            // lblPointerSearcherValue
+            // 
+            this.lblPointerSearcherValue.AutoSize = true;
+            this.lblPointerSearcherValue.Location = new System.Drawing.Point(6, 196);
+            this.lblPointerSearcherValue.Name = "lblPointerSearcherValue";
+            this.lblPointerSearcherValue.Size = new System.Drawing.Size(76, 13);
+            this.lblPointerSearcherValue.TabIndex = 14;
+            this.lblPointerSearcherValue.Text = "Desired Value:";
+            // 
+            // lblPointerSearcherMaxOffset
+            // 
+            this.lblPointerSearcherMaxOffset.AutoSize = true;
+            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(6, 170);
+            this.lblPointerSearcherMaxOffset.Name = "lblPointerSearcherMaxOffset";
+            this.lblPointerSearcherMaxOffset.Size = new System.Drawing.Size(85, 13);
+            this.lblPointerSearcherMaxOffset.TabIndex = 12;
+            this.lblPointerSearcherMaxOffset.Text = "Maximum Offset:";
+            // 
+            // txtPointerSearcherValue
+            // 
+            this.txtPointerSearcherValue.Location = new System.Drawing.Point(97, 193);
+            this.txtPointerSearcherValue.MaxLength = 10;
+            this.txtPointerSearcherValue.Name = "txtPointerSearcherValue";
+            this.txtPointerSearcherValue.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherValue.TabIndex = 15;
+            this.txtPointerSearcherValue.Text = "0x00000000";
+            this.txtPointerSearcherValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // txtPointerSearcherMaxOffset
+            // 
+            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(97, 167);
+            this.txtPointerSearcherMaxOffset.MaxLength = 10;
+            this.txtPointerSearcherMaxOffset.Name = "txtPointerSearcherMaxOffset";
+            this.txtPointerSearcherMaxOffset.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMaxOffset.TabIndex = 13;
+            this.txtPointerSearcherMaxOffset.Text = "0x1000";
+            this.txtPointerSearcherMaxOffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // lblPointerSearcherMemDump2
+            // 
+            this.lblPointerSearcherMemDump2.AutoSize = true;
+            this.lblPointerSearcherMemDump2.Location = new System.Drawing.Point(6, 61);
+            this.lblPointerSearcherMemDump2.Name = "lblPointerSearcherMemDump2";
+            this.lblPointerSearcherMemDump2.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump2.TabIndex = 4;
+            this.lblPointerSearcherMemDump2.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherMemDump1
+            // 
+            this.lblPointerSearcherMemDump1.AutoSize = true;
+            this.lblPointerSearcherMemDump1.Location = new System.Drawing.Point(6, 9);
+            this.lblPointerSearcherMemDump1.Name = "lblPointerSearcherMemDump1";
+            this.lblPointerSearcherMemDump1.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump1.TabIndex = 0;
+            this.lblPointerSearcherMemDump1.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherMode
+            // 
+            this.lblPointerSearcherMode.AutoSize = true;
+            this.lblPointerSearcherMode.Location = new System.Drawing.Point(6, 117);
+            this.lblPointerSearcherMode.Name = "lblPointerSearcherMode";
+            this.lblPointerSearcherMode.Size = new System.Drawing.Size(37, 13);
+            this.lblPointerSearcherMode.TabIndex = 8;
+            this.lblPointerSearcherMode.Text = "Mode:";
+            // 
+            // lblPointerSearcherAddress2
+            // 
+            this.lblPointerSearcherAddress2.AutoSize = true;
+            this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(6, 87);
+            this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
+            this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress2.TabIndex = 6;
+            this.lblPointerSearcherAddress2.Text = "Address:";
+            // 
+            // lblPointerSearcherAddress1
+            // 
+            this.lblPointerSearcherAddress1.AutoSize = true;
+            this.lblPointerSearcherAddress1.Location = new System.Drawing.Point(6, 35);
+            this.lblPointerSearcherAddress1.Name = "lblPointerSearcherAddress1";
+            this.lblPointerSearcherAddress1.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress1.TabIndex = 2;
+            this.lblPointerSearcherAddress1.Text = "Address:";
+            // 
+            // txtPointerSearcherMemDump2
+            // 
+            this.txtPointerSearcherMemDump2.AllowDrop = true;
+            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(97, 58);
+            this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
+            this.txtPointerSearcherMemDump2.ReadOnly = true;
+            this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump2.TabIndex = 5;
+            this.txtPointerSearcherMemDump2.Click += new System.EventHandler(this.txtPointerSearcherMemDump2_Click);
+            this.txtPointerSearcherMemDump2.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump2.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            // 
+            // txtPointerSearcherMemDump1
+            // 
+            this.txtPointerSearcherMemDump1.AllowDrop = true;
+            this.txtPointerSearcherMemDump1.Location = new System.Drawing.Point(97, 6);
+            this.txtPointerSearcherMemDump1.Name = "txtPointerSearcherMemDump1";
+            this.txtPointerSearcherMemDump1.ReadOnly = true;
+            this.txtPointerSearcherMemDump1.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump1.TabIndex = 1;
+            this.txtPointerSearcherMemDump1.Click += new System.EventHandler(this.txtPointerSearcherMemDump1_Click);
+            this.txtPointerSearcherMemDump1.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump1.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            // 
+            // txtPointerSearcherAddress2
+            // 
+            this.txtPointerSearcherAddress2.Location = new System.Drawing.Point(97, 84);
+            this.txtPointerSearcherAddress2.MaxLength = 10;
+            this.txtPointerSearcherAddress2.Name = "txtPointerSearcherAddress2";
+            this.txtPointerSearcherAddress2.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress2.TabIndex = 7;
+            this.txtPointerSearcherAddress2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // txtPointerSearcherAddress1
+            // 
+            this.txtPointerSearcherAddress1.Location = new System.Drawing.Point(97, 32);
+            this.txtPointerSearcherAddress1.MaxLength = 10;
+            this.txtPointerSearcherAddress1.Name = "txtPointerSearcherAddress1";
+            this.txtPointerSearcherAddress1.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress1.TabIndex = 3;
+            this.txtPointerSearcherAddress1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // frmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(769, 449);
+            this.Controls.Add(this.tctrlTabs);
+            this.Controls.Add(this.frmStatusStrip);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "TempAR - Vita Edition  V1.0";
+            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.pnlConvertFormat.ResumeLayout(false);
+            this.pnlConvertFormat.PerformLayout();
+            this.pnlConvertFile.ResumeLayout(false);
+            this.pnlConvertFile.PerformLayout();
+            this.frmStatusStrip.ResumeLayout(false);
+            this.frmStatusStrip.PerformLayout();
+            this.tctrlTabs.ResumeLayout(false);
+            this.tabConverter.ResumeLayout(false);
+            this.pnlConvertType.ResumeLayout(false);
+            this.pnlConvertType.PerformLayout();
+            this.pnlConvertText.ResumeLayout(false);
+            this.pnlConvertText.PerformLayout();
+            this.tabPointerSearcher.ResumeLayout(false);
+            this.tabPointerSearcher.PerformLayout();
+            this.pnlPointerSearcherCodeType.ResumeLayout(false);
+            this.pnlPointerSearcherCodeType.PerformLayout();
+            this.pnlPointerSearcherBitType.ResumeLayout(false);
+            this.pnlPointerSearcherBitType.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
-  }
+
+        private void FrmStatusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+    }
 }
