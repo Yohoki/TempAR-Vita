@@ -493,7 +493,7 @@ namespace TempAR
             string str2 = "";
             string str3 = string.Format("$3300 00000000 {0:X08}\n", (object)value);
             for (int index = 1; index < pointers.Count; ++index)
-                str1 = !pointers[index].Negative ? str1 + string.Format("$3{0}00 00000000 {1:X08}\n", (object)bittype, (object)pointers[index].Offset) : str1 + string.Format("$3200 00000000 {0:X08}\n", (object)(4294967296L - (long)pointers[index].Offset));
+                str1 = !pointers[index].Negative ? str1 + string.Format("$3{0}00 00000000 {1:X08}\n", (object)bittype, (object)pointers[index].Offset) : str1 + string.Format("$3{0}00 00000000 {1:X08}\n", (object)bittype, (object)(4294967296L - (long)pointers[index].Offset));
             if (pointers.Count > 1)
                 str1 += string.Format("");
             str2 = !pointers[0].Negative ? str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)pointers[0].Offset) + str1 : str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)(4294967296L - (long)pointers[0].Offset)) + str1;
@@ -1086,7 +1086,7 @@ namespace TempAR
       this.MaximizeBox = false;
       this.Name = nameof (frmMain);
       this.StartPosition = FormStartPosition.CenterScreen;
-      this.Text = "TempAR - Vita Edition --- BETA VERSION --- DO NOT DISTRIBUTE --- V.01 ---";
+      this.Text = "TempAR - Vita Edition  V1.0";
       this.Load += new EventHandler(this.frmMain_Load);
       this.pnlConvertFormat.ResumeLayout(false);
       this.pnlConvertFormat.PerformLayout();
