@@ -111,8 +111,10 @@ namespace TempAR
                     num2 = 2U;
                     break;
                   }
-                  catch (Exception ex)
-                  {
+#pragma warning disable CS0168 // Variable is declared but never used
+                                    catch (Exception ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+                                    {
                     break;
                   }
                 case 112:
@@ -139,8 +141,10 @@ namespace TempAR
                     num2 = 2U;
                     break;
                   }
-                  catch (Exception ex)
-                  {
+#pragma warning disable CS0168 // Variable is declared but never used
+                                    catch (Exception ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+                                    {
                     break;
                   }
                 case 210:
@@ -177,8 +181,10 @@ namespace TempAR
                   break;
               }
             }
-            catch (Exception ex)
-            {
+#pragma warning disable CS0168 // Variable is declared but never used
+                        catch (Exception ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+                        {
             }
           }
         }

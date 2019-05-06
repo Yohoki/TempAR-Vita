@@ -16,8 +16,10 @@ namespace TempAR
     private PointerSearcher memdump;
     private PointerSearcher memdump2;
     private uint memory_start;
-    private IContainer components;
-    private Panel pnlConvertFormat;
+#pragma warning disable CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
+        private IContainer components;
+#pragma warning restore CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
+        private Panel pnlConvertFormat;
     private RadioButton rdbR4CCE;
     private RadioButton rdbNitePR;
     private Panel pnlConvertFile;
@@ -70,7 +72,8 @@ namespace TempAR
     private Panel pnlPointerSearcherCodeType;
         private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
         private RadioButton rdbPointerSearcherCodeTypeCWCheat;
-    private TextBox txtBaseAddress;
+        private RadioButton rdbPointerSearcherCodeTypeAR;
+        private TextBox txtBaseAddress;
     private Label lblBaseAddress;
 
     public frmMain()
@@ -335,7 +338,18 @@ namespace TempAR
         bittype = 0;
         num &= (uint) byte.MaxValue;
       }
-            this.txtPointerSearcherCode.Text = (!this.rdbPointerSearcherCodeTypeCWCheat.Checked ? this.getARPointerCode(pointers, bittype, num) : this.getCWCheatPointerCode(pointers, bittype, num)).Replace("\n", "\r\n");
+            if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
+             {
+                this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+             }
+            else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
+            {
+                this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+            }
+            else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
+            {
+                this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+            }
         }
 
     private void txtPointerSearcherMemDump1_Click(object sender, EventArgs e)
@@ -477,6 +491,30 @@ namespace TempAR
             switch (bittype)
             {
                 case 0:
+                    bittype = 2;
+                    break;
+                case 1:
+                    bittype = 1;
+                    break;
+                case 2:
+                    bittype = 0;
+                    break;
+                default:
+                    bittype = 0;
+                    break;
+            }
+            string str1 = "";
+            for (int index = 0; index < pointers.Count; ++index)
+                str1 = !pointers[index].Negative ? str1 + string.Format("{0:X01}{1:X07} {2:X08}\n", (object)(index == pointers.Count - 1 ? bittype : 11), (object)pointers[index].Offset, (object)(uint)(index == pointers.Count - 1 ? (int)value : 0)) : str1 + string.Format("DC000000 {0:X08}\n{1:X01}0000000 {2:X08}\n", (object)(4294967296L - (long)pointers[index].Offset), (object)(index == pointers.Count - 1 ? bittype : 11), (object)(uint)(index == pointers.Count - 1 ? (int)value : 0));
+            string str2 = string.Format("6{0:X07} 00000000\nB{0:X07} 00000000\n{1}D2000000 00000000", (object)pointers[0].Address, (object)str1);
+            return (this.chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
+        }
+
+            private string getVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
+        {
+            switch (bittype)
+            {
+                case 0:
                     bittype = 0;
                     break;
                 case 1:
@@ -500,7 +538,7 @@ namespace TempAR
             return (this.chkPointerSearcherRAWCode.Checked ? "" : "_V0 Generated Code\n") + str2 + str3;
         }
 
-    private string getCWCheatPointerCode(
+        private string getCWCheatPointerCode(
       List<PointerSearcherLog> pointers,
       int bittype,
       uint value)
@@ -577,6 +615,7 @@ namespace TempAR
       this.pnlPointerSearcherCodeType = new Panel();
             this.rdbPointerSearcherCodeTypeVitaCheat = new RadioButton();
             this.rdbPointerSearcherCodeTypeCWCheat = new RadioButton();
+            this.rdbPointerSearcherCodeTypeAR = new RadioButton();
       this.pnlPointerSearcherBitType = new Panel();
       this.rdbPointerSearcherBitType32 = new RadioButton();
       this.rdbPointerSearcherBitType8 = new RadioButton();
@@ -871,14 +910,15 @@ namespace TempAR
       this.pnlPointerSearcherCodeType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeVitaCheat);
             this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeCWCheat);
-      this.pnlPointerSearcherCodeType.Location = new Point(292, 256);
+            this.pnlPointerSearcherCodeType.Controls.Add((Control)this.rdbPointerSearcherCodeTypeAR);
+            this.pnlPointerSearcherCodeType.Location = new Point(292, 256);
       this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
             this.pnlPointerSearcherCodeType.Size = new Size(700, 24);
             this.pnlPointerSearcherCodeType.TabIndex = 24;
       this.rdbPointerSearcherCodeTypeCWCheat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
-      this.rdbPointerSearcherCodeTypeCWCheat.Checked = true;
-      this.rdbPointerSearcherCodeTypeCWCheat.Location = new Point(5, 3);
+      this.rdbPointerSearcherCodeTypeCWCheat.Checked = false;
+      this.rdbPointerSearcherCodeTypeCWCheat.Location = new Point(100, 3);
       this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
       this.rdbPointerSearcherCodeTypeCWCheat.Size = new Size(71, 17);
       this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
@@ -887,13 +927,24 @@ namespace TempAR
       this.rdbPointerSearcherCodeTypeCWCheat.UseVisualStyleBackColor = true;
       this.rdbPointerSearcherCodeTypeVitaCheat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
-        this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
-      this.rdbPointerSearcherCodeTypeVitaCheat.Location = new Point(130, 3);
+      this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
+      this.rdbPointerSearcherCodeTypeVitaCheat.Location = new Point(35, 3);
       this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
       this.rdbPointerSearcherCodeTypeVitaCheat.Size = new Size(40, 17);
       this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
+      this.rdbPointerSearcherCodeTypeVitaCheat.TabStop = false;
       this.rdbPointerSearcherCodeTypeVitaCheat.Text = "VitaCheat";
       this.rdbPointerSearcherCodeTypeVitaCheat.UseVisualStyleBackColor = true;
+            this.rdbPointerSearcherCodeTypeAR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.rdbPointerSearcherCodeTypeAR.AutoSize = true;
+            this.rdbPointerSearcherCodeTypeAR.Checked = false;
+            this.rdbPointerSearcherCodeTypeAR.Location = new Point(170, 3);
+            this.rdbPointerSearcherCodeTypeAR.Name = "rdbPointerSearcherCodeTypeAR";
+            this.rdbPointerSearcherCodeTypeAR.Size = new Size(71, 17);
+            this.rdbPointerSearcherCodeTypeAR.TabIndex = 2;
+            this.rdbPointerSearcherCodeTypeAR.TabStop = false;
+            this.rdbPointerSearcherCodeTypeAR.Text = "AR";
+            this.rdbPointerSearcherCodeTypeAR.UseVisualStyleBackColor = true;
             this.pnlPointerSearcherBitType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       this.pnlPointerSearcherBitType.Controls.Add((Control) this.rdbPointerSearcherBitType32);
       this.pnlPointerSearcherBitType.Controls.Add((Control) this.rdbPointerSearcherBitType8);
