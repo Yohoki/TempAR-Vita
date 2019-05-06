@@ -1306,7 +1306,7 @@ namespace TempAR
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TempAR - Vita Edition  V1.0";
+            this.Text = "TempAR - Vita Edition  V1.03";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlConvertFormat.ResumeLayout(false);
             this.pnlConvertFormat.PerformLayout();
