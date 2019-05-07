@@ -75,7 +75,8 @@ namespace TempAR
     private RadioButton rdbPointerSearcherCodeTypeCWCheat;
     private RadioButton rdbPointerSearcherCodeTypeAR;
     private TextBox txtBaseAddress;
-    private Label lblBaseAddress;
+        private TabPage tabVitaCheat;
+        private Label lblBaseAddress;
 
     public frmMain()
     {
@@ -809,7 +810,7 @@ namespace TempAR
             // 
             this.frmStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.frmStatusStrip.Location = new System.Drawing.Point(0, 427);
+            this.frmStatusStrip.Location = new System.Drawing.Point(0, 639);
             this.frmStatusStrip.Name = "frmStatusStrip";
             this.frmStatusStrip.Size = new System.Drawing.Size(769, 22);
             this.frmStatusStrip.SizingGrip = false;
@@ -832,7 +833,7 @@ namespace TempAR
             this.tctrlTabs.Location = new System.Drawing.Point(5, 5);
             this.tctrlTabs.Name = "tctrlTabs";
             this.tctrlTabs.SelectedIndex = 1;
-            this.tctrlTabs.Size = new System.Drawing.Size(765, 419);
+            this.tctrlTabs.Size = new System.Drawing.Size(765, 600);
             this.tctrlTabs.TabIndex = 0;
             // 
             // tabConverter
@@ -845,7 +846,7 @@ namespace TempAR
             this.tabConverter.Location = new System.Drawing.Point(4, 22);
             this.tabConverter.Name = "tabConverter";
             this.tabConverter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConverter.Size = new System.Drawing.Size(757, 393);
+            this.tabConverter.Size = new System.Drawing.Size(757, 574);
             this.tabConverter.TabIndex = 0;
             this.tabConverter.Text = "Code Converter";
             this.tabConverter.UseVisualStyleBackColor = true;
@@ -907,7 +908,7 @@ namespace TempAR
             this.pnlConvertText.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.pnlConvertText.Location = new System.Drawing.Point(3, 40);
             this.pnlConvertText.Name = "pnlConvertText";
-            this.pnlConvertText.Size = new System.Drawing.Size(751, 347);
+            this.pnlConvertText.Size = new System.Drawing.Size(751, 534);
             this.pnlConvertText.TabIndex = 5;
             // 
             // txtTextOutput
@@ -918,7 +919,7 @@ namespace TempAR
             this.txtTextOutput.Name = "txtTextOutput";
             this.txtTextOutput.ReadOnly = true;
             this.txtTextOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextOutput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextOutput.Size = new System.Drawing.Size(365, 528);
             this.txtTextOutput.TabIndex = 2;
             this.txtTextOutput.WordWrap = false;
             this.txtTextOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
@@ -930,7 +931,7 @@ namespace TempAR
             this.txtTextInput.Multiline = true;
             this.txtTextInput.Name = "txtTextInput";
             this.txtTextInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextInput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextInput.Size = new System.Drawing.Size(365, 528);
             this.txtTextInput.TabIndex = 1;
             this.txtTextInput.WordWrap = false;
             this.txtTextInput.TextChanged += new System.EventHandler(this.txtTextInput_TextChanged);
@@ -967,7 +968,7 @@ namespace TempAR
             this.tabPointerSearcher.Location = new System.Drawing.Point(4, 22);
             this.tabPointerSearcher.Name = "tabPointerSearcher";
             this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 393);
+            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 574);
             this.tabPointerSearcher.TabIndex = 1;
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
@@ -1012,17 +1013,16 @@ namespace TempAR
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeVitaCheat);
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeCWCheat);
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeAR);
-            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(292, 256);
+            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(9, 380);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
-            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(700, 24);
+            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(279, 24);
             this.pnlPointerSearcherCodeType.TabIndex = 24;
             // 
             // rdbPointerSearcherCodeTypeVitaCheat
             // 
-            this.rdbPointerSearcherCodeTypeVitaCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
             this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
-            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(4, 3);
+            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(8, 3);
             this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
             this.rdbPointerSearcherCodeTypeVitaCheat.Size = new System.Drawing.Size(71, 17);
             this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
@@ -1032,9 +1032,8 @@ namespace TempAR
             // 
             // rdbPointerSearcherCodeTypeCWCheat
             // 
-            this.rdbPointerSearcherCodeTypeCWCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(100, 3);
+            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(104, 3);
             this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
             this.rdbPointerSearcherCodeTypeCWCheat.Size = new System.Drawing.Size(71, 17);
             this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
@@ -1043,9 +1042,8 @@ namespace TempAR
             // 
             // rdbPointerSearcherCodeTypeAR
             // 
-            this.rdbPointerSearcherCodeTypeAR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeAR.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(201, 3);
+            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(205, 3);
             this.rdbPointerSearcherCodeTypeAR.Name = "rdbPointerSearcherCodeTypeAR";
             this.rdbPointerSearcherCodeTypeAR.Size = new System.Drawing.Size(40, 17);
             this.rdbPointerSearcherCodeTypeAR.TabIndex = 2;
@@ -1113,12 +1111,12 @@ namespace TempAR
             // txtPointerSearcherCode
             // 
             this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtPointerSearcherCode.Location = new System.Drawing.Point(292, 286);
+            this.txtPointerSearcherCode.Location = new System.Drawing.Point(9, 406);
             this.txtPointerSearcherCode.Multiline = true;
             this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
             this.txtPointerSearcherCode.ReadOnly = true;
             this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPointerSearcherCode.Size = new System.Drawing.Size(462, 101);
+            this.txtPointerSearcherCode.Size = new System.Drawing.Size(279, 162);
             this.txtPointerSearcherCode.TabIndex = 25;
             this.txtPointerSearcherCode.WordWrap = false;
             // 
@@ -1176,9 +1174,10 @@ namespace TempAR
             // 
             // treePointerSearcherPointers
             // 
+            this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treePointerSearcherPointers.Location = new System.Drawing.Point(292, 6);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 244);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 562);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.treePointerSearcherPointers_DoubleClick);
@@ -1314,7 +1313,7 @@ namespace TempAR
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(769, 449);
+            this.ClientSize = new System.Drawing.Size(769, 661);
             this.Controls.Add(this.tctrlTabs);
             this.Controls.Add(this.frmStatusStrip);
             this.DoubleBuffered = true;
@@ -1322,7 +1321,7 @@ namespace TempAR
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TempAR - Vita Edition  V1.03";
+            this.Text = "TempAR - Vita Edition  V1.04";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlConvertFormat.ResumeLayout(false);
             this.pnlConvertFormat.PerformLayout();
