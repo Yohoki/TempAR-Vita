@@ -17,9 +17,9 @@ namespace TempAR
     private PointerSearcher memdump2;
     private uint memory_start;
 #pragma warning disable CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-        private IContainer components;
+    private IContainer components;
 #pragma warning restore CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-        private Panel pnlConvertFormat;
+    private Panel pnlConvertFormat;
     private RadioButton rdbR4CCE;
     private RadioButton rdbNitePR;
     private Panel pnlConvertFile;
@@ -70,10 +70,11 @@ namespace TempAR
     private ComboBox comboPointerSearcherMode;
     private Label lblPointerSearcherMode;
     private Panel pnlPointerSearcherCodeType;
-        private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
-        private RadioButton rdbPointerSearcherCodeTypeCWCheat;
-        private RadioButton rdbPointerSearcherCodeTypeAR;
-        private TextBox txtBaseAddress;
+        // Radio Buttons for Code type
+    private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
+    private RadioButton rdbPointerSearcherCodeTypeCWCheat;
+    private RadioButton rdbPointerSearcherCodeTypeAR;
+    private TextBox txtBaseAddress;
     private Label lblBaseAddress;
 
     public frmMain()
@@ -236,7 +237,11 @@ namespace TempAR
     {
       this.comboPointerSearcherMode.SelectedIndex = 0;
     }
-
+        //
+        //
+        // Pointer Searcher Tab starts here
+        //
+        //
     private void btnPointerSearcherFindPointers_Click(object sender, EventArgs e)
     {
       uint num1;
@@ -338,18 +343,21 @@ namespace TempAR
         bittype = 0;
         num &= (uint) byte.MaxValue;
       }
-            if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
-             {
-                this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-             }
-            else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
-            {
-                this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-            }
-            else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
-            {
-                this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-            }
+      //
+      // Check which code is being generated
+      //
+      if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
+      {
+        this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+      }
+      else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
+      {
+        this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+      }
+      else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
+      {
+        this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+      }
         }
 
     private void txtPointerSearcherMemDump1_Click(object sender, EventArgs e)
@@ -463,29 +471,33 @@ namespace TempAR
         return uint.Parse(s.Remove(0, 2), NumberStyles.AllowHexSpecifier);
       return uint.Parse(s, numstyle);
     }
-
+    //
+    // Default values for "Base Address"
+    //
     private void comboPointerSearcherMode_SelectedIndexChanged(object sender, EventArgs e)
     {
       this.txtBaseAddress.Enabled = false;
       switch (this.comboPointerSearcherMode.SelectedIndex)
       {
-                case 0:
+                case 0: // Sony Vita
                     this.memory_start = 2164260864U;
                     break;
-                case 1:
+                case 1: // Sony PSP
                     this.memory_start = 142606336U;
                     break;
-               case 2:
+               case 2: // Nintendo DS
                     this.memory_start = 33554432U;
                     break;
-               case 3:
+               case 3: // Other..
                     this.memory_start = 0U;
                     this.txtBaseAddress.Enabled = true;
                     break;
       }
       this.txtBaseAddress.Text = string.Format("0x{0:X08}", (object) this.memory_start);
     }
-
+        //
+        // AR Code Generation
+        //
         private string getARPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
             switch (bittype)
@@ -509,7 +521,9 @@ namespace TempAR
             string str2 = string.Format("6{0:X07} 00000000\nB{0:X07} 00000000\n{1}D2000000 00000000", (object)pointers[0].Address, (object)str1);
             return (this.chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
         }
-
+        //
+        // VitaCheat Code Generation
+        //
             private string getVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
             switch (bittype)
@@ -537,7 +551,9 @@ namespace TempAR
             str2 = !pointers[0].Negative ? str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)pointers[0].Offset) + str1 : str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)(4294967296L - (long)pointers[0].Offset)) + str1;
             return (this.chkPointerSearcherRAWCode.Checked ? "" : "_V0 Generated Code\n") + str2 + str3;
         }
-
+        //
+        // CWCheat Code Generation
+        //
         private string getCWCheatPointerCode(
       List<PointerSearcherLog> pointers,
       int bittype,
