@@ -11,490 +11,527 @@ using System.Windows.Forms;
 
 namespace TempAR
 {
-  public class frmMain : Form
-  {
-    private PointerSearcher memdump;
-    private PointerSearcher memdump2;
-    private uint memory_start;
+    public class frmMain : Form
+    {
+        private PointerSearcher memdump;
+        private PointerSearcher memdump2;
+        private uint memory_start;
 #pragma warning disable CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-    private IContainer components;
+        private IContainer components;
 #pragma warning restore CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-    private Panel pnlConvertFormat;
-    private RadioButton rdbR4CCE;
-    private RadioButton rdbNitePR;
-    private Panel pnlConvertFile;
-    private TextBox txtOutputPath;
-    private TextBox txtInputPath;
-    private Label lblOutputPath;
-    private Label lblInputPath;
-    private Button btnOutputBrowse;
-    private Button btnInputBrowse;
-    private StatusStrip frmStatusStrip;
-    private ToolStripStatusLabel lblStatus;
-    private RadioButton rdbTempAR;
-    private RadioButton rdbCWCheatPOPS;
-    private TabControl tctrlTabs;
-    private TabPage tabConverter;
-    private Panel pnlConvertText;
-    private TextBox txtTextOutput;
-    private TextBox txtTextInput;
-    private TabPage tabPointerSearcher;
-    private Button btnConvert;
-    private RadioButton rdbConvertFile;
-    private RadioButton rdbConvertText;
-    private Panel pnlConvertType;
-    private Label lblPointerSearcherMaxOffset;
-    private TextBox txtPointerSearcherMaxOffset;
-    private Label lblPointerSearcherAddress1;
-    private TextBox txtPointerSearcherAddress1;
-    private Button btnPointerSearcherFindPointers;
-    private TreeView treePointerSearcherPointers;
-    private Button btnPointerSearcherClear;
-    private CheckBox chkPointerSearcherIncludeNegatives;
-    private TextBox txtPointerSearcherCode;
-    private Label lblPointerSearcherMemDump1;
-    private TextBox txtPointerSearcherMemDump1;
-    private CheckBox chkPointerSearcherRealAddresses;
-    private Panel pnlPointerSearcherBitType;
-    private RadioButton rdbPointerSearcherBitType32;
-    private RadioButton rdbPointerSearcherBitType8;
-    private RadioButton rdbPointerSearcherBitType16;
-    private Label lblPointerSearcherValue;
-    private TextBox txtPointerSearcherValue;
-    private CheckBox chkPointerSearcherRAWCode;
-    private CheckBox chkPointerSearcherOptimizePointerPaths;
-    private Label lblPointerSearcherMemDump2;
-    private Label lblPointerSearcherAddress2;
-    private TextBox txtPointerSearcherMemDump2;
-    private TextBox txtPointerSearcherAddress2;
-    private ComboBox comboPointerSearcherMode;
-    private Label lblPointerSearcherMode;
-    private Panel pnlPointerSearcherCodeType;
+        private Panel pnlConvertFormat;
+        private RadioButton rdbR4CCE;
+        private RadioButton rdbNitePR;
+        private Panel pnlConvertFile;
+        private TextBox txtOutputPath;
+        private TextBox txtInputPath;
+        private Label lblOutputPath;
+        private Label lblInputPath;
+        private Button btnOutputBrowse;
+        private Button btnInputBrowse;
+        private StatusStrip frmStatusStrip;
+        private ToolStripStatusLabel lblStatus;
+        private RadioButton rdbTempAR;
+        private RadioButton rdbCWCheatPOPS;
+        private TabControl tctrlTabs;
+        private TabPage tabConverter;
+        private Panel pnlConvertText;
+        private TextBox txtTextOutput;
+        private TextBox txtTextInput;
+        private TabPage tabPointerSearcher;
+        private Button btnConvert;
+        private RadioButton rdbConvertFile;
+        private RadioButton rdbConvertText;
+        private Panel pnlConvertType;
+        private Label lblPointerSearcherMaxOffset;
+        private TextBox txtPointerSearcherMaxOffset;
+        private Label lblPointerSearcherAddress1;
+        private TextBox txtPointerSearcherAddress1;
+        private Button btnPointerSearcherFindPointers;
+        private TreeView treePointerSearcherPointers;
+        private Button btnPointerSearcherClear;
+        private CheckBox chkPointerSearcherIncludeNegatives;
+        private TextBox txtPointerSearcherCode;
+        private Label lblPointerSearcherMemDump1;
+        private TextBox txtPointerSearcherMemDump1;
+        private CheckBox chkPointerSearcherRealAddresses;
+        private Panel pnlPointerSearcherBitType;
+        private RadioButton rdbPointerSearcherBitType32;
+        private RadioButton rdbPointerSearcherBitType8;
+        private RadioButton rdbPointerSearcherBitType16;
+        private Label lblPointerSearcherValue;
+        private TextBox txtPointerSearcherValue;
+        private CheckBox chkPointerSearcherRAWCode;
+        private CheckBox chkPointerSearcherOptimizePointerPaths;
+        private Label lblPointerSearcherMemDump2;
+        private Label lblPointerSearcherAddress2;
+        private TextBox txtPointerSearcherMemDump2;
+        private TextBox txtPointerSearcherAddress2;
+        private ComboBox comboPointerSearcherMode;
+        private Label lblPointerSearcherMode;
+        private Panel pnlPointerSearcherCodeType;
         // Radio Buttons for Code type
-    private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
-    private RadioButton rdbPointerSearcherCodeTypeCWCheat;
-    private RadioButton rdbPointerSearcherCodeTypeAR;
-    private TextBox txtBaseAddress;
-    private Label lblBaseAddress;
+        private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
+        private RadioButton rdbPointerSearcherCodeTypeCWCheat;
+        private RadioButton rdbPointerSearcherCodeTypeAR;
+        private TextBox txtBaseAddress;
+        private TabPage tabVitaCheat;
+        private ComboBox comboVitaCheatCodeType;
+        private Label lblVitaCheatCodeType;
+        private Label lblVitaCheatAddress1;
+        private TextBox txtVitaCheatAddress1;
+        private Label lblVitaCheatAddress2;
+        private TextBox txtVitaCheatAddress2;
+        private TextBox txtVitaCheatCode;
+        private Label lblVitaCheatValue;
+        private TextBox txtVitaCheatValue;
+        private Button btnVitaCheatGenerate;
+        private Panel pnlVitaCheatBitType;
+        private RadioButton rdbVitaCheatBitType8Bit;
+        private GroupBox groupVitaCheatAddress2Offset;
+        private TextBox txtVitaCheatAddress2Offset5;
+        private TextBox txtVitaCheatAddress2Offset4;
+        private TextBox txtVitaCheatAddress2Offset3;
+        private TextBox txtVitaCheatAddress2Offset2;
+        private TextBox txtVitaCheatAddress2Offset1;
+        private GroupBox groupVitaCheatAddress1Offset;
+        private TextBox txtVitaCheatAddress1Offset5;
+        private TextBox txtVitaCheatAddress1Offset4;
+        private TextBox txtVitaCheatAddress1Offset3;
+        private TextBox txtVitaCheatAddress1Offset2;
+        private TextBox txtVitaCheatAddress1Offset1;
+        private RadioButton rdbVitaCheatBitType32Bit;
+        private RadioButton rdbVitaCheatBitType16Bit;
+        private ComboBox comboVitaCheatPointerLevel;
+        private Label lblVitaCheatPointerLevel;
+        private GroupBox groupVitaCheatCompression;
+        private Label lblVitaCheatValueGap;
+        private Label lblVitaCheatAddressGap;
+        private Label lblVitaCheatCompressions;
+        private TextBox txtVitaCheatValueGap;
+        private TextBox txtVitaCheatAddressGap;
+        private NumericUpDown numericVitaCheatCompressions;
+        private Label lblBaseAddress;
 
-    public frmMain()
-    {
-      this.InitializeComponent();
-    }
-
-    private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
-    {
-      if (!((RadioButton) sender).Checked)
-        return;
-      this.ChangeFrameMode(1);
-    }
-
-    private void rdbConvertFile_CheckedChanged(object sender, EventArgs e)
-    {
-      if (!((RadioButton) sender).Checked)
-        return;
-      this.ChangeFrameMode(2);
-    }
-
-    private void rdbCWCheatPOPS_CheckedChanged(object sender, EventArgs e)
-    {
-      this.btnConvert_Click(sender, e);
-    }
-
-    private void rdbNitePR_CheckedChanged(object sender, EventArgs e)
-    {
-      this.btnConvert_Click(sender, e);
-    }
-
-    private void rdbR4CCE_CheckedChanged(object sender, EventArgs e)
-    {
-      this.btnConvert_Click(sender, e);
-    }
-
-    private void txtTextInput_TextChanged(object sender, EventArgs e)
-    {
-      this.btnConvert_Click(sender, e);
-    }
-
-    private void btnConvert_Click(object sender, EventArgs e)
-    {
-      this.lblStatus.Text = "Working...";
-      this.lblStatus.Visible = true;
-      this.Refresh();
-      if (this.rdbConvertText.Checked)
-      {
-        if (this.rdbCWCheatPOPS.Checked)
-          this.txtTextOutput.Text = Converter.cwcpops_pspar(this.txtTextInput.Text);
-        else if (this.rdbNitePR.Checked)
-          this.txtTextOutput.Text = Converter.nitepr_pspar(this.txtTextInput.Text);
-        else if (this.rdbR4CCE.Checked)
-          this.txtTextOutput.Text = Converter.reformat_r4cce(this.txtTextInput.Text, true);
-        else if (this.rdbTempAR.Checked)
-          this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
-      }
-      else if (this.rdbConvertFile.Checked && ((Control) sender).Name == "btnConvert" && (this.txtInputPath.Text.Length > 0 && this.txtOutputPath.Text.Length > 0))
-      {
-        if (this.rdbCWCheatPOPS.Checked)
+        public frmMain()
         {
-          if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-            Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+            this.InitializeComponent();
         }
-        else if (this.rdbNitePR.Checked)
+
+        private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
         {
-          if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-            Converter.file_nitepr_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+            if (!((RadioButton)sender).Checked)
+                return;
+            this.ChangeFrameMode(1);
         }
-        else if (this.rdbTempAR.Checked && File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-          Converter.file_reformat_tempar(this.txtInputPath.Text, this.txtOutputPath.Text);
-      }
-      this.lblStatus.Visible = false;
-    }
 
-    private void btnInputBrowse_Click(object sender, EventArgs e)
-    {
-      if (this.rdbCWCheatPOPS.Checked || this.rdbTempAR.Checked)
-      {
-        this.txtInputPath.Text = this.OpenFile(this.txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
-      }
-      else
-      {
-        if (!this.rdbNitePR.Checked)
-          return;
-        this.txtInputPath.Text = this.OpenDirectory(this.txtInputPath.Text, "Select your NitePR code file directory:");
-      }
-    }
+        private void rdbConvertFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!((RadioButton)sender).Checked)
+                return;
+            this.ChangeFrameMode(2);
+        }
 
-    private void btnOutputBrowse_Click(object sender, EventArgs e)
-    {
-      this.txtOutputPath.Text = this.SaveFile(this.txtOutputPath.Text, "TempAR Database File (*.db)|*.db", "Save");
-    }
+        private void rdbCWCheatPOPS_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btnConvert_Click(sender, e);
+        }
 
-    private void textFieldSelectAll(object sender, KeyEventArgs e)
-    {
-      if (e.Control && e.KeyCode == Keys.A)
-      {
-        ((TextBoxBase) sender).SelectAll();
-        e.SuppressKeyPress = true;
-        e.Handled = true;
-      }
-      else
-        this.OnKeyDown(e);
-    }
+        private void rdbNitePR_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btnConvert_Click(sender, e);
+        }
 
-    private void ChangeFrameMode(int mode)
-    {
-      if (mode == 1)
-      {
-        this.pnlConvertText.BringToFront();
-        this.rdbR4CCE.Enabled = true;
-      }
-      else
-      {
-        this.pnlConvertFile.BringToFront();
-        this.rdbR4CCE.Enabled = false;
-        if (!this.rdbR4CCE.Checked)
-          return;
-        this.rdbCWCheatPOPS.Checked = true;
-      }
-    }
+        private void rdbR4CCE_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btnConvert_Click(sender, e);
+        }
 
-    private string OpenDirectory(string defaultdir, string description)
-    {
-      FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = defaultdir.Length > 0 ? defaultdir : Directory.GetCurrentDirectory();
-      folderBrowserDialog.Description = description;
-      folderBrowserDialog.ShowNewFolderButton = false;
-      if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-        return folderBrowserDialog.SelectedPath;
-      return defaultdir;
-    }
+        private void txtTextInput_TextChanged(object sender, EventArgs e)
+        {
+            this.btnConvert_Click(sender, e);
+        }
 
-    private string OpenFile(string defaultfile, string filter, string title)
-    {
-      OpenFileDialog openFileDialog = new OpenFileDialog();
-      openFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string) null;
-      openFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
-      openFileDialog.Filter = filter;
-      openFileDialog.Title = title;
-      if (openFileDialog.ShowDialog() == DialogResult.OK)
-        return openFileDialog.FileName;
-      return defaultfile;
-    }
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            this.lblStatus.Text = "Working...";
+            this.lblStatus.Visible = true;
+            this.Refresh();
+            if (this.rdbConvertText.Checked)
+            {
+                if (this.rdbCWCheatPOPS.Checked)
+                    this.txtTextOutput.Text = Converter.cwcpops_pspar(this.txtTextInput.Text);
+                else if (this.rdbNitePR.Checked)
+                    this.txtTextOutput.Text = Converter.nitepr_pspar(this.txtTextInput.Text);
+                else if (this.rdbR4CCE.Checked)
+                    this.txtTextOutput.Text = Converter.reformat_r4cce(this.txtTextInput.Text, true);
+                else if (this.rdbTempAR.Checked)
+                    this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+            }
+            else if (this.rdbConvertFile.Checked && ((Control)sender).Name == "btnConvert" && (this.txtInputPath.Text.Length > 0 && this.txtOutputPath.Text.Length > 0))
+            {
+                if (this.rdbCWCheatPOPS.Checked)
+                {
+                    if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                        Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                }
+                else if (this.rdbNitePR.Checked)
+                {
+                    if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                        Converter.file_nitepr_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                }
+                else if (this.rdbTempAR.Checked && File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                    Converter.file_reformat_tempar(this.txtInputPath.Text, this.txtOutputPath.Text);
+            }
+            this.lblStatus.Visible = false;
+        }
 
-    private string SaveFile(string defaultfile, string filter, string title)
-    {
-      SaveFileDialog saveFileDialog = new SaveFileDialog();
-      saveFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string) null;
-      saveFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
-      saveFileDialog.Filter = filter;
-      saveFileDialog.Title = title;
-      if (saveFileDialog.ShowDialog() == DialogResult.OK)
-        return saveFileDialog.FileName;
-      return defaultfile;
-    }
+        private void btnInputBrowse_Click(object sender, EventArgs e)
+        {
+            if (this.rdbCWCheatPOPS.Checked || this.rdbTempAR.Checked)
+            {
+                this.txtInputPath.Text = this.OpenFile(this.txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
+            }
+            else
+            {
+                if (!this.rdbNitePR.Checked)
+                    return;
+                this.txtInputPath.Text = this.OpenDirectory(this.txtInputPath.Text, "Select your NitePR code file directory:");
+            }
+        }
 
-    private void frmMain_Load(object sender, EventArgs e)
-    {
-      this.comboPointerSearcherMode.SelectedIndex = 0;
-    }
+        private void btnOutputBrowse_Click(object sender, EventArgs e)
+        {
+            this.txtOutputPath.Text = this.SaveFile(this.txtOutputPath.Text, "TempAR Database File (*.db)|*.db", "Save");
+        }
+
+        private void textFieldSelectAll(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                ((TextBoxBase)sender).SelectAll();
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+            }
+            else
+                this.OnKeyDown(e);
+        }
+
+        private void ChangeFrameMode(int mode)
+        {
+            if (mode == 1)
+            {
+                this.pnlConvertText.BringToFront();
+                this.rdbR4CCE.Enabled = true;
+            }
+            else
+            {
+                this.pnlConvertFile.BringToFront();
+                this.rdbR4CCE.Enabled = false;
+                if (!this.rdbR4CCE.Checked)
+                    return;
+                this.rdbCWCheatPOPS.Checked = true;
+            }
+        }
+
+        private string OpenDirectory(string defaultdir, string description)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.SelectedPath = defaultdir.Length > 0 ? defaultdir : Directory.GetCurrentDirectory();
+            folderBrowserDialog.Description = description;
+            folderBrowserDialog.ShowNewFolderButton = false;
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                return folderBrowserDialog.SelectedPath;
+            return defaultdir;
+        }
+
+        private string OpenFile(string defaultfile, string filter, string title)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string)null;
+            openFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
+            openFileDialog.Filter = filter;
+            openFileDialog.Title = title;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                return openFileDialog.FileName;
+            return defaultfile;
+        }
+
+        private string SaveFile(string defaultfile, string filter, string title)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string)null;
+            saveFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
+            saveFileDialog.Filter = filter;
+            saveFileDialog.Title = title;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                return saveFileDialog.FileName;
+            return defaultfile;
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            this.comboPointerSearcherMode.SelectedIndex = 0;
+            this.comboVitaCheatCodeType.SelectedIndex = 0;
+        }
         //
         //
         // Pointer Searcher Tab starts here
         //
         //
-    private void btnPointerSearcherFindPointers_Click(object sender, EventArgs e)
-    {
-      uint num1;
-      try
-      {
-        num1 = this.parseNum(this.txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
-      }
-      catch
-      {
-        int num2 = (int) MessageBox.Show("Unable to parse address, make sure value is a valid hexadecimal number.");
-        return;
-      }
-      uint num3;
-      try
-      {
-        num3 = this.parseNum(this.txtPointerSearcherMaxOffset.Text);
-      }
-      catch
-      {
-        int num2 = (int) MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
-        return;
-      }
-      try
-      {
-        this.memory_start = this.parseNum(this.txtBaseAddress.Text);
-      }
-      catch
-      {
-        int num2 = (int) MessageBox.Show("Unable to parse base address, make sure value is a valid hexadecimal number.");
-        return;
-      }
-      this.treePointerSearcherPointers.Nodes.Clear();
-      this.memdump = new PointerSearcher(this.txtPointerSearcherMemDump1.Text, this.memory_start);
-      this.memdump2 = new PointerSearcher(this.txtPointerSearcherMemDump2.Text, this.memory_start);
-      this.addPointerTree(this.memdump.findPointers(num1, num3), this.treePointerSearcherPointers.SelectedNode);
-    }
-
-    private void treePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
-    {
-      if (this.treePointerSearcherPointers.SelectedNode == null)
-        return;
-      uint num1;
-      try
-      {
-        num1 = this.parseNum(this.txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
-      }
-      catch
-      {
-        int num2 = (int) MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
-        return;
-      }
-      this.treePointerSearcherPointers.SelectedNode.Nodes.Clear();
-      this.addPointerTree(this.memdump.findPointers(new PointerSearcherLog(this.treePointerSearcherPointers.SelectedNode.Text, this.memory_start).Address, num1), this.treePointerSearcherPointers.SelectedNode);
-    }
-
-    private void btnPointerSearcherClear_Click(object sender, EventArgs e)
-    {
-      this.treePointerSearcherPointers.Nodes.Clear();
-    }
-
-    public void SortList<T>(List<T> dataSource, string fieldName, bool asc)
-    {
-      PropertyInfo propInfo = typeof (T).GetProperty(fieldName);
-      Comparison<T> comparison = (Comparison<T>) ((a, b) =>
-      {
-        object obj1 = asc ? propInfo.GetValue((object) a, (object[]) null) : propInfo.GetValue((object) b, (object[]) null);
-        object obj2 = asc ? propInfo.GetValue((object) b, (object[]) null) : propInfo.GetValue((object) a, (object[]) null);
-        if (!(obj1 is IComparable))
-          return 0;
-        return ((IComparable) obj1).CompareTo(obj2);
-      });
-      dataSource.Sort(comparison);
-    }
-
-    private void treePointerSearcherPointers_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      if (this.treePointerSearcherPointers.SelectedNode == null)
-        return;
-      List<PointerSearcherLog> pointers = new List<PointerSearcherLog>();
-      string[] strArray = this.treePointerSearcherPointers.SelectedNode.FullPath.ToString().Split('\\');
-      for (int index = 0; index < strArray.Length; ++index)
-        pointers.Add(new PointerSearcherLog(strArray[strArray.Length - 1 - index], this.memory_start));
-      uint num = 0;
-      try
-      {
-        num = this.parseNum(this.txtPointerSearcherValue.Text);
-      }
-      catch
-      {
-      }
-      int bittype = 2;
-      if (this.rdbPointerSearcherBitType16.Checked)
-      {
-        bittype = 1;
-        num &= (uint) ushort.MaxValue;
-      }
-      else if (this.rdbPointerSearcherBitType8.Checked)
-      {
-        bittype = 0;
-        num &= (uint) byte.MaxValue;
-      }
-      //
-      // Check which code is being generated
-      //
-      if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
-      {
-        this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-      }
-      else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
-      {
-        this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-      }
-      else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
-      {
-        this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-      }
-        }
-
-    private void txtPointerSearcherMemDump1_Click(object sender, EventArgs e)
-    {
-      this.txtPointerSearcherMemDump1.Text = this.OpenFile(this.txtPointerSearcherMemDump1.Text, (string) null, "Open");
-    }
-
-    private void txtPointerSearcherMemDump2_Click(object sender, EventArgs e)
-    {
-      this.txtPointerSearcherMemDump2.Text = this.OpenFile(this.txtPointerSearcherMemDump2.Text, (string) null, "Open");
-    }
-
-    private void treePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
-    {
-      switch (e.KeyData)
-      {
-        case Keys.Space:
-          this.treePointerSearcherPointers_DoubleClick((object) null, (EventArgs) null);
-          break;
-        case Keys.Delete:
-          if (this.treePointerSearcherPointers.SelectedNode == null)
-            break;
-          this.treePointerSearcherPointers.SelectedNode.Remove();
-          break;
-      }
-    }
-
-    private void addPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
-    {
-      if (pointers == null)
-        return;
-      this.SortList<PointerSearcherLog>(pointers, "Address", true);
-      if (this.chkPointerSearcherOptimizePointerPaths.Checked)
-      {
-        List<PointerSearcherLog> pointerSearcherLogList = new List<PointerSearcherLog>();
-        if (this.treePointerSearcherPointers.Nodes.Count > 0)
+        private void btnPointerSearcherFindPointers_Click(object sender, EventArgs e)
         {
-          TreeNodeCollection parentEqualTree = this.getParentEqualTree(this.treePointerSearcherPointers.Nodes, this.treePointerSearcherPointers.SelectedNode == null ? 0 : this.treePointerSearcherPointers.SelectedNode.Level);
-          for (int index = 0; index < parentEqualTree.Count; ++index)
-            pointerSearcherLogList.Add(new PointerSearcherLog(parentEqualTree[index].Text, this.memory_start));
+            uint num1;
+            try
+            {
+                num1 = this.parseNum(this.txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse address, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            uint num3;
+            try
+            {
+                num3 = this.parseNum(this.txtPointerSearcherMaxOffset.Text);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            try
+            {
+                this.memory_start = this.parseNum(this.txtBaseAddress.Text);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse base address, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            this.treePointerSearcherPointers.Nodes.Clear();
+            this.memdump = new PointerSearcher(this.txtPointerSearcherMemDump1.Text, this.memory_start);
+            this.memdump2 = new PointerSearcher(this.txtPointerSearcherMemDump2.Text, this.memory_start);
+            this.addPointerTree(this.memdump.findPointers(num1, num3), this.treePointerSearcherPointers.SelectedNode);
         }
-        for (int index1 = 0; index1 < pointerSearcherLogList.Count; ++index1)
-        {
-          for (int index2 = 0; index2 < pointers.Count; ++index2)
-          {
-            if ((int) pointerSearcherLogList[index1].Address == (int) pointers[index2].Address)
-              pointers.RemoveAt(index2);
-          }
-        }
-      }
-      for (int index1 = 0; index1 < pointers.Count; ++index1)
-      {
-        Color color = Color.Black;
-        if (this.memdump2 != null)
-        {
-          string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-          uint num = this.parseNum(this.txtPointerSearcherAddress2.Text, NumberStyles.AllowHexSpecifier);
-          if (num < this.memory_start)
-            num += this.memory_start;
-          uint address = 0;
-          for (int index2 = 0; index2 < strArray.Length; ++index2)
-          {
-            PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-            if (index2 == 0)
-              address = pointerSearcherLog.Address;
-            address = this.memdump2.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-          }
-          if ((int) num == (int) address)
-            color = Color.Green;
-        }
-        if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
-        {
-          TreeNode node = new TreeNode();
-          node.Text = pointers[index1].ToString(this.chkPointerSearcherRealAddresses.Checked ? 0U : this.memory_start);
-          node.ForeColor = color;
-          if (parent == null)
-            this.treePointerSearcherPointers.Nodes.Add(node);
-          else
-            parent.Nodes.Add(node);
-        }
-      }
-    }
 
-    private TreeNodeCollection getParentEqualTree(
-      TreeNodeCollection nodes,
-      int level)
-    {
-      TreeView treeView = new TreeView();
-      foreach (TreeNode node in nodes)
-      {
-        if (node.Level <= level)
+        private void treePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
         {
-          treeView.Nodes.Add(node.Text);
-          foreach (TreeNode treeNode in this.getParentEqualTree(node.Nodes, level))
-            treeView.Nodes.Add(treeNode.Text);
+            if (this.treePointerSearcherPointers.SelectedNode == null)
+                return;
+            uint num1;
+            try
+            {
+                num1 = this.parseNum(this.txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            this.treePointerSearcherPointers.SelectedNode.Nodes.Clear();
+            this.addPointerTree(this.memdump.findPointers(new PointerSearcherLog(this.treePointerSearcherPointers.SelectedNode.Text, this.memory_start).Address, num1), this.treePointerSearcherPointers.SelectedNode);
         }
-      }
-      return treeView.Nodes;
-    }
 
-    private uint parseNum(string s)
-    {
-      return this.parseNum(s, NumberStyles.None);
-    }
+        private void btnPointerSearcherClear_Click(object sender, EventArgs e)
+        {
+            this.treePointerSearcherPointers.Nodes.Clear();
+        }
 
-    private uint parseNum(string s, NumberStyles numstyle)
-    {
-      if (s.Trim().Length == 0)
-        return 0;
-      if (s.StartsWith("0x"))
-        return uint.Parse(s.Remove(0, 2), NumberStyles.AllowHexSpecifier);
-      return uint.Parse(s, numstyle);
-    }
-    //
-    // Default values for "Base Address"
-    //
-    private void comboPointerSearcherMode_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      this.txtBaseAddress.Enabled = false;
-      switch (this.comboPointerSearcherMode.SelectedIndex)
-      {
+        public void SortList<T>(List<T> dataSource, string fieldName, bool asc)
+        {
+            PropertyInfo propInfo = typeof(T).GetProperty(fieldName);
+            Comparison<T> comparison = (Comparison<T>)((a, b) =>
+           {
+               object obj1 = asc ? propInfo.GetValue((object)a, (object[])null) : propInfo.GetValue((object)b, (object[])null);
+               object obj2 = asc ? propInfo.GetValue((object)b, (object[])null) : propInfo.GetValue((object)a, (object[])null);
+               if (!(obj1 is IComparable))
+                   return 0;
+               return ((IComparable)obj1).CompareTo(obj2);
+           });
+            dataSource.Sort(comparison);
+        }
+
+        private void treePointerSearcherPointers_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (this.treePointerSearcherPointers.SelectedNode == null)
+                return;
+            List<PointerSearcherLog> pointers = new List<PointerSearcherLog>();
+            string[] strArray = this.treePointerSearcherPointers.SelectedNode.FullPath.ToString().Split('\\');
+            for (int index = 0; index < strArray.Length; ++index)
+                pointers.Add(new PointerSearcherLog(strArray[strArray.Length - 1 - index], this.memory_start));
+            uint num = 0;
+            try
+            {
+                num = this.parseNum(this.txtPointerSearcherValue.Text);
+            }
+            catch
+            {
+            }
+            int bittype = 2;
+            if (this.rdbPointerSearcherBitType16.Checked)
+            {
+                bittype = 1;
+                num &= (uint)ushort.MaxValue;
+            }
+            else if (this.rdbPointerSearcherBitType8.Checked)
+            {
+                bittype = 0;
+                num &= (uint)byte.MaxValue;
+            }
+            //
+            // Check which code is being generated
+            //
+            if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
+            {
+                this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+            }
+            else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
+            {
+                this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+            }
+            else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
+            {
+                this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+            }
+        }
+
+        private void txtPointerSearcherMemDump1_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump1.Text = this.OpenFile(this.txtPointerSearcherMemDump1.Text, (string)null, "Open");
+        }
+
+        private void txtPointerSearcherMemDump2_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump2.Text = this.OpenFile(this.txtPointerSearcherMemDump2.Text, (string)null, "Open");
+        }
+
+        private void treePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Space:
+                    this.treePointerSearcherPointers_DoubleClick((object)null, (EventArgs)null);
+                    break;
+                case Keys.Delete:
+                    if (this.treePointerSearcherPointers.SelectedNode == null)
+                        break;
+                    this.treePointerSearcherPointers.SelectedNode.Remove();
+                    break;
+            }
+        }
+
+        private void addPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
+        {
+            if (pointers == null)
+                return;
+            this.SortList<PointerSearcherLog>(pointers, "Address", true);
+            if (this.chkPointerSearcherOptimizePointerPaths.Checked)
+            {
+                List<PointerSearcherLog> pointerSearcherLogList = new List<PointerSearcherLog>();
+                if (this.treePointerSearcherPointers.Nodes.Count > 0)
+                {
+                    TreeNodeCollection parentEqualTree = this.getParentEqualTree(this.treePointerSearcherPointers.Nodes, this.treePointerSearcherPointers.SelectedNode == null ? 0 : this.treePointerSearcherPointers.SelectedNode.Level);
+                    for (int index = 0; index < parentEqualTree.Count; ++index)
+                        pointerSearcherLogList.Add(new PointerSearcherLog(parentEqualTree[index].Text, this.memory_start));
+                }
+                for (int index1 = 0; index1 < pointerSearcherLogList.Count; ++index1)
+                {
+                    for (int index2 = 0; index2 < pointers.Count; ++index2)
+                    {
+                        if ((int)pointerSearcherLogList[index1].Address == (int)pointers[index2].Address)
+                            pointers.RemoveAt(index2);
+                    }
+                }
+            }
+            for (int index1 = 0; index1 < pointers.Count; ++index1)
+            {
+                Color color = Color.Black;
+                if (this.memdump2 != null)
+                {
+                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    uint num = this.parseNum(this.txtPointerSearcherAddress2.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < this.memory_start)
+                        num += this.memory_start;
+                    uint address = 0;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
+                        if (index2 == 0)
+                            address = pointerSearcherLog.Address;
+                        address = this.memdump2.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address)
+                        color = Color.Green;
+                }
+                if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = pointers[index1].ToString(this.chkPointerSearcherRealAddresses.Checked ? 0U : this.memory_start);
+                    node.ForeColor = color;
+                    if (parent == null)
+                        this.treePointerSearcherPointers.Nodes.Add(node);
+                    else
+                        parent.Nodes.Add(node);
+                }
+            }
+        }
+
+        private TreeNodeCollection getParentEqualTree(
+          TreeNodeCollection nodes,
+          int level)
+        {
+            TreeView treeView = new TreeView();
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Level <= level)
+                {
+                    treeView.Nodes.Add(node.Text);
+                    foreach (TreeNode treeNode in this.getParentEqualTree(node.Nodes, level))
+                        treeView.Nodes.Add(treeNode.Text);
+                }
+            }
+            return treeView.Nodes;
+        }
+
+        private uint parseNum(string s)
+        {
+            return this.parseNum(s, NumberStyles.None);
+        }
+
+        private uint parseNum(string s, NumberStyles numstyle)
+        {
+            if (s.Trim().Length == 0)
+                return 0;
+            if (s.StartsWith("0x"))
+                return uint.Parse(s.Remove(0, 2), NumberStyles.AllowHexSpecifier);
+            return uint.Parse(s, numstyle);
+        }
+        //
+        // Default values for "Base Address"
+        //
+        private void comboPointerSearcherMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.txtBaseAddress.Enabled = false;
+            switch (this.comboPointerSearcherMode.SelectedIndex)
+            {
                 case 0: // Sony Vita
                     this.memory_start = 2164260864U;
                     break;
                 case 1: // Sony PSP
                     this.memory_start = 142606336U;
                     break;
-               case 2: // Nintendo DS
+                case 2: // Nintendo DS
                     this.memory_start = 33554432U;
                     break;
-               case 3: // Other..
+                case 3: // Other..
                     this.memory_start = 0U;
                     this.txtBaseAddress.Enabled = true;
                     break;
-      }
-      this.txtBaseAddress.Text = string.Format("0x{0:X08}", (object) this.memory_start);
-    }
+            }
+            this.txtBaseAddress.Text = string.Format("0x{0:X08}", (object)this.memory_start);
+        }
         //
         // AR Code Generation
         //
@@ -524,7 +561,7 @@ namespace TempAR
         //
         // VitaCheat Code Generation
         //
-            private string getVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
+        private string getVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
             switch (bittype)
             {
@@ -558,49 +595,49 @@ namespace TempAR
       List<PointerSearcherLog> pointers,
       int bittype,
       uint value)
-    {
-      if (bittype != 0 && bittype != 1 && bittype != 2)
-        bittype = 2;
-      if (pointers[0].Negative)
-        bittype += 3;
-      string str1 = "";
-      for (int index = 0; index < pointers.Count - 1; ++index)
-        str1 = index % 2 != 0 ? str1 + string.Format(" 0x{0:X01}{1:X07}\n", (object) (pointers[index].Negative ? 3 : 2), (object) pointers[index].Offset) : str1 + string.Format("{0}0x{1:X01}{2:X07}", this.chkPointerSearcherRAWCode.Checked ? (object) "" : (object) "_L ", (object) (pointers[index].Negative ? 3 : 2), (object) pointers[index].Offset);
-      if (pointers.Count % 2 == 0)
-        str1 += string.Format(" 0x00000000");
-      string str2 = string.Format("{0}0x6{1:X07} 0x{2:X08}\n{0}0x000{3:X01}{4:X04} 0x{5:X08}\n", this.chkPointerSearcherRAWCode.Checked ? (object) "" : (object) "_L ", (object) (uint) ((int) pointers[0].Address - (int) this.memory_start), (object) value, (object) bittype, (object) pointers.Count, (object) pointers[pointers.Count - 1].Offset) + str1;
-      return (this.chkPointerSearcherRAWCode.Checked ? "" : "_C0 Generated Code\n") + str2;
-    }
+        {
+            if (bittype != 0 && bittype != 1 && bittype != 2)
+                bittype = 2;
+            if (pointers[0].Negative)
+                bittype += 3;
+            string str1 = "";
+            for (int index = 0; index < pointers.Count - 1; ++index)
+                str1 = index % 2 != 0 ? str1 + string.Format(" 0x{0:X01}{1:X07}\n", (object)(pointers[index].Negative ? 3 : 2), (object)pointers[index].Offset) : str1 + string.Format("{0}0x{1:X01}{2:X07}", this.chkPointerSearcherRAWCode.Checked ? (object)"" : (object)"_L ", (object)(pointers[index].Negative ? 3 : 2), (object)pointers[index].Offset);
+            if (pointers.Count % 2 == 0)
+                str1 += string.Format(" 0x00000000");
+            string str2 = string.Format("{0}0x6{1:X07} 0x{2:X08}\n{0}0x000{3:X01}{4:X04} 0x{5:X08}\n", this.chkPointerSearcherRAWCode.Checked ? (object)"" : (object)"_L ", (object)(uint)((int)pointers[0].Address - (int)this.memory_start), (object)value, (object)bittype, (object)pointers.Count, (object)pointers[pointers.Count - 1].Offset) + str1;
+            return (this.chkPointerSearcherRAWCode.Checked ? "" : "_C0 Generated Code\n") + str2;
+        }
 
-    private void txtFileDragDrop_DragEnter(object sender, DragEventArgs e)
-    {
-      if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        e.Effect = DragDropEffects.Copy;
-      else
-        e.Effect = DragDropEffects.None;
-    }
+        private void txtFileDragDrop_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
 
-    private void txtFileDragDrop_DragDrop(object sender, DragEventArgs e)
-    {
-      ((Control) sender).Text = ((string[]) e.Data.GetData(DataFormats.FileDrop))[0];
-    }
+        private void txtFileDragDrop_DragDrop(object sender, DragEventArgs e)
+        {
+            ((Control)sender).Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+        }
 
-    private void txtValidateHexString_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      if (!Regex.IsMatch(e.KeyChar.ToString(), "[^0-9a-fA-F\x0001\x0003\b\x0016]"))
-        return;
-      e.Handled = true;
-    }
+        private void txtValidateHexString_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Regex.IsMatch(e.KeyChar.ToString(), "[^0-9a-fA-F\x0001\x0003\b\x0016]"))
+                return;
+            e.Handled = true;
+        }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+                this.components.Dispose();
+            base.Dispose(disposing);
+        }
 
-    private void InitializeComponent()
-    {
+        private void InitializeComponent()
+        {
             this.pnlConvertFormat = new System.Windows.Forms.Panel();
             this.rdbTempAR = new System.Windows.Forms.RadioButton();
             this.rdbR4CCE = new System.Windows.Forms.RadioButton();
@@ -657,6 +694,42 @@ namespace TempAR
             this.txtPointerSearcherMemDump1 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
+            this.tabVitaCheat = new System.Windows.Forms.TabPage();
+            this.lblVitaCheatPointerLevel = new System.Windows.Forms.Label();
+            this.comboVitaCheatPointerLevel = new System.Windows.Forms.ComboBox();
+            this.pnlVitaCheatBitType = new System.Windows.Forms.Panel();
+            this.rdbVitaCheatBitType32Bit = new System.Windows.Forms.RadioButton();
+            this.rdbVitaCheatBitType16Bit = new System.Windows.Forms.RadioButton();
+            this.rdbVitaCheatBitType8Bit = new System.Windows.Forms.RadioButton();
+            this.groupVitaCheatAddress2Offset = new System.Windows.Forms.GroupBox();
+            this.txtVitaCheatAddress2Offset5 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress2Offset4 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress2Offset3 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress2Offset2 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress2Offset1 = new System.Windows.Forms.TextBox();
+            this.groupVitaCheatAddress1Offset = new System.Windows.Forms.GroupBox();
+            this.txtVitaCheatAddress1Offset5 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress1Offset4 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress1Offset3 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress1Offset2 = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddress1Offset1 = new System.Windows.Forms.TextBox();
+            this.btnVitaCheatGenerate = new System.Windows.Forms.Button();
+            this.txtVitaCheatCode = new System.Windows.Forms.TextBox();
+            this.lblVitaCheatValue = new System.Windows.Forms.Label();
+            this.txtVitaCheatValue = new System.Windows.Forms.TextBox();
+            this.lblVitaCheatAddress2 = new System.Windows.Forms.Label();
+            this.txtVitaCheatAddress2 = new System.Windows.Forms.TextBox();
+            this.lblVitaCheatAddress1 = new System.Windows.Forms.Label();
+            this.txtVitaCheatAddress1 = new System.Windows.Forms.TextBox();
+            this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
+            this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
+            this.groupVitaCheatCompression = new System.Windows.Forms.GroupBox();
+            this.numericVitaCheatCompressions = new System.Windows.Forms.NumericUpDown();
+            this.txtVitaCheatAddressGap = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatValueGap = new System.Windows.Forms.TextBox();
+            this.lblVitaCheatCompressions = new System.Windows.Forms.Label();
+            this.lblVitaCheatAddressGap = new System.Windows.Forms.Label();
+            this.lblVitaCheatValueGap = new System.Windows.Forms.Label();
             this.pnlConvertFormat.SuspendLayout();
             this.pnlConvertFile.SuspendLayout();
             this.frmStatusStrip.SuspendLayout();
@@ -667,6 +740,12 @@ namespace TempAR
             this.tabPointerSearcher.SuspendLayout();
             this.pnlPointerSearcherCodeType.SuspendLayout();
             this.pnlPointerSearcherBitType.SuspendLayout();
+            this.tabVitaCheat.SuspendLayout();
+            this.pnlVitaCheatBitType.SuspendLayout();
+            this.groupVitaCheatAddress2Offset.SuspendLayout();
+            this.groupVitaCheatAddress1Offset.SuspendLayout();
+            this.groupVitaCheatCompression.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlConvertFormat
@@ -809,13 +888,12 @@ namespace TempAR
             // 
             this.frmStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.frmStatusStrip.Location = new System.Drawing.Point(0, 427);
+            this.frmStatusStrip.Location = new System.Drawing.Point(0, 639);
             this.frmStatusStrip.Name = "frmStatusStrip";
             this.frmStatusStrip.Size = new System.Drawing.Size(769, 22);
             this.frmStatusStrip.SizingGrip = false;
             this.frmStatusStrip.TabIndex = 1;
             this.frmStatusStrip.Text = "statusStrip1";
-            this.frmStatusStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FrmStatusStrip_ItemClicked);
             // 
             // lblStatus
             // 
@@ -829,10 +907,11 @@ namespace TempAR
             // 
             this.tctrlTabs.Controls.Add(this.tabConverter);
             this.tctrlTabs.Controls.Add(this.tabPointerSearcher);
+            this.tctrlTabs.Controls.Add(this.tabVitaCheat);
             this.tctrlTabs.Location = new System.Drawing.Point(5, 5);
             this.tctrlTabs.Name = "tctrlTabs";
             this.tctrlTabs.SelectedIndex = 1;
-            this.tctrlTabs.Size = new System.Drawing.Size(765, 419);
+            this.tctrlTabs.Size = new System.Drawing.Size(765, 600);
             this.tctrlTabs.TabIndex = 0;
             // 
             // tabConverter
@@ -845,7 +924,7 @@ namespace TempAR
             this.tabConverter.Location = new System.Drawing.Point(4, 22);
             this.tabConverter.Name = "tabConverter";
             this.tabConverter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConverter.Size = new System.Drawing.Size(757, 393);
+            this.tabConverter.Size = new System.Drawing.Size(757, 574);
             this.tabConverter.TabIndex = 0;
             this.tabConverter.Text = "Code Converter";
             this.tabConverter.UseVisualStyleBackColor = true;
@@ -907,7 +986,7 @@ namespace TempAR
             this.pnlConvertText.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.pnlConvertText.Location = new System.Drawing.Point(3, 40);
             this.pnlConvertText.Name = "pnlConvertText";
-            this.pnlConvertText.Size = new System.Drawing.Size(751, 347);
+            this.pnlConvertText.Size = new System.Drawing.Size(751, 534);
             this.pnlConvertText.TabIndex = 5;
             // 
             // txtTextOutput
@@ -918,7 +997,7 @@ namespace TempAR
             this.txtTextOutput.Name = "txtTextOutput";
             this.txtTextOutput.ReadOnly = true;
             this.txtTextOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextOutput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextOutput.Size = new System.Drawing.Size(365, 528);
             this.txtTextOutput.TabIndex = 2;
             this.txtTextOutput.WordWrap = false;
             this.txtTextOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
@@ -930,7 +1009,7 @@ namespace TempAR
             this.txtTextInput.Multiline = true;
             this.txtTextInput.Name = "txtTextInput";
             this.txtTextInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextInput.Size = new System.Drawing.Size(365, 341);
+            this.txtTextInput.Size = new System.Drawing.Size(365, 528);
             this.txtTextInput.TabIndex = 1;
             this.txtTextInput.WordWrap = false;
             this.txtTextInput.TextChanged += new System.EventHandler(this.txtTextInput_TextChanged);
@@ -967,7 +1046,7 @@ namespace TempAR
             this.tabPointerSearcher.Location = new System.Drawing.Point(4, 22);
             this.tabPointerSearcher.Name = "tabPointerSearcher";
             this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 393);
+            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 574);
             this.tabPointerSearcher.TabIndex = 1;
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
@@ -1012,17 +1091,16 @@ namespace TempAR
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeVitaCheat);
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeCWCheat);
             this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeAR);
-            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(292, 256);
+            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(9, 380);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
-            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(700, 24);
+            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(279, 24);
             this.pnlPointerSearcherCodeType.TabIndex = 24;
             // 
             // rdbPointerSearcherCodeTypeVitaCheat
             // 
-            this.rdbPointerSearcherCodeTypeVitaCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
             this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
-            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(4, 3);
+            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(8, 3);
             this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
             this.rdbPointerSearcherCodeTypeVitaCheat.Size = new System.Drawing.Size(71, 17);
             this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
@@ -1032,9 +1110,8 @@ namespace TempAR
             // 
             // rdbPointerSearcherCodeTypeCWCheat
             // 
-            this.rdbPointerSearcherCodeTypeCWCheat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(100, 3);
+            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(104, 3);
             this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
             this.rdbPointerSearcherCodeTypeCWCheat.Size = new System.Drawing.Size(71, 17);
             this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
@@ -1043,9 +1120,8 @@ namespace TempAR
             // 
             // rdbPointerSearcherCodeTypeAR
             // 
-            this.rdbPointerSearcherCodeTypeAR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherCodeTypeAR.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(201, 3);
+            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(205, 3);
             this.rdbPointerSearcherCodeTypeAR.Name = "rdbPointerSearcherCodeTypeAR";
             this.rdbPointerSearcherCodeTypeAR.Size = new System.Drawing.Size(40, 17);
             this.rdbPointerSearcherCodeTypeAR.TabIndex = 2;
@@ -1113,12 +1189,12 @@ namespace TempAR
             // txtPointerSearcherCode
             // 
             this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtPointerSearcherCode.Location = new System.Drawing.Point(292, 286);
+            this.txtPointerSearcherCode.Location = new System.Drawing.Point(9, 406);
             this.txtPointerSearcherCode.Multiline = true;
             this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
             this.txtPointerSearcherCode.ReadOnly = true;
             this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPointerSearcherCode.Size = new System.Drawing.Size(462, 101);
+            this.txtPointerSearcherCode.Size = new System.Drawing.Size(279, 162);
             this.txtPointerSearcherCode.TabIndex = 25;
             this.txtPointerSearcherCode.WordWrap = false;
             // 
@@ -1176,9 +1252,10 @@ namespace TempAR
             // 
             // treePointerSearcherPointers
             // 
+            this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treePointerSearcherPointers.Location = new System.Drawing.Point(292, 6);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 244);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 562);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.treePointerSearcherPointers_DoubleClick);
@@ -1309,12 +1386,376 @@ namespace TempAR
             this.txtPointerSearcherAddress1.TabIndex = 3;
             this.txtPointerSearcherAddress1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
             // 
+            // tabVitaCheat
+            // 
+            this.tabVitaCheat.Controls.Add(this.groupVitaCheatCompression);
+            this.tabVitaCheat.Controls.Add(this.lblVitaCheatPointerLevel);
+            this.tabVitaCheat.Controls.Add(this.comboVitaCheatPointerLevel);
+            this.tabVitaCheat.Controls.Add(this.pnlVitaCheatBitType);
+            this.tabVitaCheat.Controls.Add(this.groupVitaCheatAddress2Offset);
+            this.tabVitaCheat.Controls.Add(this.groupVitaCheatAddress1Offset);
+            this.tabVitaCheat.Controls.Add(this.btnVitaCheatGenerate);
+            this.tabVitaCheat.Controls.Add(this.txtVitaCheatCode);
+            this.tabVitaCheat.Controls.Add(this.lblVitaCheatValue);
+            this.tabVitaCheat.Controls.Add(this.txtVitaCheatValue);
+            this.tabVitaCheat.Controls.Add(this.lblVitaCheatAddress2);
+            this.tabVitaCheat.Controls.Add(this.txtVitaCheatAddress2);
+            this.tabVitaCheat.Controls.Add(this.lblVitaCheatAddress1);
+            this.tabVitaCheat.Controls.Add(this.txtVitaCheatAddress1);
+            this.tabVitaCheat.Controls.Add(this.lblVitaCheatCodeType);
+            this.tabVitaCheat.Controls.Add(this.comboVitaCheatCodeType);
+            this.tabVitaCheat.Location = new System.Drawing.Point(4, 22);
+            this.tabVitaCheat.Name = "tabVitaCheat";
+            this.tabVitaCheat.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVitaCheat.Size = new System.Drawing.Size(757, 574);
+            this.tabVitaCheat.TabIndex = 2;
+            this.tabVitaCheat.Text = "VitaCheat";
+            this.tabVitaCheat.UseVisualStyleBackColor = true;
+            // 
+            // lblVitaCheatPointerLevel
+            // 
+            this.lblVitaCheatPointerLevel.AutoSize = true;
+            this.lblVitaCheatPointerLevel.Location = new System.Drawing.Point(6, 116);
+            this.lblVitaCheatPointerLevel.Name = "lblVitaCheatPointerLevel";
+            this.lblVitaCheatPointerLevel.Size = new System.Drawing.Size(69, 13);
+            this.lblVitaCheatPointerLevel.TabIndex = 15;
+            this.lblVitaCheatPointerLevel.Text = "Pointer Level";
+            // 
+            // comboVitaCheatPointerLevel
+            // 
+            this.comboVitaCheatPointerLevel.DisplayMember = "1";
+            this.comboVitaCheatPointerLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVitaCheatPointerLevel.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.comboVitaCheatPointerLevel.FormattingEnabled = true;
+            this.comboVitaCheatPointerLevel.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboVitaCheatPointerLevel.Location = new System.Drawing.Point(90, 113);
+            this.comboVitaCheatPointerLevel.MaxDropDownItems = 5;
+            this.comboVitaCheatPointerLevel.Name = "comboVitaCheatPointerLevel";
+            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(121, 21);
+            this.comboVitaCheatPointerLevel.TabIndex = 14;
+            this.comboVitaCheatPointerLevel.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatPointerLevel_SelectedIndexChanged);
+            // 
+            // pnlVitaCheatBitType
+            // 
+            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType32Bit);
+            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType16Bit);
+            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType8Bit);
+            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(11, 140);
+            this.pnlVitaCheatBitType.Name = "pnlVitaCheatBitType";
+            this.pnlVitaCheatBitType.Size = new System.Drawing.Size(200, 20);
+            this.pnlVitaCheatBitType.TabIndex = 13;
+            // 
+            // rdbVitaCheatBitType32Bit
+            // 
+            this.rdbVitaCheatBitType32Bit.AutoSize = true;
+            this.rdbVitaCheatBitType32Bit.Checked = true;
+            this.rdbVitaCheatBitType32Bit.Location = new System.Drawing.Point(116, 0);
+            this.rdbVitaCheatBitType32Bit.Name = "rdbVitaCheatBitType32Bit";
+            this.rdbVitaCheatBitType32Bit.Size = new System.Drawing.Size(52, 17);
+            this.rdbVitaCheatBitType32Bit.TabIndex = 2;
+            this.rdbVitaCheatBitType32Bit.TabStop = true;
+            this.rdbVitaCheatBitType32Bit.Text = "32-Bit";
+            this.rdbVitaCheatBitType32Bit.UseVisualStyleBackColor = true;
+            // 
+            // rdbVitaCheatBitType16Bit
+            // 
+            this.rdbVitaCheatBitType16Bit.AutoSize = true;
+            this.rdbVitaCheatBitType16Bit.Location = new System.Drawing.Point(57, 0);
+            this.rdbVitaCheatBitType16Bit.Name = "rdbVitaCheatBitType16Bit";
+            this.rdbVitaCheatBitType16Bit.Size = new System.Drawing.Size(52, 17);
+            this.rdbVitaCheatBitType16Bit.TabIndex = 1;
+            this.rdbVitaCheatBitType16Bit.Text = "16-Bit";
+            this.rdbVitaCheatBitType16Bit.UseVisualStyleBackColor = true;
+            // 
+            // rdbVitaCheatBitType8Bit
+            // 
+            this.rdbVitaCheatBitType8Bit.AutoSize = true;
+            this.rdbVitaCheatBitType8Bit.Location = new System.Drawing.Point(4, 0);
+            this.rdbVitaCheatBitType8Bit.Name = "rdbVitaCheatBitType8Bit";
+            this.rdbVitaCheatBitType8Bit.Size = new System.Drawing.Size(46, 17);
+            this.rdbVitaCheatBitType8Bit.TabIndex = 0;
+            this.rdbVitaCheatBitType8Bit.Text = "8-Bit";
+            this.rdbVitaCheatBitType8Bit.UseVisualStyleBackColor = true;
+            // 
+            // groupVitaCheatAddress2Offset
+            // 
+            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset5);
+            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset4);
+            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset3);
+            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset2);
+            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset1);
+            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(338, 15);
+            this.groupVitaCheatAddress2Offset.Name = "groupVitaCheatAddress2Offset";
+            this.groupVitaCheatAddress2Offset.Size = new System.Drawing.Size(115, 150);
+            this.groupVitaCheatAddress2Offset.TabIndex = 12;
+            this.groupVitaCheatAddress2Offset.TabStop = false;
+            this.groupVitaCheatAddress2Offset.Text = "Address 2 Offsets";
+            // 
+            // txtVitaCheatAddress2Offset5
+            // 
+            this.txtVitaCheatAddress2Offset5.Location = new System.Drawing.Point(7, 123);
+            this.txtVitaCheatAddress2Offset5.Name = "txtVitaCheatAddress2Offset5";
+            this.txtVitaCheatAddress2Offset5.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset5.TabIndex = 4;
+            // 
+            // txtVitaCheatAddress2Offset4
+            // 
+            this.txtVitaCheatAddress2Offset4.Location = new System.Drawing.Point(7, 97);
+            this.txtVitaCheatAddress2Offset4.Name = "txtVitaCheatAddress2Offset4";
+            this.txtVitaCheatAddress2Offset4.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset4.TabIndex = 3;
+            // 
+            // txtVitaCheatAddress2Offset3
+            // 
+            this.txtVitaCheatAddress2Offset3.Location = new System.Drawing.Point(7, 71);
+            this.txtVitaCheatAddress2Offset3.Name = "txtVitaCheatAddress2Offset3";
+            this.txtVitaCheatAddress2Offset3.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset3.TabIndex = 2;
+            // 
+            // txtVitaCheatAddress2Offset2
+            // 
+            this.txtVitaCheatAddress2Offset2.Location = new System.Drawing.Point(7, 45);
+            this.txtVitaCheatAddress2Offset2.Name = "txtVitaCheatAddress2Offset2";
+            this.txtVitaCheatAddress2Offset2.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset2.TabIndex = 1;
+            // 
+            // txtVitaCheatAddress2Offset1
+            // 
+            this.txtVitaCheatAddress2Offset1.Location = new System.Drawing.Point(7, 19);
+            this.txtVitaCheatAddress2Offset1.Name = "txtVitaCheatAddress2Offset1";
+            this.txtVitaCheatAddress2Offset1.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset1.TabIndex = 0;
+            // 
+            // groupVitaCheatAddress1Offset
+            // 
+            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset5);
+            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset4);
+            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset3);
+            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset2);
+            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset1);
+            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(217, 15);
+            this.groupVitaCheatAddress1Offset.Name = "groupVitaCheatAddress1Offset";
+            this.groupVitaCheatAddress1Offset.Size = new System.Drawing.Size(115, 150);
+            this.groupVitaCheatAddress1Offset.TabIndex = 11;
+            this.groupVitaCheatAddress1Offset.TabStop = false;
+            this.groupVitaCheatAddress1Offset.Text = "Address 1 Offsets";
+            // 
+            // txtVitaCheatAddress1Offset5
+            // 
+            this.txtVitaCheatAddress1Offset5.Location = new System.Drawing.Point(7, 123);
+            this.txtVitaCheatAddress1Offset5.Name = "txtVitaCheatAddress1Offset5";
+            this.txtVitaCheatAddress1Offset5.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset5.TabIndex = 4;
+            // 
+            // txtVitaCheatAddress1Offset4
+            // 
+            this.txtVitaCheatAddress1Offset4.Location = new System.Drawing.Point(7, 97);
+            this.txtVitaCheatAddress1Offset4.Name = "txtVitaCheatAddress1Offset4";
+            this.txtVitaCheatAddress1Offset4.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset4.TabIndex = 3;
+            // 
+            // txtVitaCheatAddress1Offset3
+            // 
+            this.txtVitaCheatAddress1Offset3.Location = new System.Drawing.Point(7, 71);
+            this.txtVitaCheatAddress1Offset3.Name = "txtVitaCheatAddress1Offset3";
+            this.txtVitaCheatAddress1Offset3.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset3.TabIndex = 2;
+            // 
+            // txtVitaCheatAddress1Offset2
+            // 
+            this.txtVitaCheatAddress1Offset2.Location = new System.Drawing.Point(7, 45);
+            this.txtVitaCheatAddress1Offset2.Name = "txtVitaCheatAddress1Offset2";
+            this.txtVitaCheatAddress1Offset2.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset2.TabIndex = 1;
+            // 
+            // txtVitaCheatAddress1Offset1
+            // 
+            this.txtVitaCheatAddress1Offset1.Location = new System.Drawing.Point(7, 19);
+            this.txtVitaCheatAddress1Offset1.Name = "txtVitaCheatAddress1Offset1";
+            this.txtVitaCheatAddress1Offset1.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset1.TabIndex = 0;
+            // 
+            // btnVitaCheatGenerate
+            // 
+            this.btnVitaCheatGenerate.Location = new System.Drawing.Point(213, 377);
+            this.btnVitaCheatGenerate.Name = "btnVitaCheatGenerate";
+            this.btnVitaCheatGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnVitaCheatGenerate.TabIndex = 10;
+            this.btnVitaCheatGenerate.Text = "Generate!";
+            this.btnVitaCheatGenerate.UseVisualStyleBackColor = true;
+            this.btnVitaCheatGenerate.Click += new System.EventHandler(this.BtnVitaCheatGenerate_Click);
+            // 
+            // txtVitaCheatCode
+            // 
+            this.txtVitaCheatCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.txtVitaCheatCode.Location = new System.Drawing.Point(9, 406);
+            this.txtVitaCheatCode.Multiline = true;
+            this.txtVitaCheatCode.Name = "txtVitaCheatCode";
+            this.txtVitaCheatCode.ReadOnly = true;
+            this.txtVitaCheatCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtVitaCheatCode.Size = new System.Drawing.Size(279, 162);
+            this.txtVitaCheatCode.TabIndex = 9;
+            this.txtVitaCheatCode.WordWrap = false;
+            // 
+            // lblVitaCheatValue
+            // 
+            this.lblVitaCheatValue.AutoSize = true;
+            this.lblVitaCheatValue.Location = new System.Drawing.Point(6, 89);
+            this.lblVitaCheatValue.Name = "lblVitaCheatValue";
+            this.lblVitaCheatValue.Size = new System.Drawing.Size(76, 13);
+            this.lblVitaCheatValue.TabIndex = 8;
+            this.lblVitaCheatValue.Text = "Desired Value:";
+            // 
+            // txtVitaCheatValue
+            // 
+            this.txtVitaCheatValue.Location = new System.Drawing.Point(90, 86);
+            this.txtVitaCheatValue.Name = "txtVitaCheatValue";
+            this.txtVitaCheatValue.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatValue.TabIndex = 7;
+            this.txtVitaCheatValue.Text = "99";
+            // 
+            // lblVitaCheatAddress2
+            // 
+            this.lblVitaCheatAddress2.AutoSize = true;
+            this.lblVitaCheatAddress2.Location = new System.Drawing.Point(6, 63);
+            this.lblVitaCheatAddress2.Name = "lblVitaCheatAddress2";
+            this.lblVitaCheatAddress2.Size = new System.Drawing.Size(60, 13);
+            this.lblVitaCheatAddress2.TabIndex = 6;
+            this.lblVitaCheatAddress2.Text = "Copy From:";
+            // 
+            // txtVitaCheatAddress2
+            // 
+            this.txtVitaCheatAddress2.Location = new System.Drawing.Point(90, 60);
+            this.txtVitaCheatAddress2.Name = "txtVitaCheatAddress2";
+            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatAddress2.TabIndex = 5;
+            this.txtVitaCheatAddress2.Text = "0x00000000";
+            // 
+            // lblVitaCheatAddress1
+            // 
+            this.lblVitaCheatAddress1.AutoSize = true;
+            this.lblVitaCheatAddress1.Location = new System.Drawing.Point(6, 37);
+            this.lblVitaCheatAddress1.Name = "lblVitaCheatAddress1";
+            this.lblVitaCheatAddress1.Size = new System.Drawing.Size(57, 13);
+            this.lblVitaCheatAddress1.TabIndex = 4;
+            this.lblVitaCheatAddress1.Text = "Address 1:";
+            // 
+            // txtVitaCheatAddress1
+            // 
+            this.txtVitaCheatAddress1.Location = new System.Drawing.Point(90, 34);
+            this.txtVitaCheatAddress1.Name = "txtVitaCheatAddress1";
+            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatAddress1.TabIndex = 3;
+            this.txtVitaCheatAddress1.Text = "0x00000000";
+            // 
+            // lblVitaCheatCodeType
+            // 
+            this.lblVitaCheatCodeType.AutoSize = true;
+            this.lblVitaCheatCodeType.Location = new System.Drawing.Point(6, 10);
+            this.lblVitaCheatCodeType.Name = "lblVitaCheatCodeType";
+            this.lblVitaCheatCodeType.Size = new System.Drawing.Size(62, 13);
+            this.lblVitaCheatCodeType.TabIndex = 2;
+            this.lblVitaCheatCodeType.Text = "Code Type:";
+            // 
+            // comboVitaCheatCodeType
+            // 
+            this.comboVitaCheatCodeType.DisplayMember = "0";
+            this.comboVitaCheatCodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVitaCheatCodeType.FormattingEnabled = true;
+            this.comboVitaCheatCodeType.Items.AddRange(new object[] {
+            "Write ($0...)",
+            "Pointer ($3...)",
+            "Compress ($4...)",
+            "MOV/Copy ($5...)",
+            "Pointer+MOV ($8...)",
+            "Pointer+Compress ($9...)"});
+            this.comboVitaCheatCodeType.Location = new System.Drawing.Point(90, 7);
+            this.comboVitaCheatCodeType.Name = "comboVitaCheatCodeType";
+            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(121, 21);
+            this.comboVitaCheatCodeType.TabIndex = 1;
+            this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
+            // 
+            // groupVitaCheatCompression
+            // 
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatValueGap);
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatAddressGap);
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatCompressions);
+            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
+            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
+            this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
+            this.groupVitaCheatCompression.Location = new System.Drawing.Point(459, 15);
+            this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
+            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 98);
+            this.groupVitaCheatCompression.TabIndex = 16;
+            this.groupVitaCheatCompression.TabStop = false;
+            this.groupVitaCheatCompression.Text = "Compression Options";
+            // 
+            // numericVitaCheatCompressions
+            // 
+            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(110, 19);
+            this.numericVitaCheatCompressions.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numericVitaCheatCompressions.Name = "numericVitaCheatCompressions";
+            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(120, 20);
+            this.numericVitaCheatCompressions.TabIndex = 0;
+            // 
+            // txtVitaCheatAddressGap
+            // 
+            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(110, 45);
+            this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
+            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatAddressGap.TabIndex = 1;
+            this.txtVitaCheatAddressGap.Text = "0x00000000";
+            // 
+            // txtVitaCheatValueGap
+            // 
+            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(110, 71);
+            this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
+            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatValueGap.TabIndex = 2;
+            this.txtVitaCheatValueGap.Text = "0x00000000";
+            // 
+            // lblVitaCheatCompressions
+            // 
+            this.lblVitaCheatCompressions.AutoSize = true;
+            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(6, 22);
+            this.lblVitaCheatCompressions.Name = "lblVitaCheatCompressions";
+            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(97, 13);
+            this.lblVitaCheatCompressions.TabIndex = 3;
+            this.lblVitaCheatCompressions.Text = "# of Compressions:";
+            // 
+            // lblVitaCheatAddressGap
+            // 
+            this.lblVitaCheatAddressGap.AutoSize = true;
+            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 45);
+            this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
+            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(71, 13);
+            this.lblVitaCheatAddressGap.TabIndex = 4;
+            this.lblVitaCheatAddressGap.Text = "Address Gap:";
+            // 
+            // lblVitaCheatValueGap
+            // 
+            this.lblVitaCheatValueGap.AutoSize = true;
+            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(6, 72);
+            this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
+            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(60, 13);
+            this.lblVitaCheatValueGap.TabIndex = 5;
+            this.lblVitaCheatValueGap.Text = "Value Gap:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(769, 449);
+            this.ClientSize = new System.Drawing.Size(769, 661);
             this.Controls.Add(this.tctrlTabs);
             this.Controls.Add(this.frmStatusStrip);
             this.DoubleBuffered = true;
@@ -1342,13 +1783,216 @@ namespace TempAR
             this.pnlPointerSearcherCodeType.PerformLayout();
             this.pnlPointerSearcherBitType.ResumeLayout(false);
             this.pnlPointerSearcherBitType.PerformLayout();
+            this.tabVitaCheat.ResumeLayout(false);
+            this.tabVitaCheat.PerformLayout();
+            this.pnlVitaCheatBitType.ResumeLayout(false);
+            this.pnlVitaCheatBitType.PerformLayout();
+            this.groupVitaCheatAddress2Offset.ResumeLayout(false);
+            this.groupVitaCheatAddress2Offset.PerformLayout();
+            this.groupVitaCheatAddress1Offset.ResumeLayout(false);
+            this.groupVitaCheatAddress1Offset.PerformLayout();
+            this.groupVitaCheatCompression.ResumeLayout(false);
+            this.groupVitaCheatCompression.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-    }
+        }
 
-        private void FrmStatusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.txtVitaCheatAddress2.Enabled = false;
+            this.txtVitaCheatValue.Enabled = true;
+            this.comboVitaCheatPointerLevel.Enabled = false;
+            this.groupVitaCheatAddress1Offset.Enabled = false;
+            this.groupVitaCheatAddress2Offset.Enabled = false;
+            this.groupVitaCheatCompression.Enabled = false;
+            switch (this.comboVitaCheatCodeType.SelectedIndex)
+            {
+                case 0: // Write
+                    break;
+                case 1: // Pointer
+                    this.comboVitaCheatPointerLevel.Enabled = true;
+                    this.groupVitaCheatAddress1Offset.Enabled = true;
+                    break;
+                case 2: // Compress
+                    this.groupVitaCheatCompression.Enabled = true;
+                    break;
+                case 3: // MOV
+                    this.txtVitaCheatAddress2.Enabled = true;
+                    this.txtVitaCheatValue.Enabled = false;
+                    break;
+                case 4: // POinter MOV
+                    this.comboVitaCheatPointerLevel.Enabled = true;
+                    this.groupVitaCheatAddress1Offset.Enabled = true;
+                    this.groupVitaCheatAddress2Offset.Enabled = true;
+                    this.txtVitaCheatValue.Enabled = false;
+                    this.txtVitaCheatAddress2.Enabled = true;
+                    break;
+                case 5: // Pointer Compress
+                    this.comboVitaCheatPointerLevel.Enabled = true;
+                    this.groupVitaCheatAddress1Offset.Enabled = true;
+                    this.groupVitaCheatCompression.Enabled = true;
+                    break;
+            }
+        }
+
+        private void ComboVitaCheatPointerLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.txtVitaCheatAddress1Offset2.Enabled = false;
+            this.txtVitaCheatAddress2Offset2.Enabled = false;
+            this.txtVitaCheatAddress1Offset3.Enabled = false;
+            this.txtVitaCheatAddress2Offset3.Enabled = false;
+            this.txtVitaCheatAddress1Offset4.Enabled = false;
+            this.txtVitaCheatAddress2Offset4.Enabled = false;
+            this.txtVitaCheatAddress1Offset5.Enabled = false;
+            this.txtVitaCheatAddress2Offset5.Enabled = false;
+            switch (this.comboVitaCheatPointerLevel.SelectedIndex)
+            {
+                case 0: // lvl 1
+                    break;
+                case 1: // lvl 2
+                    this.txtVitaCheatAddress1Offset2.Enabled = true;
+                    this.txtVitaCheatAddress2Offset2.Enabled = true;
+                    break;
+                case 2: // lvl 3
+                    this.txtVitaCheatAddress1Offset2.Enabled = true;
+                    this.txtVitaCheatAddress2Offset2.Enabled = true;
+                    this.txtVitaCheatAddress1Offset3.Enabled = true;
+                    this.txtVitaCheatAddress2Offset3.Enabled = true;
+                    break;
+                case 3: // lvl 4
+                    this.txtVitaCheatAddress1Offset2.Enabled = true;
+                    this.txtVitaCheatAddress2Offset2.Enabled = true;
+                    this.txtVitaCheatAddress1Offset3.Enabled = true;
+                    this.txtVitaCheatAddress2Offset3.Enabled = true;
+                    this.txtVitaCheatAddress1Offset4.Enabled = true;
+                    this.txtVitaCheatAddress2Offset4.Enabled = true;
+                    break;
+                case 4: // lvl 5
+                    this.txtVitaCheatAddress1Offset2.Enabled = true;
+                    this.txtVitaCheatAddress2Offset2.Enabled = true;
+                    this.txtVitaCheatAddress1Offset3.Enabled = true;
+                    this.txtVitaCheatAddress2Offset3.Enabled = true;
+                    this.txtVitaCheatAddress1Offset4.Enabled = true;
+                    this.txtVitaCheatAddress2Offset4.Enabled = true;
+                    this.txtVitaCheatAddress1Offset5.Enabled = true;
+                    this.txtVitaCheatAddress2Offset5.Enabled = true;
+                    break;
+            }
+        }
+        private void BtnVitaCheatGenerate_Click(object sender, EventArgs e)
+        {
+            //
+            //Check for hex numbers and give error if bad
+            //
+            uint VCadd1;
+            try
+            {
+                VCadd1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse Address 1, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            uint VCadd2;
+            try
+            {
+                VCadd2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse Address 2, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            uint VCaddgap;
+            try
+            {
+                VCaddgap = this.parseNum(this.txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            uint VCvalgap;
+            try
+            {
+                VCvalgap = this.parseNum(this.txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            uint VCcomps;
+            try
+            {
+                VCcomps = this.parseNum(this.numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                int num2 = (int)MessageBox.Show("Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
+                return;
+            }
+            string VCstr1 = "_V0 Generated Code\r\n\r\n";
+            uint VCAddr1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
+            uint VCAddr2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
+            uint VCAddGp = this.parseNum(this.txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
+            uint VCValGp = this.parseNum(this.txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
+            uint VCComps = this.parseNum(this.numericVitaCheatCompressions.Text);
+            uint VCValue = this.parseNum(this.txtVitaCheatValue.Text);
+            //
+            //Get Bit Type from radio buttons
+            //
+            int bittype = 2;
+            if (this.rdbVitaCheatBitType8Bit.Checked)
+            {
+                bittype = 0;
+            }
+            else if (this.rdbVitaCheatBitType16Bit.Checked)
+            {
+                bittype = 1;
+            }
+            else { bittype = 2; }
+            //
+            // Generate code
+            //
+            if (this.comboVitaCheatCodeType.SelectedIndex == 0) // WRITE
+            {
+                string str2 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                this.txtVitaCheatCode.Text = VCstr1 + str2;
+            }
+            if (this.comboVitaCheatCodeType.SelectedIndex == 1) // POINTER
+            {
+                string str2 = string.Format("$3{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                string str3 = string.Format("Not working yet.");
+                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
+            }
+            if (this.comboVitaCheatCodeType.SelectedIndex == 2) // COMPRESSION
+            {
+                string str2 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                string str3 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
+                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
+            }
+            if (this.comboVitaCheatCodeType.SelectedIndex == 3) // MOV
+            {
+                string str2 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                this.txtVitaCheatCode.Text = VCstr1 + str2;
+            }
+            if (this.comboVitaCheatCodeType.SelectedIndex == 4) // POINTER + COMPRESSION
+            {
+                string str2 = string.Format("$7{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                string str3 = string.Format("Not working yet.");
+                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
+            }
+            if (this.comboVitaCheatCodeType.SelectedIndex == 5) // POINTER + MOV
+            {
+                string str2 = string.Format("$8{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                string str3 = string.Format("Not working yet.");
+                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
+            }
 
         }
     }
