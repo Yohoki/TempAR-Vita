@@ -1757,7 +1757,7 @@ namespace TempAR
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TempAR - Vita Edition  V1.03";
+            this.Text = "TempAR - Vita Edition  V2.0";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlConvertFormat.ResumeLayout(false);
             this.pnlConvertFormat.PerformLayout();
@@ -2031,11 +2031,28 @@ namespace TempAR
                 this.txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
                 break;
                     case VC_GEN_PTRCOM:
-                string VCGenPtrCom1 = string.Format("$8{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
-                string VCGenPtrCom2 = string.Format("Not working yet.");
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrCom2;
+                string VCGenPtrComstr2 = "";
+                uint VCGenptrcomoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                string VCGenPtrCom1 = string.Format("$7{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrcomoff1);
+                string VCGenPtrCom3 = string.Format("$770{0} 00000000 {1:X08}\r\n", comboVitaCheatPointerLevel.Text, VCValue);
+                    string VCGenPtrCom4 = string.Format("${0:X04} 0000{1:X04} 0000{2:X04}", VCComps, VCAddGp, VCValGp);
+                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                {
+                    if (x is TextBox)
+                    {
+                        if (((TextBox)x).Enabled == true)
+                        {
+                            uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                            if (((TextBox)x).TabIndex != 0)
+                            {
+                                VCGenPtrComstr2 = string.Format("$7{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrComstr2;
+                            }
+                        }
+                    }
+                }
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrComstr2 + VCGenPtrCom3 + VCGenPtrCom4;
                 break;
-                    case VC_GEN_PTRMOV:
+                case VC_GEN_PTRMOV:
                 string VCGenPtrMovstr2 = "";
                 uint VCGenptrmovoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
                 string VCGenPtrMov1 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrmovoff1);
