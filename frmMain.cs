@@ -311,6 +311,7 @@ namespace TempAR
         {
             this.comboPointerSearcherMode.SelectedIndex = 0;
             this.comboVitaCheatCodeType.SelectedIndex = 0;
+            this.comboVitaCheatPointerLevel.SelectedIndex = 0;
         }
         //
         //
@@ -1412,7 +1413,7 @@ namespace TempAR
             // 
             // comboVitaCheatPointerLevel
             // 
-            this.comboVitaCheatPointerLevel.DisplayMember = "1";
+            this.comboVitaCheatPointerLevel.DisplayMember = "0";
             this.comboVitaCheatPointerLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatPointerLevel.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.comboVitaCheatPointerLevel.FormattingEnabled = true;
@@ -1840,39 +1841,31 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset4.Enabled = false;
             this.txtVitaCheatAddress1Offset5.Enabled = false;
             this.txtVitaCheatAddress2Offset5.Enabled = false;
-            switch (this.comboVitaCheatPointerLevel.SelectedIndex)
+            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 1)
             {
-                case 0: // lvl 1
-                    break;
-                case 1: // lvl 2
-                    this.txtVitaCheatAddress1Offset2.Enabled = true;
-                    this.txtVitaCheatAddress2Offset2.Enabled = true;
-                    break;
-                case 2: // lvl 3
-                    this.txtVitaCheatAddress1Offset2.Enabled = true;
-                    this.txtVitaCheatAddress2Offset2.Enabled = true;
-                    this.txtVitaCheatAddress1Offset3.Enabled = true;
-                    this.txtVitaCheatAddress2Offset3.Enabled = true;
-                    break;
-                case 3: // lvl 4
-                    this.txtVitaCheatAddress1Offset2.Enabled = true;
-                    this.txtVitaCheatAddress2Offset2.Enabled = true;
-                    this.txtVitaCheatAddress1Offset3.Enabled = true;
-                    this.txtVitaCheatAddress2Offset3.Enabled = true;
-                    this.txtVitaCheatAddress1Offset4.Enabled = true;
-                    this.txtVitaCheatAddress2Offset4.Enabled = true;
-                    break;
-                case 4: // lvl 5
-                    this.txtVitaCheatAddress1Offset2.Enabled = true;
-                    this.txtVitaCheatAddress2Offset2.Enabled = true;
-                    this.txtVitaCheatAddress1Offset3.Enabled = true;
-                    this.txtVitaCheatAddress2Offset3.Enabled = true;
-                    this.txtVitaCheatAddress1Offset4.Enabled = true;
-                    this.txtVitaCheatAddress2Offset4.Enabled = true;
-                    this.txtVitaCheatAddress1Offset5.Enabled = true;
-                    this.txtVitaCheatAddress2Offset5.Enabled = true;
-                    break;
+
+                this.txtVitaCheatAddress1Offset2.Enabled = true;
+                this.txtVitaCheatAddress2Offset2.Enabled = true;
             }
+            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 2)
+            {
+
+                this.txtVitaCheatAddress1Offset3.Enabled = true;
+                this.txtVitaCheatAddress2Offset3.Enabled = true;
+            }
+            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 3)
+            {
+
+                this.txtVitaCheatAddress1Offset4.Enabled = true;
+                this.txtVitaCheatAddress2Offset4.Enabled = true;
+            }
+            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 4)
+            {
+
+                this.txtVitaCheatAddress1Offset5.Enabled = true;
+                this.txtVitaCheatAddress2Offset5.Enabled = true;
+            }
+
         }
         private void BtnVitaCheatGenerate_Click(object sender, EventArgs e)
         {
