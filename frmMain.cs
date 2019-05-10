@@ -692,7 +692,7 @@ namespace TempAR
             this.tctrlTabs = new System.Windows.Forms.TabControl();
             this.tabConverter = new System.Windows.Forms.TabPage();
             this.btnConvert = new System.Windows.Forms.Button();
-            this.pnlConvertType = new System.Windows.Forms.Panel();            
+            this.pnlConvertType = new System.Windows.Forms.Panel();
             this.rdbConvertText = new System.Windows.Forms.RadioButton();
             this.rdbConvertFile = new System.Windows.Forms.RadioButton();
             this.pnlConvertText = new System.Windows.Forms.Panel();
@@ -703,8 +703,8 @@ namespace TempAR
             this.lblBaseAddress = new System.Windows.Forms.Label();
             this.comboPointerSearcherMode = new System.Windows.Forms.ComboBox();
             this.pnlPointerSearcherCodeType = new System.Windows.Forms.Panel();
-            this.cbPntCodeTypes = new System.Windows.Forms.ComboBox();
             this.lblPntCodeTypes = new System.Windows.Forms.Label();
+            this.cbPntCodeTypes = new System.Windows.Forms.ComboBox();
             this.pnlPointerSearcherBitType = new System.Windows.Forms.Panel();
             this.rdbPointerSearcherBitType32 = new System.Windows.Forms.RadioButton();
             this.rdbPointerSearcherBitType8 = new System.Windows.Forms.RadioButton();
@@ -731,6 +731,13 @@ namespace TempAR
             this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
             this.tabVitaCheat = new System.Windows.Forms.TabPage();
+            this.groupVitaCheatCompression = new System.Windows.Forms.GroupBox();
+            this.lblVitaCheatValueGap = new System.Windows.Forms.Label();
+            this.lblVitaCheatAddressGap = new System.Windows.Forms.Label();
+            this.lblVitaCheatCompressions = new System.Windows.Forms.Label();
+            this.txtVitaCheatValueGap = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatAddressGap = new System.Windows.Forms.TextBox();
+            this.numericVitaCheatCompressions = new System.Windows.Forms.NumericUpDown();
             this.lblVitaCheatPointerLevel = new System.Windows.Forms.Label();
             this.comboVitaCheatPointerLevel = new System.Windows.Forms.ComboBox();
             this.pnlVitaCheatBitType = new System.Windows.Forms.Panel();
@@ -759,13 +766,6 @@ namespace TempAR
             this.txtVitaCheatAddress1 = new System.Windows.Forms.TextBox();
             this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
             this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
-            this.groupVitaCheatCompression = new System.Windows.Forms.GroupBox();
-            this.numericVitaCheatCompressions = new System.Windows.Forms.NumericUpDown();
-            this.txtVitaCheatAddressGap = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatValueGap = new System.Windows.Forms.TextBox();
-            this.lblVitaCheatCompressions = new System.Windows.Forms.Label();
-            this.lblVitaCheatAddressGap = new System.Windows.Forms.Label();
-            this.lblVitaCheatValueGap = new System.Windows.Forms.Label();
             this.pnlConvertFormat.SuspendLayout();
             this.pnlConvertFile.SuspendLayout();
             this.frmStatusStrip.SuspendLayout();
@@ -777,11 +777,11 @@ namespace TempAR
             this.pnlPointerSearcherCodeType.SuspendLayout();
             this.pnlPointerSearcherBitType.SuspendLayout();
             this.tabVitaCheat.SuspendLayout();
+            this.groupVitaCheatCompression.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).BeginInit();
             this.pnlVitaCheatBitType.SuspendLayout();
             this.groupVitaCheatAddress2Offset.SuspendLayout();
             this.groupVitaCheatAddress1Offset.SuspendLayout();
-            this.groupVitaCheatCompression.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlConvertFormat
@@ -798,7 +798,7 @@ namespace TempAR
             this.lblCnvCodeTypes.AutoSize = true;
             this.lblCnvCodeTypes.Location = new System.Drawing.Point(8, 3);
             this.lblCnvCodeTypes.Name = "lblCnvCodeTypes";
-            this.lblCnvCodeTypes.Size = new System.Drawing.Size(58, 13);
+            this.lblCnvCodeTypes.Size = new System.Drawing.Size(62, 13);
             this.lblCnvCodeTypes.TabIndex = 1;
             this.lblCnvCodeTypes.Text = "Code Type:";
             // 
@@ -1099,6 +1099,16 @@ namespace TempAR
             this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(9, 380);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
             this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(279, 24);
+            this.pnlPointerSearcherCodeType.TabIndex = 12;
+            // 
+            // lblPntCodeTypes
+            // 
+            this.lblPntCodeTypes.AutoSize = true;
+            this.lblPntCodeTypes.Location = new System.Drawing.Point(17, 6);
+            this.lblPntCodeTypes.Name = "lblPntCodeTypes";
+            this.lblPntCodeTypes.Size = new System.Drawing.Size(62, 13);
+            this.lblPntCodeTypes.TabIndex = 2;
+            this.lblPntCodeTypes.Text = "Code Type:";
             // 
             // cbPntCodeTypes
             // 
@@ -1108,15 +1118,6 @@ namespace TempAR
             this.cbPntCodeTypes.Name = "cbPntCodeTypes";
             this.cbPntCodeTypes.Size = new System.Drawing.Size(150, 21);
             this.cbPntCodeTypes.TabIndex = 1;
-            // 
-            // lblPntCodeTypes
-            // 
-            this.lblPntCodeTypes.AutoSize = true;
-            this.lblPntCodeTypes.Location = new System.Drawing.Point(17, 6);
-            this.lblPntCodeTypes.Name = "lblPntCodeTypes";
-            this.lblPntCodeTypes.Size = new System.Drawing.Size(58, 13);
-            this.lblPntCodeTypes.TabIndex = 2;
-            this.lblPntCodeTypes.Text = "Code Type:";
             // 
             // pnlPointerSearcherBitType
             // 
@@ -1402,6 +1403,76 @@ namespace TempAR
             this.tabVitaCheat.Text = "VitaCheat";
             this.tabVitaCheat.UseVisualStyleBackColor = true;
             // 
+            // groupVitaCheatCompression
+            // 
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatValueGap);
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatAddressGap);
+            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatCompressions);
+            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
+            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
+            this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
+            this.groupVitaCheatCompression.Location = new System.Drawing.Point(459, 15);
+            this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
+            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 98);
+            this.groupVitaCheatCompression.TabIndex = 16;
+            this.groupVitaCheatCompression.TabStop = false;
+            this.groupVitaCheatCompression.Text = "Compression Options";
+            // 
+            // lblVitaCheatValueGap
+            // 
+            this.lblVitaCheatValueGap.AutoSize = true;
+            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(6, 72);
+            this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
+            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(60, 13);
+            this.lblVitaCheatValueGap.TabIndex = 5;
+            this.lblVitaCheatValueGap.Text = "Value Gap:";
+            // 
+            // lblVitaCheatAddressGap
+            // 
+            this.lblVitaCheatAddressGap.AutoSize = true;
+            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 45);
+            this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
+            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(71, 13);
+            this.lblVitaCheatAddressGap.TabIndex = 4;
+            this.lblVitaCheatAddressGap.Text = "Address Gap:";
+            // 
+            // lblVitaCheatCompressions
+            // 
+            this.lblVitaCheatCompressions.AutoSize = true;
+            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(6, 22);
+            this.lblVitaCheatCompressions.Name = "lblVitaCheatCompressions";
+            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(97, 13);
+            this.lblVitaCheatCompressions.TabIndex = 3;
+            this.lblVitaCheatCompressions.Text = "# of Compressions:";
+            // 
+            // txtVitaCheatValueGap
+            // 
+            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(110, 71);
+            this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
+            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatValueGap.TabIndex = 2;
+            this.txtVitaCheatValueGap.Text = "0x00000000";
+            // 
+            // txtVitaCheatAddressGap
+            // 
+            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(110, 45);
+            this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
+            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatAddressGap.TabIndex = 1;
+            this.txtVitaCheatAddressGap.Text = "0x00000000";
+            // 
+            // numericVitaCheatCompressions
+            // 
+            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(110, 19);
+            this.numericVitaCheatCompressions.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numericVitaCheatCompressions.Name = "numericVitaCheatCompressions";
+            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(120, 20);
+            this.numericVitaCheatCompressions.TabIndex = 0;
+            // 
             // lblVitaCheatPointerLevel
             // 
             this.lblVitaCheatPointerLevel.AutoSize = true;
@@ -1492,6 +1563,7 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset5.Name = "txtVitaCheatAddress2Offset5";
             this.txtVitaCheatAddress2Offset5.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress2Offset5.TabIndex = 4;
+            this.txtVitaCheatAddress2Offset5.Text = "0x00000000";
             // 
             // txtVitaCheatAddress2Offset4
             // 
@@ -1499,6 +1571,7 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset4.Name = "txtVitaCheatAddress2Offset4";
             this.txtVitaCheatAddress2Offset4.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress2Offset4.TabIndex = 3;
+            this.txtVitaCheatAddress2Offset4.Text = "0x00000000";
             // 
             // txtVitaCheatAddress2Offset3
             // 
@@ -1506,6 +1579,7 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset3.Name = "txtVitaCheatAddress2Offset3";
             this.txtVitaCheatAddress2Offset3.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress2Offset3.TabIndex = 2;
+            this.txtVitaCheatAddress2Offset3.Text = "0x00000000";
             // 
             // txtVitaCheatAddress2Offset2
             // 
@@ -1513,6 +1587,7 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset2.Name = "txtVitaCheatAddress2Offset2";
             this.txtVitaCheatAddress2Offset2.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress2Offset2.TabIndex = 1;
+            this.txtVitaCheatAddress2Offset2.Text = "0x00000000";
             // 
             // txtVitaCheatAddress2Offset1
             // 
@@ -1520,6 +1595,7 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset1.Name = "txtVitaCheatAddress2Offset1";
             this.txtVitaCheatAddress2Offset1.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress2Offset1.TabIndex = 0;
+            this.txtVitaCheatAddress2Offset1.Text = "0x00000000";
             // 
             // groupVitaCheatAddress1Offset
             // 
@@ -1541,6 +1617,7 @@ namespace TempAR
             this.txtVitaCheatAddress1Offset5.Name = "txtVitaCheatAddress1Offset5";
             this.txtVitaCheatAddress1Offset5.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress1Offset5.TabIndex = 4;
+            this.txtVitaCheatAddress1Offset5.Text = "0x00000000";
             // 
             // txtVitaCheatAddress1Offset4
             // 
@@ -1548,6 +1625,7 @@ namespace TempAR
             this.txtVitaCheatAddress1Offset4.Name = "txtVitaCheatAddress1Offset4";
             this.txtVitaCheatAddress1Offset4.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress1Offset4.TabIndex = 3;
+            this.txtVitaCheatAddress1Offset4.Text = "0x00000000";
             // 
             // txtVitaCheatAddress1Offset3
             // 
@@ -1555,6 +1633,7 @@ namespace TempAR
             this.txtVitaCheatAddress1Offset3.Name = "txtVitaCheatAddress1Offset3";
             this.txtVitaCheatAddress1Offset3.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress1Offset3.TabIndex = 2;
+            this.txtVitaCheatAddress1Offset3.Text = "0x00000000";
             // 
             // txtVitaCheatAddress1Offset2
             // 
@@ -1562,6 +1641,7 @@ namespace TempAR
             this.txtVitaCheatAddress1Offset2.Name = "txtVitaCheatAddress1Offset2";
             this.txtVitaCheatAddress1Offset2.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress1Offset2.TabIndex = 1;
+            this.txtVitaCheatAddress1Offset2.Text = "0x00000000";
             // 
             // txtVitaCheatAddress1Offset1
             // 
@@ -1569,6 +1649,7 @@ namespace TempAR
             this.txtVitaCheatAddress1Offset1.Name = "txtVitaCheatAddress1Offset1";
             this.txtVitaCheatAddress1Offset1.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddress1Offset1.TabIndex = 0;
+            this.txtVitaCheatAddress1Offset1.Text = "0x00000000";
             // 
             // btnVitaCheatGenerate
             // 
@@ -1663,76 +1744,6 @@ namespace TempAR
             this.comboVitaCheatCodeType.TabIndex = 1;
             this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
             // 
-            // groupVitaCheatCompression
-            // 
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatValueGap);
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatAddressGap);
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatCompressions);
-            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
-            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
-            this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
-            this.groupVitaCheatCompression.Location = new System.Drawing.Point(459, 15);
-            this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
-            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 98);
-            this.groupVitaCheatCompression.TabIndex = 16;
-            this.groupVitaCheatCompression.TabStop = false;
-            this.groupVitaCheatCompression.Text = "Compression Options";
-            // 
-            // numericVitaCheatCompressions
-            // 
-            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(110, 19);
-            this.numericVitaCheatCompressions.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericVitaCheatCompressions.Name = "numericVitaCheatCompressions";
-            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(120, 20);
-            this.numericVitaCheatCompressions.TabIndex = 0;
-            // 
-            // txtVitaCheatAddressGap
-            // 
-            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(110, 45);
-            this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
-            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(120, 20);
-            this.txtVitaCheatAddressGap.TabIndex = 1;
-            this.txtVitaCheatAddressGap.Text = "0x00000000";
-            // 
-            // txtVitaCheatValueGap
-            // 
-            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(110, 71);
-            this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
-            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(120, 20);
-            this.txtVitaCheatValueGap.TabIndex = 2;
-            this.txtVitaCheatValueGap.Text = "0x00000000";
-            // 
-            // lblVitaCheatCompressions
-            // 
-            this.lblVitaCheatCompressions.AutoSize = true;
-            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(6, 22);
-            this.lblVitaCheatCompressions.Name = "lblVitaCheatCompressions";
-            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(97, 13);
-            this.lblVitaCheatCompressions.TabIndex = 3;
-            this.lblVitaCheatCompressions.Text = "# of Compressions:";
-            // 
-            // lblVitaCheatAddressGap
-            // 
-            this.lblVitaCheatAddressGap.AutoSize = true;
-            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 45);
-            this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
-            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(71, 13);
-            this.lblVitaCheatAddressGap.TabIndex = 4;
-            this.lblVitaCheatAddressGap.Text = "Address Gap:";
-            // 
-            // lblVitaCheatValueGap
-            // 
-            this.lblVitaCheatValueGap.AutoSize = true;
-            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(6, 72);
-            this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
-            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(60, 13);
-            this.lblVitaCheatValueGap.TabIndex = 5;
-            this.lblVitaCheatValueGap.Text = "Value Gap:";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1768,15 +1779,15 @@ namespace TempAR
             this.pnlPointerSearcherBitType.PerformLayout();
             this.tabVitaCheat.ResumeLayout(false);
             this.tabVitaCheat.PerformLayout();
+            this.groupVitaCheatCompression.ResumeLayout(false);
+            this.groupVitaCheatCompression.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).EndInit();
             this.pnlVitaCheatBitType.ResumeLayout(false);
             this.pnlVitaCheatBitType.PerformLayout();
             this.groupVitaCheatAddress2Offset.ResumeLayout(false);
             this.groupVitaCheatAddress2Offset.PerformLayout();
             this.groupVitaCheatAddress1Offset.ResumeLayout(false);
             this.groupVitaCheatAddress1Offset.PerformLayout();
-            this.groupVitaCheatCompression.ResumeLayout(false);
-            this.groupVitaCheatCompression.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1922,6 +1933,25 @@ namespace TempAR
                 int num2 = (int)MessageBox.Show("Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
                 return;
             }
+            foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+            {
+                if (x is TextBox)
+                {
+                    if (((TextBox)x).Enabled == true)
+                    {
+
+                        try
+                        {
+                            uint VCgenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                        }
+                        catch
+                        {
+                            int num2 = (int)MessageBox.Show("Unable to parse Address 1's Offsets, make sure values are valid hexadecimal numbers.");
+                            return;
+                        }
+                    }
+                }
+            }
             string VCstr1 = "_V0 Generated Code\r\n\r\n";
             uint VCAddr1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
             uint VCAddr2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
@@ -1952,9 +1982,26 @@ namespace TempAR
                 this.txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
                 break;
                     case VC_GEN_PNTR:
-                string VCGenPtr1 = string.Format("$3{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                string VCGenPtr2 = string.Format("Not working yet.");
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtr2;
+                string VCGenPtrstr2 = "";
+                uint VCGenptroff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                string VCGenPtr1 = string.Format("$3{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptroff1);
+                    string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
+                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                {
+                    if (x is TextBox)
+                    {
+                        if (((TextBox)x).Enabled == true)
+                        {
+
+                                uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                if (((TextBox)x).TabIndex != 0)
+                                {
+                                    VCGenPtrstr2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrstr2;
+                                }
+                        }
+                    }
+                }
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtrstr2 + VCGenPtr3;
                 break;
                     case VC_GEN_COMP:
                 string VCGenComp1 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
