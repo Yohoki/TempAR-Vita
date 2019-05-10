@@ -1952,6 +1952,25 @@ namespace TempAR
                     }
                 }
             }
+            foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
+            {
+                if (x is TextBox)
+                {
+                    if (((TextBox)x).Enabled == true)
+                    {
+
+                        try
+                        {
+                            uint VCgenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                        }
+                        catch
+                        {
+                            int num2 = (int)MessageBox.Show("Unable to parse Address 2's Offsets, make sure values are valid hexadecimal numbers.");
+                            return;
+                        }
+                    }
+                }
+            }
             string VCstr1 = "_V0 Generated Code\r\n\r\n";
             uint VCAddr1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
             uint VCAddr2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
@@ -1985,14 +2004,13 @@ namespace TempAR
                 string VCGenPtrstr2 = "";
                 uint VCGenptroff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
                 string VCGenPtr1 = string.Format("$3{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptroff1);
-                    string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
+                string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
                 foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
                 {
                     if (x is TextBox)
                     {
                         if (((TextBox)x).Enabled == true)
                         {
-
                                 uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
@@ -2018,9 +2036,44 @@ namespace TempAR
                 this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrCom2;
                 break;
                     case VC_GEN_PTRMOV:
-                this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+                string VCGenPtrMovstr2 = "";
+                uint VCGenptrmovoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                string VCGenPtrMov1 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrmovoff1);
+                string VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
+                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                {
+                    if (x is TextBox)
+                    {
+                        if (((TextBox)x).Enabled == true)
+                        {
+                            uint VCGenptrmov2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                            if (((TextBox)x).TabIndex != 0)
+                            {
+                                VCGenPtrMovstr2 = string.Format("$8{0}00 00000000 {1:X08}\r\n", bittype, VCGenptrmov2) + VCGenPtrMovstr2;
+                            }
+                        }
+                    }
+                }
+                string VCGenPtr2str2 = "";
+                uint VCGenptrmov2off1 = this.parseNum(txtVitaCheatAddress2Offset1.Text, NumberStyles.AllowHexSpecifier);
+                string VCGenPtrMov21 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype + 4, comboVitaCheatPointerLevel.Text, VCAddr2, VCGenptrmov2off1);
+                string VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
+                foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
+                {
+                    if (x is TextBox)
+                    {
+                        if (((TextBox)x).Enabled == true)
+                        {
+                            uint VCGenptrmov22 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                            if (((TextBox)x).TabIndex != 0)
+                            {
+                                VCGenPtr2str2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype + 4, VCGenptrmov22) + VCGenPtr2str2;
+                            }
+                        }
+                    }
+                }
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrMov1 + VCGenPtrMovstr2 + VCGenPtrMov3 + VCGenPtrMov21 + VCGenPtr2str2 + VCGenPtrMov23;
                 break;
-
             }
 
         }
