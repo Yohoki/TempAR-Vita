@@ -68,8 +68,6 @@ namespace TempAR
         private Panel pnlPointerSearcherCodeType;
         private TextBox txtBaseAddress;
         private TabPage tabVitaCheat;
-        private ComboBox comboVitaCheatCodeType;
-        private Label lblVitaCheatCodeType;
         private Label lblVitaCheatAddress1;
         private TextBox txtVitaCheatAddress1;
         private Label lblVitaCheatAddress2;
@@ -117,6 +115,16 @@ namespace TempAR
         private const string CT_PNT_VITACHEAT = "VitaCheat";
         private const string CT_PNT_CWCHEAT   = "CWCheat";        
         private const string CT_PNT_AR        = "AR";
+        // Code types for VitaCheat Code Maker tab
+        private Label lblVitaCheatCodeType;
+        private ComboBox comboVitaCheatCodeType;
+        private const string VC_GEN_WRITE = "Write ($0...)";
+        private const string VC_GEN_PNTR = "Pointer ($3...)";
+        private const string VC_GEN_COMP = "Compress ($4...)";
+        private const string VC_GEN_MOV = "MOV/Copy ($5...)";
+        private const string VC_GEN_PTRCOM = "Pointer+Compress ($7...)";
+        private const string VC_GEN_PTRMOV = "Pointer+MOV ($8...)";
+
 
         public frmMain()
         {
@@ -134,6 +142,15 @@ namespace TempAR
             CT_PNT_CWCHEAT,
             CT_PNT_AR});
             this.cbPntCodeTypes.Text = CT_PNT_VITACHEAT;
+
+            this.comboVitaCheatCodeType.Items.AddRange(new object[] {
+            VC_GEN_WRITE,
+            VC_GEN_PNTR,
+            VC_GEN_COMP,
+            VC_GEN_MOV,
+            VC_GEN_PTRCOM,
+            VC_GEN_PTRMOV});
+            this.comboVitaCheatCodeType.Text = VC_GEN_WRITE;
         }
 
         private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
@@ -1639,13 +1656,6 @@ namespace TempAR
             this.comboVitaCheatCodeType.DisplayMember = "0";
             this.comboVitaCheatCodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatCodeType.FormattingEnabled = true;
-            this.comboVitaCheatCodeType.Items.AddRange(new object[] {
-            "Write ($0...)",
-            "Pointer ($3...)",
-            "Compress ($4...)",
-            "MOV/Copy ($5...)",
-            "Pointer+MOV ($8...)",
-            "Pointer+Compress ($9...)"});
             this.comboVitaCheatCodeType.Location = new System.Drawing.Point(90, 7);
             this.comboVitaCheatCodeType.Name = "comboVitaCheatCodeType";
             this.comboVitaCheatCodeType.Size = new System.Drawing.Size(121, 21);
@@ -1790,32 +1800,32 @@ namespace TempAR
             this.groupVitaCheatAddress1Offset.Enabled = false;
             this.groupVitaCheatAddress2Offset.Enabled = false;
             this.groupVitaCheatCompression.Enabled = false;
-            switch (this.comboVitaCheatCodeType.SelectedIndex)
+            switch (this.comboVitaCheatCodeType.Text)
             {
-                case 0: // Write
+                case VC_GEN_WRITE: // Write
                     break;
-                case 1: // Pointer
+                case VC_GEN_PNTR: // Pointer
                     this.comboVitaCheatPointerLevel.Enabled = true;
                     this.groupVitaCheatAddress1Offset.Enabled = true;
                     break;
-                case 2: // Compress
+                case VC_GEN_COMP: // Compress
                     this.groupVitaCheatCompression.Enabled = true;
                     break;
-                case 3: // MOV
+                case VC_GEN_MOV: // MOV
                     this.txtVitaCheatAddress2.Enabled = true;
                     this.txtVitaCheatValue.Enabled = false;
                     break;
-                case 4: // POinter MOV
+                case VC_GEN_PTRCOM: // Pointer Compress
+                    this.comboVitaCheatPointerLevel.Enabled = true;
+                    this.groupVitaCheatAddress1Offset.Enabled = true;
+                    this.groupVitaCheatCompression.Enabled = true;
+                    break;
+                case VC_GEN_PTRMOV: // Pointer MOV
                     this.comboVitaCheatPointerLevel.Enabled = true;
                     this.groupVitaCheatAddress1Offset.Enabled = true;
                     this.groupVitaCheatAddress2Offset.Enabled = true;
                     this.txtVitaCheatValue.Enabled = false;
                     this.txtVitaCheatAddress2.Enabled = true;
-                    break;
-                case 5: // Pointer Compress
-                    this.comboVitaCheatPointerLevel.Enabled = true;
-                    this.groupVitaCheatAddress1Offset.Enabled = true;
-                    this.groupVitaCheatCompression.Enabled = true;
                     break;
             }
         }
@@ -1942,39 +1952,35 @@ namespace TempAR
             //
             // Generate code
             //
-            if (this.comboVitaCheatCodeType.SelectedIndex == 0) // WRITE
+            switch (this.comboVitaCheatCodeType.Text)
             {
-                string str2 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                this.txtVitaCheatCode.Text = VCstr1 + str2;
-            }
-            if (this.comboVitaCheatCodeType.SelectedIndex == 1) // POINTER
-            {
-                string str2 = string.Format("$3{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                string str3 = string.Format("Not working yet.");
-                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
-            }
-            if (this.comboVitaCheatCodeType.SelectedIndex == 2) // COMPRESSION
-            {
-                string str2 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                string str3 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
-                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
-            }
-            if (this.comboVitaCheatCodeType.SelectedIndex == 3) // MOV
-            {
-                string str2 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
-                this.txtVitaCheatCode.Text = VCstr1 + str2;
-            }
-            if (this.comboVitaCheatCodeType.SelectedIndex == 4) // POINTER + COMPRESSION
-            {
-                string str2 = string.Format("$7{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                string str3 = string.Format("Not working yet.");
-                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
-            }
-            if (this.comboVitaCheatCodeType.SelectedIndex == 5) // POINTER + MOV
-            {
-                string str2 = string.Format("$8{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
-                string str3 = string.Format("Not working yet.");
-                this.txtVitaCheatCode.Text = VCstr1 + str2 + str3;
+                    case VC_GEN_WRITE:
+                string VCGenWrite1 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
+                break;
+                    case VC_GEN_PNTR:
+                string VCGenPtr1 = string.Format("$3{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                string VCGenPtr2 = string.Format("Not working yet.");
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtr2;
+                break;
+                    case VC_GEN_COMP:
+                string VCGenComp1 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                string VCGenComp2 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenComp1 + VCGenComp2;
+                break;
+                    case VC_GEN_MOV:
+                string VCGenMov1 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
+                break;
+                    case VC_GEN_PTRCOM:
+                string VCGenPtrCom1 = string.Format("$8{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                string VCGenPtrCom2 = string.Format("Not working yet.");
+                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrCom2;
+                break;
+                    case VC_GEN_PTRMOV:
+                this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+                break;
+
             }
 
         }
