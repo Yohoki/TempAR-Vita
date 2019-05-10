@@ -20,8 +20,6 @@ namespace TempAR
         private IContainer components;
 #pragma warning restore CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
         private Panel pnlConvertFormat;
-        private RadioButton rdbR4CCE;
-        private RadioButton rdbNitePR;
         private Panel pnlConvertFile;
         private TextBox txtOutputPath;
         private TextBox txtInputPath;
@@ -31,8 +29,6 @@ namespace TempAR
         private Button btnInputBrowse;
         private StatusStrip frmStatusStrip;
         private ToolStripStatusLabel lblStatus;
-        private RadioButton rdbTempAR;
-        private RadioButton rdbCWCheatPOPS;
         private TabControl tctrlTabs;
         private TabPage tabConverter;
         private Panel pnlConvertText;
@@ -70,10 +66,6 @@ namespace TempAR
         private ComboBox comboPointerSearcherMode;
         private Label lblPointerSearcherMode;
         private Panel pnlPointerSearcherCodeType;
-        // Radio Buttons for Code type
-        private RadioButton rdbPointerSearcherCodeTypeVitaCheat;
-        private RadioButton rdbPointerSearcherCodeTypeCWCheat;
-        private RadioButton rdbPointerSearcherCodeTypeAR;
         private TextBox txtBaseAddress;
         private TabPage tabVitaCheat;
         private ComboBox comboVitaCheatCodeType;
@@ -112,10 +104,36 @@ namespace TempAR
         private TextBox txtVitaCheatAddressGap;
         private NumericUpDown numericVitaCheatCompressions;
         private Label lblBaseAddress;
+        // Code types for converter tab
+        private Label lblCnvCodeTypes;
+        private ComboBox cbCnvCodeTypes;
+        private const string CT_CNV_CWCHEATPOPS = "CWCheat POPS";
+        private const string CT_CNV_NITEPR      = "NitePR";
+        private const string CT_CNV_R4CCE       = "R4CCE to TempAR";
+        private const string CT_CNV_TEMPAR      = "TempAR to R4CCE";
+        // Code types for pointer search tab
+        private Label lblPntCodeTypes;
+        private ComboBox cbPntCodeTypes;
+        private const string CT_PNT_VITACHEAT = "VitaCheat";
+        private const string CT_PNT_CWCHEAT   = "CWCheat";        
+        private const string CT_PNT_AR        = "AR";
 
         public frmMain()
         {
             this.InitializeComponent();
+
+            this.cbCnvCodeTypes.Items.AddRange(new object[] {
+            CT_CNV_CWCHEATPOPS,
+            CT_CNV_NITEPR,
+            CT_CNV_R4CCE,
+            CT_CNV_TEMPAR});
+            this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
+
+            this.cbPntCodeTypes.Items.AddRange(new object[] {
+            CT_PNT_VITACHEAT,
+            CT_PNT_CWCHEAT,
+            CT_PNT_AR});
+            this.cbPntCodeTypes.Text = CT_PNT_VITACHEAT;
         }
 
         private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
@@ -132,21 +150,6 @@ namespace TempAR
             this.ChangeFrameMode(2);
         }
 
-        private void rdbCWCheatPOPS_CheckedChanged(object sender, EventArgs e)
-        {
-            this.btnConvert_Click(sender, e);
-        }
-
-        private void rdbNitePR_CheckedChanged(object sender, EventArgs e)
-        {
-            this.btnConvert_Click(sender, e);
-        }
-
-        private void rdbR4CCE_CheckedChanged(object sender, EventArgs e)
-        {
-            this.btnConvert_Click(sender, e);
-        }
-
         private void txtTextInput_TextChanged(object sender, EventArgs e)
         {
             this.btnConvert_Click(sender, e);
@@ -159,44 +162,63 @@ namespace TempAR
             this.Refresh();
             if (this.rdbConvertText.Checked)
             {
-                if (this.rdbCWCheatPOPS.Checked)
-                    this.txtTextOutput.Text = Converter.cwcpops_pspar(this.txtTextInput.Text);
-                else if (this.rdbNitePR.Checked)
-                    this.txtTextOutput.Text = Converter.nitepr_pspar(this.txtTextInput.Text);
-                else if (this.rdbR4CCE.Checked)
-                    this.txtTextOutput.Text = Converter.reformat_r4cce(this.txtTextInput.Text, true);
-                else if (this.rdbTempAR.Checked)
-                    this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+                switch (this.cbCnvCodeTypes.Text)
+                {
+                    case CT_CNV_CWCHEATPOPS:
+                        this.txtTextOutput.Text = Converter.cwcpops_pspar(this.txtTextInput.Text);
+                        break;
+                    case CT_CNV_NITEPR:
+                        this.txtTextOutput.Text = Converter.nitepr_pspar(this.txtTextInput.Text);
+                        break;
+                    case CT_CNV_R4CCE:
+                        this.txtTextOutput.Text = Converter.reformat_r4cce(this.txtTextInput.Text, true);
+                        break;
+                    case CT_CNV_TEMPAR:
+                        this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+                        break;
+
+                }
             }
             else if (this.rdbConvertFile.Checked && ((Control)sender).Name == "btnConvert" && (this.txtInputPath.Text.Length > 0 && this.txtOutputPath.Text.Length > 0))
             {
-                if (this.rdbCWCheatPOPS.Checked)
+                switch (this.cbCnvCodeTypes.Text)
                 {
-                    if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                        Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                    case CT_CNV_CWCHEATPOPS:
+                        if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                            Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                        break;
+                    case CT_CNV_NITEPR:
+                        if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                            Converter.file_nitepr_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                        break;
+                    case CT_CNV_R4CCE:
+                        MessageBox.Show("File conversion not supported for this code type");
+                        break;
+                    case CT_CNV_TEMPAR:
+                        if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
+                            Converter.file_reformat_tempar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                        break;
+
                 }
-                else if (this.rdbNitePR.Checked)
-                {
-                    if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                        Converter.file_nitepr_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
-                }
-                else if (this.rdbTempAR.Checked && File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                    Converter.file_reformat_tempar(this.txtInputPath.Text, this.txtOutputPath.Text);
             }
             this.lblStatus.Visible = false;
         }
 
         private void btnInputBrowse_Click(object sender, EventArgs e)
         {
-            if (this.rdbCWCheatPOPS.Checked || this.rdbTempAR.Checked)
+            switch (this.cbCnvCodeTypes.Text)
             {
-                this.txtInputPath.Text = this.OpenFile(this.txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
-            }
-            else
-            {
-                if (!this.rdbNitePR.Checked)
-                    return;
-                this.txtInputPath.Text = this.OpenDirectory(this.txtInputPath.Text, "Select your NitePR code file directory:");
+                case CT_CNV_CWCHEATPOPS:
+                case CT_CNV_TEMPAR:
+                    this.txtInputPath.Text = this.OpenFile(this.txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
+                    break;
+                case CT_CNV_NITEPR:
+                    this.txtInputPath.Text = this.OpenDirectory(this.txtInputPath.Text, "Select your NitePR code file directory:");
+                    break;
+                case CT_CNV_R4CCE:
+                    MessageBox.Show("File conversion not supported for this code type");
+                    break;
+
             }
         }
 
@@ -222,15 +244,14 @@ namespace TempAR
             if (mode == 1)
             {
                 this.pnlConvertText.BringToFront();
-                this.rdbR4CCE.Enabled = true;
             }
             else
             {
                 this.pnlConvertFile.BringToFront();
-                this.rdbR4CCE.Enabled = false;
-                if (!this.rdbR4CCE.Checked)
-                    return;
-                this.rdbCWCheatPOPS.Checked = true;
+                if (!String.IsNullOrEmpty(this.cbCnvCodeTypes.Text) && this.cbCnvCodeTypes.Text == CT_CNV_R4CCE)
+                {
+                    this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
+                }
             }
         }
 
@@ -383,17 +404,17 @@ namespace TempAR
             //
             // Check which code is being generated
             //
-            if (this.rdbPointerSearcherCodeTypeVitaCheat.Checked == true)
+            switch (this.cbPntCodeTypes.Text)
             {
-                this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-            }
-            else if (this.rdbPointerSearcherCodeTypeCWCheat.Checked == true)
-            {
-                this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
-            }
-            else if (this.rdbPointerSearcherCodeTypeAR.Checked == true)
-            {
-                this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                case CT_PNT_VITACHEAT:
+                    this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    break;
+                case CT_PNT_CWCHEAT:
+                    this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    break;
+                case CT_PNT_AR:
+                    this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    break;
             }
         }
 
@@ -639,10 +660,8 @@ namespace TempAR
         private void InitializeComponent()
         {
             this.pnlConvertFormat = new System.Windows.Forms.Panel();
-            this.rdbTempAR = new System.Windows.Forms.RadioButton();
-            this.rdbR4CCE = new System.Windows.Forms.RadioButton();
-            this.rdbNitePR = new System.Windows.Forms.RadioButton();
-            this.rdbCWCheatPOPS = new System.Windows.Forms.RadioButton();
+            this.lblCnvCodeTypes = new System.Windows.Forms.Label();
+            this.cbCnvCodeTypes = new System.Windows.Forms.ComboBox();
             this.pnlConvertFile = new System.Windows.Forms.Panel();
             this.btnOutputBrowse = new System.Windows.Forms.Button();
             this.btnInputBrowse = new System.Windows.Forms.Button();
@@ -655,7 +674,7 @@ namespace TempAR
             this.tctrlTabs = new System.Windows.Forms.TabControl();
             this.tabConverter = new System.Windows.Forms.TabPage();
             this.btnConvert = new System.Windows.Forms.Button();
-            this.pnlConvertType = new System.Windows.Forms.Panel();
+            this.pnlConvertType = new System.Windows.Forms.Panel();            
             this.rdbConvertText = new System.Windows.Forms.RadioButton();
             this.rdbConvertFile = new System.Windows.Forms.RadioButton();
             this.pnlConvertText = new System.Windows.Forms.Panel();
@@ -666,9 +685,8 @@ namespace TempAR
             this.lblBaseAddress = new System.Windows.Forms.Label();
             this.comboPointerSearcherMode = new System.Windows.Forms.ComboBox();
             this.pnlPointerSearcherCodeType = new System.Windows.Forms.Panel();
-            this.rdbPointerSearcherCodeTypeVitaCheat = new System.Windows.Forms.RadioButton();
-            this.rdbPointerSearcherCodeTypeCWCheat = new System.Windows.Forms.RadioButton();
-            this.rdbPointerSearcherCodeTypeAR = new System.Windows.Forms.RadioButton();
+            this.cbPntCodeTypes = new System.Windows.Forms.ComboBox();
+            this.lblPntCodeTypes = new System.Windows.Forms.Label();
             this.pnlPointerSearcherBitType = new System.Windows.Forms.Panel();
             this.rdbPointerSearcherBitType32 = new System.Windows.Forms.RadioButton();
             this.rdbPointerSearcherBitType8 = new System.Windows.Forms.RadioButton();
@@ -750,61 +768,31 @@ namespace TempAR
             // 
             // pnlConvertFormat
             // 
-            this.pnlConvertFormat.Controls.Add(this.rdbTempAR);
-            this.pnlConvertFormat.Controls.Add(this.rdbR4CCE);
-            this.pnlConvertFormat.Controls.Add(this.rdbNitePR);
-            this.pnlConvertFormat.Controls.Add(this.rdbCWCheatPOPS);
+            this.pnlConvertFormat.Controls.Add(this.lblCnvCodeTypes);
+            this.pnlConvertFormat.Controls.Add(this.cbCnvCodeTypes);
             this.pnlConvertFormat.Location = new System.Drawing.Point(6, 6);
             this.pnlConvertFormat.Name = "pnlConvertFormat";
             this.pnlConvertFormat.Size = new System.Drawing.Size(440, 24);
             this.pnlConvertFormat.TabIndex = 7;
             // 
-            // rdbTempAR
+            // lblCnvCodeTypes
             // 
-            this.rdbTempAR.AutoSize = true;
-            this.rdbTempAR.Location = new System.Drawing.Point(300, 4);
-            this.rdbTempAR.Name = "rdbTempAR";
-            this.rdbTempAR.Size = new System.Drawing.Size(117, 17);
-            this.rdbTempAR.TabIndex = 2;
-            this.rdbTempAR.Text = "TempAR to R4CCE";
-            this.rdbTempAR.UseVisualStyleBackColor = true;
-            this.rdbTempAR.Visible = false;
-            this.rdbTempAR.CheckedChanged += new System.EventHandler(this.rdbR4CCE_CheckedChanged);
+            this.lblCnvCodeTypes.AutoSize = true;
+            this.lblCnvCodeTypes.Location = new System.Drawing.Point(8, 3);
+            this.lblCnvCodeTypes.Name = "lblCnvCodeTypes";
+            this.lblCnvCodeTypes.Size = new System.Drawing.Size(58, 13);
+            this.lblCnvCodeTypes.TabIndex = 1;
+            this.lblCnvCodeTypes.Text = "Code Type:";
             // 
-            // rdbR4CCE
+            // cbCnvCodeTypes
             // 
-            this.rdbR4CCE.AutoSize = true;
-            this.rdbR4CCE.Location = new System.Drawing.Point(177, 4);
-            this.rdbR4CCE.Name = "rdbR4CCE";
-            this.rdbR4CCE.Size = new System.Drawing.Size(117, 17);
-            this.rdbR4CCE.TabIndex = 2;
-            this.rdbR4CCE.Text = "R4CCE to TempAR";
-            this.rdbR4CCE.UseVisualStyleBackColor = true;
-            this.rdbR4CCE.CheckedChanged += new System.EventHandler(this.rdbR4CCE_CheckedChanged);
-            // 
-            // rdbNitePR
-            // 
-            this.rdbNitePR.AutoSize = true;
-            this.rdbNitePR.Location = new System.Drawing.Point(112, 4);
-            this.rdbNitePR.Name = "rdbNitePR";
-            this.rdbNitePR.Size = new System.Drawing.Size(59, 17);
-            this.rdbNitePR.TabIndex = 1;
-            this.rdbNitePR.Text = "NitePR";
-            this.rdbNitePR.UseVisualStyleBackColor = true;
-            this.rdbNitePR.CheckedChanged += new System.EventHandler(this.rdbNitePR_CheckedChanged);
-            // 
-            // rdbCWCheatPOPS
-            // 
-            this.rdbCWCheatPOPS.AutoSize = true;
-            this.rdbCWCheatPOPS.Checked = true;
-            this.rdbCWCheatPOPS.Location = new System.Drawing.Point(3, 4);
-            this.rdbCWCheatPOPS.Name = "rdbCWCheatPOPS";
-            this.rdbCWCheatPOPS.Size = new System.Drawing.Size(103, 17);
-            this.rdbCWCheatPOPS.TabIndex = 0;
-            this.rdbCWCheatPOPS.TabStop = true;
-            this.rdbCWCheatPOPS.Text = "CWCheat POPS";
-            this.rdbCWCheatPOPS.UseVisualStyleBackColor = true;
-            this.rdbCWCheatPOPS.CheckedChanged += new System.EventHandler(this.rdbCWCheatPOPS_CheckedChanged);
+            this.cbCnvCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCnvCodeTypes.FormattingEnabled = true;
+            this.cbCnvCodeTypes.Location = new System.Drawing.Point(77, 0);
+            this.cbCnvCodeTypes.Name = "cbCnvCodeTypes";
+            this.cbCnvCodeTypes.Size = new System.Drawing.Size(150, 21);
+            this.cbCnvCodeTypes.TabIndex = 0;
+            this.cbCnvCodeTypes.SelectedIndexChanged += new System.EventHandler(this.cbCodeTypes_SelectedIndexChanged);
             // 
             // pnlConvertFile
             // 
@@ -1088,45 +1076,29 @@ namespace TempAR
             // pnlPointerSearcherCodeType
             // 
             this.pnlPointerSearcherCodeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeVitaCheat);
-            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeCWCheat);
-            this.pnlPointerSearcherCodeType.Controls.Add(this.rdbPointerSearcherCodeTypeAR);
+            this.pnlPointerSearcherCodeType.Controls.Add(this.lblPntCodeTypes);
+            this.pnlPointerSearcherCodeType.Controls.Add(this.cbPntCodeTypes);
             this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(9, 380);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
             this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(279, 24);
-            this.pnlPointerSearcherCodeType.TabIndex = 24;
             // 
-            // rdbPointerSearcherCodeTypeVitaCheat
+            // cbPntCodeTypes
             // 
-            this.rdbPointerSearcherCodeTypeVitaCheat.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeVitaCheat.Checked = true;
-            this.rdbPointerSearcherCodeTypeVitaCheat.Location = new System.Drawing.Point(8, 3);
-            this.rdbPointerSearcherCodeTypeVitaCheat.Name = "rdbPointerSearcherCodeTypeVitaCheat";
-            this.rdbPointerSearcherCodeTypeVitaCheat.Size = new System.Drawing.Size(71, 17);
-            this.rdbPointerSearcherCodeTypeVitaCheat.TabIndex = 1;
-            this.rdbPointerSearcherCodeTypeVitaCheat.TabStop = true;
-            this.rdbPointerSearcherCodeTypeVitaCheat.Text = "VitaCheat";
-            this.rdbPointerSearcherCodeTypeVitaCheat.UseVisualStyleBackColor = true;
+            this.cbPntCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPntCodeTypes.FormattingEnabled = true;
+            this.cbPntCodeTypes.Location = new System.Drawing.Point(88, 3);
+            this.cbPntCodeTypes.Name = "cbPntCodeTypes";
+            this.cbPntCodeTypes.Size = new System.Drawing.Size(150, 21);
+            this.cbPntCodeTypes.TabIndex = 1;
             // 
-            // rdbPointerSearcherCodeTypeCWCheat
+            // lblPntCodeTypes
             // 
-            this.rdbPointerSearcherCodeTypeCWCheat.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeCWCheat.Location = new System.Drawing.Point(104, 3);
-            this.rdbPointerSearcherCodeTypeCWCheat.Name = "rdbPointerSearcherCodeTypeCWCheat";
-            this.rdbPointerSearcherCodeTypeCWCheat.Size = new System.Drawing.Size(71, 17);
-            this.rdbPointerSearcherCodeTypeCWCheat.TabIndex = 0;
-            this.rdbPointerSearcherCodeTypeCWCheat.Text = "CWCheat";
-            this.rdbPointerSearcherCodeTypeCWCheat.UseVisualStyleBackColor = true;
-            // 
-            // rdbPointerSearcherCodeTypeAR
-            // 
-            this.rdbPointerSearcherCodeTypeAR.AutoSize = true;
-            this.rdbPointerSearcherCodeTypeAR.Location = new System.Drawing.Point(205, 3);
-            this.rdbPointerSearcherCodeTypeAR.Name = "rdbPointerSearcherCodeTypeAR";
-            this.rdbPointerSearcherCodeTypeAR.Size = new System.Drawing.Size(40, 17);
-            this.rdbPointerSearcherCodeTypeAR.TabIndex = 2;
-            this.rdbPointerSearcherCodeTypeAR.Text = "AR";
-            this.rdbPointerSearcherCodeTypeAR.UseVisualStyleBackColor = true;
+            this.lblPntCodeTypes.AutoSize = true;
+            this.lblPntCodeTypes.Location = new System.Drawing.Point(17, 6);
+            this.lblPntCodeTypes.Name = "lblPntCodeTypes";
+            this.lblPntCodeTypes.Size = new System.Drawing.Size(58, 13);
+            this.lblPntCodeTypes.TabIndex = 2;
+            this.lblPntCodeTypes.Text = "Code Type:";
             // 
             // pnlPointerSearcherBitType
             // 
@@ -1797,6 +1769,17 @@ namespace TempAR
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void cbCodeTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox) sender;
+
+            if(!String.IsNullOrEmpty(comboBox.Text))
+            {
+                this.btnConvert.Enabled = true;
+                this.btnConvert_Click(sender, e);
+            }
         }
 
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
