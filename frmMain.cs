@@ -826,7 +826,7 @@ namespace TempAR
             this.pnlConvertFile.Controls.Add(this.lblInputPath);
             this.pnlConvertFile.Location = new System.Drawing.Point(5, 40);
             this.pnlConvertFile.Name = "pnlConvertFile";
-            this.pnlConvertFile.Size = new System.Drawing.Size(751, 347);
+            this.pnlConvertFile.Size = new System.Drawing.Size(750, 700);
             this.pnlConvertFile.TabIndex = 8;
             // 
             // btnOutputBrowse
