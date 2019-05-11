@@ -135,7 +135,7 @@ namespace TempAR
             CT_CNV_NITEPR,
             CT_CNV_R4CCE,
             CT_CNV_TEMPAR});
-            this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS.Replace("\r\n", "\n").Replace("\n", "\r\n");
+            this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
 
             this.cbPntCodeTypes.Items.AddRange(new object[] {
             CT_PNT_VITACHEAT,
@@ -203,7 +203,7 @@ namespace TempAR
                 {
                     case CT_CNV_CWCHEATPOPS:
                         if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                            Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text.Replace("\r\n", "\n"));
+                            Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
                         break;
                     case CT_CNV_NITEPR:
                         if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
