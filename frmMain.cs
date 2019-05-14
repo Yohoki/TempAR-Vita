@@ -123,6 +123,7 @@ namespace TempAR
         private const string VC_GEN_COMP = "Compress ($4...)";
         private const string VC_GEN_MOV = "MOV/Copy ($5...)";
         private const string VC_GEN_PTRCOM = "Pointer+Compress ($7...)";
+        private TextBox txtVCInstructions;
         private const string VC_GEN_PTRMOV = "Pointer+MOV ($8...)";
 
 
@@ -732,6 +733,7 @@ namespace TempAR
             this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
             this.tabVitaCheat = new System.Windows.Forms.TabPage();
+            this.txtVCInstructions = new System.Windows.Forms.TextBox();
             this.groupVitaCheatCompression = new System.Windows.Forms.GroupBox();
             this.lblVitaCheatValueGap = new System.Windows.Forms.Label();
             this.lblVitaCheatAddressGap = new System.Windows.Forms.Label();
@@ -1380,6 +1382,7 @@ namespace TempAR
             // 
             // tabVitaCheat
             // 
+            this.tabVitaCheat.Controls.Add(this.txtVCInstructions);
             this.tabVitaCheat.Controls.Add(this.groupVitaCheatCompression);
             this.tabVitaCheat.Controls.Add(this.lblVitaCheatPointerLevel);
             this.tabVitaCheat.Controls.Add(this.comboVitaCheatPointerLevel);
@@ -1404,6 +1407,17 @@ namespace TempAR
             this.tabVitaCheat.Text = "VitaCheat";
             this.tabVitaCheat.UseVisualStyleBackColor = true;
             // 
+            // txtVCInstructions
+            // 
+            this.txtVCInstructions.BackColor = System.Drawing.SystemColors.Control;
+            this.txtVCInstructions.Location = new System.Drawing.Point(294, 377);
+            this.txtVCInstructions.Multiline = true;
+            this.txtVCInstructions.Name = "txtVCInstructions";
+            this.txtVCInstructions.ReadOnly = true;
+            this.txtVCInstructions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtVCInstructions.Size = new System.Drawing.Size(457, 191);
+            this.txtVCInstructions.TabIndex = 17;
+            // 
             // groupVitaCheatCompression
             // 
             this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatValueGap);
@@ -1412,9 +1426,9 @@ namespace TempAR
             this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
             this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
             this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
-            this.groupVitaCheatCompression.Location = new System.Drawing.Point(459, 15);
+            this.groupVitaCheatCompression.Location = new System.Drawing.Point(9, 289);
             this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
-            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 98);
+            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 85);
             this.groupVitaCheatCompression.TabIndex = 16;
             this.groupVitaCheatCompression.TabStop = false;
             this.groupVitaCheatCompression.Text = "Compression Options";
@@ -1422,7 +1436,7 @@ namespace TempAR
             // lblVitaCheatValueGap
             // 
             this.lblVitaCheatValueGap.AutoSize = true;
-            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(6, 72);
+            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(120, 42);
             this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
             this.lblVitaCheatValueGap.Size = new System.Drawing.Size(60, 13);
             this.lblVitaCheatValueGap.TabIndex = 5;
@@ -1431,7 +1445,7 @@ namespace TempAR
             // lblVitaCheatAddressGap
             // 
             this.lblVitaCheatAddressGap.AutoSize = true;
-            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 45);
+            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 42);
             this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
             this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(71, 13);
             this.lblVitaCheatAddressGap.TabIndex = 4;
@@ -1448,17 +1462,17 @@ namespace TempAR
             // 
             // txtVitaCheatValueGap
             // 
-            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(110, 71);
+            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(123, 58);
             this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
-            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatValueGap.TabIndex = 2;
             this.txtVitaCheatValueGap.Text = "0x00000000";
             // 
             // txtVitaCheatAddressGap
             // 
-            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(110, 45);
+            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(9, 58);
             this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
-            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(120, 20);
+            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(100, 20);
             this.txtVitaCheatAddressGap.TabIndex = 1;
             this.txtVitaCheatAddressGap.Text = "0x00000000";
             // 
@@ -1487,7 +1501,7 @@ namespace TempAR
             // 
             this.comboVitaCheatPointerLevel.DisplayMember = "0";
             this.comboVitaCheatPointerLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboVitaCheatPointerLevel.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.comboVitaCheatPointerLevel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.comboVitaCheatPointerLevel.FormattingEnabled = true;
             this.comboVitaCheatPointerLevel.Items.AddRange(new object[] {
             "1",
@@ -1498,7 +1512,7 @@ namespace TempAR
             this.comboVitaCheatPointerLevel.Location = new System.Drawing.Point(90, 113);
             this.comboVitaCheatPointerLevel.MaxDropDownItems = 5;
             this.comboVitaCheatPointerLevel.Name = "comboVitaCheatPointerLevel";
-            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(121, 21);
+            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(150, 21);
             this.comboVitaCheatPointerLevel.TabIndex = 14;
             this.comboVitaCheatPointerLevel.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatPointerLevel_SelectedIndexChanged);
             // 
@@ -1507,7 +1521,7 @@ namespace TempAR
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType32Bit);
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType16Bit);
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType8Bit);
-            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(11, 140);
+            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(11, 380);
             this.pnlVitaCheatBitType.Name = "pnlVitaCheatBitType";
             this.pnlVitaCheatBitType.Size = new System.Drawing.Size(200, 20);
             this.pnlVitaCheatBitType.TabIndex = 13;
@@ -1551,7 +1565,7 @@ namespace TempAR
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset3);
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset2);
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset1);
-            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(338, 15);
+            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(130, 140);
             this.groupVitaCheatAddress2Offset.Name = "groupVitaCheatAddress2Offset";
             this.groupVitaCheatAddress2Offset.Size = new System.Drawing.Size(115, 150);
             this.groupVitaCheatAddress2Offset.TabIndex = 12;
@@ -1605,7 +1619,7 @@ namespace TempAR
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset3);
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset2);
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset1);
-            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(217, 15);
+            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(9, 140);
             this.groupVitaCheatAddress1Offset.Name = "groupVitaCheatAddress1Offset";
             this.groupVitaCheatAddress1Offset.Size = new System.Drawing.Size(115, 150);
             this.groupVitaCheatAddress1Offset.TabIndex = 11;
@@ -1687,7 +1701,7 @@ namespace TempAR
             // 
             this.txtVitaCheatValue.Location = new System.Drawing.Point(90, 86);
             this.txtVitaCheatValue.Name = "txtVitaCheatValue";
-            this.txtVitaCheatValue.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatValue.Size = new System.Drawing.Size(150, 20);
             this.txtVitaCheatValue.TabIndex = 7;
             this.txtVitaCheatValue.Text = "99";
             // 
@@ -1704,7 +1718,7 @@ namespace TempAR
             // 
             this.txtVitaCheatAddress2.Location = new System.Drawing.Point(90, 60);
             this.txtVitaCheatAddress2.Name = "txtVitaCheatAddress2";
-            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(150, 20);
             this.txtVitaCheatAddress2.TabIndex = 5;
             this.txtVitaCheatAddress2.Text = "0x00000000";
             // 
@@ -1721,7 +1735,7 @@ namespace TempAR
             // 
             this.txtVitaCheatAddress1.Location = new System.Drawing.Point(90, 34);
             this.txtVitaCheatAddress1.Name = "txtVitaCheatAddress1";
-            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(121, 20);
+            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(150, 20);
             this.txtVitaCheatAddress1.TabIndex = 3;
             this.txtVitaCheatAddress1.Text = "0x00000000";
             // 
@@ -1741,7 +1755,7 @@ namespace TempAR
             this.comboVitaCheatCodeType.FormattingEnabled = true;
             this.comboVitaCheatCodeType.Location = new System.Drawing.Point(90, 7);
             this.comboVitaCheatCodeType.Name = "comboVitaCheatCodeType";
-            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(121, 21);
+            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(150, 21);
             this.comboVitaCheatCodeType.TabIndex = 1;
             this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
             // 
@@ -1816,22 +1830,27 @@ namespace TempAR
             switch (this.comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE: // Write
+                    this.txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064";
                     break;
                 case VC_GEN_PNTR: // Pointer
                     this.comboVitaCheatPointerLevel.Enabled = true;
                     this.groupVitaCheatAddress1Offset.Enabled = true;
+                    this.txtVCInstructions.Text = "POINTER\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.";
                     break;
                 case VC_GEN_COMP: // Compress
                     this.groupVitaCheatCompression.Enabled = true;
+                    this.txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063";
                     break;
                 case VC_GEN_MOV: // MOV
                     this.txtVitaCheatAddress2.Enabled = true;
                     this.txtVitaCheatValue.Enabled = false;
+                    this.txtVCInstructions.Text = "MOV/COPY\r\nMOV/Copy codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333";
                     break;
                 case VC_GEN_PTRCOM: // Pointer Compress
                     this.comboVitaCheatPointerLevel.Enabled = true;
                     this.groupVitaCheatAddress1Offset.Enabled = true;
                     this.groupVitaCheatCompression.Enabled = true;
+                    this.txtVCInstructions.Text = "POINTER + COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.";
                     break;
                 case VC_GEN_PTRMOV: // Pointer MOV
                     this.comboVitaCheatPointerLevel.Enabled = true;
@@ -1839,6 +1858,7 @@ namespace TempAR
                     this.groupVitaCheatAddress2Offset.Enabled = true;
                     this.txtVitaCheatValue.Enabled = false;
                     this.txtVitaCheatAddress2.Enabled = true;
+                    this.txtVCInstructions.Text = "POINTER + MOV\r\nPointer MOV copies one address to another, but uses pionters as the starting points.";
                     break;
             }
         }
