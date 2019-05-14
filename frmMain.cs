@@ -15,6 +15,10 @@ namespace TempAR
     {
         private PointerSearcher memdump;
         private PointerSearcher memdump2;
+        private PointerSearcher memdump3;
+        private PointerSearcher memdump4;
+        private PointerSearcher memdump5;
+        private PointerSearcher memdump6;
         private uint memory_start;
 #pragma warning disable CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
         private IContainer components;
@@ -63,6 +67,16 @@ namespace TempAR
         private Label lblPointerSearcherAddress2;
         private TextBox txtPointerSearcherMemDump2;
         private TextBox txtPointerSearcherAddress2;
+        private TextBox txtPointerSearcherAddress3;
+        private TextBox txtPointerSearcherMemDump3;
+        private Label lblPointerSearcherMemDump6;
+        private Label lblPointerSearcherMemDump5;
+        private Label lblPointerSearcherAddress6;
+        private Label lblPointerSearcherAddress5;
+        private Label lblPointerSearcherMemDump4;
+        private Label lblPointerSearcherMemDump3;
+        private Label lblPointerSearcherAddress4;
+        private Label lblPointerSearcherAddress3;
         private ComboBox comboPointerSearcherMode;
         private Label lblPointerSearcherMode;
         private Panel pnlPointerSearcherCodeType;
@@ -123,8 +137,14 @@ namespace TempAR
         private const string VC_GEN_COMP = "Compress ($4...)";
         private const string VC_GEN_MOV = "MOV/Copy ($5...)";
         private const string VC_GEN_PTRCOM = "Pointer+Compress ($7...)";
-        private TextBox txtVCInstructions;
         private const string VC_GEN_PTRMOV = "Pointer+MOV ($8...)";
+        private TextBox txtVCInstructions;
+        private TextBox txtPointerSearcherAddress6;
+        private TextBox txtPointerSearcherMemDump6;
+        private TextBox txtPointerSearcherAddress5;
+        private TextBox txtPointerSearcherMemDump5;
+        private TextBox txtPointerSearcherAddress4;
+        private TextBox txtPointerSearcherMemDump4;
 
 
         public frmMain()
@@ -354,6 +374,10 @@ namespace TempAR
             this.treePointerSearcherPointers.Nodes.Clear();
             this.memdump = new PointerSearcher(this.txtPointerSearcherMemDump1.Text, this.memory_start);
             this.memdump2 = new PointerSearcher(this.txtPointerSearcherMemDump2.Text, this.memory_start);
+            this.memdump3 = new PointerSearcher(this.txtPointerSearcherMemDump3.Text, this.memory_start);
+            this.memdump4 = new PointerSearcher(this.txtPointerSearcherMemDump4.Text, this.memory_start);
+            this.memdump5 = new PointerSearcher(this.txtPointerSearcherMemDump5.Text, this.memory_start);
+            this.memdump6 = new PointerSearcher(this.txtPointerSearcherMemDump6.Text, this.memory_start);
             this.addPointerTree(this.memdump.findPointers(num1, num3), this.treePointerSearcherPointers.SelectedNode);
         }
 
@@ -448,6 +472,26 @@ namespace TempAR
             this.txtPointerSearcherMemDump2.Text = this.OpenFile(this.txtPointerSearcherMemDump2.Text, (string)null, "Open");
         }
 
+        private void txtPointerSearcherMemDump3_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump3.Text = this.OpenFile(this.txtPointerSearcherMemDump3.Text, (string)null, "Open");
+        }
+
+        private void txtPointerSearcherMemDump4_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump4.Text = this.OpenFile(this.txtPointerSearcherMemDump4.Text, (string)null, "Open");
+        }
+
+        private void txtPointerSearcherMemDump5_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump5.Text = this.OpenFile(this.txtPointerSearcherMemDump5.Text, (string)null, "Open");
+        }
+
+        private void txtPointerSearcherMemDump6_Click(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump6.Text = this.OpenFile(this.txtPointerSearcherMemDump6.Text, (string)null, "Open");
+        }
+
         private void treePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
@@ -505,6 +549,124 @@ namespace TempAR
                     }
                     if ((int)num == (int)address)
                         color = Color.Green;
+                }
+                if (this.memdump2 != null && this.memdump3 != null)
+                {
+                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    uint num = this.parseNum(this.txtPointerSearcherAddress3.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < this.memory_start)
+                        num += this.memory_start;
+                    uint address = 0;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
+                        if (index2 == 0)
+                            address = pointerSearcherLog.Address;
+                        address = this.memdump3.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address)
+                        if (color == Color.Green)
+                        {
+                            color = Color.Blue;
+                        }
+                    else
+                        color = Color.Green;
+                }
+                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null)
+                {
+                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    uint num = this.parseNum(this.txtPointerSearcherAddress4.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < this.memory_start)
+                        num += this.memory_start;
+                    uint address = 0;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
+                        if (index2 == 0)
+                            address = pointerSearcherLog.Address;
+                        address = this.memdump4.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address)
+                        if (color == Color.Blue)
+                        {
+                            color = Color.Orchid;
+                        }
+                        else if (color == Color.Green)
+                        {
+                            color = Color.Blue;
+                        }
+                        else
+                        {
+                            color = Color.Green;
+                        }
+                }
+                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null)
+                {
+                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    uint num = this.parseNum(this.txtPointerSearcherAddress5.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < this.memory_start)
+                        num += this.memory_start;
+                    uint address = 0;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
+                        if (index2 == 0)
+                            address = pointerSearcherLog.Address;
+                        address = this.memdump5.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address)
+                        if (color == Color.Orchid)
+                        {
+                            color = Color.Red;
+                        }
+                        else if (color == Color.Blue)
+                        {
+                            color = Color.Orchid;
+                        }
+                        else if (color == Color.Green)
+                        {
+                            color = Color.Blue;
+                        }
+                        else
+                        {
+                            color = Color.Green;
+                        }
+                }
+                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null && this.memdump6 != null)
+                {
+                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    uint num = this.parseNum(this.txtPointerSearcherAddress6.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < this.memory_start)
+                        num += this.memory_start;
+                    uint address = 0;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
+                        if (index2 == 0)
+                            address = pointerSearcherLog.Address;
+                        address = this.memdump6.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address)
+                        if (color == Color.Red)
+                        {
+                            color = Color.Orange;
+                        }
+                        else if (color == Color.Orchid)
+                        {
+                            color = Color.Red;
+                        }
+                        else if (color == Color.Blue)
+                        {
+                            color = Color.Orchid;
+                        }
+                        else if (color == Color.Green)
+                        {
+                            color = Color.Blue;
+                        }
+                        else
+                        {
+                            color = Color.Green;
+                        }
                 }
                 if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
                 {
@@ -701,6 +863,20 @@ namespace TempAR
             this.txtTextOutput = new System.Windows.Forms.TextBox();
             this.txtTextInput = new System.Windows.Forms.TextBox();
             this.tabPointerSearcher = new System.Windows.Forms.TabPage();
+            this.lblPointerSearcherMemDump6 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMemDump5 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress6 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress5 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMemDump4 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherMemDump3 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress4 = new System.Windows.Forms.Label();
+            this.lblPointerSearcherAddress3 = new System.Windows.Forms.Label();
+            this.txtPointerSearcherAddress6 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherMemDump6 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherAddress5 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherMemDump5 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherAddress4 = new System.Windows.Forms.TextBox();
+            this.txtPointerSearcherMemDump4 = new System.Windows.Forms.TextBox();
             this.txtBaseAddress = new System.Windows.Forms.TextBox();
             this.lblBaseAddress = new System.Windows.Forms.Label();
             this.comboPointerSearcherMode = new System.Windows.Forms.ComboBox();
@@ -726,8 +902,10 @@ namespace TempAR
             this.lblPointerSearcherMemDump2 = new System.Windows.Forms.Label();
             this.lblPointerSearcherMemDump1 = new System.Windows.Forms.Label();
             this.lblPointerSearcherMode = new System.Windows.Forms.Label();
+            this.txtPointerSearcherAddress3 = new System.Windows.Forms.TextBox();
             this.lblPointerSearcherAddress2 = new System.Windows.Forms.Label();
             this.lblPointerSearcherAddress1 = new System.Windows.Forms.Label();
+            this.txtPointerSearcherMemDump3 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherMemDump2 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherMemDump1 = new System.Windows.Forms.TextBox();
             this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
@@ -1026,6 +1204,20 @@ namespace TempAR
             // 
             // tabPointerSearcher
             // 
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump6);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump5);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress6);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress5);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump4);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump3);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress4);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress3);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress6);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump6);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress5);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump5);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress4);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump4);
             this.tabPointerSearcher.Controls.Add(this.txtBaseAddress);
             this.tabPointerSearcher.Controls.Add(this.lblBaseAddress);
             this.tabPointerSearcher.Controls.Add(this.comboPointerSearcherMode);
@@ -1046,8 +1238,10 @@ namespace TempAR
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump2);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump1);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMode);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress3);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress2);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress1);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump3);
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump2);
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump1);
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress2);
@@ -1060,9 +1254,81 @@ namespace TempAR
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
             // 
+            // lblPointerSearcherMemDump6
+            // 
+            this.lblPointerSearcherMemDump6.AutoSize = true;
+            this.lblPointerSearcherMemDump6.Location = new System.Drawing.Point(6, 269);
+            this.lblPointerSearcherMemDump6.Name = "lblPointerSearcherMemDump6";
+            this.lblPointerSearcherMemDump6.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump6.TabIndex = 40;
+            this.lblPointerSearcherMemDump6.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherMemDump5
+            // 
+            this.lblPointerSearcherMemDump5.AutoSize = true;
+            this.lblPointerSearcherMemDump5.Location = new System.Drawing.Point(6, 217);
+            this.lblPointerSearcherMemDump5.Name = "lblPointerSearcherMemDump5";
+            this.lblPointerSearcherMemDump5.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump5.TabIndex = 38;
+            this.lblPointerSearcherMemDump5.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherAddress6
+            // 
+            this.lblPointerSearcherAddress6.AutoSize = true;
+            this.lblPointerSearcherAddress6.Location = new System.Drawing.Point(6, 295);
+            this.lblPointerSearcherAddress6.Name = "lblPointerSearcherAddress6";
+            this.lblPointerSearcherAddress6.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress6.TabIndex = 41;
+            this.lblPointerSearcherAddress6.Text = "Address:";
+            // 
+            // lblPointerSearcherAddress5
+            // 
+            this.lblPointerSearcherAddress5.AutoSize = true;
+            this.lblPointerSearcherAddress5.Location = new System.Drawing.Point(6, 243);
+            this.lblPointerSearcherAddress5.Name = "lblPointerSearcherAddress5";
+            this.lblPointerSearcherAddress5.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress5.TabIndex = 39;
+            this.lblPointerSearcherAddress5.Text = "Address:";
+            // 
+            // lblPointerSearcherMemDump4
+            // 
+            this.lblPointerSearcherMemDump4.AutoSize = true;
+            this.lblPointerSearcherMemDump4.Location = new System.Drawing.Point(6, 165);
+            this.lblPointerSearcherMemDump4.Name = "lblPointerSearcherMemDump4";
+            this.lblPointerSearcherMemDump4.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump4.TabIndex = 36;
+            this.lblPointerSearcherMemDump4.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherMemDump3
+            // 
+            this.lblPointerSearcherMemDump3.AutoSize = true;
+            this.lblPointerSearcherMemDump3.Location = new System.Drawing.Point(6, 113);
+            this.lblPointerSearcherMemDump3.Name = "lblPointerSearcherMemDump3";
+            this.lblPointerSearcherMemDump3.Size = new System.Drawing.Size(78, 13);
+            this.lblPointerSearcherMemDump3.TabIndex = 34;
+            this.lblPointerSearcherMemDump3.Text = "Memory Dump:";
+            // 
+            // lblPointerSearcherAddress4
+            // 
+            this.lblPointerSearcherAddress4.AutoSize = true;
+            this.lblPointerSearcherAddress4.Location = new System.Drawing.Point(6, 191);
+            this.lblPointerSearcherAddress4.Name = "lblPointerSearcherAddress4";
+            this.lblPointerSearcherAddress4.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress4.TabIndex = 37;
+            this.lblPointerSearcherAddress4.Text = "Address:";
+            // 
+            // lblPointerSearcherAddress3
+            // 
+            this.lblPointerSearcherAddress3.AutoSize = true;
+            this.lblPointerSearcherAddress3.Location = new System.Drawing.Point(6, 139);
+            this.lblPointerSearcherAddress3.Name = "lblPointerSearcherAddress3";
+            this.lblPointerSearcherAddress3.Size = new System.Drawing.Size(48, 13);
+            this.lblPointerSearcherAddress3.TabIndex = 35;
+            this.lblPointerSearcherAddress3.Text = "Address:";
+            // 
             // txtBaseAddress
             // 
-            this.txtBaseAddress.Location = new System.Drawing.Point(97, 141);
+            this.txtBaseAddress.Location = new System.Drawing.Point(395, 450);
             this.txtBaseAddress.MaxLength = 10;
             this.txtBaseAddress.Name = "txtBaseAddress";
             this.txtBaseAddress.Size = new System.Drawing.Size(189, 20);
@@ -1072,7 +1338,7 @@ namespace TempAR
             // lblBaseAddress
             // 
             this.lblBaseAddress.AutoSize = true;
-            this.lblBaseAddress.Location = new System.Drawing.Point(6, 144);
+            this.lblBaseAddress.Location = new System.Drawing.Point(305, 453);
             this.lblBaseAddress.Name = "lblBaseAddress";
             this.lblBaseAddress.Size = new System.Drawing.Size(75, 13);
             this.lblBaseAddress.TabIndex = 10;
@@ -1088,7 +1354,7 @@ namespace TempAR
             "Sony PSP",
             "Nintendo DS",
             "Other..."});
-            this.comboPointerSearcherMode.Location = new System.Drawing.Point(97, 114);
+            this.comboPointerSearcherMode.Location = new System.Drawing.Point(395, 423);
             this.comboPointerSearcherMode.Name = "comboPointerSearcherMode";
             this.comboPointerSearcherMode.Size = new System.Drawing.Size(189, 21);
             this.comboPointerSearcherMode.TabIndex = 9;
@@ -1128,7 +1394,7 @@ namespace TempAR
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType32);
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType8);
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType16);
-            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(97, 219);
+            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(395, 528);
             this.pnlPointerSearcherBitType.Name = "pnlPointerSearcherBitType";
             this.pnlPointerSearcherBitType.Size = new System.Drawing.Size(189, 24);
             this.pnlPointerSearcherBitType.TabIndex = 16;
@@ -1173,7 +1439,7 @@ namespace TempAR
             this.chkPointerSearcherRealAddresses.AutoSize = true;
             this.chkPointerSearcherRealAddresses.Checked = true;
             this.chkPointerSearcherRealAddresses.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(97, 318);
+            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(622, 521);
             this.chkPointerSearcherRealAddresses.Name = "chkPointerSearcherRealAddresses";
             this.chkPointerSearcherRealAddresses.Size = new System.Drawing.Size(100, 17);
             this.chkPointerSearcherRealAddresses.TabIndex = 20;
@@ -1197,7 +1463,7 @@ namespace TempAR
             this.chkPointerSearcherOptimizePointerPaths.AutoSize = true;
             this.chkPointerSearcherOptimizePointerPaths.Checked = true;
             this.chkPointerSearcherOptimizePointerPaths.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(97, 249);
+            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(74, 328);
             this.chkPointerSearcherOptimizePointerPaths.Name = "chkPointerSearcherOptimizePointerPaths";
             this.chkPointerSearcherOptimizePointerPaths.Size = new System.Drawing.Size(191, 17);
             this.chkPointerSearcherOptimizePointerPaths.TabIndex = 17;
@@ -1207,7 +1473,7 @@ namespace TempAR
             // chkPointerSearcherRAWCode
             // 
             this.chkPointerSearcherRAWCode.AutoSize = true;
-            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(97, 272);
+            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(622, 453);
             this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
             this.chkPointerSearcherRAWCode.Size = new System.Drawing.Size(80, 17);
             this.chkPointerSearcherRAWCode.TabIndex = 18;
@@ -1217,7 +1483,7 @@ namespace TempAR
             // chkPointerSearcherIncludeNegatives
             // 
             this.chkPointerSearcherIncludeNegatives.AutoSize = true;
-            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(97, 295);
+            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(622, 489);
             this.chkPointerSearcherIncludeNegatives.Name = "chkPointerSearcherIncludeNegatives";
             this.chkPointerSearcherIncludeNegatives.Size = new System.Drawing.Size(112, 17);
             this.chkPointerSearcherIncludeNegatives.TabIndex = 19;
@@ -1249,7 +1515,7 @@ namespace TempAR
             this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treePointerSearcherPointers.Location = new System.Drawing.Point(292, 6);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 562);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 398);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.treePointerSearcherPointers_DoubleClick);
@@ -1258,7 +1524,7 @@ namespace TempAR
             // lblPointerSearcherValue
             // 
             this.lblPointerSearcherValue.AutoSize = true;
-            this.lblPointerSearcherValue.Location = new System.Drawing.Point(6, 196);
+            this.lblPointerSearcherValue.Location = new System.Drawing.Point(304, 505);
             this.lblPointerSearcherValue.Name = "lblPointerSearcherValue";
             this.lblPointerSearcherValue.Size = new System.Drawing.Size(76, 13);
             this.lblPointerSearcherValue.TabIndex = 14;
@@ -1267,7 +1533,7 @@ namespace TempAR
             // lblPointerSearcherMaxOffset
             // 
             this.lblPointerSearcherMaxOffset.AutoSize = true;
-            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(6, 170);
+            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(304, 479);
             this.lblPointerSearcherMaxOffset.Name = "lblPointerSearcherMaxOffset";
             this.lblPointerSearcherMaxOffset.Size = new System.Drawing.Size(85, 13);
             this.lblPointerSearcherMaxOffset.TabIndex = 12;
@@ -1275,7 +1541,7 @@ namespace TempAR
             // 
             // txtPointerSearcherValue
             // 
-            this.txtPointerSearcherValue.Location = new System.Drawing.Point(97, 193);
+            this.txtPointerSearcherValue.Location = new System.Drawing.Point(395, 502);
             this.txtPointerSearcherValue.MaxLength = 10;
             this.txtPointerSearcherValue.Name = "txtPointerSearcherValue";
             this.txtPointerSearcherValue.Size = new System.Drawing.Size(189, 20);
@@ -1285,7 +1551,7 @@ namespace TempAR
             // 
             // txtPointerSearcherMaxOffset
             // 
-            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(97, 167);
+            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(395, 476);
             this.txtPointerSearcherMaxOffset.MaxLength = 10;
             this.txtPointerSearcherMaxOffset.Name = "txtPointerSearcherMaxOffset";
             this.txtPointerSearcherMaxOffset.Size = new System.Drawing.Size(189, 20);
@@ -1314,11 +1580,20 @@ namespace TempAR
             // lblPointerSearcherMode
             // 
             this.lblPointerSearcherMode.AutoSize = true;
-            this.lblPointerSearcherMode.Location = new System.Drawing.Point(6, 117);
+            this.lblPointerSearcherMode.Location = new System.Drawing.Point(304, 426);
             this.lblPointerSearcherMode.Name = "lblPointerSearcherMode";
             this.lblPointerSearcherMode.Size = new System.Drawing.Size(37, 13);
             this.lblPointerSearcherMode.TabIndex = 8;
             this.lblPointerSearcherMode.Text = "Mode:";
+            // 
+            // txtPointerSearcherAddress3
+            // 
+            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(97, 136);
+            this.txtPointerSearcherAddress3.MaxLength = 10;
+            this.txtPointerSearcherAddress3.Name = "txtPointerSearcherAddress3";
+            this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress3.TabIndex = 27;
+            this.txtPointerSearcherAddress3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
             // 
             // lblPointerSearcherAddress2
             // 
@@ -1337,6 +1612,81 @@ namespace TempAR
             this.lblPointerSearcherAddress1.Size = new System.Drawing.Size(48, 13);
             this.lblPointerSearcherAddress1.TabIndex = 2;
             this.lblPointerSearcherAddress1.Text = "Address:";
+            // 
+            // txtPointerSearcherAddress6
+            // 
+            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(97, 292);
+            this.txtPointerSearcherAddress6.MaxLength = 10;
+            this.txtPointerSearcherAddress6.Name = "txtPointerSearcherAddress6";
+            this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress6.TabIndex = 33;
+            this.txtPointerSearcherAddress6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // txtPointerSearcherMemDump6
+            // 
+            this.txtPointerSearcherMemDump6.AllowDrop = true;
+            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(97, 266);
+            this.txtPointerSearcherMemDump6.Name = "txtPointerSearcherMemDump6";
+            this.txtPointerSearcherMemDump6.ReadOnly = true;
+            this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump6.TabIndex = 32;
+            this.txtPointerSearcherMemDump6.Click += new System.EventHandler(this.txtPointerSearcherMemDump6_Click);
+            this.txtPointerSearcherMemDump6.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump6.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            // 
+            // txtPointerSearcherAddress5
+            // 
+            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(97, 240);
+            this.txtPointerSearcherAddress5.MaxLength = 10;
+            this.txtPointerSearcherAddress5.Name = "txtPointerSearcherAddress5";
+            this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress5.TabIndex = 31;
+            this.txtPointerSearcherAddress5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // txtPointerSearcherMemDump5
+            // 
+            this.txtPointerSearcherMemDump5.AllowDrop = true;
+            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(97, 214);
+            this.txtPointerSearcherMemDump5.Name = "txtPointerSearcherMemDump5";
+            this.txtPointerSearcherMemDump5.ReadOnly = true;
+            this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump5.TabIndex = 30;
+            this.txtPointerSearcherMemDump5.Click += new System.EventHandler(this.txtPointerSearcherMemDump5_Click);
+            this.txtPointerSearcherMemDump5.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump5.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            // 
+            // txtPointerSearcherAddress4
+            // 
+            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(97, 188);
+            this.txtPointerSearcherAddress4.MaxLength = 10;
+            this.txtPointerSearcherAddress4.Name = "txtPointerSearcherAddress4";
+            this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress4.TabIndex = 29;
+            this.txtPointerSearcherAddress4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
+            // 
+            // txtPointerSearcherMemDump4
+            // 
+            this.txtPointerSearcherMemDump4.AllowDrop = true;
+            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(97, 162);
+            this.txtPointerSearcherMemDump4.Name = "txtPointerSearcherMemDump4";
+            this.txtPointerSearcherMemDump4.ReadOnly = true;
+            this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump4.TabIndex = 28;
+            this.txtPointerSearcherMemDump4.Click += new System.EventHandler(this.txtPointerSearcherMemDump4_Click);
+            this.txtPointerSearcherMemDump4.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump4.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            // 
+            // txtPointerSearcherMemDump3
+            // 
+            this.txtPointerSearcherMemDump3.AllowDrop = true;
+            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(97, 110);
+            this.txtPointerSearcherMemDump3.Name = "txtPointerSearcherMemDump3";
+            this.txtPointerSearcherMemDump3.ReadOnly = true;
+            this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump3.TabIndex = 26;
+            this.txtPointerSearcherMemDump3.Click += new System.EventHandler(this.txtPointerSearcherMemDump3_Click);
+            this.txtPointerSearcherMemDump3.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
+            this.txtPointerSearcherMemDump3.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
             // 
             // txtPointerSearcherMemDump2
             // 
