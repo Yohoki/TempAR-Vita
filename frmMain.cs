@@ -1391,6 +1391,7 @@ namespace TempAR
             // txtPointerSearcherAddress6
             // 
             this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(97, 292);
+            this.txtPointerSearcherAddress6.Enabled = false;
             this.txtPointerSearcherAddress6.MaxLength = 10;
             this.txtPointerSearcherAddress6.Name = "txtPointerSearcherAddress6";
             this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(189, 20);
@@ -1401,6 +1402,7 @@ namespace TempAR
             // 
             this.txtPointerSearcherMemDump6.AllowDrop = true;
             this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(97, 266);
+            this.txtPointerSearcherMemDump6.Enabled = false;
             this.txtPointerSearcherMemDump6.Name = "txtPointerSearcherMemDump6";
             this.txtPointerSearcherMemDump6.ReadOnly = true;
             this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(189, 20);
@@ -1408,10 +1410,12 @@ namespace TempAR
             this.txtPointerSearcherMemDump6.Click += new System.EventHandler(this.txtPointerSearcherMemDump6_Click);
             this.txtPointerSearcherMemDump6.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump6.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump6.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherAddress5
             // 
             this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(97, 240);
+            this.txtPointerSearcherAddress5.Enabled = false;
             this.txtPointerSearcherAddress5.MaxLength = 10;
             this.txtPointerSearcherAddress5.Name = "txtPointerSearcherAddress5";
             this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(189, 20);
@@ -1422,6 +1426,7 @@ namespace TempAR
             // 
             this.txtPointerSearcherMemDump5.AllowDrop = true;
             this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(97, 214);
+            this.txtPointerSearcherMemDump5.Enabled = false;
             this.txtPointerSearcherMemDump5.Name = "txtPointerSearcherMemDump5";
             this.txtPointerSearcherMemDump5.ReadOnly = true;
             this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(189, 20);
@@ -1429,10 +1434,12 @@ namespace TempAR
             this.txtPointerSearcherMemDump5.Click += new System.EventHandler(this.txtPointerSearcherMemDump5_Click);
             this.txtPointerSearcherMemDump5.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump5.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump5.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherAddress4
             // 
             this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(97, 188);
+            this.txtPointerSearcherAddress4.Enabled = false;
             this.txtPointerSearcherAddress4.MaxLength = 10;
             this.txtPointerSearcherAddress4.Name = "txtPointerSearcherAddress4";
             this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(189, 20);
@@ -1443,6 +1450,7 @@ namespace TempAR
             // 
             this.txtPointerSearcherMemDump4.AllowDrop = true;
             this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(97, 162);
+            this.txtPointerSearcherMemDump4.Enabled = false;
             this.txtPointerSearcherMemDump4.Name = "txtPointerSearcherMemDump4";
             this.txtPointerSearcherMemDump4.ReadOnly = true;
             this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(189, 20);
@@ -1450,6 +1458,7 @@ namespace TempAR
             this.txtPointerSearcherMemDump4.Click += new System.EventHandler(this.txtPointerSearcherMemDump4_Click);
             this.txtPointerSearcherMemDump4.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump4.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump4.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtBaseAddress
             // 
@@ -1716,6 +1725,7 @@ namespace TempAR
             // txtPointerSearcherAddress3
             // 
             this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(97, 136);
+            this.txtPointerSearcherAddress3.Enabled = false;
             this.txtPointerSearcherAddress3.MaxLength = 10;
             this.txtPointerSearcherAddress3.Name = "txtPointerSearcherAddress3";
             this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(189, 20);
@@ -1726,6 +1736,7 @@ namespace TempAR
             // 
             this.lblPointerSearcherAddress2.AutoSize = true;
             this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(6, 87);
+            this.txtPointerSearcherAddress2.Enabled = false;
             this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
             this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(48, 13);
             this.lblPointerSearcherAddress2.TabIndex = 6;
@@ -1744,6 +1755,7 @@ namespace TempAR
             // 
             this.txtPointerSearcherMemDump3.AllowDrop = true;
             this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(97, 110);
+            this.txtPointerSearcherMemDump3.Enabled = false;
             this.txtPointerSearcherMemDump3.Name = "txtPointerSearcherMemDump3";
             this.txtPointerSearcherMemDump3.ReadOnly = true;
             this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(189, 20);
@@ -1751,11 +1763,13 @@ namespace TempAR
             this.txtPointerSearcherMemDump3.Click += new System.EventHandler(this.txtPointerSearcherMemDump3_Click);
             this.txtPointerSearcherMemDump3.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump3.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump3.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherMemDump2
             // 
             this.txtPointerSearcherMemDump2.AllowDrop = true;
             this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(97, 58);
+            this.txtPointerSearcherMemDump2.Enabled = false;
             this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
             this.txtPointerSearcherMemDump2.ReadOnly = true;
             this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(189, 20);
@@ -1763,6 +1777,7 @@ namespace TempAR
             this.txtPointerSearcherMemDump2.Click += new System.EventHandler(this.txtPointerSearcherMemDump2_Click);
             this.txtPointerSearcherMemDump2.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump2.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump2.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherMemDump1
             // 
@@ -1775,6 +1790,8 @@ namespace TempAR
             this.txtPointerSearcherMemDump1.Click += new System.EventHandler(this.txtPointerSearcherMemDump1_Click);
             this.txtPointerSearcherMemDump1.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump1.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
+            this.txtPointerSearcherMemDump1.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
+
             // 
             // txtPointerSearcherAddress2
             // 
@@ -2269,6 +2286,20 @@ namespace TempAR
             }
         }
 
+        private void txtPointerSearcherMemDump_TextChanged(object sender, EventArgs e)
+        {
+            this.txtPointerSearcherMemDump2.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump1.Text);
+            this.txtPointerSearcherAddress2.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump1.Text);
+            this.txtPointerSearcherMemDump3.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump2.Text);
+            this.txtPointerSearcherAddress3.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump2.Text);
+            this.txtPointerSearcherMemDump4.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump3.Text);
+            this.txtPointerSearcherAddress4.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump3.Text);
+            this.txtPointerSearcherMemDump5.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump4.Text);
+            this.txtPointerSearcherAddress5.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump4.Text);
+            this.txtPointerSearcherMemDump6.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump5.Text);
+            this.txtPointerSearcherAddress6.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump5.Text);
+        }
+
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.txtVitaCheatAddress2.Enabled = false;
@@ -2325,29 +2356,24 @@ namespace TempAR
             this.txtVitaCheatAddress2Offset5.Enabled = false;
             if (this.comboVitaCheatPointerLevel.SelectedIndex >= 1)
             {
-
                 this.txtVitaCheatAddress1Offset2.Enabled = true;
                 this.txtVitaCheatAddress2Offset2.Enabled = true;
             }
             if (this.comboVitaCheatPointerLevel.SelectedIndex >= 2)
             {
-
                 this.txtVitaCheatAddress1Offset3.Enabled = true;
                 this.txtVitaCheatAddress2Offset3.Enabled = true;
             }
             if (this.comboVitaCheatPointerLevel.SelectedIndex >= 3)
             {
-
                 this.txtVitaCheatAddress1Offset4.Enabled = true;
                 this.txtVitaCheatAddress2Offset4.Enabled = true;
             }
             if (this.comboVitaCheatPointerLevel.SelectedIndex >= 4)
             {
-
                 this.txtVitaCheatAddress1Offset5.Enabled = true;
                 this.txtVitaCheatAddress2Offset5.Enabled = true;
             }
-
         }
         private void BtnVitaCheatGenerate_Click(object sender, EventArgs e)
         {
