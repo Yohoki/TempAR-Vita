@@ -544,6 +544,7 @@ namespace TempAR
             for (int index1 = 0; index1 < pointers.Count; ++index1)
             {
                 Color color = Color.Black;
+                int PointerColor = 0;
                 if (this.memdump2 != null)
                 {
                     string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
@@ -559,7 +560,7 @@ namespace TempAR
                         address = this.memdump2.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
                     if ((int)num == (int)address)
-                        color = Color.Green;
+                        PointerColor += 1;
                 }
                 if (this.memdump2 != null && this.memdump3 != null)
                 {
@@ -576,12 +577,7 @@ namespace TempAR
                         address = this.memdump3.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
                     if ((int)num == (int)address)
-                        if (color == Color.Green)
-                        {
-                            color = Color.Blue;
-                        }
-                    else
-                        color = Color.Green;
+                        PointerColor += 1;
                 }
                 if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null)
                 {
@@ -598,18 +594,7 @@ namespace TempAR
                         address = this.memdump4.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
                     if ((int)num == (int)address)
-                        if (color == Color.Blue)
-                        {
-                            color = Color.Orchid;
-                        }
-                        else if (color == Color.Green)
-                        {
-                            color = Color.Blue;
-                        }
-                        else
-                        {
-                            color = Color.Green;
-                        }
+                        PointerColor += 1;
                 }
                 if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null)
                 {
@@ -626,22 +611,7 @@ namespace TempAR
                         address = this.memdump5.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
                     if ((int)num == (int)address)
-                        if (color == Color.Orchid)
-                        {
-                            color = Color.Red;
-                        }
-                        else if (color == Color.Blue)
-                        {
-                            color = Color.Orchid;
-                        }
-                        else if (color == Color.Green)
-                        {
-                            color = Color.Blue;
-                        }
-                        else
-                        {
-                            color = Color.Green;
-                        }
+                        PointerColor += 1;
                 }
                 if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null && this.memdump6 != null)
                 {
@@ -658,26 +628,28 @@ namespace TempAR
                         address = this.memdump6.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
                     if ((int)num == (int)address)
-                        if (color == Color.Red)
-                        {
-                            color = Color.Orange;
-                        }
-                        else if (color == Color.Orchid)
-                        {
-                            color = Color.Red;
-                        }
-                        else if (color == Color.Blue)
-                        {
-                            color = Color.Orchid;
-                        }
-                        else if (color == Color.Green)
-                        {
-                            color = Color.Blue;
-                        }
-                        else
-                        {
-                            color = Color.Green;
-                        }
+                        PointerColor += 1;
+                }
+                switch (PointerColor)
+                {
+                    case 0:
+                        color = Color.Black;
+                        break;
+                    case 1:
+                        color = Color.Green;
+                        break;
+                    case 2:
+                        color = Color.Blue;
+                        break;
+                    case 3:
+                        color = Color.Orchid;
+                        break;
+                    case 4:
+                        color = Color.Red;
+                        break;
+                    case 5:
+                        color = Color.Orange;
+                        break;
                 }
                 if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
                 {
