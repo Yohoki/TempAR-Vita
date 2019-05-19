@@ -120,15 +120,15 @@ namespace TempAR
         private Label lblCnvCodeTypes;
         private ComboBox cbCnvCodeTypes;
         private const string CT_CNV_CWCHEATPOPS = "CWCheat POPS";
-        private const string CT_CNV_NITEPR      = "NitePR";
-        private const string CT_CNV_R4CCE       = "R4CCE to TempAR";
-        private const string CT_CNV_TEMPAR      = "TempAR to R4CCE";
+        private const string CT_CNV_NITEPR = "NitePR";
+        private const string CT_CNV_R4CCE = "R4CCE to TempAR";
+        private const string CT_CNV_TEMPAR = "TempAR to R4CCE";
         // Code types for pointer search tab
         private Label lblPntCodeTypes;
         private ComboBox cbPntCodeTypes;
         private const string CT_PNT_VITACHEAT = "VitaCheat";
-        private const string CT_PNT_CWCHEAT   = "CWCheat";        
-        private const string CT_PNT_AR        = "AR";
+        private const string CT_PNT_CWCHEAT = "CWCheat";
+        private const string CT_PNT_AR = "AR";
         // Code types for VitaCheat Code Maker tab
         private Label lblVitaCheatCodeType;
         private ComboBox comboVitaCheatCodeType;
@@ -145,12 +145,12 @@ namespace TempAR
         private TextBox txtPointerSearcherMemDump5;
         private TextBox txtPointerSearcherAddress4;
         private Label lblLowPercent;
-        private Panel pnlColorOrange;
-        private Panel pnlColorRed;
-        private Panel pnlColorOrchid;
-        private Panel pnlColorBlue;
-        private Panel pnlColorGreen;
-        private Panel pnlColorBlack;
+        private TextBox txtColorOrange;
+        private TextBox txtColorRed;
+        private TextBox txtColorOrchid;
+        private TextBox txtColorBlue;
+        private TextBox txtColorGreen;
+        private TextBox txtColorBlack;
         private Label lblNotLikelyPercent;
         private Label lblGoodPercent;
         private Label lblHighPercent;
@@ -183,8 +183,15 @@ namespace TempAR
             VC_GEN_PTRCOM,
             VC_GEN_PTRMOV});
             this.comboVitaCheatCodeType.Text = VC_GEN_WRITE;
-        }
 
+
+        }
+        public int PointerBlk { get; private set; }
+        public int PointerGrn { get; private set; }
+        public int PointerBlu { get; private set; }
+        public int PointerPur { get; private set; }
+        public int PointerRed { get; private set; }
+        public int PointerOrn { get; private set; }
         private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
         {
             if (!((RadioButton)sender).Checked)
@@ -382,6 +389,12 @@ namespace TempAR
                 int num2 = (int)MessageBox.Show("Unable to parse base address, make sure value is a valid hexadecimal number.");
                 return;
             }
+            PointerBlk = 0;
+            PointerGrn = 0;
+            PointerBlu = 0;
+            PointerPur = 0;
+            PointerRed = 0;
+            PointerOrn = 0;
             this.treePointerSearcherPointers.Nodes.Clear();
             this.memdump = new PointerSearcher(this.txtPointerSearcherMemDump1.Text, this.memory_start);
             this.memdump2 = new PointerSearcher(this.txtPointerSearcherMemDump2.Text, this.memory_start);
@@ -413,6 +426,18 @@ namespace TempAR
         private void btnPointerSearcherClear_Click(object sender, EventArgs e)
         {
             this.treePointerSearcherPointers.Nodes.Clear();
+            this.txtColorBlack.Text = "0";
+            this.txtColorGreen.Text = "0";
+            this.txtColorBlue.Text = "0";
+            this.txtColorOrchid.Text = "0";
+            this.txtColorRed.Text = "0";
+            this.txtColorOrange.Text = "0";
+            PointerBlk = 0;
+            PointerGrn = 0;
+            PointerBlu = 0;
+            PointerPur = 0;
+            PointerRed = 0;
+            PointerOrn = 0;
         }
 
         public void SortList<T>(List<T> dataSource, string fieldName, bool asc)
@@ -634,21 +659,33 @@ namespace TempAR
                 {
                     case 0:
                         color = Color.Black;
+                        PointerBlk += 1;
+                        this.txtColorBlack.Text = PointerBlk.ToString();
                         break;
                     case 1:
                         color = Color.Green;
+                        PointerGrn += 1;
+                        this.txtColorGreen.Text = PointerGrn.ToString();
                         break;
                     case 2:
                         color = Color.Blue;
+                        PointerBlu += 1;
+                        this.txtColorBlue.Text = PointerBlu.ToString();
                         break;
                     case 3:
                         color = Color.Orchid;
+                        PointerPur += 1;
+                        this.txtColorOrchid.Text = PointerPur.ToString();
                         break;
                     case 4:
                         color = Color.Red;
+                        PointerRed += 1;
+                        this.txtColorRed.Text = PointerRed.ToString();
                         break;
                     case 5:
                         color = Color.Orange;
+                        PointerOrn += 1;
+                        this.txtColorOrange.Text = PointerOrn.ToString();
                         break;
                 }
                 if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
@@ -846,13 +883,17 @@ namespace TempAR
             this.txtTextOutput = new System.Windows.Forms.TextBox();
             this.txtTextInput = new System.Windows.Forms.TextBox();
             this.tabPointerSearcher = new System.Windows.Forms.TabPage();
+            this.lblNotLikelyPercent = new System.Windows.Forms.Label();
+            this.lblGoodPercent = new System.Windows.Forms.Label();
+            this.lblHighPercent = new System.Windows.Forms.Label();
+            this.lblMediumPercent = new System.Windows.Forms.Label();
             this.lblLowPercent = new System.Windows.Forms.Label();
-            this.pnlColorOrange = new System.Windows.Forms.Panel();
-            this.pnlColorRed = new System.Windows.Forms.Panel();
-            this.pnlColorOrchid = new System.Windows.Forms.Panel();
-            this.pnlColorBlue = new System.Windows.Forms.Panel();
-            this.pnlColorGreen = new System.Windows.Forms.Panel();
-            this.pnlColorBlack = new System.Windows.Forms.Panel();
+            this.txtColorOrange = new System.Windows.Forms.TextBox();
+            this.txtColorRed = new System.Windows.Forms.TextBox();
+            this.txtColorOrchid = new System.Windows.Forms.TextBox();
+            this.txtColorBlue = new System.Windows.Forms.TextBox();
+            this.txtColorGreen = new System.Windows.Forms.TextBox();
+            this.txtColorBlack = new System.Windows.Forms.TextBox();
             this.lblPointerSearcherMemDump6 = new System.Windows.Forms.Label();
             this.lblPointerSearcherMemDump5 = new System.Windows.Forms.Label();
             this.lblPointerSearcherAddress6 = new System.Windows.Forms.Label();
@@ -937,10 +978,6 @@ namespace TempAR
             this.txtVitaCheatAddress1 = new System.Windows.Forms.TextBox();
             this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
             this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
-            this.lblMediumPercent = new System.Windows.Forms.Label();
-            this.lblHighPercent = new System.Windows.Forms.Label();
-            this.lblGoodPercent = new System.Windows.Forms.Label();
-            this.lblNotLikelyPercent = new System.Windows.Forms.Label();
             this.pnlConvertFormat.SuspendLayout();
             this.pnlConvertFile.SuspendLayout();
             this.frmStatusStrip.SuspendLayout();
@@ -1203,12 +1240,12 @@ namespace TempAR
             this.tabPointerSearcher.Controls.Add(this.lblHighPercent);
             this.tabPointerSearcher.Controls.Add(this.lblMediumPercent);
             this.tabPointerSearcher.Controls.Add(this.lblLowPercent);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorOrange);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorRed);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorOrchid);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorBlue);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorGreen);
-            this.tabPointerSearcher.Controls.Add(this.pnlColorBlack);
+            this.tabPointerSearcher.Controls.Add(this.txtColorOrange);
+            this.tabPointerSearcher.Controls.Add(this.txtColorRed);
+            this.tabPointerSearcher.Controls.Add(this.txtColorOrchid);
+            this.tabPointerSearcher.Controls.Add(this.txtColorBlue);
+            this.tabPointerSearcher.Controls.Add(this.txtColorGreen);
+            this.tabPointerSearcher.Controls.Add(this.txtColorBlack);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump6);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump5);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress6);
@@ -1259,6 +1296,42 @@ namespace TempAR
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
             // 
+            // lblNotLikelyPercent
+            // 
+            this.lblNotLikelyPercent.AutoSize = true;
+            this.lblNotLikelyPercent.Location = new System.Drawing.Point(339, 411);
+            this.lblNotLikelyPercent.Name = "lblNotLikelyPercent";
+            this.lblNotLikelyPercent.Size = new System.Drawing.Size(50, 13);
+            this.lblNotLikelyPercent.TabIndex = 50;
+            this.lblNotLikelyPercent.Text = "Not likely";
+            // 
+            // lblGoodPercent
+            // 
+            this.lblGoodPercent.AutoSize = true;
+            this.lblGoodPercent.Location = new System.Drawing.Point(586, 412);
+            this.lblGoodPercent.Name = "lblGoodPercent";
+            this.lblGoodPercent.Size = new System.Drawing.Size(44, 13);
+            this.lblGoodPercent.TabIndex = 49;
+            this.lblGoodPercent.Text = "Good %";
+            // 
+            // lblHighPercent
+            // 
+            this.lblHighPercent.AutoSize = true;
+            this.lblHighPercent.Location = new System.Drawing.Point(672, 411);
+            this.lblHighPercent.Name = "lblHighPercent";
+            this.lblHighPercent.Size = new System.Drawing.Size(40, 13);
+            this.lblHighPercent.TabIndex = 48;
+            this.lblHighPercent.Text = "High %";
+            // 
+            // lblMediumPercent
+            // 
+            this.lblMediumPercent.AutoSize = true;
+            this.lblMediumPercent.Location = new System.Drawing.Point(505, 411);
+            this.lblMediumPercent.Name = "lblMediumPercent";
+            this.lblMediumPercent.Size = new System.Drawing.Size(39, 13);
+            this.lblMediumPercent.TabIndex = 47;
+            this.lblMediumPercent.Text = "Med %";
+            // 
             // lblLowPercent
             // 
             this.lblLowPercent.AutoSize = true;
@@ -1268,53 +1341,71 @@ namespace TempAR
             this.lblLowPercent.TabIndex = 46;
             this.lblLowPercent.Text = "Low %";
             // 
-            // pnlColorOrange
+            // txtColorOrange
             // 
-            this.pnlColorOrange.BackColor = System.Drawing.Color.Orange;
-            this.pnlColorOrange.Location = new System.Drawing.Point(718, 410);
-            this.pnlColorOrange.Name = "pnlColorOrange";
-            this.pnlColorOrange.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorOrange.TabIndex = 45;
+            this.txtColorOrange.BackColor = System.Drawing.Color.Orange;
+            this.txtColorOrange.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorOrange.Location = new System.Drawing.Point(718, 410);
+            this.txtColorOrange.Name = "txtColorOrange";
+            this.txtColorOrange.ReadOnly = true;
+            this.txtColorOrange.Size = new System.Drawing.Size(30, 20);
+            this.txtColorOrange.TabIndex = 45;
+            this.txtColorOrange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlColorRed
+            // txtColorRed
             // 
-            this.pnlColorRed.BackColor = System.Drawing.Color.Red;
-            this.pnlColorRed.Location = new System.Drawing.Point(636, 410);
-            this.pnlColorRed.Name = "pnlColorRed";
-            this.pnlColorRed.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorRed.TabIndex = 44;
+            this.txtColorRed.BackColor = System.Drawing.Color.Red;
+            this.txtColorRed.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorRed.Location = new System.Drawing.Point(636, 410);
+            this.txtColorRed.Name = "txtColorRed";
+            this.txtColorRed.ReadOnly = true;
+            this.txtColorRed.Size = new System.Drawing.Size(30, 20);
+            this.txtColorRed.TabIndex = 44;
+            this.txtColorRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlColorOrchid
+            // txtColorOrchid
             // 
-            this.pnlColorOrchid.BackColor = System.Drawing.Color.Orchid;
-            this.pnlColorOrchid.Location = new System.Drawing.Point(550, 410);
-            this.pnlColorOrchid.Name = "pnlColorOrchid";
-            this.pnlColorOrchid.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorOrchid.TabIndex = 45;
+            this.txtColorOrchid.BackColor = System.Drawing.Color.Orchid;
+            this.txtColorOrchid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorOrchid.Location = new System.Drawing.Point(550, 410);
+            this.txtColorOrchid.Name = "txtColorOrchid";
+            this.txtColorOrchid.ReadOnly = true;
+            this.txtColorOrchid.Size = new System.Drawing.Size(30, 20);
+            this.txtColorOrchid.TabIndex = 45;
+            this.txtColorOrchid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlColorBlue
+            // txtColorBlue
             // 
-            this.pnlColorBlue.BackColor = System.Drawing.Color.Blue;
-            this.pnlColorBlue.Location = new System.Drawing.Point(469, 410);
-            this.pnlColorBlue.Name = "pnlColorBlue";
-            this.pnlColorBlue.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorBlue.TabIndex = 44;
+            this.txtColorBlue.BackColor = System.Drawing.Color.Blue;
+            this.txtColorBlue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorBlue.Location = new System.Drawing.Point(469, 410);
+            this.txtColorBlue.Name = "txtColorBlue";
+            this.txtColorBlue.ReadOnly = true;
+            this.txtColorBlue.Size = new System.Drawing.Size(30, 20);
+            this.txtColorBlue.TabIndex = 44;
+            this.txtColorBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlColorGreen
+            // txtColorGreen
             // 
-            this.pnlColorGreen.BackColor = System.Drawing.Color.Green;
-            this.pnlColorGreen.Location = new System.Drawing.Point(389, 410);
-            this.pnlColorGreen.Name = "pnlColorGreen";
-            this.pnlColorGreen.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorGreen.TabIndex = 43;
+            this.txtColorGreen.BackColor = System.Drawing.Color.Green;
+            this.txtColorGreen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorGreen.Location = new System.Drawing.Point(389, 410);
+            this.txtColorGreen.Name = "txtColorGreen";
+            this.txtColorGreen.ReadOnly = true;
+            this.txtColorGreen.Size = new System.Drawing.Size(30, 20);
+            this.txtColorGreen.TabIndex = 43;
+            this.txtColorGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlColorBlack
+            // txtColorBlack
             // 
-            this.pnlColorBlack.BackColor = System.Drawing.Color.Black;
-            this.pnlColorBlack.Location = new System.Drawing.Point(307, 410);
-            this.pnlColorBlack.Name = "pnlColorBlack";
-            this.pnlColorBlack.Size = new System.Drawing.Size(30, 15);
-            this.pnlColorBlack.TabIndex = 42;
+            this.txtColorBlack.BackColor = System.Drawing.Color.Black;
+            this.txtColorBlack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorBlack.Location = new System.Drawing.Point(307, 410);
+            this.txtColorBlack.Name = "txtColorBlack";
+            this.txtColorBlack.ReadOnly = true;
+            this.txtColorBlack.Size = new System.Drawing.Size(30, 20);
+            this.txtColorBlack.TabIndex = 42;
+            this.txtColorBlack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblPointerSearcherMemDump6
             // 
@@ -1390,8 +1481,8 @@ namespace TempAR
             // 
             // txtPointerSearcherAddress6
             // 
-            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(97, 292);
             this.txtPointerSearcherAddress6.Enabled = false;
+            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(97, 292);
             this.txtPointerSearcherAddress6.MaxLength = 10;
             this.txtPointerSearcherAddress6.Name = "txtPointerSearcherAddress6";
             this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(189, 20);
@@ -1401,21 +1492,21 @@ namespace TempAR
             // txtPointerSearcherMemDump6
             // 
             this.txtPointerSearcherMemDump6.AllowDrop = true;
-            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(97, 266);
             this.txtPointerSearcherMemDump6.Enabled = false;
+            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(97, 266);
             this.txtPointerSearcherMemDump6.Name = "txtPointerSearcherMemDump6";
             this.txtPointerSearcherMemDump6.ReadOnly = true;
             this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump6.TabIndex = 32;
             this.txtPointerSearcherMemDump6.Click += new System.EventHandler(this.txtPointerSearcherMemDump6_Click);
+            this.txtPointerSearcherMemDump6.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump6.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump6.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump6.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherAddress5
             // 
-            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(97, 240);
             this.txtPointerSearcherAddress5.Enabled = false;
+            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(97, 240);
             this.txtPointerSearcherAddress5.MaxLength = 10;
             this.txtPointerSearcherAddress5.Name = "txtPointerSearcherAddress5";
             this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(189, 20);
@@ -1425,21 +1516,21 @@ namespace TempAR
             // txtPointerSearcherMemDump5
             // 
             this.txtPointerSearcherMemDump5.AllowDrop = true;
-            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(97, 214);
             this.txtPointerSearcherMemDump5.Enabled = false;
+            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(97, 214);
             this.txtPointerSearcherMemDump5.Name = "txtPointerSearcherMemDump5";
             this.txtPointerSearcherMemDump5.ReadOnly = true;
             this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump5.TabIndex = 30;
             this.txtPointerSearcherMemDump5.Click += new System.EventHandler(this.txtPointerSearcherMemDump5_Click);
+            this.txtPointerSearcherMemDump5.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump5.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump5.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump5.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherAddress4
             // 
-            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(97, 188);
             this.txtPointerSearcherAddress4.Enabled = false;
+            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(97, 188);
             this.txtPointerSearcherAddress4.MaxLength = 10;
             this.txtPointerSearcherAddress4.Name = "txtPointerSearcherAddress4";
             this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(189, 20);
@@ -1449,16 +1540,16 @@ namespace TempAR
             // txtPointerSearcherMemDump4
             // 
             this.txtPointerSearcherMemDump4.AllowDrop = true;
-            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(97, 162);
             this.txtPointerSearcherMemDump4.Enabled = false;
+            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(97, 162);
             this.txtPointerSearcherMemDump4.Name = "txtPointerSearcherMemDump4";
             this.txtPointerSearcherMemDump4.ReadOnly = true;
             this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump4.TabIndex = 28;
             this.txtPointerSearcherMemDump4.Click += new System.EventHandler(this.txtPointerSearcherMemDump4_Click);
+            this.txtPointerSearcherMemDump4.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump4.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump4.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump4.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtBaseAddress
             // 
@@ -1724,8 +1815,8 @@ namespace TempAR
             // 
             // txtPointerSearcherAddress3
             // 
-            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(97, 136);
             this.txtPointerSearcherAddress3.Enabled = false;
+            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(97, 136);
             this.txtPointerSearcherAddress3.MaxLength = 10;
             this.txtPointerSearcherAddress3.Name = "txtPointerSearcherAddress3";
             this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(189, 20);
@@ -1736,7 +1827,6 @@ namespace TempAR
             // 
             this.lblPointerSearcherAddress2.AutoSize = true;
             this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(6, 87);
-            this.txtPointerSearcherAddress2.Enabled = false;
             this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
             this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(48, 13);
             this.lblPointerSearcherAddress2.TabIndex = 6;
@@ -1754,30 +1844,30 @@ namespace TempAR
             // txtPointerSearcherMemDump3
             // 
             this.txtPointerSearcherMemDump3.AllowDrop = true;
-            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(97, 110);
             this.txtPointerSearcherMemDump3.Enabled = false;
+            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(97, 110);
             this.txtPointerSearcherMemDump3.Name = "txtPointerSearcherMemDump3";
             this.txtPointerSearcherMemDump3.ReadOnly = true;
             this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump3.TabIndex = 26;
             this.txtPointerSearcherMemDump3.Click += new System.EventHandler(this.txtPointerSearcherMemDump3_Click);
+            this.txtPointerSearcherMemDump3.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump3.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump3.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump3.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherMemDump2
             // 
             this.txtPointerSearcherMemDump2.AllowDrop = true;
-            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(97, 58);
             this.txtPointerSearcherMemDump2.Enabled = false;
+            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(97, 58);
             this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
             this.txtPointerSearcherMemDump2.ReadOnly = true;
             this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump2.TabIndex = 5;
             this.txtPointerSearcherMemDump2.Click += new System.EventHandler(this.txtPointerSearcherMemDump2_Click);
+            this.txtPointerSearcherMemDump2.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump2.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump2.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump2.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             // 
             // txtPointerSearcherMemDump1
             // 
@@ -1788,13 +1878,13 @@ namespace TempAR
             this.txtPointerSearcherMemDump1.Size = new System.Drawing.Size(189, 20);
             this.txtPointerSearcherMemDump1.TabIndex = 1;
             this.txtPointerSearcherMemDump1.Click += new System.EventHandler(this.txtPointerSearcherMemDump1_Click);
+            this.txtPointerSearcherMemDump1.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
             this.txtPointerSearcherMemDump1.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
             this.txtPointerSearcherMemDump1.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            this.txtPointerSearcherMemDump1.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-
             // 
             // txtPointerSearcherAddress2
             // 
+            this.txtPointerSearcherAddress2.Enabled = false;
             this.txtPointerSearcherAddress2.Location = new System.Drawing.Point(97, 84);
             this.txtPointerSearcherAddress2.MaxLength = 10;
             this.txtPointerSearcherAddress2.Name = "txtPointerSearcherAddress2";
@@ -2190,42 +2280,6 @@ namespace TempAR
             this.comboVitaCheatCodeType.TabIndex = 1;
             this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
             // 
-            // lblMediumPercent
-            // 
-            this.lblMediumPercent.AutoSize = true;
-            this.lblMediumPercent.Location = new System.Drawing.Point(505, 411);
-            this.lblMediumPercent.Name = "lblMediumPercent";
-            this.lblMediumPercent.Size = new System.Drawing.Size(39, 13);
-            this.lblMediumPercent.TabIndex = 47;
-            this.lblMediumPercent.Text = "Med %";
-            // 
-            // lblHighPercent
-            // 
-            this.lblHighPercent.AutoSize = true;
-            this.lblHighPercent.Location = new System.Drawing.Point(672, 411);
-            this.lblHighPercent.Name = "lblHighPercent";
-            this.lblHighPercent.Size = new System.Drawing.Size(40, 13);
-            this.lblHighPercent.TabIndex = 48;
-            this.lblHighPercent.Text = "High %";
-            // 
-            // lblGoodPercent
-            // 
-            this.lblGoodPercent.AutoSize = true;
-            this.lblGoodPercent.Location = new System.Drawing.Point(586, 412);
-            this.lblGoodPercent.Name = "lblGoodPercent";
-            this.lblGoodPercent.Size = new System.Drawing.Size(44, 13);
-            this.lblGoodPercent.TabIndex = 49;
-            this.lblGoodPercent.Text = "Good %";
-            // 
-            // lblNotLikelyPercent
-            // 
-            this.lblNotLikelyPercent.AutoSize = true;
-            this.lblNotLikelyPercent.Location = new System.Drawing.Point(339, 411);
-            this.lblNotLikelyPercent.Name = "lblNotLikelyPercent";
-            this.lblNotLikelyPercent.Size = new System.Drawing.Size(50, 13);
-            this.lblNotLikelyPercent.TabIndex = 50;
-            this.lblNotLikelyPercent.Text = "Not likely";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2277,9 +2331,9 @@ namespace TempAR
 
         private void cbCodeTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox comboBox = (ComboBox) sender;
+            ComboBox comboBox = (ComboBox)sender;
 
-            if(!String.IsNullOrEmpty(comboBox.Text))
+            if (!String.IsNullOrEmpty(comboBox.Text))
             {
                 this.btnConvert.Enabled = true;
                 this.btnConvert_Click(sender, e);
@@ -2493,101 +2547,101 @@ namespace TempAR
             //
             switch (this.comboVitaCheatCodeType.Text)
             {
-                    case VC_GEN_WRITE:
-                string VCGenWrite1 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
-                break;
-                    case VC_GEN_PNTR:
-                string VCGenPtrstr2 = "";
-                uint VCGenptroff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                string VCGenPtr1 = string.Format("$3{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptroff1);
-                string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
-                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
-                {
-                    if (x is TextBox)
+                case VC_GEN_WRITE:
+                    string VCGenWrite1 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
+                    break;
+                case VC_GEN_PNTR:
+                    string VCGenPtrstr2 = "";
+                    uint VCGenptroff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    string VCGenPtr1 = string.Format("$3{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptroff1);
+                    string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
+                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (((TextBox)x).Enabled == true)
+                        if (x is TextBox)
                         {
+                            if (((TextBox)x).Enabled == true)
+                            {
                                 uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
                                     VCGenPtrstr2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrstr2;
                                 }
+                            }
                         }
                     }
-                }
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtrstr2 + VCGenPtr3;
-                break;
-                    case VC_GEN_COMP:
-                string VCGenComp1 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                string VCGenComp2 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenComp1 + VCGenComp2;
-                break;
-                    case VC_GEN_MOV:
-                string VCGenMov1 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
-                break;
-                    case VC_GEN_PTRCOM:
-                string VCGenPtrComstr2 = "";
-                uint VCGenptrcomoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                string VCGenPtrCom1 = string.Format("$7{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrcomoff1);
-                string VCGenPtrCom3 = string.Format("$770{0} 00000000 {1:X08}\r\n", comboVitaCheatPointerLevel.Text, VCValue);
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtrstr2 + VCGenPtr3;
+                    break;
+                case VC_GEN_COMP:
+                    string VCGenComp1 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
+                    string VCGenComp2 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenComp1 + VCGenComp2;
+                    break;
+                case VC_GEN_MOV:
+                    string VCGenMov1 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
+                    break;
+                case VC_GEN_PTRCOM:
+                    string VCGenPtrComstr2 = "";
+                    uint VCGenptrcomoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    string VCGenPtrCom1 = string.Format("$7{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrcomoff1);
+                    string VCGenPtrCom3 = string.Format("$770{0} 00000000 {1:X08}\r\n", comboVitaCheatPointerLevel.Text, VCValue);
                     string VCGenPtrCom4 = string.Format("${0:X04} 0000{1:X04} 0000{2:X04}", VCComps, VCAddGp, VCValGp);
-                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
-                {
-                    if (x is TextBox)
+                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (((TextBox)x).Enabled == true)
+                        if (x is TextBox)
                         {
-                            uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                            if (((TextBox)x).TabIndex != 0)
+                            if (((TextBox)x).Enabled == true)
                             {
-                                VCGenPtrComstr2 = string.Format("$7{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrComstr2;
+                                uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                if (((TextBox)x).TabIndex != 0)
+                                {
+                                    VCGenPtrComstr2 = string.Format("$7{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrComstr2;
+                                }
                             }
                         }
                     }
-                }
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrComstr2 + VCGenPtrCom3 + VCGenPtrCom4;
-                break;
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrComstr2 + VCGenPtrCom3 + VCGenPtrCom4;
+                    break;
                 case VC_GEN_PTRMOV:
-                string VCGenPtrMovstr2 = "";
-                uint VCGenptrmovoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                string VCGenPtrMov1 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrmovoff1);
-                string VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
-                foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
-                {
-                    if (x is TextBox)
+                    string VCGenPtrMovstr2 = "";
+                    uint VCGenptrmovoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    string VCGenPtrMov1 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrmovoff1);
+                    string VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
+                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (((TextBox)x).Enabled == true)
+                        if (x is TextBox)
                         {
-                            uint VCGenptrmov2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                            if (((TextBox)x).TabIndex != 0)
+                            if (((TextBox)x).Enabled == true)
                             {
-                                VCGenPtrMovstr2 = string.Format("$8{0}00 00000000 {1:X08}\r\n", bittype, VCGenptrmov2) + VCGenPtrMovstr2;
+                                uint VCGenptrmov2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                if (((TextBox)x).TabIndex != 0)
+                                {
+                                    VCGenPtrMovstr2 = string.Format("$8{0}00 00000000 {1:X08}\r\n", bittype, VCGenptrmov2) + VCGenPtrMovstr2;
+                                }
                             }
                         }
                     }
-                }
-                string VCGenPtr2str2 = "";
-                uint VCGenptrmov2off1 = this.parseNum(txtVitaCheatAddress2Offset1.Text, NumberStyles.AllowHexSpecifier);
-                string VCGenPtrMov21 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype + 4, comboVitaCheatPointerLevel.Text, VCAddr2, VCGenptrmov2off1);
-                string VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
-                foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
-                {
-                    if (x is TextBox)
+                    string VCGenPtr2str2 = "";
+                    uint VCGenptrmov2off1 = this.parseNum(txtVitaCheatAddress2Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    string VCGenPtrMov21 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype + 4, comboVitaCheatPointerLevel.Text, VCAddr2, VCGenptrmov2off1);
+                    string VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
+                    foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
                     {
-                        if (((TextBox)x).Enabled == true)
+                        if (x is TextBox)
                         {
-                            uint VCGenptrmov22 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                            if (((TextBox)x).TabIndex != 0)
+                            if (((TextBox)x).Enabled == true)
                             {
-                                VCGenPtr2str2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype + 4, VCGenptrmov22) + VCGenPtr2str2;
+                                uint VCGenptrmov22 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                if (((TextBox)x).TabIndex != 0)
+                                {
+                                    VCGenPtr2str2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype + 4, VCGenptrmov22) + VCGenPtr2str2;
+                                }
                             }
                         }
                     }
-                }
-                this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrMov1 + VCGenPtrMovstr2 + VCGenPtrMov3 + VCGenPtrMov21 + VCGenPtr2str2 + VCGenPtrMov23;
-                break;
+                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrMov1 + VCGenPtrMovstr2 + VCGenPtrMov3 + VCGenPtrMov21 + VCGenPtr2str2 + VCGenPtrMov23;
+                    break;
             }
 
         }
