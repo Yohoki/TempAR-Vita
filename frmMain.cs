@@ -1345,6 +1345,7 @@ namespace TempAR
             // 
             this.txtColorOrange.BackColor = System.Drawing.Color.Orange;
             this.txtColorOrange.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorOrange.Text = "0";
             this.txtColorOrange.Location = new System.Drawing.Point(718, 410);
             this.txtColorOrange.Name = "txtColorOrange";
             this.txtColorOrange.ReadOnly = true;
@@ -1356,6 +1357,7 @@ namespace TempAR
             // 
             this.txtColorRed.BackColor = System.Drawing.Color.Red;
             this.txtColorRed.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorRed.Text = "0";
             this.txtColorRed.Location = new System.Drawing.Point(636, 410);
             this.txtColorRed.Name = "txtColorRed";
             this.txtColorRed.ReadOnly = true;
@@ -1367,6 +1369,7 @@ namespace TempAR
             // 
             this.txtColorOrchid.BackColor = System.Drawing.Color.Orchid;
             this.txtColorOrchid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorOrchid.Text = "0";
             this.txtColorOrchid.Location = new System.Drawing.Point(550, 410);
             this.txtColorOrchid.Name = "txtColorOrchid";
             this.txtColorOrchid.ReadOnly = true;
@@ -1378,6 +1381,7 @@ namespace TempAR
             // 
             this.txtColorBlue.BackColor = System.Drawing.Color.Blue;
             this.txtColorBlue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorBlue.Text = "0";
             this.txtColorBlue.Location = new System.Drawing.Point(469, 410);
             this.txtColorBlue.Name = "txtColorBlue";
             this.txtColorBlue.ReadOnly = true;
@@ -1389,6 +1393,7 @@ namespace TempAR
             // 
             this.txtColorGreen.BackColor = System.Drawing.Color.Green;
             this.txtColorGreen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorGreen.Text = "0";
             this.txtColorGreen.Location = new System.Drawing.Point(389, 410);
             this.txtColorGreen.Name = "txtColorGreen";
             this.txtColorGreen.ReadOnly = true;
@@ -1400,6 +1405,7 @@ namespace TempAR
             // 
             this.txtColorBlack.BackColor = System.Drawing.Color.Black;
             this.txtColorBlack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtColorBlack.Text = "0";
             this.txtColorBlack.Location = new System.Drawing.Point(307, 410);
             this.txtColorBlack.Name = "txtColorBlack";
             this.txtColorBlack.ReadOnly = true;
