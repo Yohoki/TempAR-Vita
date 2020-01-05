@@ -13,40 +13,40 @@ using System.Runtime.CompilerServices;
 
 namespace TempAR.Properties
 {
-  [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-  [CompilerGenerated]
-  [DebuggerNonUserCode]
-  internal class Resources
-  {
-    private static ResourceManager resourceMan;
-    private static CultureInfo resourceCulture;
-
-    internal Resources()
+    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [CompilerGenerated]
+    [DebuggerNonUserCode]
+    internal class Resources
     {
-    }
+        private static ResourceManager resourceMan;
+        private static CultureInfo resourceCulture;
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static ResourceManager ResourceManager
-    {
-      get
-      {
-        if (object.ReferenceEquals((object) TempAR.Properties.Resources.resourceMan, (object) null))
-          TempAR.Properties.Resources.resourceMan = new ResourceManager("TempAR.Properties.Resources", typeof (TempAR.Properties.Resources).Assembly);
-        return TempAR.Properties.Resources.resourceMan;
-      }
-    }
+        internal Resources()
+        {
+        }
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static CultureInfo Culture
-    {
-      get
-      {
-        return TempAR.Properties.Resources.resourceCulture;
-      }
-      set
-      {
-        TempAR.Properties.Resources.resourceCulture = value;
-      }
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals((object)TempAR.Properties.Resources.resourceMan, (object)null))
+                    TempAR.Properties.Resources.resourceMan = new ResourceManager("TempAR.Properties.Resources", typeof(TempAR.Properties.Resources).Assembly);
+                return TempAR.Properties.Resources.resourceMan;
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static CultureInfo Culture
+        {
+            get
+            {
+                return TempAR.Properties.Resources.resourceCulture;
+            }
+            set
+            {
+                TempAR.Properties.Resources.resourceCulture = value;
+            }
+        }
     }
-  }
 }

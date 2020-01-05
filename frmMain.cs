@@ -1,17 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TempAR
 {
-    public class frmMain : Form
+    public partial class frmMain : Form
     {
         private PointerSearcher memdump;
         private PointerSearcher memdump2;
@@ -20,273 +17,171 @@ namespace TempAR
         private PointerSearcher memdump5;
         private PointerSearcher memdump6;
         private uint memory_start;
-#pragma warning disable CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-        private IContainer components;
-#pragma warning restore CS0649 //I got no fucking idea what this is... but it ain't breaking shit.
-        private Panel pnlConvertFormat;
-        private Panel pnlConvertFile;
-        private TextBox txtOutputPath;
-        private TextBox txtInputPath;
-        private Label lblOutputPath;
-        private Label lblInputPath;
-        private Button btnOutputBrowse;
-        private Button btnInputBrowse;
-        private StatusStrip frmStatusStrip;
-        private ToolStripStatusLabel lblStatus;
-        private TabControl tctrlTabs;
-        private TabPage tabConverter;
-        private Panel pnlConvertText;
-        private TextBox txtTextOutput;
-        private TextBox txtTextInput;
-        private TabPage tabPointerSearcher;
-        private Button btnConvert;
-        private RadioButton rdbConvertFile;
-        private RadioButton rdbConvertText;
-        private Panel pnlConvertType;
-        private Label lblPointerSearcherMaxOffset;
-        private TextBox txtPointerSearcherMaxOffset;
-        private Label lblPointerSearcherAddress1;
-        private TextBox txtPointerSearcherAddress1;
-        private Button btnPointerSearcherFindPointers;
-        private TreeView treePointerSearcherPointers;
-        private Button btnPointerSearcherClear;
-        private CheckBox chkPointerSearcherIncludeNegatives;
-        private TextBox txtPointerSearcherCode;
-        private Label lblPointerSearcherMemDump1;
-        private TextBox txtPointerSearcherMemDump1;
-        private CheckBox chkPointerSearcherRealAddresses;
-        private Panel pnlPointerSearcherBitType;
-        private RadioButton rdbPointerSearcherBitType32;
-        private RadioButton rdbPointerSearcherBitType8;
-        private RadioButton rdbPointerSearcherBitType16;
-        private Label lblPointerSearcherValue;
-        private TextBox txtPointerSearcherValue;
-        private CheckBox chkPointerSearcherRAWCode;
-        private CheckBox chkPointerSearcherOptimizePointerPaths;
-        private Label lblPointerSearcherMemDump2;
-        private Label lblPointerSearcherAddress2;
-        private TextBox txtPointerSearcherMemDump2;
-        private TextBox txtPointerSearcherAddress2;
-        private TextBox txtPointerSearcherAddress3;
-        private TextBox txtPointerSearcherMemDump3;
-        private Label lblPointerSearcherMemDump6;
-        private Label lblPointerSearcherMemDump5;
-        private Label lblPointerSearcherAddress6;
-        private Label lblPointerSearcherAddress5;
-        private Label lblPointerSearcherMemDump4;
-        private Label lblPointerSearcherMemDump3;
-        private Label lblPointerSearcherAddress4;
-        private Label lblPointerSearcherAddress3;
-        private ComboBox comboPointerSearcherMode;
-        private Label lblPointerSearcherMode;
-        private Panel pnlPointerSearcherCodeType;
-        private TextBox txtBaseAddress;
-        private TabPage tabVitaCheat;
-        private Label lblVitaCheatAddress1;
-        private TextBox txtVitaCheatAddress1;
-        private Label lblVitaCheatAddress2;
-        private TextBox txtVitaCheatAddress2;
-        private TextBox txtVitaCheatCode;
-        private Label lblVitaCheatValue;
-        private TextBox txtVitaCheatValue;
-        private Button btnVitaCheatGenerate;
-        private Panel pnlVitaCheatBitType;
-        private RadioButton rdbVitaCheatBitType8Bit;
-        private GroupBox groupVitaCheatAddress2Offset;
-        private TextBox txtVitaCheatAddress2Offset5;
-        private TextBox txtVitaCheatAddress2Offset4;
-        private TextBox txtVitaCheatAddress2Offset3;
-        private TextBox txtVitaCheatAddress2Offset2;
-        private TextBox txtVitaCheatAddress2Offset1;
-        private GroupBox groupVitaCheatAddress1Offset;
-        private TextBox txtVitaCheatAddress1Offset5;
-        private TextBox txtVitaCheatAddress1Offset4;
-        private TextBox txtVitaCheatAddress1Offset3;
-        private TextBox txtVitaCheatAddress1Offset2;
-        private TextBox txtVitaCheatAddress1Offset1;
-        private RadioButton rdbVitaCheatBitType32Bit;
-        private RadioButton rdbVitaCheatBitType16Bit;
-        private ComboBox comboVitaCheatPointerLevel;
-        private Label lblVitaCheatPointerLevel;
-        private GroupBox groupVitaCheatCompression;
-        private Label lblVitaCheatValueGap;
-        private Label lblVitaCheatAddressGap;
-        private Label lblVitaCheatCompressions;
-        private TextBox txtVitaCheatValueGap;
-        private TextBox txtVitaCheatAddressGap;
-        private NumericUpDown numericVitaCheatCompressions;
-        private Label lblBaseAddress;
+
         // Code types for converter tab
-        private Label lblCnvCodeTypes;
-        private ComboBox cbCnvCodeTypes;
         private const string CT_CNV_CWCHEATPOPS = "CWCheat POPS";
+
         private const string CT_CNV_NITEPR = "NitePR";
-        private const string CT_CNV_R4CCE = "R4CCE to TempAR";
-        private const string CT_CNV_TEMPAR = "TempAR to R4CCE";
+        private const string CT_CNV_R4CCE = "R4CCE 转 TempAR";
+        private const string CT_CNV_TEMPAR = "TempAR 转 R4CCE";
+
         // Code types for pointer search tab
-        private Label lblPntCodeTypes;
-        private ComboBox cbPntCodeTypes;
         private const string CT_PNT_VITACHEAT = "VitaCheat";
+
         private const string CT_PNT_CWCHEAT = "CWCheat";
         private const string CT_PNT_AR = "AR";
+
         // Code types for VitaCheat Code Maker tab
-        private Label lblVitaCheatCodeType;
-        private ComboBox comboVitaCheatCodeType;
-        private const string VC_GEN_WRITE = "Write ($0...)";
-        private const string VC_GEN_PNTR = "Pointer ($3...)";
-        private const string VC_GEN_COMP = "Compress ($4...)";
-        private const string VC_GEN_MOV = "MOV/Copy ($5...)";
-        private const string VC_GEN_PTRCOM = "Pointer+Compress ($7...)";
-        private const string VC_GEN_PTRMOV = "Pointer+MOV ($8...)";
-        private TextBox txtVCInstructions;
-        private TextBox txtPointerSearcherAddress6;
-        private TextBox txtPointerSearcherMemDump6;
-        private TextBox txtPointerSearcherAddress5;
-        private TextBox txtPointerSearcherMemDump5;
-        private TextBox txtPointerSearcherAddress4;
-        private Label lblLowPercent;
-        private TextBox txtColorOrange;
-        private TextBox txtColorRed;
-        private TextBox txtColorOrchid;
-        private TextBox txtColorBlue;
-        private TextBox txtColorGreen;
-        private TextBox txtColorBlack;
-        private Label lblNotLikelyPercent;
-        private Label lblGoodPercent;
-        private Label lblHighPercent;
-        private Label lblMediumPercent;
-        private Label lblVitaCheatCompressionLevelOffset;
-        private NumericUpDown numericVitaCheatCompressionLevelOffset;
-        private TextBox txtPointerSearcherMemDump4;
+        private const string VC_GEN_WRITE = "写入码 ($0...)";
 
+        private const string VC_GEN_PNTR = "指针码 ($3...)";
+        private const string VC_GEN_COMP = "压缩码 ($4...)";
+        private const string VC_GEN_MOV = "传送码 ($5...)";
+        private const string VC_GEN_PTRCOM = "指针压缩码 ($7...)";
+        private const string VC_GEN_PTRMOV = "指针传送码 ($8...)";
 
-        public frmMain()
-        {
-            this.InitializeComponent();
-
-            this.cbCnvCodeTypes.Items.AddRange(new object[] {
-            CT_CNV_CWCHEATPOPS,
-            CT_CNV_NITEPR,
-            CT_CNV_R4CCE,
-            CT_CNV_TEMPAR});
-            this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
-
-            this.cbPntCodeTypes.Items.AddRange(new object[] {
-            CT_PNT_VITACHEAT,
-            CT_PNT_CWCHEAT,
-            CT_PNT_AR});
-            this.cbPntCodeTypes.Text = CT_PNT_VITACHEAT;
-
-            this.comboVitaCheatCodeType.Items.AddRange(new object[] {
-            VC_GEN_WRITE,
-            VC_GEN_PNTR,
-            VC_GEN_COMP,
-            VC_GEN_MOV,
-            VC_GEN_PTRCOM,
-            VC_GEN_PTRMOV});
-            this.comboVitaCheatCodeType.Text = VC_GEN_WRITE;
-
-
-        }
         public int PointerBlk { get; private set; }
         public int PointerGrn { get; private set; }
         public int PointerBlu { get; private set; }
         public int PointerPur { get; private set; }
         public int PointerRed { get; private set; }
         public int PointerOrn { get; private set; }
-        private void rdbConvertText_CheckedChanged(object sender, EventArgs e)
+
+        public frmMain()
         {
-            if (!((RadioButton)sender).Checked)
-                return;
-            this.ChangeFrameMode(1);
+            InitializeComponent();
+
+            cbCnvCodeTypes.Items.AddRange(new object[] {
+            CT_CNV_CWCHEATPOPS,
+            CT_CNV_NITEPR,
+            CT_CNV_R4CCE,
+            CT_CNV_TEMPAR});
+            cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
+
+            cbPntCodeTypes.Items.AddRange(new object[] {
+            CT_PNT_VITACHEAT,
+            CT_PNT_CWCHEAT,
+            CT_PNT_AR});
+            cbPntCodeTypes.Text = CT_PNT_VITACHEAT;
+
+            comboVitaCheatCodeType.Items.AddRange(new object[] {
+            VC_GEN_WRITE,
+            VC_GEN_PNTR,
+            VC_GEN_COMP,
+            VC_GEN_MOV,
+            VC_GEN_PTRCOM,
+            VC_GEN_PTRMOV});
+            comboVitaCheatCodeType.Text = VC_GEN_WRITE;
         }
 
-        private void rdbConvertFile_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 转换器-转换模式单选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RdbConvert_CheckedChanged(object sender, EventArgs e)
         {
-            if (!((RadioButton)sender).Checked)
-                return;
-            this.ChangeFrameMode(2);
+            ChangeFrameMode(rdbConvertText.Checked);
         }
 
-        private void txtTextInput_TextChanged(object sender, EventArgs e)
+        private void TxtTextInput_TextChanged(object sender, EventArgs e)
         {
-            this.txtTextInput.Text = this.txtTextInput.Text.Replace("\r\n", "\n").Replace("\n", "\r\n");
-            this.btnConvert_Click(sender, e);
+            txtTextInput.Text = txtTextInput.Text.Replace("\r\n", "\n").Replace("\n", "\r\n");
+            BtnConvert_Click(sender, e);
         }
 
-        private void btnConvert_Click(object sender, EventArgs e)
+        private void BtnConvert_Click(object sender, EventArgs e)
         {
-            this.lblStatus.Text = "Working...";
-            this.lblStatus.Visible = true;
-            this.Refresh();
-            if (this.rdbConvertText.Checked)
+            lblStatus.Text = "工作中...";
+            lblStatus.Visible = true;
+            Refresh();
+            if (rdbConvertText.Checked)
             {
-                switch (this.cbCnvCodeTypes.Text)
+                switch (cbCnvCodeTypes.Text)
                 {
                     case CT_CNV_CWCHEATPOPS:
-                        this.txtTextOutput.Text = Converter.cwcpops_pspar(this.txtTextInput.Text);
-                        break;
-                    case CT_CNV_NITEPR:
-                        this.txtTextOutput.Text = Converter.nitepr_pspar(this.txtTextInput.Text);
-                        break;
-                    case CT_CNV_R4CCE:
-                        this.txtTextOutput.Text = Converter.reformat_r4cce(this.txtTextInput.Text, true);
-                        break;
-                    case CT_CNV_TEMPAR:
-                        this.txtTextOutput.Text = Converter.reformat_tempar(this.txtTextInput.Text);
+                        txtTextOutput.Text = Converter.Cwcpops_pspar(txtTextInput.Text);
                         break;
 
+                    case CT_CNV_NITEPR:
+                        txtTextOutput.Text = Converter.Nitepr_pspar(txtTextInput.Text);
+                        break;
+
+                    case CT_CNV_R4CCE:
+                        txtTextOutput.Text = Converter.Reformat_r4cce(txtTextInput.Text, true);
+                        break;
+
+                    case CT_CNV_TEMPAR:
+                        txtTextOutput.Text = Converter.Reformat_tempar(txtTextInput.Text);
+                        break;
+
+                    default:
+                        break;
                 }
             }
-            else if (this.rdbConvertFile.Checked && ((Control)sender).Name == "btnConvert" && (this.txtInputPath.Text.Length > 0 && this.txtOutputPath.Text.Length > 0))
+            else if (txtInputPath.Text.Length > 0 && txtOutputPath.Text.Length > 0)
             {
-                switch (this.cbCnvCodeTypes.Text)
+                switch (cbCnvCodeTypes.Text)
                 {
                     case CT_CNV_CWCHEATPOPS:
-                        if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                            Converter.file_cwcpops_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
-                        break;
-                    case CT_CNV_NITEPR:
-                        if (Directory.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                            Converter.file_nitepr_pspar(this.txtInputPath.Text, this.txtOutputPath.Text);
-                        break;
-                    case CT_CNV_R4CCE:
-                        MessageBox.Show("File conversion not supported for this code type");
-                        break;
-                    case CT_CNV_TEMPAR:
-                        if (File.Exists(this.txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(this.txtOutputPath.Text)))
-                            Converter.file_reformat_tempar(this.txtInputPath.Text, this.txtOutputPath.Text);
+                        if (File.Exists(txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(txtOutputPath.Text)))
+                            Converter.File_cwcpops_pspar(txtInputPath.Text, txtOutputPath.Text);
                         break;
 
+                    case CT_CNV_NITEPR:
+                        if (Directory.Exists(txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(txtOutputPath.Text)))
+                            Converter.File_nitepr_pspar(txtInputPath.Text, txtOutputPath.Text);
+                        break;
+
+                    case CT_CNV_R4CCE:
+                        MessageBox.Show("暂未支持此代码类型的文件转换!");
+                        break;
+
+                    case CT_CNV_TEMPAR:
+                        if (File.Exists(txtInputPath.Text) && Directory.Exists(Path.GetDirectoryName(txtOutputPath.Text)))
+                            Converter.File_reformat_tempar(txtInputPath.Text, txtOutputPath.Text);
+                        break;
+
+                    default:
+                        break;
                 }
             }
-            this.lblStatus.Visible = false;
+            lblStatus.Visible = false;
         }
 
-        private void btnInputBrowse_Click(object sender, EventArgs e)
+        private void BtnInputBrowse_Click(object sender, EventArgs e)
         {
-            switch (this.cbCnvCodeTypes.Text)
+            switch (cbCnvCodeTypes.SelectedIndex)
             {
-                case CT_CNV_CWCHEATPOPS:
-                case CT_CNV_TEMPAR:
-                    this.txtInputPath.Text = this.OpenFile(this.txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
-                    break;
-                case CT_CNV_NITEPR:
-                    this.txtInputPath.Text = this.OpenDirectory(this.txtInputPath.Text, "Select your NitePR code file directory:");
-                    break;
-                case CT_CNV_R4CCE:
-                    MessageBox.Show("File conversion not supported for this code type");
+                case 0:
+                case 1:
+                    txtInputPath.Text = Utils.OpenFile(txtInputPath.Text, "CWCheat 数据文件 (*.db)|*.db");
                     break;
 
+                case 2:
+                    txtInputPath.Text = Utils.OpenDirectory(txtInputPath.Text, "选择您的 NitePR 代码文件目录:");
+                    break;
+
+                case 3:
+                    MessageBox.Show("暂未支持此代码类型的文件转换!");
+                    break;
+
+                default:
+                    break;
             }
         }
 
-        private void btnOutputBrowse_Click(object sender, EventArgs e)
+        private void BtnOutputBrowse_Click(object sender, EventArgs e)
         {
-            this.txtOutputPath.Text = this.SaveFile(this.txtOutputPath.Text, "TempAR Database File (*.db)|*.db", "Save");
+            txtOutputPath.Text = Utils.SaveFile(txtOutputPath.Text, "TempAR 数据文件 (*.db)|*.db", "Save");
         }
 
-        private void textFieldSelectAll(object sender, KeyEventArgs e)
+        /// <summary>
+        /// 实现ctrl+a全选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextFieldSelectAll(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.A)
             {
@@ -295,145 +190,80 @@ namespace TempAR
                 e.Handled = true;
             }
             else
-                this.OnKeyDown(e);
+                OnKeyDown(e);
         }
 
-        private void ChangeFrameMode(int mode)
+        /// <summary>
+        /// 代码转换器- 文本文件模式切换
+        /// </summary>
+        /// <param name="mode"></param>
+        private void ChangeFrameMode(bool mode)
         {
-            if (mode == 1)
+            if (mode)
             {
-                this.pnlConvertText.BringToFront();
+                pnlConvertText.BringToFront();
             }
             else
             {
-                this.pnlConvertFile.BringToFront();
-                if (!String.IsNullOrEmpty(this.cbCnvCodeTypes.Text) && this.cbCnvCodeTypes.Text == CT_CNV_R4CCE)
+                pnlConvertFile.BringToFront();
+                if (!String.IsNullOrEmpty(cbCnvCodeTypes.Text) && cbCnvCodeTypes.Text == CT_CNV_R4CCE)
                 {
-                    this.cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
+                    cbCnvCodeTypes.Text = CT_CNV_CWCHEATPOPS;
                 }
             }
         }
 
-        private string OpenDirectory(string defaultdir, string description)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.SelectedPath = defaultdir.Length > 0 ? defaultdir : Directory.GetCurrentDirectory();
-            folderBrowserDialog.Description = description;
-            folderBrowserDialog.ShowNewFolderButton = false;
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                return folderBrowserDialog.SelectedPath;
-            return defaultdir;
+            comboPointerSearcherMode.SelectedIndex = 0;
+            comboVitaCheatCodeType.SelectedIndex = 0;
+            comboVitaCheatPointerLevel.SelectedIndex = 0;
         }
 
-        private string OpenFile(string defaultfile, string filter, string title)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string)null;
-            openFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
-            openFileDialog.Filter = filter;
-            openFileDialog.Title = title;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                return openFileDialog.FileName;
-            return defaultfile;
-        }
-
-        private string SaveFile(string defaultfile, string filter, string title)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = defaultfile.Length > 0 ? defaultfile : (string)null;
-            saveFileDialog.InitialDirectory = defaultfile.Length > 0 ? defaultfile : Directory.GetCurrentDirectory();
-            saveFileDialog.Filter = filter;
-            saveFileDialog.Title = title;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                return saveFileDialog.FileName;
-            return defaultfile;
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            this.comboPointerSearcherMode.SelectedIndex = 0;
-            this.comboVitaCheatCodeType.SelectedIndex = 0;
-            this.comboVitaCheatPointerLevel.SelectedIndex = 0;
-        }
         //
         //
         // Pointer Searcher Tab starts here
         //
         //
-        private void btnPointerSearcherFindPointers_Click(object sender, EventArgs e)
+        private void BtnPointerSearcherFindPointers_Click(object sender, EventArgs e)
         {
-            uint num1;
-            try
-            {
-                num1 = this.parseNum(this.txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse address, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            uint num3;
-            try
-            {
-                num3 = this.parseNum(this.txtPointerSearcherMaxOffset.Text);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            try
-            {
-                this.memory_start = this.parseNum(this.txtBaseAddress.Text);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse base address, make sure value is a valid hexadecimal number.");
-                return;
-            }
+            var num1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
+            var num3 = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
+            memory_start = Utils.ParseNum(txtBaseAddress.Text);
             PointerBlk = 0;
             PointerGrn = 0;
             PointerBlu = 0;
             PointerPur = 0;
             PointerRed = 0;
             PointerOrn = 0;
-            this.treePointerSearcherPointers.Nodes.Clear();
-            this.memdump = new PointerSearcher(this.txtPointerSearcherMemDump1.Text, this.memory_start);
-            this.memdump2 = new PointerSearcher(this.txtPointerSearcherMemDump2.Text, this.memory_start);
-            this.memdump3 = new PointerSearcher(this.txtPointerSearcherMemDump3.Text, this.memory_start);
-            this.memdump4 = new PointerSearcher(this.txtPointerSearcherMemDump4.Text, this.memory_start);
-            this.memdump5 = new PointerSearcher(this.txtPointerSearcherMemDump5.Text, this.memory_start);
-            this.memdump6 = new PointerSearcher(this.txtPointerSearcherMemDump6.Text, this.memory_start);
-            this.addPointerTree(this.memdump.findPointers(num1, num3), this.treePointerSearcherPointers.SelectedNode);
+            treePointerSearcherPointers.Nodes.Clear();
+            memdump = new PointerSearcher(txtPointerSearcherMemDump1.Text, memory_start);
+            memdump2 = new PointerSearcher(txtPointerSearcherMemDump2.Text, memory_start);
+            memdump3 = new PointerSearcher(txtPointerSearcherMemDump3.Text, memory_start);
+            memdump4 = new PointerSearcher(txtPointerSearcherMemDump4.Text, memory_start);
+            memdump5 = new PointerSearcher(txtPointerSearcherMemDump5.Text, memory_start);
+            memdump6 = new PointerSearcher(txtPointerSearcherMemDump6.Text, memory_start);
+            AddPointerTree(memdump.FindPointers(num1, num3), treePointerSearcherPointers.SelectedNode);
         }
 
-        private void treePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
+        private void TreePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
         {
-            if (this.treePointerSearcherPointers.SelectedNode == null)
-                return;
-            uint num1;
-            try
-            {
-                num1 = this.parseNum(this.txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse maximum offset, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            this.treePointerSearcherPointers.SelectedNode.Nodes.Clear();
-            this.addPointerTree(this.memdump.findPointers(new PointerSearcherLog(this.treePointerSearcherPointers.SelectedNode.Text, this.memory_start).Address, num1), this.treePointerSearcherPointers.SelectedNode);
+            if (treePointerSearcherPointers.SelectedNode == null) return;
+
+            var num1 = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
+            treePointerSearcherPointers.SelectedNode.Nodes.Clear();
+            AddPointerTree(memdump.FindPointers(new PointerSearcherLog(treePointerSearcherPointers.SelectedNode.Text, memory_start).Address, num1), treePointerSearcherPointers.SelectedNode);
         }
 
-        private void btnPointerSearcherClear_Click(object sender, EventArgs e)
+        private void BtnPointerSearcherClear_Click(object sender, EventArgs e)
         {
-            this.treePointerSearcherPointers.Nodes.Clear();
-            this.txtColorBlack.Text = "0";
-            this.txtColorGreen.Text = "0";
-            this.txtColorBlue.Text = "0";
-            this.txtColorOrchid.Text = "0";
-            this.txtColorRed.Text = "0";
-            this.txtColorOrange.Text = "0";
+            treePointerSearcherPointers.Nodes.Clear();
+            txtColorBlack.Text = "0";
+            txtColorGreen.Text = "0";
+            txtColorBlue.Text = "0";
+            txtColorOrchid.Text = "0";
+            txtColorRed.Text = "0";
+            txtColorOrange.Text = "0";
             PointerBlk = 0;
             PointerGrn = 0;
             PointerBlu = 0;
@@ -442,43 +272,24 @@ namespace TempAR
             PointerOrn = 0;
         }
 
-        public void SortList<T>(List<T> dataSource, string fieldName, bool asc)
+        private void TreePointerSearcherPointers_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            PropertyInfo propInfo = typeof(T).GetProperty(fieldName);
-            Comparison<T> comparison = (Comparison<T>)((a, b) =>
-           {
-               object obj1 = asc ? propInfo.GetValue((object)a, (object[])null) : propInfo.GetValue((object)b, (object[])null);
-               object obj2 = asc ? propInfo.GetValue((object)b, (object[])null) : propInfo.GetValue((object)a, (object[])null);
-               if (!(obj1 is IComparable))
-                   return 0;
-               return ((IComparable)obj1).CompareTo(obj2);
-           });
-            dataSource.Sort(comparison);
-        }
-
-        private void treePointerSearcherPointers_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (this.treePointerSearcherPointers.SelectedNode == null)
-                return;
-            List<PointerSearcherLog> pointers = new List<PointerSearcherLog>();
-            string[] strArray = this.treePointerSearcherPointers.SelectedNode.FullPath.ToString().Split('\\');
+            if (treePointerSearcherPointers.SelectedNode == null) return;
+            var pointers = new List<PointerSearcherLog>();
+            var strArray = treePointerSearcherPointers.SelectedNode.FullPath.ToString().Split('\\');
             for (int index = 0; index < strArray.Length; ++index)
-                pointers.Add(new PointerSearcherLog(strArray[strArray.Length - 1 - index], this.memory_start));
-            uint num = 0;
-            try
             {
-                num = this.parseNum(this.txtPointerSearcherValue.Text);
+                pointers.Add(new PointerSearcherLog(strArray[strArray.Length - 1 - index], memory_start));
             }
-            catch
-            {
-            }
-            int bittype = 2;
-            if (this.rdbPointerSearcherBitType16.Checked)
+
+            var num = Utils.ParseNum(txtPointerSearcherValue.Text);
+            var bittype = 2;
+            if (rdbPointerSearcherBitType16.Checked)
             {
                 bittype = 1;
                 num &= (uint)ushort.MaxValue;
             }
-            else if (this.rdbPointerSearcherBitType8.Checked)
+            else if (rdbPointerSearcherBitType8.Checked)
             {
                 bittype = 0;
                 num &= (uint)byte.MaxValue;
@@ -486,78 +297,63 @@ namespace TempAR
             //
             // Check which code is being generated
             //
-            switch (this.cbPntCodeTypes.Text)
+            switch (cbPntCodeTypes.Text)
             {
                 case CT_PNT_VITACHEAT:
-                    this.txtPointerSearcherCode.Text = this.getVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    txtPointerSearcherCode.Text = GetVitaCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
                     break;
+
                 case CT_PNT_CWCHEAT:
-                    this.txtPointerSearcherCode.Text = this.getCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    txtPointerSearcherCode.Text = GetCWCheatPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
                     break;
+
                 case CT_PNT_AR:
-                    this.txtPointerSearcherCode.Text = this.getARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    txtPointerSearcherCode.Text = GetARPointerCode(pointers, bittype, num).Replace("\n", "\r\n");
+                    break;
+
+                default:
                     break;
             }
         }
 
-        private void txtPointerSearcherMemDump1_Click(object sender, EventArgs e)
+        private void TxtPointerSearcherMemDump_Click(object sender, EventArgs e)
         {
-            this.txtPointerSearcherMemDump1.Text = this.OpenFile(this.txtPointerSearcherMemDump1.Text, (string)null, "Open");
+            ((TextBox)sender).Text = Utils.OpenFile(((TextBox)sender).Text, null, "打开转储文件");
         }
 
-        private void txtPointerSearcherMemDump2_Click(object sender, EventArgs e)
-        {
-            this.txtPointerSearcherMemDump2.Text = this.OpenFile(this.txtPointerSearcherMemDump2.Text, (string)null, "Open");
-        }
-
-        private void txtPointerSearcherMemDump3_Click(object sender, EventArgs e)
-        {
-            this.txtPointerSearcherMemDump3.Text = this.OpenFile(this.txtPointerSearcherMemDump3.Text, (string)null, "Open");
-        }
-
-        private void txtPointerSearcherMemDump4_Click(object sender, EventArgs e)
-        {
-            this.txtPointerSearcherMemDump4.Text = this.OpenFile(this.txtPointerSearcherMemDump4.Text, (string)null, "Open");
-        }
-
-        private void txtPointerSearcherMemDump5_Click(object sender, EventArgs e)
-        {
-            this.txtPointerSearcherMemDump5.Text = this.OpenFile(this.txtPointerSearcherMemDump5.Text, (string)null, "Open");
-        }
-
-        private void txtPointerSearcherMemDump6_Click(object sender, EventArgs e)
-        {
-            this.txtPointerSearcherMemDump6.Text = this.OpenFile(this.txtPointerSearcherMemDump6.Text, (string)null, "Open");
-        }
-
-        private void treePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
+        private void TreePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
             {
                 case Keys.Space:
-                    this.treePointerSearcherPointers_DoubleClick((object)null, (EventArgs)null);
+                    TreePointerSearcherPointers_DoubleClick(null, null);
                     break;
+
                 case Keys.Delete:
-                    if (this.treePointerSearcherPointers.SelectedNode == null)
-                        break;
-                    this.treePointerSearcherPointers.SelectedNode.Remove();
+                    if (treePointerSearcherPointers.SelectedNode == null) break;
+                    treePointerSearcherPointers.SelectedNode.Remove();
+                    break;
+
+                default:
                     break;
             }
         }
 
-        private void addPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
+        private void AddPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
         {
             if (pointers == null)
                 return;
-            this.SortList<PointerSearcherLog>(pointers, "Address", true);
-            if (this.chkPointerSearcherOptimizePointerPaths.Checked)
+            Utils.SortList<PointerSearcherLog>(pointers, "Address", true);
+            if (chkPointerSearcherOptimizePointerPaths.Checked)
             {
-                List<PointerSearcherLog> pointerSearcherLogList = new List<PointerSearcherLog>();
-                if (this.treePointerSearcherPointers.Nodes.Count > 0)
+                var pointerSearcherLogList = new List<PointerSearcherLog>();
+                if (treePointerSearcherPointers.Nodes.Count > 0)
                 {
-                    TreeNodeCollection parentEqualTree = this.getParentEqualTree(this.treePointerSearcherPointers.Nodes, this.treePointerSearcherPointers.SelectedNode == null ? 0 : this.treePointerSearcherPointers.SelectedNode.Level);
+                    var parentEqualTree = GetParentEqualTree(treePointerSearcherPointers.Nodes, treePointerSearcherPointers.SelectedNode == null ? 0 : treePointerSearcherPointers.SelectedNode.Level);
                     for (int index = 0; index < parentEqualTree.Count; ++index)
-                        pointerSearcherLogList.Add(new PointerSearcherLog(parentEqualTree[index].Text, this.memory_start));
+                    {
+                        pointerSearcherLogList.Add(new PointerSearcherLog(parentEqualTree[index].Text, memory_start));
+                    }
                 }
                 for (int index1 = 0; index1 < pointerSearcherLogList.Count; ++index1)
                 {
@@ -570,209 +366,212 @@ namespace TempAR
             }
             for (int index1 = 0; index1 < pointers.Count; ++index1)
             {
-                Color color = Color.Black;
-                int PointerColor = 0;
-                if (this.memdump2 != null)
+                var color = Color.Black;
+                var PointerColor = 0;
+
+                if (memdump2 != null)
                 {
-                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    uint num = this.parseNum(this.txtPointerSearcherAddress2.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < this.memory_start)
-                        num += this.memory_start;
-                    uint address = 0;
+                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+                    var num = Utils.ParseNum(txtPointerSearcherAddress2.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    var address = 0u;
                     for (int index2 = 0; index2 < strArray.Length; ++index2)
                     {
-                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-                        if (index2 == 0)
-                            address = pointerSearcherLog.Address;
-                        address = this.memdump2.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = memdump2.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
-                    if ((int)num == (int)address)
-                        PointerColor += 1;
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
-                if (this.memdump2 != null && this.memdump3 != null)
+
+                if (memdump2 != null && memdump3 != null)
                 {
-                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    uint num = this.parseNum(this.txtPointerSearcherAddress3.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < this.memory_start)
-                        num += this.memory_start;
-                    uint address = 0;
+                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+                    var num = Utils.ParseNum(txtPointerSearcherAddress3.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    var address = 0u;
                     for (int index2 = 0; index2 < strArray.Length; ++index2)
                     {
-                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-                        if (index2 == 0)
-                            address = pointerSearcherLog.Address;
-                        address = this.memdump3.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = memdump3.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
-                    if ((int)num == (int)address)
-                        PointerColor += 1;
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
-                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null)
+
+                if (memdump2 != null && memdump3 != null && memdump4 != null)
                 {
-                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    uint num = this.parseNum(this.txtPointerSearcherAddress4.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < this.memory_start)
-                        num += this.memory_start;
-                    uint address = 0;
+                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
+                    var num = Utils.ParseNum(txtPointerSearcherAddress4.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    var address = 0u;
                     for (int index2 = 0; index2 < strArray.Length; ++index2)
                     {
-                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-                        if (index2 == 0)
-                            address = pointerSearcherLog.Address;
-                        address = this.memdump4.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = memdump4.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
-                    if ((int)num == (int)address)
-                        PointerColor += 1;
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
-                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null)
+
+                if (memdump2 != null && memdump3 != null && memdump4 != null && memdump5 != null)
                 {
-                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    uint num = this.parseNum(this.txtPointerSearcherAddress5.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < this.memory_start)
-                        num += this.memory_start;
-                    uint address = 0;
+                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+                    var num = Utils.ParseNum(txtPointerSearcherAddress5.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    var address = 0u;
                     for (int index2 = 0; index2 < strArray.Length; ++index2)
                     {
-                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-                        if (index2 == 0)
-                            address = pointerSearcherLog.Address;
-                        address = this.memdump5.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = memdump5.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
-                    if ((int)num == (int)address)
-                        PointerColor += 1;
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
-                if (this.memdump2 != null && this.memdump3 != null && this.memdump4 != null && this.memdump5 != null && this.memdump6 != null)
+
+                if (memdump2 != null && memdump3 != null && memdump4 != null && memdump5 != null && memdump6 != null)
                 {
-                    string[] strArray = ((this.treePointerSearcherPointers.SelectedNode == null ? "" : this.treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    uint num = this.parseNum(this.txtPointerSearcherAddress6.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < this.memory_start)
-                        num += this.memory_start;
-                    uint address = 0;
+                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+                    var num = Utils.ParseNum(txtPointerSearcherAddress6.Text, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    var address = 0u;
                     for (int index2 = 0; index2 < strArray.Length; ++index2)
                     {
-                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], this.memory_start);
-                        if (index2 == 0)
-                            address = pointerSearcherLog.Address;
-                        address = this.memdump6.getPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = memdump6.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
                     }
-                    if ((int)num == (int)address)
-                        PointerColor += 1;
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
+
                 switch (PointerColor)
                 {
                     case 0:
                         color = Color.Black;
                         PointerBlk += 1;
-                        this.txtColorBlack.Text = PointerBlk.ToString();
+                        txtColorBlack.Text = PointerBlk.ToString();
                         break;
+
                     case 1:
                         color = Color.Green;
                         PointerGrn += 1;
-                        this.txtColorGreen.Text = PointerGrn.ToString();
+                        txtColorGreen.Text = PointerGrn.ToString();
                         break;
+
                     case 2:
                         color = Color.Blue;
                         PointerBlu += 1;
-                        this.txtColorBlue.Text = PointerBlu.ToString();
+                        txtColorBlue.Text = PointerBlu.ToString();
                         break;
+
                     case 3:
                         color = Color.Orchid;
                         PointerPur += 1;
-                        this.txtColorOrchid.Text = PointerPur.ToString();
+                        txtColorOrchid.Text = PointerPur.ToString();
                         break;
+
                     case 4:
                         color = Color.Red;
                         PointerRed += 1;
-                        this.txtColorRed.Text = PointerRed.ToString();
+                        txtColorRed.Text = PointerRed.ToString();
                         break;
+
                     case 5:
                         color = Color.Orange;
                         PointerOrn += 1;
-                        this.txtColorOrange.Text = PointerOrn.ToString();
+                        txtColorOrange.Text = PointerOrn.ToString();
+                        break;
+
+                    default:
                         break;
                 }
-                if (!pointers[index1].Negative || this.chkPointerSearcherIncludeNegatives.Checked)
+
+                if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
                 {
-                    TreeNode node = new TreeNode();
-                    node.Text = pointers[index1].ToString(this.chkPointerSearcherRealAddresses.Checked ? 0U : this.memory_start);
-                    node.ForeColor = color;
+                    var node = new TreeNode
+                    {
+                        Text = pointers[index1].ToString(chkPointerSearcherRealAddresses.Checked ? 0U : memory_start),
+                        ForeColor = color
+                    };
                     if (parent == null)
-                        this.treePointerSearcherPointers.Nodes.Add(node);
+                    {
+                        treePointerSearcherPointers.Nodes.Add(node);
+                    }
                     else
+                    {
                         parent.Nodes.Add(node);
+                    }
                 }
             }
         }
 
-        private TreeNodeCollection getParentEqualTree(
-          TreeNodeCollection nodes,
-          int level)
+        private TreeNodeCollection GetParentEqualTree(TreeNodeCollection nodes, int level)
         {
-            TreeView treeView = new TreeView();
-            foreach (TreeNode node in nodes)
+            using (var treeView = new TreeView())
             {
-                if (node.Level <= level)
+                foreach (TreeNode node in nodes)
                 {
-                    treeView.Nodes.Add(node.Text);
-                    foreach (TreeNode treeNode in this.getParentEqualTree(node.Nodes, level))
-                        treeView.Nodes.Add(treeNode.Text);
+                    if (node.Level <= level)
+                    {
+                        treeView.Nodes.Add(node.Text);
+                        foreach (TreeNode treeNode in GetParentEqualTree(node.Nodes, level))
+                            treeView.Nodes.Add(treeNode.Text);
+                    }
                 }
+                return treeView.Nodes;
             }
-            return treeView.Nodes;
         }
 
-        private uint parseNum(string s)
-        {
-            return this.parseNum(s, NumberStyles.None);
-        }
-
-        private uint parseNum(string s, NumberStyles numstyle)
-        {
-            if (s.Trim().Length == 0)
-                return 0;
-            if (s.StartsWith("0x"))
-                return uint.Parse(s.Remove(0, 2), NumberStyles.AllowHexSpecifier);
-            return uint.Parse(s, numstyle);
-        }
         //
         // Default values for "Base Address"
         //
-        private void comboPointerSearcherMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboPointerSearcherMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtBaseAddress.Enabled = false;
-            switch (this.comboPointerSearcherMode.SelectedIndex)
+            txtBaseAddress.Enabled = false;
+            switch (comboPointerSearcherMode.SelectedIndex)
             {
                 case 0: // Sony Vita
-                    this.memory_start = 2164260864U;
+                    memory_start = 0x81000000U;
                     break;
+
                 case 1: // Sony PSP
-                    this.memory_start = 142606336U;
+                    memory_start = 0x8800000U;
                     break;
+
                 case 2: // Nintendo DS
-                    this.memory_start = 33554432U;
+                    memory_start = 0x2000000U;
                     break;
+
                 case 3: // Other..
-                    this.memory_start = 0U;
-                    this.txtBaseAddress.Enabled = true;
+                    memory_start = 0x0U;
+                    txtBaseAddress.Enabled = true;
+                    break;
+
+                default:
                     break;
             }
-            this.txtBaseAddress.Text = string.Format("0x{0:X08}", (object)this.memory_start);
+            txtBaseAddress.Text = string.Format("0x{0:X08}", (object)memory_start);
         }
+
         //
         // AR Code Generation
         //
-        private string getARPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
+        private string GetARPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
             switch (bittype)
             {
                 case 0:
                     bittype = 2;
                     break;
+
                 case 1:
                     bittype = 1;
                     break;
+
                 case 2:
                     bittype = 0;
                     break;
+
                 default:
                     bittype = 0;
                     break;
@@ -781,60 +580,68 @@ namespace TempAR
             for (int index = 0; index < pointers.Count; ++index)
                 str1 = !pointers[index].Negative ? str1 + string.Format("{0:X01}{1:X07} {2:X08}\n", (object)(index == pointers.Count - 1 ? bittype : 11), (object)pointers[index].Offset, (object)(uint)(index == pointers.Count - 1 ? (int)value : 0)) : str1 + string.Format("DC000000 {0:X08}\n{1:X01}0000000 {2:X08}\n", (object)(4294967296L - (long)pointers[index].Offset), (object)(index == pointers.Count - 1 ? bittype : 11), (object)(uint)(index == pointers.Count - 1 ? (int)value : 0));
             string str2 = string.Format("6{0:X07} 00000000\nB{0:X07} 00000000\n{1}D2000000 00000000", (object)pointers[0].Address, (object)str1);
-            return (this.chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
+            return (chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
         }
+
         //
         // VitaCheat Code Generation
         //
-        private string getVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
+        private string GetVitaCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
             switch (bittype)
             {
                 case 0:
                     bittype = 0;
                     break;
+
                 case 1:
                     bittype = 1;
                     break;
+
                 case 2:
                     bittype = 2;
                     break;
+
                 default:
                     bittype = 2;
                     break;
             }
-            string str1 = "";
-            string str2 = "";
-            string str3 = string.Format("$3300 00000000 {0:X08}\n", (object)value);
+            var str1 = "";
+            var str2 = "";
+            var str3 = $"$3300 00000000 {value:X08}\n";
             for (int index = 1; index < pointers.Count; ++index)
-                str1 = !pointers[index].Negative ? str1 + string.Format("$3{0}00 00000000 {1:X08}\n", (object)bittype, (object)pointers[index].Offset) : str1 + string.Format("$3{0}00 00000000 {1:X08}\n", (object)bittype, (object)(4294967296L - (long)pointers[index].Offset));
-            if (pointers.Count > 1)
-                str1 += string.Format("");
-            str2 = !pointers[0].Negative ? str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)pointers[0].Offset) + str1 : str2 + string.Format("$3{0:X01}{1:X02} {2:X08} {3:X08}\n", (object)bittype, (object)pointers.Count, (object)pointers[0].Address, (object)(4294967296L - (long)pointers[0].Offset)) + str1;
-            return (this.chkPointerSearcherRAWCode.Checked ? "" : "_V0 Generated Code\n") + str2 + str3;
+            {
+                str1 = !pointers[index].Negative ? $"{str1}$3{bittype}00 00000000 {pointers[index].Offset:X08}\n" : $"{str1}$3{bittype}00 00000000 {(0x100000000L - pointers[index].Offset):X08}\n";
+            }
+
+            if (pointers.Count > 1) str1 += string.Format("");
+
+            str2 = !pointers[0].Negative ? $"{str2}$3{bittype:X01}{pointers.Count:X02} {pointers[0].Address:X08} {pointers[0].Offset:X08}\n" + str1 : $"{str2}$3{bittype:X01}{pointers.Count:X02} {pointers[0].Address:X08} {(0x100000000L - pointers[0].Offset):X08}\n{str1}";
+
+            return (chkPointerSearcherRAWCode.Checked ? "" : $"_V0 Generated Code\n{str2}{str3}");
         }
+
         //
         // CWCheat Code Generation
         //
-        private string getCWCheatPointerCode(
-      List<PointerSearcherLog> pointers,
-      int bittype,
-      uint value)
+        private string GetCWCheatPointerCode(List<PointerSearcherLog> pointers, int bittype, uint value)
         {
-            if (bittype != 0 && bittype != 1 && bittype != 2)
-                bittype = 2;
-            if (pointers[0].Negative)
-                bittype += 3;
-            string str1 = "";
+            if (bittype != 0 && bittype != 1 && bittype != 2) bittype = 2;
+            if (pointers[0].Negative) bittype += 3;
+            var str1 = "";
             for (int index = 0; index < pointers.Count - 1; ++index)
-                str1 = index % 2 != 0 ? str1 + string.Format(" 0x{0:X01}{1:X07}\n", (object)(pointers[index].Negative ? 3 : 2), (object)pointers[index].Offset) : str1 + string.Format("{0}0x{1:X01}{2:X07}", this.chkPointerSearcherRAWCode.Checked ? (object)"" : (object)"_L ", (object)(pointers[index].Negative ? 3 : 2), (object)pointers[index].Offset);
-            if (pointers.Count % 2 == 0)
-                str1 += string.Format(" 0x00000000");
-            string str2 = string.Format("{0}0x6{1:X07} 0x{2:X08}\n{0}0x000{3:X01}{4:X04} 0x{5:X08}\n", this.chkPointerSearcherRAWCode.Checked ? (object)"" : (object)"_L ", (object)(uint)((int)pointers[0].Address - (int)this.memory_start), (object)value, (object)bittype, (object)pointers.Count, (object)pointers[pointers.Count - 1].Offset) + str1;
-            return (this.chkPointerSearcherRAWCode.Checked ? "" : "_C0 Generated Code\n") + str2;
+            {
+                str1 = index % 2 != 0 ? str1 + $" 0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}\n" : $"{str1}{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}";
+            }
+
+            if (pointers.Count % 2 == 0) str1 += string.Format(" 0x00000000");
+
+            var str2 = $"{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x6{(uint)((int)pointers[0].Address - (int)memory_start):X07} 0x{value:X08}\n{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x000{bittype:X01}{pointers.Count:X04} 0x{pointers[pointers.Count - 1].Offset:X08}\n{str1}";
+
+            return (chkPointerSearcherRAWCode.Checked ? "" : $"_C0 Generated Code\n{str2}");
         }
 
-        private void txtFileDragDrop_DragEnter(object sender, DragEventArgs e)
+        private void TxtFileDragDrop_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
@@ -842,1980 +649,276 @@ namespace TempAR
                 e.Effect = DragDropEffects.None;
         }
 
-        private void txtFileDragDrop_DragDrop(object sender, DragEventArgs e)
+        private void TxtFileDragDrop_DragDrop(object sender, DragEventArgs e)
         {
             ((Control)sender).Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
         }
 
-        private void txtValidateHexString_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtValidateHexString_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Regex.IsMatch(e.KeyChar.ToString(), "[^0-9a-fA-F\x0001\x0003\b\x0016]"))
-                return;
+            if (!Regex.IsMatch(e.KeyChar.ToString(), "[^0-9a-fA-F\x0001\x0003\b\x0016]")) return;
             e.Handled = true;
         }
 
-        protected override void Dispose(bool disposing)
+        private void CbCodeTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (disposing && this.components != null)
-                this.components.Dispose();
-            base.Dispose(disposing);
-        }
+            var comboBox = (ComboBox)sender;
 
-        private void InitializeComponent()
-        {
-            this.pnlConvertFormat = new System.Windows.Forms.Panel();
-            this.lblCnvCodeTypes = new System.Windows.Forms.Label();
-            this.cbCnvCodeTypes = new System.Windows.Forms.ComboBox();
-            this.pnlConvertFile = new System.Windows.Forms.Panel();
-            this.btnOutputBrowse = new System.Windows.Forms.Button();
-            this.btnInputBrowse = new System.Windows.Forms.Button();
-            this.txtOutputPath = new System.Windows.Forms.TextBox();
-            this.txtInputPath = new System.Windows.Forms.TextBox();
-            this.lblOutputPath = new System.Windows.Forms.Label();
-            this.lblInputPath = new System.Windows.Forms.Label();
-            this.frmStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tctrlTabs = new System.Windows.Forms.TabControl();
-            this.tabConverter = new System.Windows.Forms.TabPage();
-            this.btnConvert = new System.Windows.Forms.Button();
-            this.pnlConvertType = new System.Windows.Forms.Panel();
-            this.rdbConvertText = new System.Windows.Forms.RadioButton();
-            this.rdbConvertFile = new System.Windows.Forms.RadioButton();
-            this.pnlConvertText = new System.Windows.Forms.Panel();
-            this.txtTextOutput = new System.Windows.Forms.TextBox();
-            this.txtTextInput = new System.Windows.Forms.TextBox();
-            this.tabPointerSearcher = new System.Windows.Forms.TabPage();
-            this.lblNotLikelyPercent = new System.Windows.Forms.Label();
-            this.lblGoodPercent = new System.Windows.Forms.Label();
-            this.lblHighPercent = new System.Windows.Forms.Label();
-            this.lblMediumPercent = new System.Windows.Forms.Label();
-            this.lblLowPercent = new System.Windows.Forms.Label();
-            this.txtColorOrange = new System.Windows.Forms.TextBox();
-            this.txtColorRed = new System.Windows.Forms.TextBox();
-            this.txtColorOrchid = new System.Windows.Forms.TextBox();
-            this.txtColorBlue = new System.Windows.Forms.TextBox();
-            this.txtColorGreen = new System.Windows.Forms.TextBox();
-            this.txtColorBlack = new System.Windows.Forms.TextBox();
-            this.lblPointerSearcherMemDump6 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMemDump5 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherAddress6 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherAddress5 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMemDump4 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMemDump3 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherAddress4 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherAddress3 = new System.Windows.Forms.Label();
-            this.txtPointerSearcherAddress6 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMemDump6 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherAddress5 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMemDump5 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherAddress4 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMemDump4 = new System.Windows.Forms.TextBox();
-            this.txtBaseAddress = new System.Windows.Forms.TextBox();
-            this.lblBaseAddress = new System.Windows.Forms.Label();
-            this.comboPointerSearcherMode = new System.Windows.Forms.ComboBox();
-            this.pnlPointerSearcherCodeType = new System.Windows.Forms.Panel();
-            this.lblPntCodeTypes = new System.Windows.Forms.Label();
-            this.cbPntCodeTypes = new System.Windows.Forms.ComboBox();
-            this.pnlPointerSearcherBitType = new System.Windows.Forms.Panel();
-            this.rdbPointerSearcherBitType32 = new System.Windows.Forms.RadioButton();
-            this.rdbPointerSearcherBitType8 = new System.Windows.Forms.RadioButton();
-            this.rdbPointerSearcherBitType16 = new System.Windows.Forms.RadioButton();
-            this.chkPointerSearcherRealAddresses = new System.Windows.Forms.CheckBox();
-            this.txtPointerSearcherCode = new System.Windows.Forms.TextBox();
-            this.chkPointerSearcherOptimizePointerPaths = new System.Windows.Forms.CheckBox();
-            this.chkPointerSearcherRAWCode = new System.Windows.Forms.CheckBox();
-            this.chkPointerSearcherIncludeNegatives = new System.Windows.Forms.CheckBox();
-            this.btnPointerSearcherClear = new System.Windows.Forms.Button();
-            this.btnPointerSearcherFindPointers = new System.Windows.Forms.Button();
-            this.treePointerSearcherPointers = new System.Windows.Forms.TreeView();
-            this.lblPointerSearcherValue = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMaxOffset = new System.Windows.Forms.Label();
-            this.txtPointerSearcherValue = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMaxOffset = new System.Windows.Forms.TextBox();
-            this.lblPointerSearcherMemDump2 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMemDump1 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherMode = new System.Windows.Forms.Label();
-            this.txtPointerSearcherAddress3 = new System.Windows.Forms.TextBox();
-            this.lblPointerSearcherAddress2 = new System.Windows.Forms.Label();
-            this.lblPointerSearcherAddress1 = new System.Windows.Forms.Label();
-            this.txtPointerSearcherMemDump3 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMemDump2 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherMemDump1 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherAddress2 = new System.Windows.Forms.TextBox();
-            this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
-            this.tabVitaCheat = new System.Windows.Forms.TabPage();
-            this.txtVCInstructions = new System.Windows.Forms.TextBox();
-            this.groupVitaCheatCompression = new System.Windows.Forms.GroupBox();
-            this.lblVitaCheatValueGap = new System.Windows.Forms.Label();
-            this.lblVitaCheatAddressGap = new System.Windows.Forms.Label();
-            this.lblVitaCheatCompressions = new System.Windows.Forms.Label();
-            this.txtVitaCheatValueGap = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddressGap = new System.Windows.Forms.TextBox();
-            this.numericVitaCheatCompressions = new System.Windows.Forms.NumericUpDown();
-            this.lblVitaCheatPointerLevel = new System.Windows.Forms.Label();
-            this.comboVitaCheatPointerLevel = new System.Windows.Forms.ComboBox();
-            this.pnlVitaCheatBitType = new System.Windows.Forms.Panel();
-            this.rdbVitaCheatBitType32Bit = new System.Windows.Forms.RadioButton();
-            this.rdbVitaCheatBitType16Bit = new System.Windows.Forms.RadioButton();
-            this.rdbVitaCheatBitType8Bit = new System.Windows.Forms.RadioButton();
-            this.groupVitaCheatAddress2Offset = new System.Windows.Forms.GroupBox();
-            this.txtVitaCheatAddress2Offset5 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress2Offset4 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress2Offset3 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress2Offset2 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress2Offset1 = new System.Windows.Forms.TextBox();
-            this.groupVitaCheatAddress1Offset = new System.Windows.Forms.GroupBox();
-            this.txtVitaCheatAddress1Offset5 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress1Offset4 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress1Offset3 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress1Offset2 = new System.Windows.Forms.TextBox();
-            this.txtVitaCheatAddress1Offset1 = new System.Windows.Forms.TextBox();
-            this.btnVitaCheatGenerate = new System.Windows.Forms.Button();
-            this.txtVitaCheatCode = new System.Windows.Forms.TextBox();
-            this.lblVitaCheatValue = new System.Windows.Forms.Label();
-            this.txtVitaCheatValue = new System.Windows.Forms.TextBox();
-            this.lblVitaCheatAddress2 = new System.Windows.Forms.Label();
-            this.txtVitaCheatAddress2 = new System.Windows.Forms.TextBox();
-            this.lblVitaCheatAddress1 = new System.Windows.Forms.Label();
-            this.txtVitaCheatAddress1 = new System.Windows.Forms.TextBox();
-            this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
-            this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
-            this.numericVitaCheatCompressionLevelOffset = new System.Windows.Forms.NumericUpDown();
-            this.lblVitaCheatCompressionLevelOffset = new System.Windows.Forms.Label();
-            this.pnlConvertFormat.SuspendLayout();
-            this.pnlConvertFile.SuspendLayout();
-            this.frmStatusStrip.SuspendLayout();
-            this.tctrlTabs.SuspendLayout();
-            this.tabConverter.SuspendLayout();
-            this.pnlConvertType.SuspendLayout();
-            this.pnlConvertText.SuspendLayout();
-            this.tabPointerSearcher.SuspendLayout();
-            this.pnlPointerSearcherCodeType.SuspendLayout();
-            this.pnlPointerSearcherBitType.SuspendLayout();
-            this.tabVitaCheat.SuspendLayout();
-            this.groupVitaCheatCompression.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).BeginInit();
-            this.pnlVitaCheatBitType.SuspendLayout();
-            this.groupVitaCheatAddress2Offset.SuspendLayout();
-            this.groupVitaCheatAddress1Offset.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressionLevelOffset)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // pnlConvertFormat
-            // 
-            this.pnlConvertFormat.Controls.Add(this.lblCnvCodeTypes);
-            this.pnlConvertFormat.Controls.Add(this.cbCnvCodeTypes);
-            this.pnlConvertFormat.Location = new System.Drawing.Point(8, 7);
-            this.pnlConvertFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlConvertFormat.Name = "pnlConvertFormat";
-            this.pnlConvertFormat.Size = new System.Drawing.Size(587, 30);
-            this.pnlConvertFormat.TabIndex = 7;
-            // 
-            // lblCnvCodeTypes
-            // 
-            this.lblCnvCodeTypes.AutoSize = true;
-            this.lblCnvCodeTypes.Location = new System.Drawing.Point(11, 4);
-            this.lblCnvCodeTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCnvCodeTypes.Name = "lblCnvCodeTypes";
-            this.lblCnvCodeTypes.Size = new System.Drawing.Size(81, 17);
-            this.lblCnvCodeTypes.TabIndex = 1;
-            this.lblCnvCodeTypes.Text = "Code Type:";
-            // 
-            // cbCnvCodeTypes
-            // 
-            this.cbCnvCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCnvCodeTypes.FormattingEnabled = true;
-            this.cbCnvCodeTypes.Location = new System.Drawing.Point(103, 0);
-            this.cbCnvCodeTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbCnvCodeTypes.Name = "cbCnvCodeTypes";
-            this.cbCnvCodeTypes.Size = new System.Drawing.Size(199, 24);
-            this.cbCnvCodeTypes.TabIndex = 0;
-            this.cbCnvCodeTypes.SelectedIndexChanged += new System.EventHandler(this.cbCodeTypes_SelectedIndexChanged);
-            // 
-            // pnlConvertFile
-            // 
-            this.pnlConvertFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlConvertFile.Controls.Add(this.btnOutputBrowse);
-            this.pnlConvertFile.Controls.Add(this.btnInputBrowse);
-            this.pnlConvertFile.Controls.Add(this.txtOutputPath);
-            this.pnlConvertFile.Controls.Add(this.txtInputPath);
-            this.pnlConvertFile.Controls.Add(this.lblOutputPath);
-            this.pnlConvertFile.Controls.Add(this.lblInputPath);
-            this.pnlConvertFile.Location = new System.Drawing.Point(7, 49);
-            this.pnlConvertFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlConvertFile.Name = "pnlConvertFile";
-            this.pnlConvertFile.Size = new System.Drawing.Size(1000, 862);
-            this.pnlConvertFile.TabIndex = 8;
-            // 
-            // btnOutputBrowse
-            // 
-            this.btnOutputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOutputBrowse.Location = new System.Drawing.Point(901, 212);
-            this.btnOutputBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnOutputBrowse.Name = "btnOutputBrowse";
-            this.btnOutputBrowse.Size = new System.Drawing.Size(96, 28);
-            this.btnOutputBrowse.TabIndex = 8;
-            this.btnOutputBrowse.Text = "Browse";
-            this.btnOutputBrowse.UseVisualStyleBackColor = true;
-            this.btnOutputBrowse.Click += new System.EventHandler(this.btnOutputBrowse_Click);
-            // 
-            // btnInputBrowse
-            // 
-            this.btnInputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInputBrowse.Location = new System.Drawing.Point(901, 180);
-            this.btnInputBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnInputBrowse.Name = "btnInputBrowse";
-            this.btnInputBrowse.Size = new System.Drawing.Size(96, 28);
-            this.btnInputBrowse.TabIndex = 7;
-            this.btnInputBrowse.Text = "Browse";
-            this.btnInputBrowse.UseVisualStyleBackColor = true;
-            this.btnInputBrowse.Click += new System.EventHandler(this.btnInputBrowse_Click);
-            // 
-            // txtOutputPath
-            // 
-            this.txtOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutputPath.Location = new System.Drawing.Point(109, 214);
-            this.txtOutputPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtOutputPath.Name = "txtOutputPath";
-            this.txtOutputPath.ReadOnly = true;
-            this.txtOutputPath.Size = new System.Drawing.Size(783, 22);
-            this.txtOutputPath.TabIndex = 3;
-            this.txtOutputPath.Click += new System.EventHandler(this.btnOutputBrowse_Click);
-            // 
-            // txtInputPath
-            // 
-            this.txtInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInputPath.Location = new System.Drawing.Point(109, 182);
-            this.txtInputPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtInputPath.Name = "txtInputPath";
-            this.txtInputPath.ReadOnly = true;
-            this.txtInputPath.Size = new System.Drawing.Size(783, 22);
-            this.txtInputPath.TabIndex = 2;
-            this.txtInputPath.Click += new System.EventHandler(this.btnInputBrowse_Click);
-            // 
-            // lblOutputPath
-            // 
-            this.lblOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOutputPath.AutoSize = true;
-            this.lblOutputPath.Location = new System.Drawing.Point(12, 218);
-            this.lblOutputPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOutputPath.Name = "lblOutputPath";
-            this.lblOutputPath.Size = new System.Drawing.Size(88, 17);
-            this.lblOutputPath.TabIndex = 1;
-            this.lblOutputPath.Text = "Output Path:";
-            // 
-            // lblInputPath
-            // 
-            this.lblInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInputPath.AutoSize = true;
-            this.lblInputPath.Location = new System.Drawing.Point(12, 186);
-            this.lblInputPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblInputPath.Name = "lblInputPath";
-            this.lblInputPath.Size = new System.Drawing.Size(76, 17);
-            this.lblInputPath.TabIndex = 0;
-            this.lblInputPath.Text = "Input Path:";
-            // 
-            // frmStatusStrip
-            // 
-            this.frmStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.frmStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus});
-            this.frmStatusStrip.Location = new System.Drawing.Point(0, 792);
-            this.frmStatusStrip.Name = "frmStatusStrip";
-            this.frmStatusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.frmStatusStrip.Size = new System.Drawing.Size(1025, 22);
-            this.frmStatusStrip.SizingGrip = false;
-            this.frmStatusStrip.TabIndex = 1;
-            this.frmStatusStrip.Text = "statusStrip1";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.BackColor = System.Drawing.SystemColors.Control;
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(49, 20);
-            this.lblStatus.Text = "Status";
-            this.lblStatus.Visible = false;
-            // 
-            // tctrlTabs
-            // 
-            this.tctrlTabs.Controls.Add(this.tabConverter);
-            this.tctrlTabs.Controls.Add(this.tabPointerSearcher);
-            this.tctrlTabs.Controls.Add(this.tabVitaCheat);
-            this.tctrlTabs.Location = new System.Drawing.Point(7, 6);
-            this.tctrlTabs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tctrlTabs.Name = "tctrlTabs";
-            this.tctrlTabs.SelectedIndex = 1;
-            this.tctrlTabs.Size = new System.Drawing.Size(1020, 738);
-            this.tctrlTabs.TabIndex = 0;
-            // 
-            // tabConverter
-            // 
-            this.tabConverter.Controls.Add(this.btnConvert);
-            this.tabConverter.Controls.Add(this.pnlConvertType);
-            this.tabConverter.Controls.Add(this.pnlConvertFormat);
-            this.tabConverter.Controls.Add(this.pnlConvertText);
-            this.tabConverter.Controls.Add(this.pnlConvertFile);
-            this.tabConverter.Location = new System.Drawing.Point(4, 25);
-            this.tabConverter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabConverter.Name = "tabConverter";
-            this.tabConverter.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabConverter.Size = new System.Drawing.Size(1012, 709);
-            this.tabConverter.TabIndex = 0;
-            this.tabConverter.Text = "Code Converter";
-            this.tabConverter.UseVisualStyleBackColor = true;
-            // 
-            // btnConvert
-            // 
-            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConvert.Location = new System.Drawing.Point(888, 5);
-            this.btnConvert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(100, 28);
-            this.btnConvert.TabIndex = 4;
-            this.btnConvert.Text = "Convert";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
-            // 
-            // pnlConvertType
-            // 
-            this.pnlConvertType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlConvertType.Controls.Add(this.rdbConvertText);
-            this.pnlConvertType.Controls.Add(this.rdbConvertFile);
-            this.pnlConvertType.Location = new System.Drawing.Point(631, 7);
-            this.pnlConvertType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlConvertType.Name = "pnlConvertType";
-            this.pnlConvertType.Size = new System.Drawing.Size(249, 30);
-            this.pnlConvertType.TabIndex = 6;
-            // 
-            // rdbConvertText
-            // 
-            this.rdbConvertText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdbConvertText.AutoSize = true;
-            this.rdbConvertText.Checked = true;
-            this.rdbConvertText.Location = new System.Drawing.Point(9, 5);
-            this.rdbConvertText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbConvertText.Name = "rdbConvertText";
-            this.rdbConvertText.Size = new System.Drawing.Size(109, 21);
-            this.rdbConvertText.TabIndex = 1;
-            this.rdbConvertText.TabStop = true;
-            this.rdbConvertText.Text = "Convert Text";
-            this.rdbConvertText.UseVisualStyleBackColor = true;
-            this.rdbConvertText.CheckedChanged += new System.EventHandler(this.rdbConvertText_CheckedChanged);
-            // 
-            // rdbConvertFile
-            // 
-            this.rdbConvertFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdbConvertFile.AutoSize = true;
-            this.rdbConvertFile.Location = new System.Drawing.Point(131, 5);
-            this.rdbConvertFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbConvertFile.Name = "rdbConvertFile";
-            this.rdbConvertFile.Size = new System.Drawing.Size(104, 21);
-            this.rdbConvertFile.TabIndex = 0;
-            this.rdbConvertFile.Text = "Convert File";
-            this.rdbConvertFile.UseVisualStyleBackColor = true;
-            this.rdbConvertFile.CheckedChanged += new System.EventHandler(this.rdbConvertFile_CheckedChanged);
-            // 
-            // pnlConvertText
-            // 
-            this.pnlConvertText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlConvertText.Controls.Add(this.txtTextOutput);
-            this.pnlConvertText.Controls.Add(this.txtTextInput);
-            this.pnlConvertText.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.pnlConvertText.Location = new System.Drawing.Point(4, 49);
-            this.pnlConvertText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlConvertText.Name = "pnlConvertText";
-            this.pnlConvertText.Size = new System.Drawing.Size(1001, 657);
-            this.pnlConvertText.TabIndex = 5;
-            // 
-            // txtTextOutput
-            // 
-            this.txtTextOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtTextOutput.Location = new System.Drawing.Point(511, 4);
-            this.txtTextOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtTextOutput.Multiline = true;
-            this.txtTextOutput.Name = "txtTextOutput";
-            this.txtTextOutput.ReadOnly = true;
-            this.txtTextOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextOutput.Size = new System.Drawing.Size(485, 649);
-            this.txtTextOutput.TabIndex = 2;
-            this.txtTextOutput.WordWrap = false;
-            this.txtTextOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
-            // 
-            // txtTextInput
-            // 
-            this.txtTextInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtTextInput.Location = new System.Drawing.Point(4, 4);
-            this.txtTextInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtTextInput.Multiline = true;
-            this.txtTextInput.Name = "txtTextInput";
-            this.txtTextInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextInput.Size = new System.Drawing.Size(485, 649);
-            this.txtTextInput.TabIndex = 1;
-            this.txtTextInput.WordWrap = false;
-            this.txtTextInput.TextChanged += new System.EventHandler(this.txtTextInput_TextChanged);
-            this.txtTextInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textFieldSelectAll);
-            // 
-            // tabPointerSearcher
-            // 
-            this.tabPointerSearcher.Controls.Add(this.lblNotLikelyPercent);
-            this.tabPointerSearcher.Controls.Add(this.lblGoodPercent);
-            this.tabPointerSearcher.Controls.Add(this.lblHighPercent);
-            this.tabPointerSearcher.Controls.Add(this.lblMediumPercent);
-            this.tabPointerSearcher.Controls.Add(this.lblLowPercent);
-            this.tabPointerSearcher.Controls.Add(this.txtColorOrange);
-            this.tabPointerSearcher.Controls.Add(this.txtColorRed);
-            this.tabPointerSearcher.Controls.Add(this.txtColorOrchid);
-            this.tabPointerSearcher.Controls.Add(this.txtColorBlue);
-            this.tabPointerSearcher.Controls.Add(this.txtColorGreen);
-            this.tabPointerSearcher.Controls.Add(this.txtColorBlack);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump6);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump5);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress6);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress5);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump4);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump3);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress4);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress3);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress6);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump6);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress5);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump5);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress4);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump4);
-            this.tabPointerSearcher.Controls.Add(this.txtBaseAddress);
-            this.tabPointerSearcher.Controls.Add(this.lblBaseAddress);
-            this.tabPointerSearcher.Controls.Add(this.comboPointerSearcherMode);
-            this.tabPointerSearcher.Controls.Add(this.pnlPointerSearcherCodeType);
-            this.tabPointerSearcher.Controls.Add(this.pnlPointerSearcherBitType);
-            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherRealAddresses);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherCode);
-            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherOptimizePointerPaths);
-            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherRAWCode);
-            this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherIncludeNegatives);
-            this.tabPointerSearcher.Controls.Add(this.btnPointerSearcherClear);
-            this.tabPointerSearcher.Controls.Add(this.btnPointerSearcherFindPointers);
-            this.tabPointerSearcher.Controls.Add(this.treePointerSearcherPointers);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherValue);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMaxOffset);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherValue);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMaxOffset);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump2);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMemDump1);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherMode);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress3);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress2);
-            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherAddress1);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump3);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump2);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump1);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress2);
-            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress1);
-            this.tabPointerSearcher.Location = new System.Drawing.Point(4, 25);
-            this.tabPointerSearcher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPointerSearcher.Name = "tabPointerSearcher";
-            this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPointerSearcher.Size = new System.Drawing.Size(1012, 709);
-            this.tabPointerSearcher.TabIndex = 1;
-            this.tabPointerSearcher.Text = "Pointer Searcher";
-            this.tabPointerSearcher.UseVisualStyleBackColor = true;
-            // 
-            // lblNotLikelyPercent
-            // 
-            this.lblNotLikelyPercent.AutoSize = true;
-            this.lblNotLikelyPercent.Location = new System.Drawing.Point(452, 506);
-            this.lblNotLikelyPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNotLikelyPercent.Name = "lblNotLikelyPercent";
-            this.lblNotLikelyPercent.Size = new System.Drawing.Size(65, 17);
-            this.lblNotLikelyPercent.TabIndex = 50;
-            this.lblNotLikelyPercent.Text = "Not likely";
-            // 
-            // lblGoodPercent
-            // 
-            this.lblGoodPercent.AutoSize = true;
-            this.lblGoodPercent.Location = new System.Drawing.Point(781, 507);
-            this.lblGoodPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblGoodPercent.Name = "lblGoodPercent";
-            this.lblGoodPercent.Size = new System.Drawing.Size(59, 17);
-            this.lblGoodPercent.TabIndex = 49;
-            this.lblGoodPercent.Text = "Good %";
-            // 
-            // lblHighPercent
-            // 
-            this.lblHighPercent.AutoSize = true;
-            this.lblHighPercent.Location = new System.Drawing.Point(896, 506);
-            this.lblHighPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblHighPercent.Name = "lblHighPercent";
-            this.lblHighPercent.Size = new System.Drawing.Size(53, 17);
-            this.lblHighPercent.TabIndex = 48;
-            this.lblHighPercent.Text = "High %";
-            // 
-            // lblMediumPercent
-            // 
-            this.lblMediumPercent.AutoSize = true;
-            this.lblMediumPercent.Location = new System.Drawing.Point(673, 506);
-            this.lblMediumPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMediumPercent.Name = "lblMediumPercent";
-            this.lblMediumPercent.Size = new System.Drawing.Size(51, 17);
-            this.lblMediumPercent.TabIndex = 47;
-            this.lblMediumPercent.Text = "Med %";
-            // 
-            // lblLowPercent
-            // 
-            this.lblLowPercent.AutoSize = true;
-            this.lblLowPercent.Location = new System.Drawing.Point(567, 506);
-            this.lblLowPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLowPercent.Name = "lblLowPercent";
-            this.lblLowPercent.Size = new System.Drawing.Size(49, 17);
-            this.lblLowPercent.TabIndex = 46;
-            this.lblLowPercent.Text = "Low %";
-            // 
-            // txtColorOrange
-            // 
-            this.txtColorOrange.BackColor = System.Drawing.Color.Orange;
-            this.txtColorOrange.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorOrange.Location = new System.Drawing.Point(957, 505);
-            this.txtColorOrange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorOrange.Name = "txtColorOrange";
-            this.txtColorOrange.ReadOnly = true;
-            this.txtColorOrange.Size = new System.Drawing.Size(39, 22);
-            this.txtColorOrange.TabIndex = 45;
-            this.txtColorOrange.Text = "0";
-            this.txtColorOrange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtColorRed
-            // 
-            this.txtColorRed.BackColor = System.Drawing.Color.Red;
-            this.txtColorRed.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorRed.Location = new System.Drawing.Point(848, 505);
-            this.txtColorRed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorRed.Name = "txtColorRed";
-            this.txtColorRed.ReadOnly = true;
-            this.txtColorRed.Size = new System.Drawing.Size(39, 22);
-            this.txtColorRed.TabIndex = 44;
-            this.txtColorRed.Text = "0";
-            this.txtColorRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtColorOrchid
-            // 
-            this.txtColorOrchid.BackColor = System.Drawing.Color.Orchid;
-            this.txtColorOrchid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorOrchid.Location = new System.Drawing.Point(733, 505);
-            this.txtColorOrchid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorOrchid.Name = "txtColorOrchid";
-            this.txtColorOrchid.ReadOnly = true;
-            this.txtColorOrchid.Size = new System.Drawing.Size(39, 22);
-            this.txtColorOrchid.TabIndex = 45;
-            this.txtColorOrchid.Text = "0";
-            this.txtColorOrchid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtColorBlue
-            // 
-            this.txtColorBlue.BackColor = System.Drawing.Color.Blue;
-            this.txtColorBlue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorBlue.Location = new System.Drawing.Point(625, 505);
-            this.txtColorBlue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorBlue.Name = "txtColorBlue";
-            this.txtColorBlue.ReadOnly = true;
-            this.txtColorBlue.Size = new System.Drawing.Size(39, 22);
-            this.txtColorBlue.TabIndex = 44;
-            this.txtColorBlue.Text = "0";
-            this.txtColorBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtColorGreen
-            // 
-            this.txtColorGreen.BackColor = System.Drawing.Color.Green;
-            this.txtColorGreen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorGreen.Location = new System.Drawing.Point(519, 505);
-            this.txtColorGreen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorGreen.Name = "txtColorGreen";
-            this.txtColorGreen.ReadOnly = true;
-            this.txtColorGreen.Size = new System.Drawing.Size(39, 22);
-            this.txtColorGreen.TabIndex = 43;
-            this.txtColorGreen.Text = "0";
-            this.txtColorGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtColorBlack
-            // 
-            this.txtColorBlack.BackColor = System.Drawing.Color.Black;
-            this.txtColorBlack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorBlack.Location = new System.Drawing.Point(409, 505);
-            this.txtColorBlack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtColorBlack.Name = "txtColorBlack";
-            this.txtColorBlack.ReadOnly = true;
-            this.txtColorBlack.Size = new System.Drawing.Size(39, 22);
-            this.txtColorBlack.TabIndex = 42;
-            this.txtColorBlack.Text = "0";
-            this.txtColorBlack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lblPointerSearcherMemDump6
-            // 
-            this.lblPointerSearcherMemDump6.AutoSize = true;
-            this.lblPointerSearcherMemDump6.Location = new System.Drawing.Point(8, 331);
-            this.lblPointerSearcherMemDump6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump6.Name = "lblPointerSearcherMemDump6";
-            this.lblPointerSearcherMemDump6.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump6.TabIndex = 40;
-            this.lblPointerSearcherMemDump6.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherMemDump5
-            // 
-            this.lblPointerSearcherMemDump5.AutoSize = true;
-            this.lblPointerSearcherMemDump5.Location = new System.Drawing.Point(8, 267);
-            this.lblPointerSearcherMemDump5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump5.Name = "lblPointerSearcherMemDump5";
-            this.lblPointerSearcherMemDump5.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump5.TabIndex = 38;
-            this.lblPointerSearcherMemDump5.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherAddress6
-            // 
-            this.lblPointerSearcherAddress6.AutoSize = true;
-            this.lblPointerSearcherAddress6.Location = new System.Drawing.Point(8, 363);
-            this.lblPointerSearcherAddress6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress6.Name = "lblPointerSearcherAddress6";
-            this.lblPointerSearcherAddress6.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress6.TabIndex = 41;
-            this.lblPointerSearcherAddress6.Text = "Address:";
-            // 
-            // lblPointerSearcherAddress5
-            // 
-            this.lblPointerSearcherAddress5.AutoSize = true;
-            this.lblPointerSearcherAddress5.Location = new System.Drawing.Point(8, 299);
-            this.lblPointerSearcherAddress5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress5.Name = "lblPointerSearcherAddress5";
-            this.lblPointerSearcherAddress5.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress5.TabIndex = 39;
-            this.lblPointerSearcherAddress5.Text = "Address:";
-            // 
-            // lblPointerSearcherMemDump4
-            // 
-            this.lblPointerSearcherMemDump4.AutoSize = true;
-            this.lblPointerSearcherMemDump4.Location = new System.Drawing.Point(8, 203);
-            this.lblPointerSearcherMemDump4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump4.Name = "lblPointerSearcherMemDump4";
-            this.lblPointerSearcherMemDump4.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump4.TabIndex = 36;
-            this.lblPointerSearcherMemDump4.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherMemDump3
-            // 
-            this.lblPointerSearcherMemDump3.AutoSize = true;
-            this.lblPointerSearcherMemDump3.Location = new System.Drawing.Point(8, 139);
-            this.lblPointerSearcherMemDump3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump3.Name = "lblPointerSearcherMemDump3";
-            this.lblPointerSearcherMemDump3.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump3.TabIndex = 34;
-            this.lblPointerSearcherMemDump3.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherAddress4
-            // 
-            this.lblPointerSearcherAddress4.AutoSize = true;
-            this.lblPointerSearcherAddress4.Location = new System.Drawing.Point(8, 235);
-            this.lblPointerSearcherAddress4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress4.Name = "lblPointerSearcherAddress4";
-            this.lblPointerSearcherAddress4.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress4.TabIndex = 37;
-            this.lblPointerSearcherAddress4.Text = "Address:";
-            // 
-            // lblPointerSearcherAddress3
-            // 
-            this.lblPointerSearcherAddress3.AutoSize = true;
-            this.lblPointerSearcherAddress3.Location = new System.Drawing.Point(8, 171);
-            this.lblPointerSearcherAddress3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress3.Name = "lblPointerSearcherAddress3";
-            this.lblPointerSearcherAddress3.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress3.TabIndex = 35;
-            this.lblPointerSearcherAddress3.Text = "Address:";
-            // 
-            // txtPointerSearcherAddress6
-            // 
-            this.txtPointerSearcherAddress6.Enabled = false;
-            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(129, 359);
-            this.txtPointerSearcherAddress6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress6.MaxLength = 10;
-            this.txtPointerSearcherAddress6.Name = "txtPointerSearcherAddress6";
-            this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress6.TabIndex = 33;
-            this.txtPointerSearcherAddress6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // txtPointerSearcherMemDump6
-            // 
-            this.txtPointerSearcherMemDump6.AllowDrop = true;
-            this.txtPointerSearcherMemDump6.Enabled = false;
-            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(129, 327);
-            this.txtPointerSearcherMemDump6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump6.Name = "txtPointerSearcherMemDump6";
-            this.txtPointerSearcherMemDump6.ReadOnly = true;
-            this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump6.TabIndex = 32;
-            this.txtPointerSearcherMemDump6.Click += new System.EventHandler(this.txtPointerSearcherMemDump6_Click);
-            this.txtPointerSearcherMemDump6.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump6.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump6.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtPointerSearcherAddress5
-            // 
-            this.txtPointerSearcherAddress5.Enabled = false;
-            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(129, 295);
-            this.txtPointerSearcherAddress5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress5.MaxLength = 10;
-            this.txtPointerSearcherAddress5.Name = "txtPointerSearcherAddress5";
-            this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress5.TabIndex = 31;
-            this.txtPointerSearcherAddress5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // txtPointerSearcherMemDump5
-            // 
-            this.txtPointerSearcherMemDump5.AllowDrop = true;
-            this.txtPointerSearcherMemDump5.Enabled = false;
-            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(129, 263);
-            this.txtPointerSearcherMemDump5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump5.Name = "txtPointerSearcherMemDump5";
-            this.txtPointerSearcherMemDump5.ReadOnly = true;
-            this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump5.TabIndex = 30;
-            this.txtPointerSearcherMemDump5.Click += new System.EventHandler(this.txtPointerSearcherMemDump5_Click);
-            this.txtPointerSearcherMemDump5.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump5.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump5.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtPointerSearcherAddress4
-            // 
-            this.txtPointerSearcherAddress4.Enabled = false;
-            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(129, 231);
-            this.txtPointerSearcherAddress4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress4.MaxLength = 10;
-            this.txtPointerSearcherAddress4.Name = "txtPointerSearcherAddress4";
-            this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress4.TabIndex = 29;
-            this.txtPointerSearcherAddress4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // txtPointerSearcherMemDump4
-            // 
-            this.txtPointerSearcherMemDump4.AllowDrop = true;
-            this.txtPointerSearcherMemDump4.Enabled = false;
-            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(129, 199);
-            this.txtPointerSearcherMemDump4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump4.Name = "txtPointerSearcherMemDump4";
-            this.txtPointerSearcherMemDump4.ReadOnly = true;
-            this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump4.TabIndex = 28;
-            this.txtPointerSearcherMemDump4.Click += new System.EventHandler(this.txtPointerSearcherMemDump4_Click);
-            this.txtPointerSearcherMemDump4.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump4.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump4.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtBaseAddress
-            // 
-            this.txtBaseAddress.Location = new System.Drawing.Point(527, 574);
-            this.txtBaseAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtBaseAddress.MaxLength = 10;
-            this.txtBaseAddress.Name = "txtBaseAddress";
-            this.txtBaseAddress.Size = new System.Drawing.Size(251, 22);
-            this.txtBaseAddress.TabIndex = 11;
-            this.txtBaseAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // lblBaseAddress
-            // 
-            this.lblBaseAddress.AutoSize = true;
-            this.lblBaseAddress.Location = new System.Drawing.Point(405, 577);
-            this.lblBaseAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBaseAddress.Name = "lblBaseAddress";
-            this.lblBaseAddress.Size = new System.Drawing.Size(100, 17);
-            this.lblBaseAddress.TabIndex = 10;
-            this.lblBaseAddress.Text = "Base Address:";
-            // 
-            // comboPointerSearcherMode
-            // 
-            this.comboPointerSearcherMode.DisplayMember = "1";
-            this.comboPointerSearcherMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPointerSearcherMode.FormattingEnabled = true;
-            this.comboPointerSearcherMode.Items.AddRange(new object[] {
-            "Sony Vita",
-            "Sony PSP",
-            "Nintendo DS",
-            "Other..."});
-            this.comboPointerSearcherMode.Location = new System.Drawing.Point(527, 540);
-            this.comboPointerSearcherMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboPointerSearcherMode.Name = "comboPointerSearcherMode";
-            this.comboPointerSearcherMode.Size = new System.Drawing.Size(251, 24);
-            this.comboPointerSearcherMode.TabIndex = 9;
-            this.comboPointerSearcherMode.SelectedIndexChanged += new System.EventHandler(this.comboPointerSearcherMode_SelectedIndexChanged);
-            // 
-            // pnlPointerSearcherCodeType
-            // 
-            this.pnlPointerSearcherCodeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPointerSearcherCodeType.Controls.Add(this.lblPntCodeTypes);
-            this.pnlPointerSearcherCodeType.Controls.Add(this.cbPntCodeTypes);
-            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(12, 468);
-            this.pnlPointerSearcherCodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
-            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(372, 30);
-            this.pnlPointerSearcherCodeType.TabIndex = 12;
-            // 
-            // lblPntCodeTypes
-            // 
-            this.lblPntCodeTypes.AutoSize = true;
-            this.lblPntCodeTypes.Location = new System.Drawing.Point(23, 7);
-            this.lblPntCodeTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPntCodeTypes.Name = "lblPntCodeTypes";
-            this.lblPntCodeTypes.Size = new System.Drawing.Size(81, 17);
-            this.lblPntCodeTypes.TabIndex = 2;
-            this.lblPntCodeTypes.Text = "Code Type:";
-            // 
-            // cbPntCodeTypes
-            // 
-            this.cbPntCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPntCodeTypes.FormattingEnabled = true;
-            this.cbPntCodeTypes.Location = new System.Drawing.Point(117, 4);
-            this.cbPntCodeTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbPntCodeTypes.Name = "cbPntCodeTypes";
-            this.cbPntCodeTypes.Size = new System.Drawing.Size(199, 24);
-            this.cbPntCodeTypes.TabIndex = 1;
-            // 
-            // pnlPointerSearcherBitType
-            // 
-            this.pnlPointerSearcherBitType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType32);
-            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType8);
-            this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType16);
-            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(527, 670);
-            this.pnlPointerSearcherBitType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlPointerSearcherBitType.Name = "pnlPointerSearcherBitType";
-            this.pnlPointerSearcherBitType.Size = new System.Drawing.Size(252, 30);
-            this.pnlPointerSearcherBitType.TabIndex = 16;
-            // 
-            // rdbPointerSearcherBitType32
-            // 
-            this.rdbPointerSearcherBitType32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdbPointerSearcherBitType32.AutoSize = true;
-            this.rdbPointerSearcherBitType32.Checked = true;
-            this.rdbPointerSearcherBitType32.Location = new System.Drawing.Point(151, 4);
-            this.rdbPointerSearcherBitType32.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbPointerSearcherBitType32.Name = "rdbPointerSearcherBitType32";
-            this.rdbPointerSearcherBitType32.Size = new System.Drawing.Size(65, 21);
-            this.rdbPointerSearcherBitType32.TabIndex = 0;
-            this.rdbPointerSearcherBitType32.TabStop = true;
-            this.rdbPointerSearcherBitType32.Text = "32-bit";
-            this.rdbPointerSearcherBitType32.UseVisualStyleBackColor = true;
-            // 
-            // rdbPointerSearcherBitType8
-            // 
-            this.rdbPointerSearcherBitType8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdbPointerSearcherBitType8.AutoSize = true;
-            this.rdbPointerSearcherBitType8.Location = new System.Drawing.Point(7, 4);
-            this.rdbPointerSearcherBitType8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbPointerSearcherBitType8.Name = "rdbPointerSearcherBitType8";
-            this.rdbPointerSearcherBitType8.Size = new System.Drawing.Size(57, 21);
-            this.rdbPointerSearcherBitType8.TabIndex = 1;
-            this.rdbPointerSearcherBitType8.Text = "8-bit";
-            this.rdbPointerSearcherBitType8.UseVisualStyleBackColor = true;
-            // 
-            // rdbPointerSearcherBitType16
-            // 
-            this.rdbPointerSearcherBitType16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdbPointerSearcherBitType16.AutoSize = true;
-            this.rdbPointerSearcherBitType16.Location = new System.Drawing.Point(75, 4);
-            this.rdbPointerSearcherBitType16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbPointerSearcherBitType16.Name = "rdbPointerSearcherBitType16";
-            this.rdbPointerSearcherBitType16.Size = new System.Drawing.Size(65, 21);
-            this.rdbPointerSearcherBitType16.TabIndex = 2;
-            this.rdbPointerSearcherBitType16.Text = "16-bit";
-            this.rdbPointerSearcherBitType16.UseVisualStyleBackColor = true;
-            // 
-            // chkPointerSearcherRealAddresses
-            // 
-            this.chkPointerSearcherRealAddresses.AutoSize = true;
-            this.chkPointerSearcherRealAddresses.Checked = true;
-            this.chkPointerSearcherRealAddresses.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(829, 641);
-            this.chkPointerSearcherRealAddresses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkPointerSearcherRealAddresses.Name = "chkPointerSearcherRealAddresses";
-            this.chkPointerSearcherRealAddresses.Size = new System.Drawing.Size(130, 21);
-            this.chkPointerSearcherRealAddresses.TabIndex = 20;
-            this.chkPointerSearcherRealAddresses.Text = "Real Addresses";
-            this.chkPointerSearcherRealAddresses.UseVisualStyleBackColor = true;
-            // 
-            // txtPointerSearcherCode
-            // 
-            this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtPointerSearcherCode.Location = new System.Drawing.Point(12, 500);
-            this.txtPointerSearcherCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherCode.Multiline = true;
-            this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
-            this.txtPointerSearcherCode.ReadOnly = true;
-            this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPointerSearcherCode.Size = new System.Drawing.Size(371, 198);
-            this.txtPointerSearcherCode.TabIndex = 25;
-            this.txtPointerSearcherCode.WordWrap = false;
-            // 
-            // chkPointerSearcherOptimizePointerPaths
-            // 
-            this.chkPointerSearcherOptimizePointerPaths.AutoSize = true;
-            this.chkPointerSearcherOptimizePointerPaths.Checked = true;
-            this.chkPointerSearcherOptimizePointerPaths.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(99, 404);
-            this.chkPointerSearcherOptimizePointerPaths.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkPointerSearcherOptimizePointerPaths.Name = "chkPointerSearcherOptimizePointerPaths";
-            this.chkPointerSearcherOptimizePointerPaths.Size = new System.Drawing.Size(254, 21);
-            this.chkPointerSearcherOptimizePointerPaths.TabIndex = 17;
-            this.chkPointerSearcherOptimizePointerPaths.Text = "Only Display Optimal  Pointer Paths";
-            this.chkPointerSearcherOptimizePointerPaths.UseVisualStyleBackColor = true;
-            // 
-            // chkPointerSearcherRAWCode
-            // 
-            this.chkPointerSearcherRAWCode.AutoSize = true;
-            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(829, 558);
-            this.chkPointerSearcherRAWCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
-            this.chkPointerSearcherRAWCode.Size = new System.Drawing.Size(99, 21);
-            this.chkPointerSearcherRAWCode.TabIndex = 18;
-            this.chkPointerSearcherRAWCode.Text = "RAW Code";
-            this.chkPointerSearcherRAWCode.UseVisualStyleBackColor = true;
-            // 
-            // chkPointerSearcherIncludeNegatives
-            // 
-            this.chkPointerSearcherIncludeNegatives.AutoSize = true;
-            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(829, 602);
-            this.chkPointerSearcherIncludeNegatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkPointerSearcherIncludeNegatives.Name = "chkPointerSearcherIncludeNegatives";
-            this.chkPointerSearcherIncludeNegatives.Size = new System.Drawing.Size(142, 21);
-            this.chkPointerSearcherIncludeNegatives.TabIndex = 19;
-            this.chkPointerSearcherIncludeNegatives.Text = "Include Negatives";
-            this.chkPointerSearcherIncludeNegatives.UseVisualStyleBackColor = true;
-            // 
-            // btnPointerSearcherClear
-            // 
-            this.btnPointerSearcherClear.Location = new System.Drawing.Point(129, 432);
-            this.btnPointerSearcherClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnPointerSearcherClear.Name = "btnPointerSearcherClear";
-            this.btnPointerSearcherClear.Size = new System.Drawing.Size(83, 28);
-            this.btnPointerSearcherClear.TabIndex = 21;
-            this.btnPointerSearcherClear.Text = "Clear";
-            this.btnPointerSearcherClear.UseVisualStyleBackColor = true;
-            this.btnPointerSearcherClear.Click += new System.EventHandler(this.btnPointerSearcherClear_Click);
-            // 
-            // btnPointerSearcherFindPointers
-            // 
-            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(220, 432);
-            this.btnPointerSearcherFindPointers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnPointerSearcherFindPointers.Name = "btnPointerSearcherFindPointers";
-            this.btnPointerSearcherFindPointers.Size = new System.Drawing.Size(133, 28);
-            this.btnPointerSearcherFindPointers.TabIndex = 22;
-            this.btnPointerSearcherFindPointers.Text = "Find Pointers";
-            this.btnPointerSearcherFindPointers.UseVisualStyleBackColor = true;
-            this.btnPointerSearcherFindPointers.Click += new System.EventHandler(this.btnPointerSearcherFindPointers_Click);
-            // 
-            // treePointerSearcherPointers
-            // 
-            this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 7);
-            this.treePointerSearcherPointers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 489);
-            this.treePointerSearcherPointers.TabIndex = 23;
-            this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePointerSearcherPointers_AfterSelect);
-            this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.treePointerSearcherPointers_DoubleClick);
-            this.treePointerSearcherPointers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treePointerSearcherPointers_KeyUp);
-            // 
-            // lblPointerSearcherValue
-            // 
-            this.lblPointerSearcherValue.AutoSize = true;
-            this.lblPointerSearcherValue.Location = new System.Drawing.Point(405, 641);
-            this.lblPointerSearcherValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherValue.Name = "lblPointerSearcherValue";
-            this.lblPointerSearcherValue.Size = new System.Drawing.Size(101, 17);
-            this.lblPointerSearcherValue.TabIndex = 14;
-            this.lblPointerSearcherValue.Text = "Desired Value:";
-            // 
-            // lblPointerSearcherMaxOffset
-            // 
-            this.lblPointerSearcherMaxOffset.AutoSize = true;
-            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(405, 609);
-            this.lblPointerSearcherMaxOffset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMaxOffset.Name = "lblPointerSearcherMaxOffset";
-            this.lblPointerSearcherMaxOffset.Size = new System.Drawing.Size(112, 17);
-            this.lblPointerSearcherMaxOffset.TabIndex = 12;
-            this.lblPointerSearcherMaxOffset.Text = "Maximum Offset:";
-            // 
-            // txtPointerSearcherValue
-            // 
-            this.txtPointerSearcherValue.Location = new System.Drawing.Point(527, 638);
-            this.txtPointerSearcherValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherValue.MaxLength = 10;
-            this.txtPointerSearcherValue.Name = "txtPointerSearcherValue";
-            this.txtPointerSearcherValue.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherValue.TabIndex = 15;
-            this.txtPointerSearcherValue.Text = "0x00000000";
-            this.txtPointerSearcherValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // txtPointerSearcherMaxOffset
-            // 
-            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(527, 606);
-            this.txtPointerSearcherMaxOffset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMaxOffset.MaxLength = 10;
-            this.txtPointerSearcherMaxOffset.Name = "txtPointerSearcherMaxOffset";
-            this.txtPointerSearcherMaxOffset.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMaxOffset.TabIndex = 13;
-            this.txtPointerSearcherMaxOffset.Text = "0x1000";
-            this.txtPointerSearcherMaxOffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // lblPointerSearcherMemDump2
-            // 
-            this.lblPointerSearcherMemDump2.AutoSize = true;
-            this.lblPointerSearcherMemDump2.Location = new System.Drawing.Point(8, 75);
-            this.lblPointerSearcherMemDump2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump2.Name = "lblPointerSearcherMemDump2";
-            this.lblPointerSearcherMemDump2.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump2.TabIndex = 4;
-            this.lblPointerSearcherMemDump2.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherMemDump1
-            // 
-            this.lblPointerSearcherMemDump1.AutoSize = true;
-            this.lblPointerSearcherMemDump1.Location = new System.Drawing.Point(8, 11);
-            this.lblPointerSearcherMemDump1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMemDump1.Name = "lblPointerSearcherMemDump1";
-            this.lblPointerSearcherMemDump1.Size = new System.Drawing.Size(103, 17);
-            this.lblPointerSearcherMemDump1.TabIndex = 0;
-            this.lblPointerSearcherMemDump1.Text = "Memory Dump:";
-            // 
-            // lblPointerSearcherMode
-            // 
-            this.lblPointerSearcherMode.AutoSize = true;
-            this.lblPointerSearcherMode.BackColor = System.Drawing.Color.Transparent;
-            this.lblPointerSearcherMode.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPointerSearcherMode.Location = new System.Drawing.Point(405, 544);
-            this.lblPointerSearcherMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherMode.Name = "lblPointerSearcherMode";
-            this.lblPointerSearcherMode.Size = new System.Drawing.Size(47, 17);
-            this.lblPointerSearcherMode.TabIndex = 8;
-            this.lblPointerSearcherMode.Text = "Mode:";
-            // 
-            // txtPointerSearcherAddress3
-            // 
-            this.txtPointerSearcherAddress3.Enabled = false;
-            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(129, 167);
-            this.txtPointerSearcherAddress3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress3.MaxLength = 10;
-            this.txtPointerSearcherAddress3.Name = "txtPointerSearcherAddress3";
-            this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress3.TabIndex = 27;
-            this.txtPointerSearcherAddress3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // lblPointerSearcherAddress2
-            // 
-            this.lblPointerSearcherAddress2.AutoSize = true;
-            this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(8, 107);
-            this.lblPointerSearcherAddress2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
-            this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress2.TabIndex = 6;
-            this.lblPointerSearcherAddress2.Text = "Address:";
-            // 
-            // lblPointerSearcherAddress1
-            // 
-            this.lblPointerSearcherAddress1.AutoSize = true;
-            this.lblPointerSearcherAddress1.Location = new System.Drawing.Point(8, 43);
-            this.lblPointerSearcherAddress1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPointerSearcherAddress1.Name = "lblPointerSearcherAddress1";
-            this.lblPointerSearcherAddress1.Size = new System.Drawing.Size(64, 17);
-            this.lblPointerSearcherAddress1.TabIndex = 2;
-            this.lblPointerSearcherAddress1.Text = "Address:";
-            // 
-            // txtPointerSearcherMemDump3
-            // 
-            this.txtPointerSearcherMemDump3.AllowDrop = true;
-            this.txtPointerSearcherMemDump3.Enabled = false;
-            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(129, 135);
-            this.txtPointerSearcherMemDump3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump3.Name = "txtPointerSearcherMemDump3";
-            this.txtPointerSearcherMemDump3.ReadOnly = true;
-            this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump3.TabIndex = 26;
-            this.txtPointerSearcherMemDump3.Click += new System.EventHandler(this.txtPointerSearcherMemDump3_Click);
-            this.txtPointerSearcherMemDump3.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump3.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump3.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtPointerSearcherMemDump2
-            // 
-            this.txtPointerSearcherMemDump2.AllowDrop = true;
-            this.txtPointerSearcherMemDump2.Enabled = false;
-            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(129, 71);
-            this.txtPointerSearcherMemDump2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
-            this.txtPointerSearcherMemDump2.ReadOnly = true;
-            this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump2.TabIndex = 5;
-            this.txtPointerSearcherMemDump2.Click += new System.EventHandler(this.txtPointerSearcherMemDump2_Click);
-            this.txtPointerSearcherMemDump2.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump2.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump2.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtPointerSearcherMemDump1
-            // 
-            this.txtPointerSearcherMemDump1.AllowDrop = true;
-            this.txtPointerSearcherMemDump1.Location = new System.Drawing.Point(129, 7);
-            this.txtPointerSearcherMemDump1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherMemDump1.Name = "txtPointerSearcherMemDump1";
-            this.txtPointerSearcherMemDump1.ReadOnly = true;
-            this.txtPointerSearcherMemDump1.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherMemDump1.TabIndex = 1;
-            this.txtPointerSearcherMemDump1.Click += new System.EventHandler(this.txtPointerSearcherMemDump1_Click);
-            this.txtPointerSearcherMemDump1.TextChanged += new System.EventHandler(this.txtPointerSearcherMemDump_TextChanged);
-            this.txtPointerSearcherMemDump1.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragDrop);
-            this.txtPointerSearcherMemDump1.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFileDragDrop_DragEnter);
-            // 
-            // txtPointerSearcherAddress2
-            // 
-            this.txtPointerSearcherAddress2.Enabled = false;
-            this.txtPointerSearcherAddress2.Location = new System.Drawing.Point(129, 103);
-            this.txtPointerSearcherAddress2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress2.MaxLength = 10;
-            this.txtPointerSearcherAddress2.Name = "txtPointerSearcherAddress2";
-            this.txtPointerSearcherAddress2.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress2.TabIndex = 7;
-            this.txtPointerSearcherAddress2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // txtPointerSearcherAddress1
-            // 
-            this.txtPointerSearcherAddress1.Location = new System.Drawing.Point(129, 39);
-            this.txtPointerSearcherAddress1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPointerSearcherAddress1.MaxLength = 10;
-            this.txtPointerSearcherAddress1.Name = "txtPointerSearcherAddress1";
-            this.txtPointerSearcherAddress1.Size = new System.Drawing.Size(251, 22);
-            this.txtPointerSearcherAddress1.TabIndex = 3;
-            this.txtPointerSearcherAddress1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValidateHexString_KeyPress);
-            // 
-            // tabVitaCheat
-            // 
-            this.tabVitaCheat.Controls.Add(this.txtVCInstructions);
-            this.tabVitaCheat.Controls.Add(this.groupVitaCheatCompression);
-            this.tabVitaCheat.Controls.Add(this.lblVitaCheatPointerLevel);
-            this.tabVitaCheat.Controls.Add(this.comboVitaCheatPointerLevel);
-            this.tabVitaCheat.Controls.Add(this.pnlVitaCheatBitType);
-            this.tabVitaCheat.Controls.Add(this.groupVitaCheatAddress2Offset);
-            this.tabVitaCheat.Controls.Add(this.groupVitaCheatAddress1Offset);
-            this.tabVitaCheat.Controls.Add(this.btnVitaCheatGenerate);
-            this.tabVitaCheat.Controls.Add(this.txtVitaCheatCode);
-            this.tabVitaCheat.Controls.Add(this.lblVitaCheatValue);
-            this.tabVitaCheat.Controls.Add(this.txtVitaCheatValue);
-            this.tabVitaCheat.Controls.Add(this.lblVitaCheatAddress2);
-            this.tabVitaCheat.Controls.Add(this.txtVitaCheatAddress2);
-            this.tabVitaCheat.Controls.Add(this.lblVitaCheatAddress1);
-            this.tabVitaCheat.Controls.Add(this.txtVitaCheatAddress1);
-            this.tabVitaCheat.Controls.Add(this.lblVitaCheatCodeType);
-            this.tabVitaCheat.Controls.Add(this.comboVitaCheatCodeType);
-            this.tabVitaCheat.Location = new System.Drawing.Point(4, 25);
-            this.tabVitaCheat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabVitaCheat.Name = "tabVitaCheat";
-            this.tabVitaCheat.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabVitaCheat.Size = new System.Drawing.Size(1012, 709);
-            this.tabVitaCheat.TabIndex = 2;
-            this.tabVitaCheat.Text = "VitaCheat";
-            this.tabVitaCheat.UseVisualStyleBackColor = true;
-            // 
-            // txtVCInstructions
-            // 
-            this.txtVCInstructions.BackColor = System.Drawing.SystemColors.Control;
-            this.txtVCInstructions.Location = new System.Drawing.Point(392, 464);
-            this.txtVCInstructions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVCInstructions.Multiline = true;
-            this.txtVCInstructions.Name = "txtVCInstructions";
-            this.txtVCInstructions.ReadOnly = true;
-            this.txtVCInstructions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtVCInstructions.Size = new System.Drawing.Size(608, 234);
-            this.txtVCInstructions.TabIndex = 17;
-            // 
-            // groupVitaCheatCompression
-            // 
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatCompressionLevelOffset);
-            this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressionLevelOffset);
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatValueGap);
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatAddressGap);
-            this.groupVitaCheatCompression.Controls.Add(this.lblVitaCheatCompressions);
-            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
-            this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
-            this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
-            this.groupVitaCheatCompression.Location = new System.Drawing.Point(12, 356);
-            this.groupVitaCheatCompression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
-            this.groupVitaCheatCompression.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatCompression.Size = new System.Drawing.Size(315, 105);
-            this.groupVitaCheatCompression.TabIndex = 16;
-            this.groupVitaCheatCompression.TabStop = false;
-            this.groupVitaCheatCompression.Text = "Compression Options";
-            // 
-            // lblVitaCheatValueGap
-            // 
-            this.lblVitaCheatValueGap.AutoSize = true;
-            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(160, 52);
-            this.lblVitaCheatValueGap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
-            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(79, 17);
-            this.lblVitaCheatValueGap.TabIndex = 5;
-            this.lblVitaCheatValueGap.Text = "Value Gap:";
-            // 
-            // lblVitaCheatAddressGap
-            // 
-            this.lblVitaCheatAddressGap.AutoSize = true;
-            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(8, 52);
-            this.lblVitaCheatAddressGap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
-            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(95, 17);
-            this.lblVitaCheatAddressGap.TabIndex = 4;
-            this.lblVitaCheatAddressGap.Text = "Address Gap:";
-            // 
-            // lblVitaCheatCompressions
-            // 
-            this.lblVitaCheatCompressions.AutoSize = true;
-            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(8, 27);
-            this.lblVitaCheatCompressions.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatCompressions.Name = "lblVitaCheatCompressions";
-            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(101, 17);
-            this.lblVitaCheatCompressions.TabIndex = 3;
-            this.lblVitaCheatCompressions.Text = "Compressions:";
-            // 
-            // txtVitaCheatValueGap
-            // 
-            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(164, 71);
-            this.txtVitaCheatValueGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
-            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatValueGap.TabIndex = 2;
-            this.txtVitaCheatValueGap.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddressGap
-            // 
-            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(12, 71);
-            this.txtVitaCheatAddressGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
-            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddressGap.TabIndex = 1;
-            this.txtVitaCheatAddressGap.Text = "0x00000000";
-            // 
-            // numericVitaCheatCompressions
-            // 
-            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(117, 25);
-            this.numericVitaCheatCompressions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.numericVitaCheatCompressions.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericVitaCheatCompressions.Name = "numericVitaCheatCompressions";
-            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(60, 22);
-            this.numericVitaCheatCompressions.TabIndex = 0;
-            // 
-            // lblVitaCheatPointerLevel
-            // 
-            this.lblVitaCheatPointerLevel.AutoSize = true;
-            this.lblVitaCheatPointerLevel.Location = new System.Drawing.Point(8, 143);
-            this.lblVitaCheatPointerLevel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatPointerLevel.Name = "lblVitaCheatPointerLevel";
-            this.lblVitaCheatPointerLevel.Size = new System.Drawing.Size(91, 17);
-            this.lblVitaCheatPointerLevel.TabIndex = 15;
-            this.lblVitaCheatPointerLevel.Text = "Pointer Level";
-            // 
-            // comboVitaCheatPointerLevel
-            // 
-            this.comboVitaCheatPointerLevel.DisplayMember = "0";
-            this.comboVitaCheatPointerLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboVitaCheatPointerLevel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboVitaCheatPointerLevel.FormattingEnabled = true;
-            this.comboVitaCheatPointerLevel.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.comboVitaCheatPointerLevel.Location = new System.Drawing.Point(120, 139);
-            this.comboVitaCheatPointerLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboVitaCheatPointerLevel.MaxDropDownItems = 5;
-            this.comboVitaCheatPointerLevel.Name = "comboVitaCheatPointerLevel";
-            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(199, 24);
-            this.comboVitaCheatPointerLevel.TabIndex = 14;
-            this.comboVitaCheatPointerLevel.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatPointerLevel_SelectedIndexChanged);
-            // 
-            // pnlVitaCheatBitType
-            // 
-            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType32Bit);
-            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType16Bit);
-            this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType8Bit);
-            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(15, 468);
-            this.pnlVitaCheatBitType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlVitaCheatBitType.Name = "pnlVitaCheatBitType";
-            this.pnlVitaCheatBitType.Size = new System.Drawing.Size(267, 25);
-            this.pnlVitaCheatBitType.TabIndex = 13;
-            // 
-            // rdbVitaCheatBitType32Bit
-            // 
-            this.rdbVitaCheatBitType32Bit.AutoSize = true;
-            this.rdbVitaCheatBitType32Bit.Checked = true;
-            this.rdbVitaCheatBitType32Bit.Location = new System.Drawing.Point(155, 0);
-            this.rdbVitaCheatBitType32Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbVitaCheatBitType32Bit.Name = "rdbVitaCheatBitType32Bit";
-            this.rdbVitaCheatBitType32Bit.Size = new System.Drawing.Size(66, 21);
-            this.rdbVitaCheatBitType32Bit.TabIndex = 2;
-            this.rdbVitaCheatBitType32Bit.TabStop = true;
-            this.rdbVitaCheatBitType32Bit.Text = "32-Bit";
-            this.rdbVitaCheatBitType32Bit.UseVisualStyleBackColor = true;
-            // 
-            // rdbVitaCheatBitType16Bit
-            // 
-            this.rdbVitaCheatBitType16Bit.AutoSize = true;
-            this.rdbVitaCheatBitType16Bit.Location = new System.Drawing.Point(76, 0);
-            this.rdbVitaCheatBitType16Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbVitaCheatBitType16Bit.Name = "rdbVitaCheatBitType16Bit";
-            this.rdbVitaCheatBitType16Bit.Size = new System.Drawing.Size(66, 21);
-            this.rdbVitaCheatBitType16Bit.TabIndex = 1;
-            this.rdbVitaCheatBitType16Bit.Text = "16-Bit";
-            this.rdbVitaCheatBitType16Bit.UseVisualStyleBackColor = true;
-            // 
-            // rdbVitaCheatBitType8Bit
-            // 
-            this.rdbVitaCheatBitType8Bit.AutoSize = true;
-            this.rdbVitaCheatBitType8Bit.Location = new System.Drawing.Point(5, 0);
-            this.rdbVitaCheatBitType8Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rdbVitaCheatBitType8Bit.Name = "rdbVitaCheatBitType8Bit";
-            this.rdbVitaCheatBitType8Bit.Size = new System.Drawing.Size(58, 21);
-            this.rdbVitaCheatBitType8Bit.TabIndex = 0;
-            this.rdbVitaCheatBitType8Bit.Text = "8-Bit";
-            this.rdbVitaCheatBitType8Bit.UseVisualStyleBackColor = true;
-            // 
-            // groupVitaCheatAddress2Offset
-            // 
-            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset5);
-            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset4);
-            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset3);
-            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset2);
-            this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset1);
-            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(173, 172);
-            this.groupVitaCheatAddress2Offset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatAddress2Offset.Name = "groupVitaCheatAddress2Offset";
-            this.groupVitaCheatAddress2Offset.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatAddress2Offset.Size = new System.Drawing.Size(153, 185);
-            this.groupVitaCheatAddress2Offset.TabIndex = 12;
-            this.groupVitaCheatAddress2Offset.TabStop = false;
-            this.groupVitaCheatAddress2Offset.Text = "Address 2 Offsets";
-            // 
-            // txtVitaCheatAddress2Offset5
-            // 
-            this.txtVitaCheatAddress2Offset5.Location = new System.Drawing.Point(9, 151);
-            this.txtVitaCheatAddress2Offset5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2Offset5.Name = "txtVitaCheatAddress2Offset5";
-            this.txtVitaCheatAddress2Offset5.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress2Offset5.TabIndex = 4;
-            this.txtVitaCheatAddress2Offset5.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress2Offset4
-            // 
-            this.txtVitaCheatAddress2Offset4.Location = new System.Drawing.Point(9, 119);
-            this.txtVitaCheatAddress2Offset4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2Offset4.Name = "txtVitaCheatAddress2Offset4";
-            this.txtVitaCheatAddress2Offset4.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress2Offset4.TabIndex = 3;
-            this.txtVitaCheatAddress2Offset4.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress2Offset3
-            // 
-            this.txtVitaCheatAddress2Offset3.Location = new System.Drawing.Point(9, 87);
-            this.txtVitaCheatAddress2Offset3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2Offset3.Name = "txtVitaCheatAddress2Offset3";
-            this.txtVitaCheatAddress2Offset3.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress2Offset3.TabIndex = 2;
-            this.txtVitaCheatAddress2Offset3.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress2Offset2
-            // 
-            this.txtVitaCheatAddress2Offset2.Location = new System.Drawing.Point(9, 55);
-            this.txtVitaCheatAddress2Offset2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2Offset2.Name = "txtVitaCheatAddress2Offset2";
-            this.txtVitaCheatAddress2Offset2.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress2Offset2.TabIndex = 1;
-            this.txtVitaCheatAddress2Offset2.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress2Offset1
-            // 
-            this.txtVitaCheatAddress2Offset1.Location = new System.Drawing.Point(9, 23);
-            this.txtVitaCheatAddress2Offset1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2Offset1.Name = "txtVitaCheatAddress2Offset1";
-            this.txtVitaCheatAddress2Offset1.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress2Offset1.TabIndex = 0;
-            this.txtVitaCheatAddress2Offset1.Text = "0x00000000";
-            // 
-            // groupVitaCheatAddress1Offset
-            // 
-            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset5);
-            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset4);
-            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset3);
-            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset2);
-            this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset1);
-            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(12, 172);
-            this.groupVitaCheatAddress1Offset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatAddress1Offset.Name = "groupVitaCheatAddress1Offset";
-            this.groupVitaCheatAddress1Offset.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupVitaCheatAddress1Offset.Size = new System.Drawing.Size(153, 185);
-            this.groupVitaCheatAddress1Offset.TabIndex = 11;
-            this.groupVitaCheatAddress1Offset.TabStop = false;
-            this.groupVitaCheatAddress1Offset.Text = "Address 1 Offsets";
-            // 
-            // txtVitaCheatAddress1Offset5
-            // 
-            this.txtVitaCheatAddress1Offset5.Location = new System.Drawing.Point(9, 151);
-            this.txtVitaCheatAddress1Offset5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1Offset5.Name = "txtVitaCheatAddress1Offset5";
-            this.txtVitaCheatAddress1Offset5.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress1Offset5.TabIndex = 4;
-            this.txtVitaCheatAddress1Offset5.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress1Offset4
-            // 
-            this.txtVitaCheatAddress1Offset4.Location = new System.Drawing.Point(9, 119);
-            this.txtVitaCheatAddress1Offset4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1Offset4.Name = "txtVitaCheatAddress1Offset4";
-            this.txtVitaCheatAddress1Offset4.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress1Offset4.TabIndex = 3;
-            this.txtVitaCheatAddress1Offset4.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress1Offset3
-            // 
-            this.txtVitaCheatAddress1Offset3.Location = new System.Drawing.Point(9, 87);
-            this.txtVitaCheatAddress1Offset3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1Offset3.Name = "txtVitaCheatAddress1Offset3";
-            this.txtVitaCheatAddress1Offset3.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress1Offset3.TabIndex = 2;
-            this.txtVitaCheatAddress1Offset3.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress1Offset2
-            // 
-            this.txtVitaCheatAddress1Offset2.Location = new System.Drawing.Point(9, 55);
-            this.txtVitaCheatAddress1Offset2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1Offset2.Name = "txtVitaCheatAddress1Offset2";
-            this.txtVitaCheatAddress1Offset2.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress1Offset2.TabIndex = 1;
-            this.txtVitaCheatAddress1Offset2.Text = "0x00000000";
-            // 
-            // txtVitaCheatAddress1Offset1
-            // 
-            this.txtVitaCheatAddress1Offset1.Location = new System.Drawing.Point(9, 23);
-            this.txtVitaCheatAddress1Offset1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1Offset1.Name = "txtVitaCheatAddress1Offset1";
-            this.txtVitaCheatAddress1Offset1.Size = new System.Drawing.Size(132, 22);
-            this.txtVitaCheatAddress1Offset1.TabIndex = 0;
-            this.txtVitaCheatAddress1Offset1.Text = "0x00000000";
-            // 
-            // btnVitaCheatGenerate
-            // 
-            this.btnVitaCheatGenerate.Location = new System.Drawing.Point(284, 464);
-            this.btnVitaCheatGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnVitaCheatGenerate.Name = "btnVitaCheatGenerate";
-            this.btnVitaCheatGenerate.Size = new System.Drawing.Size(100, 28);
-            this.btnVitaCheatGenerate.TabIndex = 10;
-            this.btnVitaCheatGenerate.Text = "Generate!";
-            this.btnVitaCheatGenerate.UseVisualStyleBackColor = true;
-            this.btnVitaCheatGenerate.Click += new System.EventHandler(this.BtnVitaCheatGenerate_Click);
-            // 
-            // txtVitaCheatCode
-            // 
-            this.txtVitaCheatCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtVitaCheatCode.Location = new System.Drawing.Point(12, 500);
-            this.txtVitaCheatCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatCode.Multiline = true;
-            this.txtVitaCheatCode.Name = "txtVitaCheatCode";
-            this.txtVitaCheatCode.ReadOnly = true;
-            this.txtVitaCheatCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtVitaCheatCode.Size = new System.Drawing.Size(371, 198);
-            this.txtVitaCheatCode.TabIndex = 9;
-            this.txtVitaCheatCode.WordWrap = false;
-            // 
-            // lblVitaCheatValue
-            // 
-            this.lblVitaCheatValue.AutoSize = true;
-            this.lblVitaCheatValue.Location = new System.Drawing.Point(8, 110);
-            this.lblVitaCheatValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatValue.Name = "lblVitaCheatValue";
-            this.lblVitaCheatValue.Size = new System.Drawing.Size(101, 17);
-            this.lblVitaCheatValue.TabIndex = 8;
-            this.lblVitaCheatValue.Text = "Desired Value:";
-            // 
-            // txtVitaCheatValue
-            // 
-            this.txtVitaCheatValue.Location = new System.Drawing.Point(120, 106);
-            this.txtVitaCheatValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatValue.Name = "txtVitaCheatValue";
-            this.txtVitaCheatValue.Size = new System.Drawing.Size(199, 22);
-            this.txtVitaCheatValue.TabIndex = 7;
-            this.txtVitaCheatValue.Text = "99";
-            // 
-            // lblVitaCheatAddress2
-            // 
-            this.lblVitaCheatAddress2.AutoSize = true;
-            this.lblVitaCheatAddress2.Location = new System.Drawing.Point(8, 78);
-            this.lblVitaCheatAddress2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatAddress2.Name = "lblVitaCheatAddress2";
-            this.lblVitaCheatAddress2.Size = new System.Drawing.Size(80, 17);
-            this.lblVitaCheatAddress2.TabIndex = 6;
-            this.lblVitaCheatAddress2.Text = "Copy From:";
-            // 
-            // txtVitaCheatAddress2
-            // 
-            this.txtVitaCheatAddress2.Location = new System.Drawing.Point(120, 74);
-            this.txtVitaCheatAddress2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress2.Name = "txtVitaCheatAddress2";
-            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(199, 22);
-            this.txtVitaCheatAddress2.TabIndex = 5;
-            this.txtVitaCheatAddress2.Text = "0x00000000";
-            // 
-            // lblVitaCheatAddress1
-            // 
-            this.lblVitaCheatAddress1.AutoSize = true;
-            this.lblVitaCheatAddress1.Location = new System.Drawing.Point(8, 46);
-            this.lblVitaCheatAddress1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatAddress1.Name = "lblVitaCheatAddress1";
-            this.lblVitaCheatAddress1.Size = new System.Drawing.Size(76, 17);
-            this.lblVitaCheatAddress1.TabIndex = 4;
-            this.lblVitaCheatAddress1.Text = "Address 1:";
-            // 
-            // txtVitaCheatAddress1
-            // 
-            this.txtVitaCheatAddress1.Location = new System.Drawing.Point(120, 42);
-            this.txtVitaCheatAddress1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtVitaCheatAddress1.Name = "txtVitaCheatAddress1";
-            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(199, 22);
-            this.txtVitaCheatAddress1.TabIndex = 3;
-            this.txtVitaCheatAddress1.Text = "0x00000000";
-            // 
-            // lblVitaCheatCodeType
-            // 
-            this.lblVitaCheatCodeType.AutoSize = true;
-            this.lblVitaCheatCodeType.Location = new System.Drawing.Point(8, 12);
-            this.lblVitaCheatCodeType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatCodeType.Name = "lblVitaCheatCodeType";
-            this.lblVitaCheatCodeType.Size = new System.Drawing.Size(81, 17);
-            this.lblVitaCheatCodeType.TabIndex = 2;
-            this.lblVitaCheatCodeType.Text = "Code Type:";
-            // 
-            // comboVitaCheatCodeType
-            // 
-            this.comboVitaCheatCodeType.DisplayMember = "0";
-            this.comboVitaCheatCodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboVitaCheatCodeType.FormattingEnabled = true;
-            this.comboVitaCheatCodeType.Location = new System.Drawing.Point(120, 9);
-            this.comboVitaCheatCodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboVitaCheatCodeType.Name = "comboVitaCheatCodeType";
-            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(199, 24);
-            this.comboVitaCheatCodeType.TabIndex = 1;
-            this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
-            // 
-            // numericVitaCheatCompressionLevelOffset
-            // 
-            this.numericVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(236, 25);
-            this.numericVitaCheatCompressionLevelOffset.Margin = new System.Windows.Forms.Padding(4);
-            this.numericVitaCheatCompressionLevelOffset.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericVitaCheatCompressionLevelOffset.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericVitaCheatCompressionLevelOffset.Name = "numericVitaCheatCompressionLevelOffset";
-            this.numericVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(60, 22);
-            this.numericVitaCheatCompressionLevelOffset.TabIndex = 6;
-            this.numericVitaCheatCompressionLevelOffset.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // lblVitaCheatCompressionLevelOffset
-            // 
-            this.lblVitaCheatCompressionLevelOffset.AutoSize = true;
-            this.lblVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(185, 27);
-            this.lblVitaCheatCompressionLevelOffset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVitaCheatCompressionLevelOffset.Name = "lblVitaCheatCompressionLevelOffset";
-            this.lblVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(46, 17);
-            this.lblVitaCheatCompressionLevelOffset.TabIndex = 7;
-            this.lblVitaCheatCompressionLevelOffset.Text = "Level:";
-            // 
-            // frmMain
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1025, 814);
-            this.Controls.Add(this.tctrlTabs);
-            this.Controls.Add(this.frmStatusStrip);
-            this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.MaximizeBox = false;
-            this.Name = "frmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TempAR - Vita Edition  V3.1";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.pnlConvertFormat.ResumeLayout(false);
-            this.pnlConvertFormat.PerformLayout();
-            this.pnlConvertFile.ResumeLayout(false);
-            this.pnlConvertFile.PerformLayout();
-            this.frmStatusStrip.ResumeLayout(false);
-            this.frmStatusStrip.PerformLayout();
-            this.tctrlTabs.ResumeLayout(false);
-            this.tabConverter.ResumeLayout(false);
-            this.pnlConvertType.ResumeLayout(false);
-            this.pnlConvertType.PerformLayout();
-            this.pnlConvertText.ResumeLayout(false);
-            this.pnlConvertText.PerformLayout();
-            this.tabPointerSearcher.ResumeLayout(false);
-            this.tabPointerSearcher.PerformLayout();
-            this.pnlPointerSearcherCodeType.ResumeLayout(false);
-            this.pnlPointerSearcherCodeType.PerformLayout();
-            this.pnlPointerSearcherBitType.ResumeLayout(false);
-            this.pnlPointerSearcherBitType.PerformLayout();
-            this.tabVitaCheat.ResumeLayout(false);
-            this.tabVitaCheat.PerformLayout();
-            this.groupVitaCheatCompression.ResumeLayout(false);
-            this.groupVitaCheatCompression.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressions)).EndInit();
-            this.pnlVitaCheatBitType.ResumeLayout(false);
-            this.pnlVitaCheatBitType.PerformLayout();
-            this.groupVitaCheatAddress2Offset.ResumeLayout(false);
-            this.groupVitaCheatAddress2Offset.PerformLayout();
-            this.groupVitaCheatAddress1Offset.ResumeLayout(false);
-            this.groupVitaCheatAddress1Offset.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVitaCheatCompressionLevelOffset)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-        }
-
-        private void cbCodeTypes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-
-            if (!String.IsNullOrEmpty(comboBox.Text))
+            if (!string.IsNullOrEmpty(comboBox.Text))
             {
-                this.btnConvert.Enabled = true;
-                this.btnConvert_Click(sender, e);
+                btnConvert.Enabled = true;
+                BtnConvert_Click(sender, e);
             }
         }
 
-        private void txtPointerSearcherMemDump_TextChanged(object sender, EventArgs e)
+        private void TxtPointerSearcherMemDump_TextChanged(object sender, EventArgs e)
         {
-            this.txtPointerSearcherMemDump2.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump1.Text);
-            this.txtPointerSearcherAddress2.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump1.Text);
-            this.txtPointerSearcherMemDump3.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump2.Text);
-            this.txtPointerSearcherAddress3.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump2.Text);
-            this.txtPointerSearcherMemDump4.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump3.Text);
-            this.txtPointerSearcherAddress4.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump3.Text);
-            this.txtPointerSearcherMemDump5.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump4.Text);
-            this.txtPointerSearcherAddress5.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump4.Text);
-            this.txtPointerSearcherMemDump6.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump5.Text);
-            this.txtPointerSearcherAddress6.Enabled = !string.IsNullOrEmpty(this.txtPointerSearcherMemDump5.Text);
+            txtPointerSearcherMemDump2.Enabled = txtPointerSearcherAddress2.Enabled = txtPointerSearcherMemDump1.Text.Length > 0;
+            txtPointerSearcherMemDump3.Enabled = txtPointerSearcherAddress3.Enabled = txtPointerSearcherMemDump2.Text.Length > 0;
+            txtPointerSearcherMemDump4.Enabled = txtPointerSearcherAddress4.Enabled = txtPointerSearcherMemDump3.Text.Length > 0;
+            txtPointerSearcherMemDump5.Enabled = txtPointerSearcherAddress5.Enabled = txtPointerSearcherMemDump4.Text.Length > 0;
+            txtPointerSearcherMemDump6.Enabled = txtPointerSearcherAddress6.Enabled = txtPointerSearcherMemDump5.Text.Length > 0;
         }
 
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtVitaCheatAddress2.Enabled = false;
-            this.txtVitaCheatValue.Enabled = true;
-            this.comboVitaCheatPointerLevel.Enabled = false;
-            this.groupVitaCheatAddress1Offset.Enabled = false;
-            this.groupVitaCheatAddress2Offset.Enabled = false;
-            this.groupVitaCheatCompression.Enabled = false;
-            switch (this.comboVitaCheatCodeType.Text)
+            txtVitaCheatAddress2.Enabled = false;
+            txtVitaCheatValue.Enabled = true;
+            comboVitaCheatPointerLevel.Enabled = false;
+            groupVitaCheatAddress1Offset.Enabled = false;
+            groupVitaCheatAddress2Offset.Enabled = false;
+            groupVitaCheatCompression.Enabled = false;
+            switch (comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE: // Write
-                    this.txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064";
+                    txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064";
                     break;
+
                 case VC_GEN_PNTR: // Pointer
-                    this.comboVitaCheatPointerLevel.Enabled = true;
-                    this.groupVitaCheatAddress1Offset.Enabled = true;
-                    this.txtVCInstructions.Text = "POINTER\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.";
+                    comboVitaCheatPointerLevel.Enabled = true;
+                    groupVitaCheatAddress1Offset.Enabled = true;
+                    txtVCInstructions.Text = "POINTER\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.";
                     break;
+
                 case VC_GEN_COMP: // Compress
-                    this.groupVitaCheatCompression.Enabled = true;
-                    this.numericVitaCheatCompressionLevelOffset.Enabled = false;
-                    this.lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    this.txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063";
+                    groupVitaCheatCompression.Enabled = true;
+                    numericVitaCheatCompressionLevelOffset.Enabled = false;
+                    lblVitaCheatCompressionLevelOffset.Enabled = false;
+                    txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063";
                     break;
+
                 case VC_GEN_MOV: // MOV
-                    this.txtVitaCheatAddress2.Enabled = true;
-                    this.txtVitaCheatValue.Enabled = false;
-                    this.txtVCInstructions.Text = "MOV/COPY\r\nMOV/Copy codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333";
+                    txtVitaCheatAddress2.Enabled = true;
+                    txtVitaCheatValue.Enabled = false;
+                    txtVCInstructions.Text = "MOV/COPY\r\nMOV/Copy codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333";
                     break;
+
                 case VC_GEN_PTRCOM: // Pointer Compress
-                    this.comboVitaCheatPointerLevel.Enabled = true;
-                    this.groupVitaCheatAddress1Offset.Enabled = true;
-                    this.groupVitaCheatCompression.Enabled = true;
-                    this.numericVitaCheatCompressionLevelOffset.Enabled = true;
-                    this.lblVitaCheatCompressionLevelOffset.Enabled = true;
-                    this.txtVCInstructions.Text = "POINTER + COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.\r\n\r\nMake sure to set which level you want the code to Compres at. Leaving at '1' will apply the compression at the first offset.\r\n\r\nExample:\r\n\r\n$7203 81000000 00000010\r\n$7200 00000000 00000200\r\n$7200 00000000 00003000\r\n$7702 00000000 00000063  - Compression level Changed to 2 with $7702\r\n$0003 00000100 00000000\r\n\r\nProduces the following code:\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000200  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000300  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000400  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n";
+                    comboVitaCheatPointerLevel.Enabled = true;
+                    groupVitaCheatAddress1Offset.Enabled = true;
+                    groupVitaCheatCompression.Enabled = true;
+                    numericVitaCheatCompressionLevelOffset.Enabled = true;
+                    lblVitaCheatCompressionLevelOffset.Enabled = true;
+                    txtVCInstructions.Text = "POINTER + COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.\r\n\r\nMake sure to set which level you want the code to Compres at. Leaving at '1' will apply the compression at the first offset.\r\n\r\nExample:\r\n\r\n$7203 81000000 00000010\r\n$7200 00000000 00000200\r\n$7200 00000000 00003000\r\n$7702 00000000 00000063  - Compression level Changed to 2 with $7702\r\n$0003 00000100 00000000\r\n\r\nProduces the following code:\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000200  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000300  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000400  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n";
                     break;
+
                 case VC_GEN_PTRMOV: // Pointer MOV
-                    this.comboVitaCheatPointerLevel.Enabled = true;
-                    this.groupVitaCheatAddress1Offset.Enabled = true;
-                    this.groupVitaCheatAddress2Offset.Enabled = true;
-                    this.txtVitaCheatValue.Enabled = false;
-                    this.txtVitaCheatAddress2.Enabled = true;
-                    this.txtVCInstructions.Text = "POINTER + MOV\r\nPointer MOV copies one address to another, but uses pionters as the starting points.";
+                    comboVitaCheatPointerLevel.Enabled = true;
+                    groupVitaCheatAddress1Offset.Enabled = true;
+                    groupVitaCheatAddress2Offset.Enabled = true;
+                    txtVitaCheatValue.Enabled = false;
+                    txtVitaCheatAddress2.Enabled = true;
+                    txtVCInstructions.Text = "POINTER + MOV\r\nPointer MOV copies one address to another, but uses pionters as the starting points.";
                     break;
             }
         }
 
         private void ComboVitaCheatPointerLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtVitaCheatAddress1Offset2.Enabled = false;
-            this.txtVitaCheatAddress2Offset2.Enabled = false;
-            this.txtVitaCheatAddress1Offset3.Enabled = false;
-            this.txtVitaCheatAddress2Offset3.Enabled = false;
-            this.txtVitaCheatAddress1Offset4.Enabled = false;
-            this.txtVitaCheatAddress2Offset4.Enabled = false;
-            this.txtVitaCheatAddress1Offset5.Enabled = false;
-            this.txtVitaCheatAddress2Offset5.Enabled = false;
-            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 1)
+            txtVitaCheatAddress1Offset2.Enabled = false;
+            txtVitaCheatAddress2Offset2.Enabled = false;
+            txtVitaCheatAddress1Offset3.Enabled = false;
+            txtVitaCheatAddress2Offset3.Enabled = false;
+            txtVitaCheatAddress1Offset4.Enabled = false;
+            txtVitaCheatAddress2Offset4.Enabled = false;
+            txtVitaCheatAddress1Offset5.Enabled = false;
+            txtVitaCheatAddress2Offset5.Enabled = false;
+            if (comboVitaCheatPointerLevel.SelectedIndex >= 1)
             {
-                this.txtVitaCheatAddress1Offset2.Enabled = true;
-                this.txtVitaCheatAddress2Offset2.Enabled = true;
+                txtVitaCheatAddress1Offset2.Enabled = true;
+                txtVitaCheatAddress2Offset2.Enabled = true;
             }
-            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 2)
+            if (comboVitaCheatPointerLevel.SelectedIndex >= 2)
             {
-                this.txtVitaCheatAddress1Offset3.Enabled = true;
-                this.txtVitaCheatAddress2Offset3.Enabled = true;
+                txtVitaCheatAddress1Offset3.Enabled = true;
+                txtVitaCheatAddress2Offset3.Enabled = true;
             }
-            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 3)
+            if (comboVitaCheatPointerLevel.SelectedIndex >= 3)
             {
-                this.txtVitaCheatAddress1Offset4.Enabled = true;
-                this.txtVitaCheatAddress2Offset4.Enabled = true;
+                txtVitaCheatAddress1Offset4.Enabled = true;
+                txtVitaCheatAddress2Offset4.Enabled = true;
             }
-            if (this.comboVitaCheatPointerLevel.SelectedIndex >= 4)
+            if (comboVitaCheatPointerLevel.SelectedIndex >= 4)
             {
-                this.txtVitaCheatAddress1Offset5.Enabled = true;
-                this.txtVitaCheatAddress2Offset5.Enabled = true;
+                txtVitaCheatAddress1Offset5.Enabled = true;
+                txtVitaCheatAddress2Offset5.Enabled = true;
             }
         }
+
         private void BtnVitaCheatGenerate_Click(object sender, EventArgs e)
         {
             //
             //Check for hex numbers and give error if bad
             //
-            uint VCadd1;
-            try
-            {
-                VCadd1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse Address 1, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            uint VCadd2;
-            try
-            {
-                VCadd2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse Address 2, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            uint VCaddgap;
-            try
-            {
-                VCaddgap = this.parseNum(this.txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            uint VCvalgap;
-            try
-            {
-                VCvalgap = this.parseNum(this.txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            uint VCcomps;
-            try
-            {
-                VCcomps = this.parseNum(this.numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier);
-            }
-            catch
-            {
-                int num2 = (int)MessageBox.Show("Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
-                return;
-            }
-            foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+            var VCadd1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier, "目的地址 格式错误!");
+            var VCadd2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier, "来源地址 格式错误!");
+            var VCaddgap = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "地址间隔 格式错误!");
+            var VCvalgap = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "数值间隔 格式错误!");
+            var VCcomps = Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "压缩计数 格式错误");
+
+            foreach (Control x in groupVitaCheatAddress1Offset.Controls)
             {
                 if (x is TextBox)
                 {
-                    if (((TextBox)x).Enabled == true)
+                    if (x.Enabled)
                     {
-
-                        try
-                        {
-                            uint VCgenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                        }
-                        catch
-                        {
-                            int num2 = (int)MessageBox.Show("Unable to parse Address 1's Offsets, make sure values are valid hexadecimal numbers.");
-                            return;
-                        }
+                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "目的地址偏移 格式错误!");
                     }
                 }
             }
-            foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
+            foreach (Control x in groupVitaCheatAddress2Offset.Controls)
             {
                 if (x is TextBox)
                 {
-                    if (((TextBox)x).Enabled == true)
+                    if (x.Enabled)
                     {
-
-                        try
-                        {
-                            uint VCgenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                        }
-                        catch
-                        {
-                            int num2 = (int)MessageBox.Show("Unable to parse Address 2's Offsets, make sure values are valid hexadecimal numbers.");
-                            return;
-                        }
+                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "来源地址偏移 格式错误!");
                     }
                 }
             }
-            string VCstr1 = "_V0 Generated Code\r\n\r\n";
-            uint VCAddr1 = this.parseNum(this.txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
-            uint VCAddr2 = this.parseNum(this.txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
-            uint VCAddGp = this.parseNum(this.txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
-            uint VCValGp = this.parseNum(this.txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
-            uint VCComps = this.parseNum(this.numericVitaCheatCompressions.Text);
-            uint VCValue = this.parseNum(this.txtVitaCheatValue.Text);
+            var VCstr1 = "_V0 Generated Code\r\n\r\n";
+            var VCAddr1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
+            var VCAddr2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
+            var VCAddGp = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
+            var VCValGp = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
+            var VCComps = Utils.ParseNum(numericVitaCheatCompressions.Text);
+            var VCValue = Utils.ParseNum(txtVitaCheatValue.Text);
             //
             //Get Bit Type from radio buttons
             //
-            int bittype = 2;
-            if (this.rdbVitaCheatBitType8Bit.Checked)
-            {
-                bittype = 0;
-            }
-            else if (this.rdbVitaCheatBitType16Bit.Checked)
-            {
-                bittype = 1;
-            }
-            else { bittype = 2; }
+            var bittype = 2;
+            bittype = rdbVitaCheatBitType8Bit.Checked ? 0 : rdbVitaCheatBitType16Bit.Checked ? 1 : 2;
+
             //
             // Generate code
             //
-            switch (this.comboVitaCheatCodeType.Text)
+            switch (comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE:
-                    string VCGenWrite1 = string.Format("$0{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
+                    var VCGenWrite1 = $"$0{bittype}00 {VCAddr1:X08} {VCValue:X08}\r\n";
+                    txtVitaCheatCode.Text = VCstr1 + VCGenWrite1;
                     break;
+
                 case VC_GEN_PNTR:
-                    string VCGenPtrstr2 = "";
-                    uint VCGenptroff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    string VCGenPtr1 = string.Format("$3{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptroff1);
-                    string VCGenPtr3 = string.Format("$3300 00000000 {0:X08}", VCValue);
-                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                    var VCGenPtrstr2 = "";
+                    var VCGenptroff1 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    var VCGenPtr1 = $"$3{bittype}0{comboVitaCheatPointerLevel.Text} {VCAddr1:X08} {VCGenptroff1:X08}\r\n";
+                    var VCGenPtr3 = $"$3300 00000000 {VCValue:X08}";
+
+                    foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
                         if (x is TextBox)
                         {
-                            if (((TextBox)x).Enabled == true)
+                            if (x.Enabled)
                             {
-                                uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                var VCGenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
-                                    VCGenPtrstr2 = string.Format("$3{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrstr2;
+                                    VCGenPtrstr2 = $"$3{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrstr2}";
                                 }
                             }
                         }
                     }
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtrstr2 + VCGenPtr3;
+                    txtVitaCheatCode.Text = VCstr1 + VCGenPtr1 + VCGenPtrstr2 + VCGenPtr3;
                     break;
+
                 case VC_GEN_COMP:
-                    string VCGenComp1 = string.Format("$4{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCValue);
-                    string VCGenComp2 = string.Format("${0:X04} {1:X08} {2:X08}\r\n", VCComps, VCAddGp, VCValGp);
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenComp1 + VCGenComp2;
+                    var VCGenComp1 = $"$4{bittype}00 {VCAddr1:X08} {VCValue:X08}\r\n";
+                    var VCGenComp2 = $"${VCComps:X04} {VCAddGp:X08} {VCValGp:X08}\r\n";
+                    txtVitaCheatCode.Text = VCstr1 + VCGenComp1 + VCGenComp2;
                     break;
+
                 case VC_GEN_MOV:
-                    string VCGenMov1 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
+                    var VCGenMov1 = string.Format("$5{0}00 {1:X08} {2:X08}\r\n", bittype, VCAddr1, VCAddr2);
+                    txtVitaCheatCode.Text = VCstr1 + VCGenMov1;
                     break;
+
                 case VC_GEN_PTRCOM:
-                    string VCGenPtrComstr2 = "";
-                    uint VCGenptrcomoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    string VCGenPtrCom1 = string.Format("$7{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrcomoff1);
-                    string VCGenPtrCom3 = string.Format("$770{0} 00000000 {1:X08}\r\n", numericVitaCheatCompressionLevelOffset.Text, VCValue);
-                    string VCGenPtrCom4 = string.Format("${0:X04} 0000{1:X04} 0000{2:X04}", VCComps, VCAddGp, VCValGp);
-                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                    var VCGenPtrComstr2 = "";
+                    var VCGenptrcomoff1 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    var VCGenPtrCom1 = $"$7{bittype}0{comboVitaCheatPointerLevel.Text} {VCAddr1:X08} {VCGenptrcomoff1:X08}\r\n";
+                    var VCGenPtrCom3 = $"$770{numericVitaCheatCompressionLevelOffset.Text} 00000000 {VCValue:X08}\r\n";
+                    var VCGenPtrCom4 = $"${VCComps:X04} 0000{VCAddGp:X04} 0000{VCValGp:X04}";
+                    foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
                         if (x is TextBox)
                         {
-                            if (((TextBox)x).Enabled == true)
+                            if (x.Enabled)
                             {
-                                uint VCGenptr2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                var VCGenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
-                                    VCGenPtrComstr2 = string.Format("$7{0}00 00000000 {1:X08}\r\n", bittype, VCGenptr2) + VCGenPtrComstr2;
+                                    VCGenPtrComstr2 = $"$7{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrComstr2}";
                                 }
                             }
                         }
                     }
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrComstr2 + VCGenPtrCom3 + VCGenPtrCom4;
+                    txtVitaCheatCode.Text = VCstr1 + VCGenPtrCom1 + VCGenPtrComstr2 + VCGenPtrCom3 + VCGenPtrCom4;
                     break;
+
                 case VC_GEN_PTRMOV:
-                    string VCGenPtrMovstr2 = "";
-                    uint VCGenptrmovoff1 = this.parseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    string VCGenPtrMov1 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype, comboVitaCheatPointerLevel.Text, VCAddr1, VCGenptrmovoff1);
-                    string VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
-                    foreach (Control x in this.groupVitaCheatAddress1Offset.Controls)
+                    var VCGenPtrMovstr2 = "";
+                    var VCGenptrmovoff1 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    var VCGenPtrMov1 = $"$8{bittype}0{comboVitaCheatPointerLevel.Text} {VCAddr1:X08} {VCGenptrmovoff1:X08}\r\n";
+                    var VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
+                    foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
                         if (x is TextBox)
                         {
-                            if (((TextBox)x).Enabled == true)
+                            if (x.Enabled)
                             {
-                                uint VCGenptrmov2 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                var VCGenptrmov2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
-                                    VCGenPtrMovstr2 = string.Format("$8{0}00 00000000 {1:X08}\r\n", bittype, VCGenptrmov2) + VCGenPtrMovstr2;
+                                    VCGenPtrMovstr2 = $"$8{bittype}00 00000000 {VCGenptrmov2:X08}\r\n{VCGenPtrMovstr2}";
                                 }
                             }
                         }
                     }
-                    string VCGenPtr2str2 = "";
-                    uint VCGenptrmov2off1 = this.parseNum(txtVitaCheatAddress2Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    string VCGenPtrMov21 = string.Format("$8{0}0{1} {2:X08} {3:X08}\r\n", bittype + 4, comboVitaCheatPointerLevel.Text, VCAddr2, VCGenptrmov2off1);
-                    string VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
-                    foreach (Control x in this.groupVitaCheatAddress2Offset.Controls)
+                    var VCGenPtr2str2 = "";
+                    var VCGenptrmov2off1 = Utils.ParseNum(txtVitaCheatAddress2Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    var VCGenPtrMov21 = $"$8{bittype + 4}0{comboVitaCheatPointerLevel.Text} {VCAddr2:X08} {VCGenptrmov2off1:X08}\r\n";
+                    var VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
+                    foreach (Control x in groupVitaCheatAddress2Offset.Controls)
                     {
                         if (x is TextBox)
                         {
-                            if (((TextBox)x).Enabled == true)
+                            if (x.Enabled)
                             {
-                                uint VCGenptrmov22 = this.parseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
+                                uint VCGenptrmov22 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
                                 if (((TextBox)x).TabIndex != 0)
                                 {
-                                    VCGenPtr2str2 = string.Format("$8{0}00 00000000 {1:X08}\r\n", bittype + 4, VCGenptrmov22) + VCGenPtr2str2;
+                                    VCGenPtr2str2 = $"$8{bittype + 4}00 00000000 {VCGenptrmov22:X08}\r\n{VCGenPtr2str2}";
                                 }
                             }
                         }
                     }
-                    this.txtVitaCheatCode.Text = VCstr1 + VCGenPtrMov1 + VCGenPtrMovstr2 + VCGenPtrMov3 + VCGenPtrMov21 + VCGenPtr2str2 + VCGenPtrMov23;
+                    txtVitaCheatCode.Text = VCstr1 + VCGenPtrMov1 + VCGenPtrMovstr2 + VCGenPtrMov3 + VCGenPtrMov21 + VCGenPtr2str2 + VCGenPtrMov23;
+                    break;
+
+                default:
                     break;
             }
-
         }
     }
 }

@@ -3,14 +3,17 @@ using System.Windows.Forms;
 
 namespace TempAR
 {
-  internal static class Program
-  {
-    [STAThread]
-    private static void Main()
+    internal static class Program
     {
-      Application.EnableVisualStyles();
-      Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run((Form) new frmMain());
+        [STAThread]
+        private static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            using (var frmMain1 = new frmMain())
+            {
+                Application.Run(frmMain1);
+            }
+        }
     }
-  }
 }
