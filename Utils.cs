@@ -9,6 +9,7 @@ namespace TempAR
     public static class Utils
     {
         /// <summary>
+        /// Convert DEC to HEX
         /// 十六进制地址转10进制数值
         /// </summary>
         /// <param name="s"></param>
@@ -19,12 +20,13 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Convert DEC to HEX
         /// 十六进制地址转10进制数值
         /// </summary>
         /// <param name="s"></param>
         /// <param name="numstyle"></param>
         /// <returns></returns>
-        public static uint ParseNum(string s, NumberStyles numstyle, string title = "格式错误!")
+        public static uint ParseNum(string s, NumberStyles numstyle, string title = "Wrong Format!")
         {
             try
             {
@@ -36,12 +38,13 @@ namespace TempAR
             }
             catch (Exception)
             {
-                MessageBox.Show("无法解析，请确保数值为有效的16进制数。", title);
+                MessageBox.Show("Unable to parse, please make sure the value is a valid hexadecimal number.", title);
                 return 0;
             }
         }
 
         /// <summary>
+        /// Open Directory
         /// 打开目录
         /// </summary>
         /// <param name="defaultdir"></param>
@@ -63,13 +66,14 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Open a File
         /// 打开文件
         /// </summary>
         /// <param name="defaultfile"></param>
         /// <param name="filter"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public static string OpenFile(string defaultfile, string filter = null, string title = "打开")
+        public static string OpenFile(string defaultfile, string filter = null, string title = "Open file")
         {
             using (var openFileDialog = new OpenFileDialog
             {
@@ -86,13 +90,14 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Save File
         /// 保存文件
         /// </summary>
         /// <param name="defaultfile"></param>
         /// <param name="filter"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public static string SaveFile(string defaultfile, string filter = null, string title = "保存")
+        public static string SaveFile(string defaultfile, string filter = null, string title = "Save File")
         {
             using (var saveFileDialog = new SaveFileDialog
             {
@@ -109,6 +114,7 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Data Sorting
         /// 数据排序
         /// </summary>
         /// <typeparam name="T"></typeparam>

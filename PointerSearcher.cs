@@ -31,7 +31,7 @@ namespace TempAR
                 address += _memory_start;
             if (address > _memory_end)
             {
-                MessageBox.Show("地址值错误，请检查后再次输入。");
+                MessageBox.Show("Address value is too large, please input a smaller value for the address.");
                 return pointerSearcherLogList;
             }
             for (int index = 0; index < MemoryDump.Length; ++index)

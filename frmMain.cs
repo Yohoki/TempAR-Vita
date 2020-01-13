@@ -22,8 +22,8 @@ namespace TempAR
         private const string CT_CNV_CWCHEATPOPS = "CWCheat POPS";
 
         private const string CT_CNV_NITEPR = "NitePR";
-        private const string CT_CNV_R4CCE = "R4CCE 转 TempAR";
-        private const string CT_CNV_TEMPAR = "TempAR 转 R4CCE";
+        private const string CT_CNV_R4CCE = "R4CCE to CWCheat";
+        private const string CT_CNV_TEMPAR = "CWCheat to R4CCE";
 
         // Code types for pointer search tab
         private const string CT_PNT_VITACHEAT = "VitaCheat";
@@ -32,13 +32,13 @@ namespace TempAR
         private const string CT_PNT_AR = "AR";
 
         // Code types for VitaCheat Code Maker tab
-        private const string VC_GEN_WRITE = "写入码 ($0...)";
+        private const string VC_GEN_WRITE = "Write ($0...)";
 
-        private const string VC_GEN_PNTR = "指针码 ($3...)";
-        private const string VC_GEN_COMP = "压缩码 ($4...)";
-        private const string VC_GEN_MOV = "传送码 ($5...)";
-        private const string VC_GEN_PTRCOM = "指针压缩码 ($7...)";
-        private const string VC_GEN_PTRMOV = "指针传送码 ($8...)";
+        private const string VC_GEN_PNTR = "Pointer ($3...)";
+        private const string VC_GEN_COMP = "Compress ($4...)";
+        private const string VC_GEN_MOV = "MOV/Copy ($5...)";
+        private const string VC_GEN_PTRCOM = "Pointer+Compress ($7...)";
+        private const string VC_GEN_PTRMOV = "Pointer+MOV ($8...)";
 
         public int PointerBlk { get; private set; }
         public int PointerGrn { get; private set; }
@@ -75,6 +75,7 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Converstion mode Radio Button
         /// 转换器-转换模式单选
         /// </summary>
         /// <param name="sender"></param>
@@ -84,6 +85,11 @@ namespace TempAR
             ChangeFrameMode(rdbConvertText.Checked);
         }
 
+        /// <summary>
+        /// Convert linebreaks uniformly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtTextInput_TextChanged(object sender, EventArgs e)
         {
             txtTextInput.Text = txtTextInput.Text.Replace("\r\n", "\n").Replace("\n", "\r\n");
@@ -92,7 +98,7 @@ namespace TempAR
 
         private void BtnConvert_Click(object sender, EventArgs e)
         {
-            lblStatus.Text = "工作中...";
+            lblStatus.Text = "Working...";
             lblStatus.Visible = true;
             Refresh();
             if (rdbConvertText.Checked)
@@ -134,7 +140,7 @@ namespace TempAR
                         break;
 
                     case CT_CNV_R4CCE:
-                        MessageBox.Show("暂未支持此代码类型的文件转换!");
+                        MessageBox.Show("File conversion for this code type is not supported at this time!");
                         break;
 
                     case CT_CNV_TEMPAR:
@@ -155,15 +161,15 @@ namespace TempAR
             {
                 case 0:
                 case 1:
-                    txtInputPath.Text = Utils.OpenFile(txtInputPath.Text, "CWCheat 数据文件 (*.db)|*.db");
+                    txtInputPath.Text = Utils.OpenFile(txtInputPath.Text, "CWCheat Database File (*.db)|*.db", "Open");
                     break;
 
                 case 2:
-                    txtInputPath.Text = Utils.OpenDirectory(txtInputPath.Text, "选择您的 NitePR 代码文件目录:");
+                    txtInputPath.Text = Utils.OpenDirectory(txtInputPath.Text, "Select your NitePR code file directory:");
                     break;
 
                 case 3:
-                    MessageBox.Show("暂未支持此代码类型的文件转换!");
+                    MessageBox.Show("File conversion for this code type is not supported at this time!");
                     break;
 
                 default:
@@ -173,10 +179,11 @@ namespace TempAR
 
         private void BtnOutputBrowse_Click(object sender, EventArgs e)
         {
-            txtOutputPath.Text = Utils.SaveFile(txtOutputPath.Text, "TempAR 数据文件 (*.db)|*.db", "Save");
+            txtOutputPath.Text = Utils.SaveFile(txtOutputPath.Text, "CWCheat Database File (*.db)|*.db", "Save");
         }
 
         /// <summary>
+        /// Select all with Ctrl+S
         /// 实现ctrl+a全选
         /// </summary>
         /// <param name="sender"></param>
@@ -194,6 +201,7 @@ namespace TempAR
         }
 
         /// <summary>
+        /// Converter Code type mode switch
         /// 代码转换器- 文本文件模式切换
         /// </summary>
         /// <param name="mode"></param>
@@ -318,7 +326,7 @@ namespace TempAR
 
         private void TxtPointerSearcherMemDump_Click(object sender, EventArgs e)
         {
-            ((TextBox)sender).Text = Utils.OpenFile(((TextBox)sender).Text, null, "打开转储文件");
+            ((TextBox)sender).Text = Utils.OpenFile(((TextBox)sender).Text, null, "Open File...");
         }
 
         private void TreePointerSearcherPointers_KeyUp(object sender, KeyEventArgs e)
@@ -770,11 +778,11 @@ namespace TempAR
             //
             //Check for hex numbers and give error if bad
             //
-            var VCadd1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier, "目的地址 格式错误!");
-            var VCadd2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier, "来源地址 格式错误!");
-            var VCaddgap = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "地址间隔 格式错误!");
-            var VCvalgap = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "数值间隔 格式错误!");
-            var VCcomps = Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "压缩计数 格式错误");
+            var VCadd1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 1, make sure address is a valid hexadecimal number.");
+            var VCadd2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 2 (Copy from), make sure address is a valid hexadecimal number.");
+            var VCaddgap = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
+            var VCvalgap = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
+            var VCcomps = Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "You shouldn't be seeing this error! My bad, dude. Error: Compressions thingy is fucked.");
 
             foreach (Control x in groupVitaCheatAddress1Offset.Controls)
             {
@@ -782,7 +790,7 @@ namespace TempAR
                 {
                     if (x.Enabled)
                     {
-                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "目的地址偏移 格式错误!");
+                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "Wrong Format!");
                     }
                 }
             }
@@ -792,7 +800,7 @@ namespace TempAR
                 {
                     if (x.Enabled)
                     {
-                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "来源地址偏移 格式错误!");
+                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "Wrong Format!");
                     }
                 }
             }
