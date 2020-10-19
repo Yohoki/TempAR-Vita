@@ -687,9 +687,14 @@ namespace TempAR
             txtPointerSearcherMemDump5.Enabled = txtPointerSearcherAddress5.Enabled = txtPointerSearcherMemDump4.Text.Length > 0;
             txtPointerSearcherMemDump6.Enabled = txtPointerSearcherAddress6.Enabled = txtPointerSearcherMemDump5.Text.Length > 0;
         }
-
+        private void txtVCInstructions_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var strWiki = "https://github.com/r0ah/vitacheat/wiki/";
+            var strPage = "";
             txtVitaCheatAddress2.Enabled = false;
             txtVitaCheatValue.Enabled = true;
             comboVitaCheatPointerLevel.Enabled = false;
@@ -699,44 +704,50 @@ namespace TempAR
             switch (comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE: // Write
-                    txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064";
+                    strPage = "Write";
+                    txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_PNTR: // Pointer
+                    strPage = "Pointer-Write";
                     comboVitaCheatPointerLevel.Enabled = true;
                     groupVitaCheatAddress1Offset.Enabled = true;
-                    txtVCInstructions.Text = "POINTER\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.";
+                    txtVCInstructions.Text = "POINTER\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_COMP: // Compress
+                    strPage = "Compression";
                     groupVitaCheatCompression.Enabled = true;
                     numericVitaCheatCompressionLevelOffset.Enabled = false;
                     lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063";
+                    txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_MOV: // MOV
+                    strPage = "MOV";
                     txtVitaCheatAddress2.Enabled = true;
                     txtVitaCheatValue.Enabled = false;
-                    txtVCInstructions.Text = "MOV/COPY\r\nMOV/Copy codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333";
+                    txtVCInstructions.Text = "MOV/COPY\r\nMOV/Copy codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_PTRCOM: // Pointer Compress
+                    strPage = "Pointer-Compression";
                     comboVitaCheatPointerLevel.Enabled = true;
                     groupVitaCheatAddress1Offset.Enabled = true;
                     groupVitaCheatCompression.Enabled = true;
                     numericVitaCheatCompressionLevelOffset.Enabled = true;
                     lblVitaCheatCompressionLevelOffset.Enabled = true;
-                    txtVCInstructions.Text = "POINTER + COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.\r\n\r\nMake sure to set which level you want the code to Compres at. Leaving at '1' will apply the compression at the first offset.\r\n\r\nExample:\r\n\r\n$7203 81000000 00000010\r\n$7200 00000000 00000200\r\n$7200 00000000 00003000\r\n$7702 00000000 00000063  - Compression level Changed to 2 with $7702\r\n$0003 00000100 00000000\r\n\r\nProduces the following code:\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000200  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000300  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000400  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n";
+                    txtVCInstructions.Text = "POINTER + COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.\r\n\r\nMake sure to set which level you want the code to Compres at. Leaving at '1' will apply the compression at the first offset.\r\n\r\nExample:\r\n\r\n$7203 81000000 00000010\r\n$7200 00000000 00000200\r\n$7200 00000000 00003000\r\n$7702 00000000 00000063  - Compression level Changed to 2 with $7702\r\n$0003 00000100 00000000\r\n\r\nProduces the following code:\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000200  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000300  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\n\r\n$3203 81000000 00000010\r\n$3200 00000000 00000400  Compression Applied Here\r\n$3200 00000000 00003000\r\n$3303 00000000 00000063\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_PTRMOV: // Pointer MOV
+                    strPage = "Pointer-MOV";
                     comboVitaCheatPointerLevel.Enabled = true;
                     groupVitaCheatAddress1Offset.Enabled = true;
                     groupVitaCheatAddress2Offset.Enabled = true;
                     txtVitaCheatValue.Enabled = false;
                     txtVitaCheatAddress2.Enabled = true;
-                    txtVCInstructions.Text = "POINTER + MOV\r\nPointer MOV copies one address to another, but uses pionters as the starting points.";
+                    txtVCInstructions.Text = "POINTER + MOV\r\nPointer MOV copies one address to another, but uses pionters as the starting points.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
             }
         }
