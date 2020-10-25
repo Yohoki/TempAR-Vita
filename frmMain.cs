@@ -41,7 +41,12 @@ namespace TempAR
         private const string VC_GEN_BTNPAD = "Button Pad ($C...)";
         private const string VC_GEN_CNDTN = "Condition ($D...)";
         private const string VC_GEN_B2COD = "B200 ($B...)";
-        
+
+        // Segment Options for VitaCheat Code Maker tab
+        private const string VC_GEN_B2_NONE = "None";
+        private const string VC_GEN_B2_SEG0 = "Seg0";
+        private const string VC_GEN_B2_SEG1 = "Seg1";
+
         public int PointerBlk { get; private set; }
         public int PointerGrn { get; private set; }
         public int PointerBlu { get; private set; }
@@ -79,6 +84,13 @@ namespace TempAR
             VC_GEN_CNDTN,
             VC_GEN_B2COD,});
             comboVitaCheatCodeType.Text = VC_GEN_WRITE;
+
+            //vita cheat B200 drop list text
+            comboVitaCheatB200.Items.AddRange(new object[] {
+            VC_GEN_B2_NONE,
+            VC_GEN_B2_SEG0,
+            VC_GEN_B2_SEG1,});
+            comboVitaCheatB200.Text = VC_GEN_B2_NONE;
 
             //vita cheat button type drop list text and value
             List<ButtonType> BTT1 = new List<ButtonType>();
@@ -281,6 +293,7 @@ namespace TempAR
         {
             comboPointerSearcherMode.SelectedIndex = 0;
             comboVitaCheatCodeType.SelectedIndex = 0;
+            comboVitaCheatB200.SelectedIndex = 0;
             comboVitaCheatPointerLevel.SelectedIndex = 0;
             comboVitaCheatButtonType.SelectedIndex = 0;
             comboVitaCheatButton.SelectedIndex = 0;
@@ -752,6 +765,10 @@ namespace TempAR
         {
             System.Diagnostics.Process.Start(e.LinkText);
         }
+        private void ComboVitaCheatB200_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Git Wiki url
@@ -960,6 +977,25 @@ namespace TempAR
             var VCRelLin = Utils.ParseNum("1");
             var VCSeg = Utils.ParseNum("1");
             var VCNull = Utils.ParseNum("0");
+
+            //
+            //Get Seg0/Seg1 State And Apply to VCstr1
+            //
+            switch (comboVitaCheatB200.Text)
+            {
+                case VC_GEN_B2_NONE:
+                    VCstr1 = "_V0 Generated Code\r\n\r\n";
+                    break;
+
+                case VC_GEN_B2_SEG0:
+                    VCstr1 = VCstr1 + "$B200 00000000 00000000\r\n";
+                    break;
+
+                case VC_GEN_B2_SEG1:
+                    VCstr1 = VCstr1 + "$B200 00000001 00000000\r\n";
+                    break;
+            }
+
 
             //
             //Get Bit Type from radio buttons

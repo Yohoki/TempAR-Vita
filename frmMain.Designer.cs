@@ -164,6 +164,9 @@
             this.txtVitaCheatAddress1 = new System.Windows.Forms.TextBox();
             this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
             this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
+            this.lblVitaCheatB200 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboVitaCheatB200 = new System.Windows.Forms.ComboBox();
             this.pnlConvertFormat.SuspendLayout();
             this.pnlConvertFile.SuspendLayout();
             this.frmStatusStrip.SuspendLayout();
@@ -181,23 +184,26 @@
             this.pnlVitaCheatBitType.SuspendLayout();
             this.groupVitaCheatAddress2Offset.SuspendLayout();
             this.groupVitaCheatAddress1Offset.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlConvertFormat
             // 
             this.pnlConvertFormat.Controls.Add(this.lblCnvCodeTypes);
             this.pnlConvertFormat.Controls.Add(this.cbCnvCodeTypes);
-            this.pnlConvertFormat.Location = new System.Drawing.Point(6, 6);
+            this.pnlConvertFormat.Location = new System.Drawing.Point(8, 7);
+            this.pnlConvertFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConvertFormat.Name = "pnlConvertFormat";
-            this.pnlConvertFormat.Size = new System.Drawing.Size(270, 27);
+            this.pnlConvertFormat.Size = new System.Drawing.Size(360, 33);
             this.pnlConvertFormat.TabIndex = 7;
             // 
             // lblCnvCodeTypes
             // 
             this.lblCnvCodeTypes.AutoSize = true;
-            this.lblCnvCodeTypes.Location = new System.Drawing.Point(8, 7);
+            this.lblCnvCodeTypes.Location = new System.Drawing.Point(11, 9);
+            this.lblCnvCodeTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCnvCodeTypes.Name = "lblCnvCodeTypes";
-            this.lblCnvCodeTypes.Size = new System.Drawing.Size(62, 13);
+            this.lblCnvCodeTypes.Size = new System.Drawing.Size(81, 17);
             this.lblCnvCodeTypes.TabIndex = 1;
             this.lblCnvCodeTypes.Text = "Code Type:";
             this.lblCnvCodeTypes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -207,9 +213,10 @@
             this.cbCnvCodeTypes.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbCnvCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCnvCodeTypes.FormattingEnabled = true;
-            this.cbCnvCodeTypes.Location = new System.Drawing.Point(81, 3);
+            this.cbCnvCodeTypes.Location = new System.Drawing.Point(108, 4);
+            this.cbCnvCodeTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCnvCodeTypes.Name = "cbCnvCodeTypes";
-            this.cbCnvCodeTypes.Size = new System.Drawing.Size(150, 21);
+            this.cbCnvCodeTypes.Size = new System.Drawing.Size(199, 24);
             this.cbCnvCodeTypes.TabIndex = 0;
             this.cbCnvCodeTypes.SelectedIndexChanged += new System.EventHandler(this.CbCodeTypes_SelectedIndexChanged);
             // 
@@ -224,17 +231,19 @@
             this.pnlConvertFile.Controls.Add(this.txtInputPath);
             this.pnlConvertFile.Controls.Add(this.lblOutputPath);
             this.pnlConvertFile.Controls.Add(this.lblInputPath);
-            this.pnlConvertFile.Location = new System.Drawing.Point(5, 40);
+            this.pnlConvertFile.Location = new System.Drawing.Point(7, 49);
+            this.pnlConvertFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConvertFile.Name = "pnlConvertFile";
-            this.pnlConvertFile.Size = new System.Drawing.Size(750, 700);
+            this.pnlConvertFile.Size = new System.Drawing.Size(1000, 862);
             this.pnlConvertFile.TabIndex = 8;
             // 
             // btnOutputBrowse
             // 
             this.btnOutputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOutputBrowse.Location = new System.Drawing.Point(676, 179);
+            this.btnOutputBrowse.Location = new System.Drawing.Point(901, 220);
+            this.btnOutputBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOutputBrowse.Name = "btnOutputBrowse";
-            this.btnOutputBrowse.Size = new System.Drawing.Size(72, 23);
+            this.btnOutputBrowse.Size = new System.Drawing.Size(96, 28);
             this.btnOutputBrowse.TabIndex = 8;
             this.btnOutputBrowse.Text = "Browse";
             this.btnOutputBrowse.UseVisualStyleBackColor = true;
@@ -243,9 +252,10 @@
             // btnInputBrowse
             // 
             this.btnInputBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInputBrowse.Location = new System.Drawing.Point(676, 147);
+            this.btnInputBrowse.Location = new System.Drawing.Point(901, 181);
+            this.btnInputBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInputBrowse.Name = "btnInputBrowse";
-            this.btnInputBrowse.Size = new System.Drawing.Size(72, 23);
+            this.btnInputBrowse.Size = new System.Drawing.Size(96, 28);
             this.btnInputBrowse.TabIndex = 7;
             this.btnInputBrowse.Text = "Browse";
             this.btnInputBrowse.UseVisualStyleBackColor = true;
@@ -254,20 +264,22 @@
             // txtOutputPath
             // 
             this.txtOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutputPath.Location = new System.Drawing.Point(82, 179);
+            this.txtOutputPath.Location = new System.Drawing.Point(109, 220);
+            this.txtOutputPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOutputPath.Name = "txtOutputPath";
             this.txtOutputPath.ReadOnly = true;
-            this.txtOutputPath.Size = new System.Drawing.Size(588, 20);
+            this.txtOutputPath.Size = new System.Drawing.Size(783, 22);
             this.txtOutputPath.TabIndex = 3;
             this.txtOutputPath.Click += new System.EventHandler(this.BtnOutputBrowse_Click);
             // 
             // txtInputPath
             // 
             this.txtInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInputPath.Location = new System.Drawing.Point(82, 147);
+            this.txtInputPath.Location = new System.Drawing.Point(109, 181);
+            this.txtInputPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtInputPath.Name = "txtInputPath";
             this.txtInputPath.ReadOnly = true;
-            this.txtInputPath.Size = new System.Drawing.Size(588, 20);
+            this.txtInputPath.Size = new System.Drawing.Size(783, 22);
             this.txtInputPath.TabIndex = 2;
             this.txtInputPath.Click += new System.EventHandler(this.BtnInputBrowse_Click);
             // 
@@ -275,9 +287,10 @@
             // 
             this.lblOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOutputPath.AutoSize = true;
-            this.lblOutputPath.Location = new System.Drawing.Point(17, 183);
+            this.lblOutputPath.Location = new System.Drawing.Point(23, 225);
+            this.lblOutputPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutputPath.Name = "lblOutputPath";
-            this.lblOutputPath.Size = new System.Drawing.Size(67, 13);
+            this.lblOutputPath.Size = new System.Drawing.Size(88, 17);
             this.lblOutputPath.TabIndex = 1;
             this.lblOutputPath.Text = "Output Path:";
             // 
@@ -285,9 +298,10 @@
             // 
             this.lblInputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInputPath.AutoSize = true;
-            this.lblInputPath.Location = new System.Drawing.Point(17, 152);
+            this.lblInputPath.Location = new System.Drawing.Point(23, 187);
+            this.lblInputPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInputPath.Name = "lblInputPath";
-            this.lblInputPath.Size = new System.Drawing.Size(59, 13);
+            this.lblInputPath.Size = new System.Drawing.Size(76, 17);
             this.lblInputPath.TabIndex = 0;
             this.lblInputPath.Text = "Input Path:";
             // 
@@ -296,9 +310,10 @@
             this.frmStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.frmStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.frmStatusStrip.Location = new System.Drawing.Point(0, 587);
+            this.frmStatusStrip.Location = new System.Drawing.Point(0, 728);
             this.frmStatusStrip.Name = "frmStatusStrip";
-            this.frmStatusStrip.Size = new System.Drawing.Size(769, 22);
+            this.frmStatusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.frmStatusStrip.Size = new System.Drawing.Size(1025, 22);
             this.frmStatusStrip.SizingGrip = false;
             this.frmStatusStrip.TabIndex = 1;
             this.frmStatusStrip.Text = "statusStrip1";
@@ -307,7 +322,7 @@
             // 
             this.lblStatus.BackColor = System.Drawing.SystemColors.Control;
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(39, 17);
+            this.lblStatus.Size = new System.Drawing.Size(49, 20);
             this.lblStatus.Text = "Status";
             this.lblStatus.Visible = false;
             // 
@@ -316,10 +331,11 @@
             this.tctrlTabs.Controls.Add(this.tabConverter);
             this.tctrlTabs.Controls.Add(this.tabPointerSearcher);
             this.tctrlTabs.Controls.Add(this.tabVitaCheat);
-            this.tctrlTabs.Location = new System.Drawing.Point(5, 4);
+            this.tctrlTabs.Location = new System.Drawing.Point(7, 5);
+            this.tctrlTabs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tctrlTabs.Name = "tctrlTabs";
             this.tctrlTabs.SelectedIndex = 1;
-            this.tctrlTabs.Size = new System.Drawing.Size(765, 600);
+            this.tctrlTabs.Size = new System.Drawing.Size(1020, 738);
             this.tctrlTabs.TabIndex = 0;
             // 
             // tabConverter
@@ -329,10 +345,11 @@
             this.tabConverter.Controls.Add(this.pnlConvertFormat);
             this.tabConverter.Controls.Add(this.pnlConvertText);
             this.tabConverter.Controls.Add(this.pnlConvertFile);
-            this.tabConverter.Location = new System.Drawing.Point(4, 22);
+            this.tabConverter.Location = new System.Drawing.Point(4, 25);
+            this.tabConverter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabConverter.Name = "tabConverter";
-            this.tabConverter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConverter.Size = new System.Drawing.Size(757, 574);
+            this.tabConverter.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabConverter.Size = new System.Drawing.Size(1012, 709);
             this.tabConverter.TabIndex = 0;
             this.tabConverter.Text = "Code Converter";
             this.tabConverter.UseVisualStyleBackColor = true;
@@ -340,9 +357,10 @@
             // btnConvert
             // 
             this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConvert.Location = new System.Drawing.Point(626, 6);
+            this.btnConvert.Location = new System.Drawing.Point(835, 7);
+            this.btnConvert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(122, 27);
+            this.btnConvert.Size = new System.Drawing.Size(163, 33);
             this.btnConvert.TabIndex = 4;
             this.btnConvert.Text = "Convert";
             this.btnConvert.UseVisualStyleBackColor = true;
@@ -354,17 +372,19 @@
             this.pnlConvertType.Controls.Add(this.label3);
             this.pnlConvertType.Controls.Add(this.rdbConvertText);
             this.pnlConvertType.Controls.Add(this.rdbConvertFile);
-            this.pnlConvertType.Location = new System.Drawing.Point(386, 6);
+            this.pnlConvertType.Location = new System.Drawing.Point(515, 7);
+            this.pnlConvertType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConvertType.Name = "pnlConvertType";
-            this.pnlConvertType.Size = new System.Drawing.Size(234, 27);
+            this.pnlConvertType.Size = new System.Drawing.Size(312, 33);
             this.pnlConvertType.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 6);
+            this.label3.Location = new System.Drawing.Point(4, 7);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(10, 13);
+            this.label3.Size = new System.Drawing.Size(12, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = " ";
             // 
@@ -372,9 +392,10 @@
             // 
             this.rdbConvertText.AutoSize = true;
             this.rdbConvertText.Checked = true;
-            this.rdbConvertText.Location = new System.Drawing.Point(60, 4);
+            this.rdbConvertText.Location = new System.Drawing.Point(80, 5);
+            this.rdbConvertText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbConvertText.Name = "rdbConvertText";
-            this.rdbConvertText.Size = new System.Drawing.Size(86, 17);
+            this.rdbConvertText.Size = new System.Drawing.Size(109, 21);
             this.rdbConvertText.TabIndex = 1;
             this.rdbConvertText.TabStop = true;
             this.rdbConvertText.Text = "Convert Text";
@@ -384,9 +405,10 @@
             // rdbConvertFile
             // 
             this.rdbConvertFile.AutoSize = true;
-            this.rdbConvertFile.Location = new System.Drawing.Point(148, 4);
+            this.rdbConvertFile.Location = new System.Drawing.Point(197, 5);
+            this.rdbConvertFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbConvertFile.Name = "rdbConvertFile";
-            this.rdbConvertFile.Size = new System.Drawing.Size(81, 17);
+            this.rdbConvertFile.Size = new System.Drawing.Size(104, 21);
             this.rdbConvertFile.TabIndex = 0;
             this.rdbConvertFile.Text = "Convert File";
             this.rdbConvertFile.UseVisualStyleBackColor = true;
@@ -400,19 +422,21 @@
             this.pnlConvertText.Controls.Add(this.txtTextInput);
             this.pnlConvertText.Controls.Add(this.txtTextOutput);
             this.pnlConvertText.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.pnlConvertText.Location = new System.Drawing.Point(3, 40);
+            this.pnlConvertText.Location = new System.Drawing.Point(4, 49);
+            this.pnlConvertText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConvertText.Name = "pnlConvertText";
-            this.pnlConvertText.Size = new System.Drawing.Size(751, 534);
+            this.pnlConvertText.Size = new System.Drawing.Size(1001, 657);
             this.pnlConvertText.TabIndex = 5;
             // 
             // txtTextInput
             // 
             this.txtTextInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtTextInput.Location = new System.Drawing.Point(3, 3);
+            this.txtTextInput.Location = new System.Drawing.Point(4, 4);
+            this.txtTextInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTextInput.Multiline = true;
             this.txtTextInput.Name = "txtTextInput";
             this.txtTextInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextInput.Size = new System.Drawing.Size(365, 528);
+            this.txtTextInput.Size = new System.Drawing.Size(485, 649);
             this.txtTextInput.TabIndex = 1;
             this.txtTextInput.WordWrap = false;
             this.txtTextInput.TextChanged += new System.EventHandler(this.TxtTextInput_TextChanged);
@@ -421,12 +445,13 @@
             // txtTextOutput
             // 
             this.txtTextOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtTextOutput.Location = new System.Drawing.Point(383, 3);
+            this.txtTextOutput.Location = new System.Drawing.Point(511, 4);
+            this.txtTextOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTextOutput.Multiline = true;
             this.txtTextOutput.Name = "txtTextOutput";
             this.txtTextOutput.ReadOnly = true;
             this.txtTextOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTextOutput.Size = new System.Drawing.Size(365, 528);
+            this.txtTextOutput.Size = new System.Drawing.Size(485, 649);
             this.txtTextOutput.TabIndex = 2;
             this.txtTextOutput.WordWrap = false;
             this.txtTextOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextFieldSelectAll);
@@ -489,10 +514,11 @@
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherMemDump1);
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress2);
             this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherAddress1);
-            this.tabPointerSearcher.Location = new System.Drawing.Point(4, 22);
+            this.tabPointerSearcher.Location = new System.Drawing.Point(4, 25);
+            this.tabPointerSearcher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPointerSearcher.Name = "tabPointerSearcher";
-            this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPointerSearcher.Size = new System.Drawing.Size(757, 574);
+            this.tabPointerSearcher.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPointerSearcher.Size = new System.Drawing.Size(1012, 709);
             this.tabPointerSearcher.TabIndex = 1;
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
@@ -500,18 +526,20 @@
             // lblPointerSearcherType
             // 
             this.lblPointerSearcherType.AutoSize = true;
-            this.lblPointerSearcherType.Location = new System.Drawing.Point(304, 548);
+            this.lblPointerSearcherType.Location = new System.Drawing.Point(405, 674);
+            this.lblPointerSearcherType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherType.Name = "lblPointerSearcherType";
-            this.lblPointerSearcherType.Size = new System.Drawing.Size(49, 13);
+            this.lblPointerSearcherType.Size = new System.Drawing.Size(64, 17);
             this.lblPointerSearcherType.TabIndex = 53;
             this.lblPointerSearcherType.Text = "Bit Type:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 415);
+            this.label1.Location = new System.Drawing.Point(407, 511);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.Size = new System.Drawing.Size(60, 17);
             this.label1.TabIndex = 52;
             this.label1.Text = "Legend:";
             // 
@@ -519,18 +547,20 @@
             // 
             this.lbl100Percent.AutoSize = true;
             this.lbl100Percent.ForeColor = System.Drawing.Color.Orange;
-            this.lbl100Percent.Location = new System.Drawing.Point(719, 415);
+            this.lbl100Percent.Location = new System.Drawing.Point(959, 511);
+            this.lbl100Percent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl100Percent.Name = "lbl100Percent";
-            this.lbl100Percent.Size = new System.Drawing.Size(27, 13);
+            this.lbl100Percent.Size = new System.Drawing.Size(36, 17);
             this.lbl100Percent.TabIndex = 51;
             this.lbl100Percent.Text = "90%";
             // 
             // lblNotLikelyPercent
             // 
             this.lblNotLikelyPercent.AutoSize = true;
-            this.lblNotLikelyPercent.Location = new System.Drawing.Point(393, 415);
+            this.lblNotLikelyPercent.Location = new System.Drawing.Point(524, 511);
+            this.lblNotLikelyPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNotLikelyPercent.Name = "lblNotLikelyPercent";
-            this.lblNotLikelyPercent.Size = new System.Drawing.Size(21, 13);
+            this.lblNotLikelyPercent.Size = new System.Drawing.Size(28, 17);
             this.lblNotLikelyPercent.TabIndex = 50;
             this.lblNotLikelyPercent.Text = "0%";
             // 
@@ -538,9 +568,10 @@
             // 
             this.lblGoodPercent.AutoSize = true;
             this.lblGoodPercent.ForeColor = System.Drawing.Color.Orchid;
-            this.lblGoodPercent.Location = new System.Drawing.Point(585, 415);
+            this.lblGoodPercent.Location = new System.Drawing.Point(780, 511);
+            this.lblGoodPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGoodPercent.Name = "lblGoodPercent";
-            this.lblGoodPercent.Size = new System.Drawing.Size(27, 13);
+            this.lblGoodPercent.Size = new System.Drawing.Size(36, 17);
             this.lblGoodPercent.TabIndex = 49;
             this.lblGoodPercent.Text = "60%";
             // 
@@ -548,9 +579,10 @@
             // 
             this.lblHighPercent.AutoSize = true;
             this.lblHighPercent.ForeColor = System.Drawing.Color.Red;
-            this.lblHighPercent.Location = new System.Drawing.Point(651, 415);
+            this.lblHighPercent.Location = new System.Drawing.Point(868, 511);
+            this.lblHighPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHighPercent.Name = "lblHighPercent";
-            this.lblHighPercent.Size = new System.Drawing.Size(27, 13);
+            this.lblHighPercent.Size = new System.Drawing.Size(36, 17);
             this.lblHighPercent.TabIndex = 48;
             this.lblHighPercent.Text = "80%";
             // 
@@ -558,9 +590,10 @@
             // 
             this.lblMediumPercent.AutoSize = true;
             this.lblMediumPercent.ForeColor = System.Drawing.Color.Blue;
-            this.lblMediumPercent.Location = new System.Drawing.Point(519, 415);
+            this.lblMediumPercent.Location = new System.Drawing.Point(692, 511);
+            this.lblMediumPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMediumPercent.Name = "lblMediumPercent";
-            this.lblMediumPercent.Size = new System.Drawing.Size(27, 13);
+            this.lblMediumPercent.Size = new System.Drawing.Size(36, 17);
             this.lblMediumPercent.TabIndex = 47;
             this.lblMediumPercent.Text = "40%";
             // 
@@ -568,9 +601,10 @@
             // 
             this.lblLowPercent.AutoSize = true;
             this.lblLowPercent.ForeColor = System.Drawing.Color.Green;
-            this.lblLowPercent.Location = new System.Drawing.Point(453, 415);
+            this.lblLowPercent.Location = new System.Drawing.Point(604, 511);
+            this.lblLowPercent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLowPercent.Name = "lblLowPercent";
-            this.lblLowPercent.Size = new System.Drawing.Size(27, 13);
+            this.lblLowPercent.Size = new System.Drawing.Size(36, 17);
             this.lblLowPercent.TabIndex = 46;
             this.lblLowPercent.Text = "20%";
             // 
@@ -578,10 +612,11 @@
             // 
             this.txtColorOrange.BackColor = System.Drawing.Color.Orange;
             this.txtColorOrange.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorOrange.Location = new System.Drawing.Point(678, 410);
+            this.txtColorOrange.Location = new System.Drawing.Point(904, 505);
+            this.txtColorOrange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorOrange.Name = "txtColorOrange";
             this.txtColorOrange.ReadOnly = true;
-            this.txtColorOrange.Size = new System.Drawing.Size(39, 20);
+            this.txtColorOrange.Size = new System.Drawing.Size(51, 22);
             this.txtColorOrange.TabIndex = 45;
             this.txtColorOrange.Text = "0";
             this.txtColorOrange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -590,10 +625,11 @@
             // 
             this.txtColorRed.BackColor = System.Drawing.Color.Red;
             this.txtColorRed.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorRed.Location = new System.Drawing.Point(612, 410);
+            this.txtColorRed.Location = new System.Drawing.Point(816, 505);
+            this.txtColorRed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorRed.Name = "txtColorRed";
             this.txtColorRed.ReadOnly = true;
-            this.txtColorRed.Size = new System.Drawing.Size(39, 20);
+            this.txtColorRed.Size = new System.Drawing.Size(51, 22);
             this.txtColorRed.TabIndex = 44;
             this.txtColorRed.Text = "0";
             this.txtColorRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -602,10 +638,11 @@
             // 
             this.txtColorOrchid.BackColor = System.Drawing.Color.Orchid;
             this.txtColorOrchid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorOrchid.Location = new System.Drawing.Point(546, 410);
+            this.txtColorOrchid.Location = new System.Drawing.Point(728, 505);
+            this.txtColorOrchid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorOrchid.Name = "txtColorOrchid";
             this.txtColorOrchid.ReadOnly = true;
-            this.txtColorOrchid.Size = new System.Drawing.Size(39, 20);
+            this.txtColorOrchid.Size = new System.Drawing.Size(51, 22);
             this.txtColorOrchid.TabIndex = 45;
             this.txtColorOrchid.Text = "0";
             this.txtColorOrchid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -614,10 +651,11 @@
             // 
             this.txtColorBlue.BackColor = System.Drawing.Color.Blue;
             this.txtColorBlue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorBlue.Location = new System.Drawing.Point(480, 410);
+            this.txtColorBlue.Location = new System.Drawing.Point(640, 505);
+            this.txtColorBlue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorBlue.Name = "txtColorBlue";
             this.txtColorBlue.ReadOnly = true;
-            this.txtColorBlue.Size = new System.Drawing.Size(39, 20);
+            this.txtColorBlue.Size = new System.Drawing.Size(51, 22);
             this.txtColorBlue.TabIndex = 44;
             this.txtColorBlue.Text = "0";
             this.txtColorBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -626,10 +664,11 @@
             // 
             this.txtColorGreen.BackColor = System.Drawing.Color.Green;
             this.txtColorGreen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorGreen.Location = new System.Drawing.Point(414, 410);
+            this.txtColorGreen.Location = new System.Drawing.Point(552, 505);
+            this.txtColorGreen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorGreen.Name = "txtColorGreen";
             this.txtColorGreen.ReadOnly = true;
-            this.txtColorGreen.Size = new System.Drawing.Size(39, 20);
+            this.txtColorGreen.Size = new System.Drawing.Size(51, 22);
             this.txtColorGreen.TabIndex = 43;
             this.txtColorGreen.Text = "0";
             this.txtColorGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -638,10 +677,11 @@
             // 
             this.txtColorBlack.BackColor = System.Drawing.Color.Black;
             this.txtColorBlack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtColorBlack.Location = new System.Drawing.Point(354, 410);
+            this.txtColorBlack.Location = new System.Drawing.Point(472, 505);
+            this.txtColorBlack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtColorBlack.Name = "txtColorBlack";
             this.txtColorBlack.ReadOnly = true;
-            this.txtColorBlack.Size = new System.Drawing.Size(39, 20);
+            this.txtColorBlack.Size = new System.Drawing.Size(51, 22);
             this.txtColorBlack.TabIndex = 42;
             this.txtColorBlack.Text = "0";
             this.txtColorBlack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -650,9 +690,10 @@
             // 
             this.lblPointerSearcherMemDump6.AutoSize = true;
             this.lblPointerSearcherMemDump6.ForeColor = System.Drawing.Color.Orange;
-            this.lblPointerSearcherMemDump6.Location = new System.Drawing.Point(7, 270);
+            this.lblPointerSearcherMemDump6.Location = new System.Drawing.Point(9, 332);
+            this.lblPointerSearcherMemDump6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump6.Name = "lblPointerSearcherMemDump6";
-            this.lblPointerSearcherMemDump6.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump6.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump6.TabIndex = 40;
             this.lblPointerSearcherMemDump6.Text = "Memory Dump 6:";
             this.lblPointerSearcherMemDump6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -661,9 +702,10 @@
             // 
             this.lblPointerSearcherMemDump5.AutoSize = true;
             this.lblPointerSearcherMemDump5.ForeColor = System.Drawing.Color.Red;
-            this.lblPointerSearcherMemDump5.Location = new System.Drawing.Point(7, 218);
+            this.lblPointerSearcherMemDump5.Location = new System.Drawing.Point(9, 268);
+            this.lblPointerSearcherMemDump5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump5.Name = "lblPointerSearcherMemDump5";
-            this.lblPointerSearcherMemDump5.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump5.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump5.TabIndex = 38;
             this.lblPointerSearcherMemDump5.Text = "Memory Dump 5:";
             this.lblPointerSearcherMemDump5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -672,9 +714,10 @@
             // 
             this.lblPointerSearcherAddress6.AutoSize = true;
             this.lblPointerSearcherAddress6.ForeColor = System.Drawing.Color.Orange;
-            this.lblPointerSearcherAddress6.Location = new System.Drawing.Point(7, 296);
+            this.lblPointerSearcherAddress6.Location = new System.Drawing.Point(9, 364);
+            this.lblPointerSearcherAddress6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress6.Name = "lblPointerSearcherAddress6";
-            this.lblPointerSearcherAddress6.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress6.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress6.TabIndex = 41;
             this.lblPointerSearcherAddress6.Text = "Address 6:";
             this.lblPointerSearcherAddress6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -683,9 +726,10 @@
             // 
             this.lblPointerSearcherAddress5.AutoSize = true;
             this.lblPointerSearcherAddress5.ForeColor = System.Drawing.Color.Red;
-            this.lblPointerSearcherAddress5.Location = new System.Drawing.Point(7, 244);
+            this.lblPointerSearcherAddress5.Location = new System.Drawing.Point(9, 300);
+            this.lblPointerSearcherAddress5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress5.Name = "lblPointerSearcherAddress5";
-            this.lblPointerSearcherAddress5.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress5.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress5.TabIndex = 39;
             this.lblPointerSearcherAddress5.Text = "Address 5:";
             this.lblPointerSearcherAddress5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -694,9 +738,10 @@
             // 
             this.lblPointerSearcherMemDump4.AutoSize = true;
             this.lblPointerSearcherMemDump4.ForeColor = System.Drawing.Color.Orchid;
-            this.lblPointerSearcherMemDump4.Location = new System.Drawing.Point(7, 166);
+            this.lblPointerSearcherMemDump4.Location = new System.Drawing.Point(9, 204);
+            this.lblPointerSearcherMemDump4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump4.Name = "lblPointerSearcherMemDump4";
-            this.lblPointerSearcherMemDump4.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump4.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump4.TabIndex = 36;
             this.lblPointerSearcherMemDump4.Text = "Memory Dump 4:";
             this.lblPointerSearcherMemDump4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -705,9 +750,10 @@
             // 
             this.lblPointerSearcherMemDump3.AutoSize = true;
             this.lblPointerSearcherMemDump3.ForeColor = System.Drawing.Color.Blue;
-            this.lblPointerSearcherMemDump3.Location = new System.Drawing.Point(7, 114);
+            this.lblPointerSearcherMemDump3.Location = new System.Drawing.Point(9, 140);
+            this.lblPointerSearcherMemDump3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump3.Name = "lblPointerSearcherMemDump3";
-            this.lblPointerSearcherMemDump3.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump3.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump3.TabIndex = 34;
             this.lblPointerSearcherMemDump3.Text = "Memory Dump 3:";
             this.lblPointerSearcherMemDump3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -716,9 +762,10 @@
             // 
             this.lblPointerSearcherAddress4.AutoSize = true;
             this.lblPointerSearcherAddress4.ForeColor = System.Drawing.Color.Orchid;
-            this.lblPointerSearcherAddress4.Location = new System.Drawing.Point(7, 192);
+            this.lblPointerSearcherAddress4.Location = new System.Drawing.Point(9, 236);
+            this.lblPointerSearcherAddress4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress4.Name = "lblPointerSearcherAddress4";
-            this.lblPointerSearcherAddress4.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress4.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress4.TabIndex = 37;
             this.lblPointerSearcherAddress4.Text = "Address 4:";
             this.lblPointerSearcherAddress4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -727,9 +774,10 @@
             // 
             this.lblPointerSearcherAddress3.AutoSize = true;
             this.lblPointerSearcherAddress3.ForeColor = System.Drawing.Color.Blue;
-            this.lblPointerSearcherAddress3.Location = new System.Drawing.Point(7, 140);
+            this.lblPointerSearcherAddress3.Location = new System.Drawing.Point(9, 172);
+            this.lblPointerSearcherAddress3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress3.Name = "lblPointerSearcherAddress3";
-            this.lblPointerSearcherAddress3.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress3.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress3.TabIndex = 35;
             this.lblPointerSearcherAddress3.Text = "Address 3:";
             this.lblPointerSearcherAddress3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -738,10 +786,11 @@
             // 
             this.txtPointerSearcherAddress6.Enabled = false;
             this.txtPointerSearcherAddress6.ForeColor = System.Drawing.Color.Orange;
-            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(97, 292);
+            this.txtPointerSearcherAddress6.Location = new System.Drawing.Point(129, 359);
+            this.txtPointerSearcherAddress6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress6.MaxLength = 10;
             this.txtPointerSearcherAddress6.Name = "txtPointerSearcherAddress6";
-            this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress6.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress6.TabIndex = 33;
             // 
             // txtPointerSearcherMemDump6
@@ -749,10 +798,11 @@
             this.txtPointerSearcherMemDump6.AllowDrop = true;
             this.txtPointerSearcherMemDump6.Enabled = false;
             this.txtPointerSearcherMemDump6.ForeColor = System.Drawing.Color.Orange;
-            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(97, 266);
+            this.txtPointerSearcherMemDump6.Location = new System.Drawing.Point(129, 327);
+            this.txtPointerSearcherMemDump6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump6.Name = "txtPointerSearcherMemDump6";
             this.txtPointerSearcherMemDump6.ReadOnly = true;
-            this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump6.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump6.TabIndex = 32;
             this.txtPointerSearcherMemDump6.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump6.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -763,10 +813,11 @@
             // 
             this.txtPointerSearcherAddress5.Enabled = false;
             this.txtPointerSearcherAddress5.ForeColor = System.Drawing.Color.Red;
-            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(97, 240);
+            this.txtPointerSearcherAddress5.Location = new System.Drawing.Point(129, 295);
+            this.txtPointerSearcherAddress5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress5.MaxLength = 10;
             this.txtPointerSearcherAddress5.Name = "txtPointerSearcherAddress5";
-            this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress5.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress5.TabIndex = 31;
             // 
             // txtPointerSearcherMemDump5
@@ -774,10 +825,11 @@
             this.txtPointerSearcherMemDump5.AllowDrop = true;
             this.txtPointerSearcherMemDump5.Enabled = false;
             this.txtPointerSearcherMemDump5.ForeColor = System.Drawing.Color.Red;
-            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(97, 214);
+            this.txtPointerSearcherMemDump5.Location = new System.Drawing.Point(129, 263);
+            this.txtPointerSearcherMemDump5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump5.Name = "txtPointerSearcherMemDump5";
             this.txtPointerSearcherMemDump5.ReadOnly = true;
-            this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump5.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump5.TabIndex = 30;
             this.txtPointerSearcherMemDump5.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump5.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -788,10 +840,11 @@
             // 
             this.txtPointerSearcherAddress4.Enabled = false;
             this.txtPointerSearcherAddress4.ForeColor = System.Drawing.Color.Orchid;
-            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(97, 188);
+            this.txtPointerSearcherAddress4.Location = new System.Drawing.Point(129, 231);
+            this.txtPointerSearcherAddress4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress4.MaxLength = 10;
             this.txtPointerSearcherAddress4.Name = "txtPointerSearcherAddress4";
-            this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress4.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress4.TabIndex = 29;
             // 
             // txtPointerSearcherMemDump4
@@ -799,10 +852,11 @@
             this.txtPointerSearcherMemDump4.AllowDrop = true;
             this.txtPointerSearcherMemDump4.Enabled = false;
             this.txtPointerSearcherMemDump4.ForeColor = System.Drawing.Color.Orchid;
-            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(97, 162);
+            this.txtPointerSearcherMemDump4.Location = new System.Drawing.Point(129, 199);
+            this.txtPointerSearcherMemDump4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump4.Name = "txtPointerSearcherMemDump4";
             this.txtPointerSearcherMemDump4.ReadOnly = true;
-            this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump4.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump4.TabIndex = 28;
             this.txtPointerSearcherMemDump4.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump4.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -811,18 +865,20 @@
             // 
             // txtBaseAddress
             // 
-            this.txtBaseAddress.Location = new System.Drawing.Point(384, 467);
+            this.txtBaseAddress.Location = new System.Drawing.Point(512, 575);
+            this.txtBaseAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBaseAddress.MaxLength = 10;
             this.txtBaseAddress.Name = "txtBaseAddress";
-            this.txtBaseAddress.Size = new System.Drawing.Size(223, 20);
+            this.txtBaseAddress.Size = new System.Drawing.Size(296, 22);
             this.txtBaseAddress.TabIndex = 11;
             // 
             // lblBaseAddress
             // 
             this.lblBaseAddress.AutoSize = true;
-            this.lblBaseAddress.Location = new System.Drawing.Point(304, 470);
+            this.lblBaseAddress.Location = new System.Drawing.Point(405, 578);
+            this.lblBaseAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBaseAddress.Name = "lblBaseAddress";
-            this.lblBaseAddress.Size = new System.Drawing.Size(75, 13);
+            this.lblBaseAddress.Size = new System.Drawing.Size(100, 17);
             this.lblBaseAddress.TabIndex = 10;
             this.lblBaseAddress.Text = "Base Address:";
             // 
@@ -836,9 +892,10 @@
             "Sony PSP",
             "Nintendo DS",
             "Other..."});
-            this.comboPointerSearcherMode.Location = new System.Drawing.Point(384, 440);
+            this.comboPointerSearcherMode.Location = new System.Drawing.Point(512, 542);
+            this.comboPointerSearcherMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboPointerSearcherMode.Name = "comboPointerSearcherMode";
-            this.comboPointerSearcherMode.Size = new System.Drawing.Size(223, 21);
+            this.comboPointerSearcherMode.Size = new System.Drawing.Size(296, 24);
             this.comboPointerSearcherMode.TabIndex = 9;
             this.comboPointerSearcherMode.SelectedIndexChanged += new System.EventHandler(this.ComboPointerSearcherMode_SelectedIndexChanged);
             // 
@@ -847,17 +904,19 @@
             this.pnlPointerSearcherCodeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPointerSearcherCodeType.Controls.Add(this.lblPntCodeTypes);
             this.pnlPointerSearcherCodeType.Controls.Add(this.cbPntCodeTypes);
-            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(9, 374);
+            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(12, 460);
+            this.pnlPointerSearcherCodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
-            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(279, 27);
+            this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(372, 33);
             this.pnlPointerSearcherCodeType.TabIndex = 12;
             // 
             // lblPntCodeTypes
             // 
             this.lblPntCodeTypes.AutoSize = true;
-            this.lblPntCodeTypes.Location = new System.Drawing.Point(17, 7);
+            this.lblPntCodeTypes.Location = new System.Drawing.Point(23, 9);
+            this.lblPntCodeTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPntCodeTypes.Name = "lblPntCodeTypes";
-            this.lblPntCodeTypes.Size = new System.Drawing.Size(62, 13);
+            this.lblPntCodeTypes.Size = new System.Drawing.Size(81, 17);
             this.lblPntCodeTypes.TabIndex = 2;
             this.lblPntCodeTypes.Text = "Code Type:";
             // 
@@ -865,9 +924,10 @@
             // 
             this.cbPntCodeTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPntCodeTypes.FormattingEnabled = true;
-            this.cbPntCodeTypes.Location = new System.Drawing.Point(88, 3);
+            this.cbPntCodeTypes.Location = new System.Drawing.Point(117, 4);
+            this.cbPntCodeTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbPntCodeTypes.Name = "cbPntCodeTypes";
-            this.cbPntCodeTypes.Size = new System.Drawing.Size(150, 21);
+            this.cbPntCodeTypes.Size = new System.Drawing.Size(199, 24);
             this.cbPntCodeTypes.TabIndex = 1;
             // 
             // pnlPointerSearcherBitType
@@ -876,9 +936,10 @@
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType32);
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType8);
             this.pnlPointerSearcherBitType.Controls.Add(this.rdbPointerSearcherBitType16);
-            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(384, 543);
+            this.pnlPointerSearcherBitType.Location = new System.Drawing.Point(512, 668);
+            this.pnlPointerSearcherBitType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPointerSearcherBitType.Name = "pnlPointerSearcherBitType";
-            this.pnlPointerSearcherBitType.Size = new System.Drawing.Size(223, 23);
+            this.pnlPointerSearcherBitType.Size = new System.Drawing.Size(297, 28);
             this.pnlPointerSearcherBitType.TabIndex = 16;
             // 
             // rdbPointerSearcherBitType32
@@ -886,9 +947,10 @@
             this.rdbPointerSearcherBitType32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherBitType32.AutoSize = true;
             this.rdbPointerSearcherBitType32.Checked = true;
-            this.rdbPointerSearcherBitType32.Location = new System.Drawing.Point(115, 3);
+            this.rdbPointerSearcherBitType32.Location = new System.Drawing.Point(157, 4);
+            this.rdbPointerSearcherBitType32.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbPointerSearcherBitType32.Name = "rdbPointerSearcherBitType32";
-            this.rdbPointerSearcherBitType32.Size = new System.Drawing.Size(52, 17);
+            this.rdbPointerSearcherBitType32.Size = new System.Drawing.Size(66, 21);
             this.rdbPointerSearcherBitType32.TabIndex = 0;
             this.rdbPointerSearcherBitType32.TabStop = true;
             this.rdbPointerSearcherBitType32.Text = "32-Bit";
@@ -898,9 +960,10 @@
             // 
             this.rdbPointerSearcherBitType8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherBitType8.AutoSize = true;
-            this.rdbPointerSearcherBitType8.Location = new System.Drawing.Point(4, 3);
+            this.rdbPointerSearcherBitType8.Location = new System.Drawing.Point(8, 4);
+            this.rdbPointerSearcherBitType8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbPointerSearcherBitType8.Name = "rdbPointerSearcherBitType8";
-            this.rdbPointerSearcherBitType8.Size = new System.Drawing.Size(46, 17);
+            this.rdbPointerSearcherBitType8.Size = new System.Drawing.Size(58, 21);
             this.rdbPointerSearcherBitType8.TabIndex = 1;
             this.rdbPointerSearcherBitType8.Text = "8-Bit";
             this.rdbPointerSearcherBitType8.UseVisualStyleBackColor = true;
@@ -909,9 +972,10 @@
             // 
             this.rdbPointerSearcherBitType16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdbPointerSearcherBitType16.AutoSize = true;
-            this.rdbPointerSearcherBitType16.Location = new System.Drawing.Point(57, 3);
+            this.rdbPointerSearcherBitType16.Location = new System.Drawing.Point(79, 4);
+            this.rdbPointerSearcherBitType16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbPointerSearcherBitType16.Name = "rdbPointerSearcherBitType16";
-            this.rdbPointerSearcherBitType16.Size = new System.Drawing.Size(52, 17);
+            this.rdbPointerSearcherBitType16.Size = new System.Drawing.Size(66, 21);
             this.rdbPointerSearcherBitType16.TabIndex = 2;
             this.rdbPointerSearcherBitType16.Text = "16-Bit";
             this.rdbPointerSearcherBitType16.UseVisualStyleBackColor = true;
@@ -921,9 +985,10 @@
             this.chkPointerSearcherRealAddresses.AutoSize = true;
             this.chkPointerSearcherRealAddresses.Checked = true;
             this.chkPointerSearcherRealAddresses.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(612, 520);
+            this.chkPointerSearcherRealAddresses.Location = new System.Drawing.Point(816, 640);
+            this.chkPointerSearcherRealAddresses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPointerSearcherRealAddresses.Name = "chkPointerSearcherRealAddresses";
-            this.chkPointerSearcherRealAddresses.Size = new System.Drawing.Size(100, 17);
+            this.chkPointerSearcherRealAddresses.Size = new System.Drawing.Size(130, 21);
             this.chkPointerSearcherRealAddresses.TabIndex = 20;
             this.chkPointerSearcherRealAddresses.Text = "Real Addresses";
             this.chkPointerSearcherRealAddresses.UseVisualStyleBackColor = true;
@@ -931,12 +996,13 @@
             // txtPointerSearcherCode
             // 
             this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtPointerSearcherCode.Location = new System.Drawing.Point(9, 406);
+            this.txtPointerSearcherCode.Location = new System.Drawing.Point(12, 500);
+            this.txtPointerSearcherCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherCode.Multiline = true;
             this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
             this.txtPointerSearcherCode.ReadOnly = true;
             this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPointerSearcherCode.Size = new System.Drawing.Size(279, 162);
+            this.txtPointerSearcherCode.Size = new System.Drawing.Size(371, 198);
             this.txtPointerSearcherCode.TabIndex = 25;
             this.txtPointerSearcherCode.WordWrap = false;
             // 
@@ -945,9 +1011,10 @@
             this.chkPointerSearcherOptimizePointerPaths.AutoSize = true;
             this.chkPointerSearcherOptimizePointerPaths.Checked = true;
             this.chkPointerSearcherOptimizePointerPaths.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(19, 321);
+            this.chkPointerSearcherOptimizePointerPaths.Location = new System.Drawing.Point(25, 395);
+            this.chkPointerSearcherOptimizePointerPaths.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPointerSearcherOptimizePointerPaths.Name = "chkPointerSearcherOptimizePointerPaths";
-            this.chkPointerSearcherOptimizePointerPaths.Size = new System.Drawing.Size(255, 17);
+            this.chkPointerSearcherOptimizePointerPaths.Size = new System.Drawing.Size(342, 21);
             this.chkPointerSearcherOptimizePointerPaths.TabIndex = 17;
             this.chkPointerSearcherOptimizePointerPaths.Text = "Only Display Optimal Pointer Paths (Ignore loops)";
             this.chkPointerSearcherOptimizePointerPaths.UseVisualStyleBackColor = true;
@@ -955,9 +1022,10 @@
             // chkPointerSearcherRAWCode
             // 
             this.chkPointerSearcherRAWCode.AutoSize = true;
-            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(612, 468);
+            this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(816, 576);
+            this.chkPointerSearcherRAWCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
-            this.chkPointerSearcherRAWCode.Size = new System.Drawing.Size(90, 17);
+            this.chkPointerSearcherRAWCode.Size = new System.Drawing.Size(114, 21);
             this.chkPointerSearcherRAWCode.TabIndex = 18;
             this.chkPointerSearcherRAWCode.Text = "Include Label";
             this.chkPointerSearcherRAWCode.UseVisualStyleBackColor = true;
@@ -965,18 +1033,20 @@
             // chkPointerSearcherIncludeNegatives
             // 
             this.chkPointerSearcherIncludeNegatives.AutoSize = true;
-            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(612, 494);
+            this.chkPointerSearcherIncludeNegatives.Location = new System.Drawing.Point(816, 608);
+            this.chkPointerSearcherIncludeNegatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPointerSearcherIncludeNegatives.Name = "chkPointerSearcherIncludeNegatives";
-            this.chkPointerSearcherIncludeNegatives.Size = new System.Drawing.Size(112, 17);
+            this.chkPointerSearcherIncludeNegatives.Size = new System.Drawing.Size(142, 21);
             this.chkPointerSearcherIncludeNegatives.TabIndex = 19;
             this.chkPointerSearcherIncludeNegatives.Text = "Include Negatives";
             this.chkPointerSearcherIncludeNegatives.UseVisualStyleBackColor = true;
             // 
             // btnPointerSearcherClear
             // 
-            this.btnPointerSearcherClear.Location = new System.Drawing.Point(84, 344);
+            this.btnPointerSearcherClear.Location = new System.Drawing.Point(112, 423);
+            this.btnPointerSearcherClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPointerSearcherClear.Name = "btnPointerSearcherClear";
-            this.btnPointerSearcherClear.Size = new System.Drawing.Size(75, 23);
+            this.btnPointerSearcherClear.Size = new System.Drawing.Size(100, 28);
             this.btnPointerSearcherClear.TabIndex = 21;
             this.btnPointerSearcherClear.Text = "Clear";
             this.btnPointerSearcherClear.UseVisualStyleBackColor = true;
@@ -984,9 +1054,10 @@
             // 
             // btnPointerSearcherFindPointers
             // 
-            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(165, 344);
+            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(220, 423);
+            this.btnPointerSearcherFindPointers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPointerSearcherFindPointers.Name = "btnPointerSearcherFindPointers";
-            this.btnPointerSearcherFindPointers.Size = new System.Drawing.Size(121, 23);
+            this.btnPointerSearcherFindPointers.Size = new System.Drawing.Size(161, 28);
             this.btnPointerSearcherFindPointers.TabIndex = 22;
             this.btnPointerSearcherFindPointers.Text = "Find Pointers";
             this.btnPointerSearcherFindPointers.UseVisualStyleBackColor = true;
@@ -995,9 +1066,10 @@
             // treePointerSearcherPointers
             // 
             this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treePointerSearcherPointers.Location = new System.Drawing.Point(292, 6);
+            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 7);
+            this.treePointerSearcherPointers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(462, 398);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 489);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.TreePointerSearcherPointers_DoubleClick);
@@ -1006,36 +1078,40 @@
             // lblPointerSearcherValue
             // 
             this.lblPointerSearcherValue.AutoSize = true;
-            this.lblPointerSearcherValue.Location = new System.Drawing.Point(304, 522);
+            this.lblPointerSearcherValue.Location = new System.Drawing.Point(405, 642);
+            this.lblPointerSearcherValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherValue.Name = "lblPointerSearcherValue";
-            this.lblPointerSearcherValue.Size = new System.Drawing.Size(76, 13);
+            this.lblPointerSearcherValue.Size = new System.Drawing.Size(101, 17);
             this.lblPointerSearcherValue.TabIndex = 14;
             this.lblPointerSearcherValue.Text = "Desired Value:";
             // 
             // lblPointerSearcherMaxOffset
             // 
             this.lblPointerSearcherMaxOffset.AutoSize = true;
-            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(304, 496);
+            this.lblPointerSearcherMaxOffset.Location = new System.Drawing.Point(405, 610);
+            this.lblPointerSearcherMaxOffset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMaxOffset.Name = "lblPointerSearcherMaxOffset";
-            this.lblPointerSearcherMaxOffset.Size = new System.Drawing.Size(61, 13);
+            this.lblPointerSearcherMaxOffset.Size = new System.Drawing.Size(79, 17);
             this.lblPointerSearcherMaxOffset.TabIndex = 12;
             this.lblPointerSearcherMaxOffset.Text = "Max Offset:";
             // 
             // txtPointerSearcherValue
             // 
-            this.txtPointerSearcherValue.Location = new System.Drawing.Point(384, 518);
+            this.txtPointerSearcherValue.Location = new System.Drawing.Point(512, 638);
+            this.txtPointerSearcherValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherValue.MaxLength = 10;
             this.txtPointerSearcherValue.Name = "txtPointerSearcherValue";
-            this.txtPointerSearcherValue.Size = new System.Drawing.Size(223, 20);
+            this.txtPointerSearcherValue.Size = new System.Drawing.Size(296, 22);
             this.txtPointerSearcherValue.TabIndex = 15;
             this.txtPointerSearcherValue.Text = "0x00000000";
             // 
             // txtPointerSearcherMaxOffset
             // 
-            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(384, 492);
+            this.txtPointerSearcherMaxOffset.Location = new System.Drawing.Point(512, 606);
+            this.txtPointerSearcherMaxOffset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMaxOffset.MaxLength = 10;
             this.txtPointerSearcherMaxOffset.Name = "txtPointerSearcherMaxOffset";
-            this.txtPointerSearcherMaxOffset.Size = new System.Drawing.Size(223, 20);
+            this.txtPointerSearcherMaxOffset.Size = new System.Drawing.Size(296, 22);
             this.txtPointerSearcherMaxOffset.TabIndex = 13;
             this.txtPointerSearcherMaxOffset.Text = "0x1000";
             // 
@@ -1043,9 +1119,10 @@
             // 
             this.lblPointerSearcherMemDump2.AutoSize = true;
             this.lblPointerSearcherMemDump2.ForeColor = System.Drawing.Color.Green;
-            this.lblPointerSearcherMemDump2.Location = new System.Drawing.Point(7, 62);
+            this.lblPointerSearcherMemDump2.Location = new System.Drawing.Point(9, 76);
+            this.lblPointerSearcherMemDump2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump2.Name = "lblPointerSearcherMemDump2";
-            this.lblPointerSearcherMemDump2.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump2.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump2.TabIndex = 4;
             this.lblPointerSearcherMemDump2.Text = "Memory Dump 2:";
             this.lblPointerSearcherMemDump2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1053,9 +1130,10 @@
             // lblPointerSearcherMemDump1
             // 
             this.lblPointerSearcherMemDump1.AutoSize = true;
-            this.lblPointerSearcherMemDump1.Location = new System.Drawing.Point(7, 10);
+            this.lblPointerSearcherMemDump1.Location = new System.Drawing.Point(9, 12);
+            this.lblPointerSearcherMemDump1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMemDump1.Name = "lblPointerSearcherMemDump1";
-            this.lblPointerSearcherMemDump1.Size = new System.Drawing.Size(87, 13);
+            this.lblPointerSearcherMemDump1.Size = new System.Drawing.Size(115, 17);
             this.lblPointerSearcherMemDump1.TabIndex = 0;
             this.lblPointerSearcherMemDump1.Text = "Memory Dump 1:";
             this.lblPointerSearcherMemDump1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1065,9 +1143,10 @@
             this.lblPointerSearcherMode.AutoSize = true;
             this.lblPointerSearcherMode.BackColor = System.Drawing.Color.Transparent;
             this.lblPointerSearcherMode.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPointerSearcherMode.Location = new System.Drawing.Point(304, 442);
+            this.lblPointerSearcherMode.Location = new System.Drawing.Point(405, 544);
+            this.lblPointerSearcherMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherMode.Name = "lblPointerSearcherMode";
-            this.lblPointerSearcherMode.Size = new System.Drawing.Size(44, 13);
+            this.lblPointerSearcherMode.Size = new System.Drawing.Size(55, 17);
             this.lblPointerSearcherMode.TabIndex = 8;
             this.lblPointerSearcherMode.Text = "Device:";
             // 
@@ -1075,19 +1154,21 @@
             // 
             this.txtPointerSearcherAddress3.Enabled = false;
             this.txtPointerSearcherAddress3.ForeColor = System.Drawing.Color.Blue;
-            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(97, 136);
+            this.txtPointerSearcherAddress3.Location = new System.Drawing.Point(129, 167);
+            this.txtPointerSearcherAddress3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress3.MaxLength = 10;
             this.txtPointerSearcherAddress3.Name = "txtPointerSearcherAddress3";
-            this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress3.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress3.TabIndex = 27;
             // 
             // lblPointerSearcherAddress2
             // 
             this.lblPointerSearcherAddress2.AutoSize = true;
             this.lblPointerSearcherAddress2.ForeColor = System.Drawing.Color.Green;
-            this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(7, 88);
+            this.lblPointerSearcherAddress2.Location = new System.Drawing.Point(9, 108);
+            this.lblPointerSearcherAddress2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress2.Name = "lblPointerSearcherAddress2";
-            this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress2.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress2.TabIndex = 6;
             this.lblPointerSearcherAddress2.Text = "Address 2:";
             this.lblPointerSearcherAddress2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1095,9 +1176,10 @@
             // lblPointerSearcherAddress1
             // 
             this.lblPointerSearcherAddress1.AutoSize = true;
-            this.lblPointerSearcherAddress1.Location = new System.Drawing.Point(7, 36);
+            this.lblPointerSearcherAddress1.Location = new System.Drawing.Point(9, 44);
+            this.lblPointerSearcherAddress1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherAddress1.Name = "lblPointerSearcherAddress1";
-            this.lblPointerSearcherAddress1.Size = new System.Drawing.Size(57, 13);
+            this.lblPointerSearcherAddress1.Size = new System.Drawing.Size(76, 17);
             this.lblPointerSearcherAddress1.TabIndex = 2;
             this.lblPointerSearcherAddress1.Text = "Address 1:";
             this.lblPointerSearcherAddress1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1107,10 +1189,11 @@
             this.txtPointerSearcherMemDump3.AllowDrop = true;
             this.txtPointerSearcherMemDump3.Enabled = false;
             this.txtPointerSearcherMemDump3.ForeColor = System.Drawing.Color.Blue;
-            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(97, 110);
+            this.txtPointerSearcherMemDump3.Location = new System.Drawing.Point(129, 135);
+            this.txtPointerSearcherMemDump3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump3.Name = "txtPointerSearcherMemDump3";
             this.txtPointerSearcherMemDump3.ReadOnly = true;
-            this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump3.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump3.TabIndex = 26;
             this.txtPointerSearcherMemDump3.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump3.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -1122,10 +1205,11 @@
             this.txtPointerSearcherMemDump2.AllowDrop = true;
             this.txtPointerSearcherMemDump2.Enabled = false;
             this.txtPointerSearcherMemDump2.ForeColor = System.Drawing.Color.Green;
-            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(97, 58);
+            this.txtPointerSearcherMemDump2.Location = new System.Drawing.Point(129, 71);
+            this.txtPointerSearcherMemDump2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump2.Name = "txtPointerSearcherMemDump2";
             this.txtPointerSearcherMemDump2.ReadOnly = true;
-            this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump2.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump2.TabIndex = 5;
             this.txtPointerSearcherMemDump2.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump2.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -1135,10 +1219,11 @@
             // txtPointerSearcherMemDump1
             // 
             this.txtPointerSearcherMemDump1.AllowDrop = true;
-            this.txtPointerSearcherMemDump1.Location = new System.Drawing.Point(97, 6);
+            this.txtPointerSearcherMemDump1.Location = new System.Drawing.Point(129, 7);
+            this.txtPointerSearcherMemDump1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherMemDump1.Name = "txtPointerSearcherMemDump1";
             this.txtPointerSearcherMemDump1.ReadOnly = true;
-            this.txtPointerSearcherMemDump1.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherMemDump1.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherMemDump1.TabIndex = 1;
             this.txtPointerSearcherMemDump1.Click += new System.EventHandler(this.TxtPointerSearcherMemDump_Click);
             this.txtPointerSearcherMemDump1.TextChanged += new System.EventHandler(this.TxtPointerSearcherMemDump_TextChanged);
@@ -1149,22 +1234,25 @@
             // 
             this.txtPointerSearcherAddress2.Enabled = false;
             this.txtPointerSearcherAddress2.ForeColor = System.Drawing.Color.Green;
-            this.txtPointerSearcherAddress2.Location = new System.Drawing.Point(97, 84);
+            this.txtPointerSearcherAddress2.Location = new System.Drawing.Point(129, 103);
+            this.txtPointerSearcherAddress2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress2.MaxLength = 10;
             this.txtPointerSearcherAddress2.Name = "txtPointerSearcherAddress2";
-            this.txtPointerSearcherAddress2.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress2.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress2.TabIndex = 7;
             // 
             // txtPointerSearcherAddress1
             // 
-            this.txtPointerSearcherAddress1.Location = new System.Drawing.Point(97, 32);
+            this.txtPointerSearcherAddress1.Location = new System.Drawing.Point(129, 39);
+            this.txtPointerSearcherAddress1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPointerSearcherAddress1.MaxLength = 10;
             this.txtPointerSearcherAddress1.Name = "txtPointerSearcherAddress1";
-            this.txtPointerSearcherAddress1.Size = new System.Drawing.Size(189, 20);
+            this.txtPointerSearcherAddress1.Size = new System.Drawing.Size(251, 22);
             this.txtPointerSearcherAddress1.TabIndex = 3;
             // 
             // tabVitaCheat
             // 
+            this.tabVitaCheat.Controls.Add(this.groupBox1);
             this.tabVitaCheat.Controls.Add(this.label4);
             this.tabVitaCheat.Controls.Add(this.comboVitaCheatCondition);
             this.tabVitaCheat.Controls.Add(this.lblVitaCheatButton);
@@ -1188,10 +1276,11 @@
             this.tabVitaCheat.Controls.Add(this.txtVitaCheatAddress1);
             this.tabVitaCheat.Controls.Add(this.lblVitaCheatCodeType);
             this.tabVitaCheat.Controls.Add(this.comboVitaCheatCodeType);
-            this.tabVitaCheat.Location = new System.Drawing.Point(4, 22);
+            this.tabVitaCheat.Location = new System.Drawing.Point(4, 25);
+            this.tabVitaCheat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabVitaCheat.Name = "tabVitaCheat";
-            this.tabVitaCheat.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVitaCheat.Size = new System.Drawing.Size(757, 574);
+            this.tabVitaCheat.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabVitaCheat.Size = new System.Drawing.Size(1012, 709);
             this.tabVitaCheat.TabIndex = 2;
             this.tabVitaCheat.Text = "VitaCheat";
             this.tabVitaCheat.UseVisualStyleBackColor = true;
@@ -1199,9 +1288,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 197);
+            this.label4.Location = new System.Drawing.Point(20, 242);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.Size = new System.Drawing.Size(71, 17);
             this.label4.TabIndex = 23;
             this.label4.Text = "Condition:";
             // 
@@ -1209,17 +1299,19 @@
             // 
             this.comboVitaCheatCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatCondition.FormattingEnabled = true;
-            this.comboVitaCheatCondition.Location = new System.Drawing.Point(90, 189);
+            this.comboVitaCheatCondition.Location = new System.Drawing.Point(120, 233);
+            this.comboVitaCheatCondition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboVitaCheatCondition.Name = "comboVitaCheatCondition";
-            this.comboVitaCheatCondition.Size = new System.Drawing.Size(155, 21);
+            this.comboVitaCheatCondition.Size = new System.Drawing.Size(205, 24);
             this.comboVitaCheatCondition.TabIndex = 22;
             // 
             // lblVitaCheatButton
             // 
             this.lblVitaCheatButton.AutoSize = true;
-            this.lblVitaCheatButton.Location = new System.Drawing.Point(15, 170);
+            this.lblVitaCheatButton.Location = new System.Drawing.Point(20, 209);
+            this.lblVitaCheatButton.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatButton.Name = "lblVitaCheatButton";
-            this.lblVitaCheatButton.Size = new System.Drawing.Size(41, 13);
+            this.lblVitaCheatButton.Size = new System.Drawing.Size(53, 17);
             this.lblVitaCheatButton.TabIndex = 21;
             this.lblVitaCheatButton.Text = "Button:";
             // 
@@ -1227,17 +1319,19 @@
             // 
             this.comboVitaCheatButton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatButton.FormattingEnabled = true;
-            this.comboVitaCheatButton.Location = new System.Drawing.Point(90, 164);
+            this.comboVitaCheatButton.Location = new System.Drawing.Point(120, 202);
+            this.comboVitaCheatButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboVitaCheatButton.Name = "comboVitaCheatButton";
-            this.comboVitaCheatButton.Size = new System.Drawing.Size(155, 21);
+            this.comboVitaCheatButton.Size = new System.Drawing.Size(205, 24);
             this.comboVitaCheatButton.TabIndex = 20;
             // 
             // lblVitaCheatButtonType
             // 
             this.lblVitaCheatButtonType.AutoSize = true;
-            this.lblVitaCheatButtonType.Location = new System.Drawing.Point(15, 143);
+            this.lblVitaCheatButtonType.Location = new System.Drawing.Point(20, 176);
+            this.lblVitaCheatButtonType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatButtonType.Name = "lblVitaCheatButtonType";
-            this.lblVitaCheatButtonType.Size = new System.Drawing.Size(68, 13);
+            this.lblVitaCheatButtonType.Size = new System.Drawing.Size(89, 17);
             this.lblVitaCheatButtonType.TabIndex = 19;
             this.lblVitaCheatButtonType.Text = "Button Type:";
             // 
@@ -1245,18 +1339,20 @@
             // 
             this.comboVitaCheatButtonType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatButtonType.FormattingEnabled = true;
-            this.comboVitaCheatButtonType.Location = new System.Drawing.Point(90, 137);
+            this.comboVitaCheatButtonType.Location = new System.Drawing.Point(120, 169);
+            this.comboVitaCheatButtonType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboVitaCheatButtonType.Name = "comboVitaCheatButtonType";
-            this.comboVitaCheatButtonType.Size = new System.Drawing.Size(155, 21);
+            this.comboVitaCheatButtonType.Size = new System.Drawing.Size(205, 24);
             this.comboVitaCheatButtonType.TabIndex = 18;
             // 
             // txtVCInstructions
             // 
             this.txtVCInstructions.BackColor = System.Drawing.SystemColors.Control;
-            this.txtVCInstructions.Location = new System.Drawing.Point(441, 6);
+            this.txtVCInstructions.Location = new System.Drawing.Point(588, 7);
+            this.txtVCInstructions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVCInstructions.Name = "txtVCInstructions";
             this.txtVCInstructions.ReadOnly = true;
-            this.txtVCInstructions.Size = new System.Drawing.Size(307, 559);
+            this.txtVCInstructions.Size = new System.Drawing.Size(408, 687);
             this.txtVCInstructions.TabIndex = 17;
             this.txtVCInstructions.Text = "";
             this.txtVCInstructions.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtVCInstructions_LinkClicked);
@@ -1271,9 +1367,11 @@
             this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatValueGap);
             this.groupVitaCheatCompression.Controls.Add(this.txtVitaCheatAddressGap);
             this.groupVitaCheatCompression.Controls.Add(this.numericVitaCheatCompressions);
-            this.groupVitaCheatCompression.Location = new System.Drawing.Point(7, 363);
+            this.groupVitaCheatCompression.Location = new System.Drawing.Point(9, 447);
+            this.groupVitaCheatCompression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupVitaCheatCompression.Name = "groupVitaCheatCompression";
-            this.groupVitaCheatCompression.Size = new System.Drawing.Size(236, 100);
+            this.groupVitaCheatCompression.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupVitaCheatCompression.Size = new System.Drawing.Size(315, 123);
             this.groupVitaCheatCompression.TabIndex = 16;
             this.groupVitaCheatCompression.TabStop = false;
             this.groupVitaCheatCompression.Text = "Compression Options";
@@ -1281,22 +1379,24 @@
             // lblVitaCheatCompressionLevelOffset
             // 
             this.lblVitaCheatCompressionLevelOffset.AutoSize = true;
-            this.lblVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(145, 20);
+            this.lblVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(193, 25);
+            this.lblVitaCheatCompressionLevelOffset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatCompressionLevelOffset.Name = "lblVitaCheatCompressionLevelOffset";
-            this.lblVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(36, 13);
+            this.lblVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(46, 17);
             this.lblVitaCheatCompressionLevelOffset.TabIndex = 7;
             this.lblVitaCheatCompressionLevelOffset.Text = "Level:";
             // 
             // numericVitaCheatCompressionLevelOffset
             // 
-            this.numericVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(185, 16);
+            this.numericVitaCheatCompressionLevelOffset.Location = new System.Drawing.Point(247, 20);
+            this.numericVitaCheatCompressionLevelOffset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericVitaCheatCompressionLevelOffset.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.numericVitaCheatCompressionLevelOffset.Name = "numericVitaCheatCompressionLevelOffset";
-            this.numericVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(45, 20);
+            this.numericVitaCheatCompressionLevelOffset.Size = new System.Drawing.Size(60, 22);
             this.numericVitaCheatCompressionLevelOffset.TabIndex = 6;
             this.numericVitaCheatCompressionLevelOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericVitaCheatCompressionLevelOffset.Value = new decimal(new int[] {
@@ -1308,67 +1408,74 @@
             // lblVitaCheatValueGap
             // 
             this.lblVitaCheatValueGap.AutoSize = true;
-            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(120, 48);
+            this.lblVitaCheatValueGap.Location = new System.Drawing.Point(160, 59);
+            this.lblVitaCheatValueGap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatValueGap.Name = "lblVitaCheatValueGap";
-            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(60, 13);
+            this.lblVitaCheatValueGap.Size = new System.Drawing.Size(79, 17);
             this.lblVitaCheatValueGap.TabIndex = 5;
             this.lblVitaCheatValueGap.Text = "Value Gap:";
             // 
             // lblVitaCheatAddressGap
             // 
             this.lblVitaCheatAddressGap.AutoSize = true;
-            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(6, 48);
+            this.lblVitaCheatAddressGap.Location = new System.Drawing.Point(8, 59);
+            this.lblVitaCheatAddressGap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatAddressGap.Name = "lblVitaCheatAddressGap";
-            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(71, 13);
+            this.lblVitaCheatAddressGap.Size = new System.Drawing.Size(95, 17);
             this.lblVitaCheatAddressGap.TabIndex = 4;
             this.lblVitaCheatAddressGap.Text = "Address Gap:";
             // 
             // lblVitaCheatCompressions
             // 
             this.lblVitaCheatCompressions.AutoSize = true;
-            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(6, 20);
+            this.lblVitaCheatCompressions.Location = new System.Drawing.Point(8, 25);
+            this.lblVitaCheatCompressions.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatCompressions.Name = "lblVitaCheatCompressions";
-            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(75, 13);
+            this.lblVitaCheatCompressions.Size = new System.Drawing.Size(101, 17);
             this.lblVitaCheatCompressions.TabIndex = 3;
             this.lblVitaCheatCompressions.Text = "Compressions:";
             // 
             // txtVitaCheatValueGap
             // 
-            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(120, 67);
+            this.txtVitaCheatValueGap.Location = new System.Drawing.Point(160, 82);
+            this.txtVitaCheatValueGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatValueGap.Name = "txtVitaCheatValueGap";
-            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(110, 20);
+            this.txtVitaCheatValueGap.Size = new System.Drawing.Size(145, 22);
             this.txtVitaCheatValueGap.TabIndex = 2;
             this.txtVitaCheatValueGap.Text = "0x00000000";
             this.txtVitaCheatValueGap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddressGap
             // 
-            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(6, 67);
+            this.txtVitaCheatAddressGap.Location = new System.Drawing.Point(8, 82);
+            this.txtVitaCheatAddressGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddressGap.Name = "txtVitaCheatAddressGap";
-            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(107, 20);
+            this.txtVitaCheatAddressGap.Size = new System.Drawing.Size(141, 22);
             this.txtVitaCheatAddressGap.TabIndex = 1;
             this.txtVitaCheatAddressGap.Text = "0x00000000";
             this.txtVitaCheatAddressGap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numericVitaCheatCompressions
             // 
-            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(88, 16);
+            this.numericVitaCheatCompressions.Location = new System.Drawing.Point(117, 20);
+            this.numericVitaCheatCompressions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericVitaCheatCompressions.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numericVitaCheatCompressions.Name = "numericVitaCheatCompressions";
-            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(51, 20);
+            this.numericVitaCheatCompressions.Size = new System.Drawing.Size(68, 22);
             this.numericVitaCheatCompressions.TabIndex = 0;
             this.numericVitaCheatCompressions.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblVitaCheatPointerLevel
             // 
             this.lblVitaCheatPointerLevel.AutoSize = true;
-            this.lblVitaCheatPointerLevel.Location = new System.Drawing.Point(14, 117);
+            this.lblVitaCheatPointerLevel.Location = new System.Drawing.Point(19, 144);
+            this.lblVitaCheatPointerLevel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatPointerLevel.Name = "lblVitaCheatPointerLevel";
-            this.lblVitaCheatPointerLevel.Size = new System.Drawing.Size(72, 13);
+            this.lblVitaCheatPointerLevel.Size = new System.Drawing.Size(95, 17);
             this.lblVitaCheatPointerLevel.TabIndex = 15;
             this.lblVitaCheatPointerLevel.Text = "Pointer Level:";
             // 
@@ -1384,10 +1491,11 @@
             "3",
             "4",
             "5"});
-            this.comboVitaCheatPointerLevel.Location = new System.Drawing.Point(90, 110);
+            this.comboVitaCheatPointerLevel.Location = new System.Drawing.Point(120, 135);
+            this.comboVitaCheatPointerLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboVitaCheatPointerLevel.MaxDropDownItems = 5;
             this.comboVitaCheatPointerLevel.Name = "comboVitaCheatPointerLevel";
-            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(155, 21);
+            this.comboVitaCheatPointerLevel.Size = new System.Drawing.Size(205, 24);
             this.comboVitaCheatPointerLevel.TabIndex = 14;
             this.comboVitaCheatPointerLevel.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatPointerLevel_SelectedIndexChanged);
             // 
@@ -1397,17 +1505,19 @@
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType32Bit);
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType16Bit);
             this.pnlVitaCheatBitType.Controls.Add(this.rdbVitaCheatBitType8Bit);
-            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(7, 469);
+            this.pnlVitaCheatBitType.Location = new System.Drawing.Point(9, 577);
+            this.pnlVitaCheatBitType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlVitaCheatBitType.Name = "pnlVitaCheatBitType";
-            this.pnlVitaCheatBitType.Size = new System.Drawing.Size(236, 27);
+            this.pnlVitaCheatBitType.Size = new System.Drawing.Size(315, 33);
             this.pnlVitaCheatBitType.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 7);
+            this.label2.Location = new System.Drawing.Point(7, 9);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.Size = new System.Drawing.Size(55, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Bittype:";
             // 
@@ -1415,9 +1525,10 @@
             // 
             this.rdbVitaCheatBitType32Bit.AutoSize = true;
             this.rdbVitaCheatBitType32Bit.Checked = true;
-            this.rdbVitaCheatBitType32Bit.Location = new System.Drawing.Point(183, 6);
+            this.rdbVitaCheatBitType32Bit.Location = new System.Drawing.Point(244, 7);
+            this.rdbVitaCheatBitType32Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbVitaCheatBitType32Bit.Name = "rdbVitaCheatBitType32Bit";
-            this.rdbVitaCheatBitType32Bit.Size = new System.Drawing.Size(52, 17);
+            this.rdbVitaCheatBitType32Bit.Size = new System.Drawing.Size(66, 21);
             this.rdbVitaCheatBitType32Bit.TabIndex = 2;
             this.rdbVitaCheatBitType32Bit.TabStop = true;
             this.rdbVitaCheatBitType32Bit.Text = "32-Bit";
@@ -1426,9 +1537,10 @@
             // rdbVitaCheatBitType16Bit
             // 
             this.rdbVitaCheatBitType16Bit.AutoSize = true;
-            this.rdbVitaCheatBitType16Bit.Location = new System.Drawing.Point(124, 6);
+            this.rdbVitaCheatBitType16Bit.Location = new System.Drawing.Point(165, 7);
+            this.rdbVitaCheatBitType16Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbVitaCheatBitType16Bit.Name = "rdbVitaCheatBitType16Bit";
-            this.rdbVitaCheatBitType16Bit.Size = new System.Drawing.Size(52, 17);
+            this.rdbVitaCheatBitType16Bit.Size = new System.Drawing.Size(66, 21);
             this.rdbVitaCheatBitType16Bit.TabIndex = 1;
             this.rdbVitaCheatBitType16Bit.Text = "16-Bit";
             this.rdbVitaCheatBitType16Bit.UseVisualStyleBackColor = true;
@@ -1436,9 +1548,10 @@
             // rdbVitaCheatBitType8Bit
             // 
             this.rdbVitaCheatBitType8Bit.AutoSize = true;
-            this.rdbVitaCheatBitType8Bit.Location = new System.Drawing.Point(71, 6);
+            this.rdbVitaCheatBitType8Bit.Location = new System.Drawing.Point(95, 7);
+            this.rdbVitaCheatBitType8Bit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdbVitaCheatBitType8Bit.Name = "rdbVitaCheatBitType8Bit";
-            this.rdbVitaCheatBitType8Bit.Size = new System.Drawing.Size(46, 17);
+            this.rdbVitaCheatBitType8Bit.Size = new System.Drawing.Size(58, 21);
             this.rdbVitaCheatBitType8Bit.TabIndex = 0;
             this.rdbVitaCheatBitType8Bit.Text = "8-Bit";
             this.rdbVitaCheatBitType8Bit.UseVisualStyleBackColor = true;
@@ -1450,54 +1563,61 @@
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset3);
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset2);
             this.groupVitaCheatAddress2Offset.Controls.Add(this.txtVitaCheatAddress2Offset1);
-            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(130, 216);
+            this.groupVitaCheatAddress2Offset.Location = new System.Drawing.Point(173, 266);
+            this.groupVitaCheatAddress2Offset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupVitaCheatAddress2Offset.Name = "groupVitaCheatAddress2Offset";
-            this.groupVitaCheatAddress2Offset.Size = new System.Drawing.Size(115, 141);
+            this.groupVitaCheatAddress2Offset.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupVitaCheatAddress2Offset.Size = new System.Drawing.Size(153, 174);
             this.groupVitaCheatAddress2Offset.TabIndex = 12;
             this.groupVitaCheatAddress2Offset.TabStop = false;
             this.groupVitaCheatAddress2Offset.Text = "Address 2 Offsets";
             // 
             // txtVitaCheatAddress2Offset5
             // 
-            this.txtVitaCheatAddress2Offset5.Location = new System.Drawing.Point(6, 113);
+            this.txtVitaCheatAddress2Offset5.Location = new System.Drawing.Point(8, 139);
+            this.txtVitaCheatAddress2Offset5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2Offset5.Name = "txtVitaCheatAddress2Offset5";
-            this.txtVitaCheatAddress2Offset5.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset5.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress2Offset5.TabIndex = 4;
             this.txtVitaCheatAddress2Offset5.Text = "0x00000000";
             this.txtVitaCheatAddress2Offset5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress2Offset4
             // 
-            this.txtVitaCheatAddress2Offset4.Location = new System.Drawing.Point(6, 89);
+            this.txtVitaCheatAddress2Offset4.Location = new System.Drawing.Point(8, 110);
+            this.txtVitaCheatAddress2Offset4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2Offset4.Name = "txtVitaCheatAddress2Offset4";
-            this.txtVitaCheatAddress2Offset4.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset4.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress2Offset4.TabIndex = 3;
             this.txtVitaCheatAddress2Offset4.Text = "0x00000000";
             this.txtVitaCheatAddress2Offset4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress2Offset3
             // 
-            this.txtVitaCheatAddress2Offset3.Location = new System.Drawing.Point(6, 67);
+            this.txtVitaCheatAddress2Offset3.Location = new System.Drawing.Point(8, 82);
+            this.txtVitaCheatAddress2Offset3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2Offset3.Name = "txtVitaCheatAddress2Offset3";
-            this.txtVitaCheatAddress2Offset3.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset3.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress2Offset3.TabIndex = 2;
             this.txtVitaCheatAddress2Offset3.Text = "0x00000000";
             this.txtVitaCheatAddress2Offset3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress2Offset2
             // 
-            this.txtVitaCheatAddress2Offset2.Location = new System.Drawing.Point(6, 43);
+            this.txtVitaCheatAddress2Offset2.Location = new System.Drawing.Point(8, 53);
+            this.txtVitaCheatAddress2Offset2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2Offset2.Name = "txtVitaCheatAddress2Offset2";
-            this.txtVitaCheatAddress2Offset2.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset2.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress2Offset2.TabIndex = 1;
             this.txtVitaCheatAddress2Offset2.Text = "0x00000000";
             this.txtVitaCheatAddress2Offset2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress2Offset1
             // 
-            this.txtVitaCheatAddress2Offset1.Location = new System.Drawing.Point(6, 19);
+            this.txtVitaCheatAddress2Offset1.Location = new System.Drawing.Point(8, 23);
+            this.txtVitaCheatAddress2Offset1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2Offset1.Name = "txtVitaCheatAddress2Offset1";
-            this.txtVitaCheatAddress2Offset1.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress2Offset1.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress2Offset1.TabIndex = 0;
             this.txtVitaCheatAddress2Offset1.Text = "0x00000000";
             this.txtVitaCheatAddress2Offset1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1509,54 +1629,61 @@
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset3);
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset2);
             this.groupVitaCheatAddress1Offset.Controls.Add(this.txtVitaCheatAddress1Offset1);
-            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(9, 216);
+            this.groupVitaCheatAddress1Offset.Location = new System.Drawing.Point(12, 266);
+            this.groupVitaCheatAddress1Offset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupVitaCheatAddress1Offset.Name = "groupVitaCheatAddress1Offset";
-            this.groupVitaCheatAddress1Offset.Size = new System.Drawing.Size(115, 141);
+            this.groupVitaCheatAddress1Offset.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupVitaCheatAddress1Offset.Size = new System.Drawing.Size(153, 174);
             this.groupVitaCheatAddress1Offset.TabIndex = 11;
             this.groupVitaCheatAddress1Offset.TabStop = false;
             this.groupVitaCheatAddress1Offset.Text = "Address 1 Offsets";
             // 
             // txtVitaCheatAddress1Offset5
             // 
-            this.txtVitaCheatAddress1Offset5.Location = new System.Drawing.Point(4, 113);
+            this.txtVitaCheatAddress1Offset5.Location = new System.Drawing.Point(5, 139);
+            this.txtVitaCheatAddress1Offset5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1Offset5.Name = "txtVitaCheatAddress1Offset5";
-            this.txtVitaCheatAddress1Offset5.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset5.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress1Offset5.TabIndex = 4;
             this.txtVitaCheatAddress1Offset5.Text = "0x00000000";
             this.txtVitaCheatAddress1Offset5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress1Offset4
             // 
-            this.txtVitaCheatAddress1Offset4.Location = new System.Drawing.Point(4, 89);
+            this.txtVitaCheatAddress1Offset4.Location = new System.Drawing.Point(5, 110);
+            this.txtVitaCheatAddress1Offset4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1Offset4.Name = "txtVitaCheatAddress1Offset4";
-            this.txtVitaCheatAddress1Offset4.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset4.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress1Offset4.TabIndex = 3;
             this.txtVitaCheatAddress1Offset4.Text = "0x00000000";
             this.txtVitaCheatAddress1Offset4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress1Offset3
             // 
-            this.txtVitaCheatAddress1Offset3.Location = new System.Drawing.Point(4, 67);
+            this.txtVitaCheatAddress1Offset3.Location = new System.Drawing.Point(5, 82);
+            this.txtVitaCheatAddress1Offset3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1Offset3.Name = "txtVitaCheatAddress1Offset3";
-            this.txtVitaCheatAddress1Offset3.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset3.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress1Offset3.TabIndex = 2;
             this.txtVitaCheatAddress1Offset3.Text = "0x00000000";
             this.txtVitaCheatAddress1Offset3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress1Offset2
             // 
-            this.txtVitaCheatAddress1Offset2.Location = new System.Drawing.Point(4, 43);
+            this.txtVitaCheatAddress1Offset2.Location = new System.Drawing.Point(5, 53);
+            this.txtVitaCheatAddress1Offset2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1Offset2.Name = "txtVitaCheatAddress1Offset2";
-            this.txtVitaCheatAddress1Offset2.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset2.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress1Offset2.TabIndex = 1;
             this.txtVitaCheatAddress1Offset2.Text = "0x00000000";
             this.txtVitaCheatAddress1Offset2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtVitaCheatAddress1Offset1
             // 
-            this.txtVitaCheatAddress1Offset1.Location = new System.Drawing.Point(4, 19);
+            this.txtVitaCheatAddress1Offset1.Location = new System.Drawing.Point(5, 23);
+            this.txtVitaCheatAddress1Offset1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1Offset1.Name = "txtVitaCheatAddress1Offset1";
-            this.txtVitaCheatAddress1Offset1.Size = new System.Drawing.Size(100, 20);
+            this.txtVitaCheatAddress1Offset1.Size = new System.Drawing.Size(132, 22);
             this.txtVitaCheatAddress1Offset1.TabIndex = 0;
             this.txtVitaCheatAddress1Offset1.Text = "0x00000000";
             this.txtVitaCheatAddress1Offset1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1564,9 +1691,10 @@
             // btnVitaCheatGenerate
             // 
             this.btnVitaCheatGenerate.Font = new System.Drawing.Font("SimSun", 12F);
-            this.btnVitaCheatGenerate.Location = new System.Drawing.Point(9, 502);
+            this.btnVitaCheatGenerate.Location = new System.Drawing.Point(12, 618);
+            this.btnVitaCheatGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVitaCheatGenerate.Name = "btnVitaCheatGenerate";
-            this.btnVitaCheatGenerate.Size = new System.Drawing.Size(236, 63);
+            this.btnVitaCheatGenerate.Size = new System.Drawing.Size(315, 78);
             this.btnVitaCheatGenerate.TabIndex = 10;
             this.btnVitaCheatGenerate.Text = "Generate \n VitaCheat Code!";
             this.btnVitaCheatGenerate.UseVisualStyleBackColor = true;
@@ -1575,29 +1703,32 @@
             // txtVitaCheatCode
             // 
             this.txtVitaCheatCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtVitaCheatCode.Location = new System.Drawing.Point(251, 6);
+            this.txtVitaCheatCode.Location = new System.Drawing.Point(335, 266);
+            this.txtVitaCheatCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatCode.Multiline = true;
             this.txtVitaCheatCode.Name = "txtVitaCheatCode";
             this.txtVitaCheatCode.ReadOnly = true;
             this.txtVitaCheatCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtVitaCheatCode.Size = new System.Drawing.Size(184, 559);
+            this.txtVitaCheatCode.Size = new System.Drawing.Size(244, 428);
             this.txtVitaCheatCode.TabIndex = 9;
             this.txtVitaCheatCode.WordWrap = false;
             // 
             // lblVitaCheatValue
             // 
             this.lblVitaCheatValue.AutoSize = true;
-            this.lblVitaCheatValue.Location = new System.Drawing.Point(14, 91);
+            this.lblVitaCheatValue.Location = new System.Drawing.Point(19, 112);
+            this.lblVitaCheatValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatValue.Name = "lblVitaCheatValue";
-            this.lblVitaCheatValue.Size = new System.Drawing.Size(76, 13);
+            this.lblVitaCheatValue.Size = new System.Drawing.Size(101, 17);
             this.lblVitaCheatValue.TabIndex = 8;
             this.lblVitaCheatValue.Text = "Desired Value:";
             // 
             // txtVitaCheatValue
             // 
-            this.txtVitaCheatValue.Location = new System.Drawing.Point(90, 84);
+            this.txtVitaCheatValue.Location = new System.Drawing.Point(120, 103);
+            this.txtVitaCheatValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatValue.Name = "txtVitaCheatValue";
-            this.txtVitaCheatValue.Size = new System.Drawing.Size(155, 20);
+            this.txtVitaCheatValue.Size = new System.Drawing.Size(205, 22);
             this.txtVitaCheatValue.TabIndex = 7;
             this.txtVitaCheatValue.Text = "99";
             this.txtVitaCheatValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1605,17 +1736,19 @@
             // lblVitaCheatAddress2
             // 
             this.lblVitaCheatAddress2.AutoSize = true;
-            this.lblVitaCheatAddress2.Location = new System.Drawing.Point(14, 65);
+            this.lblVitaCheatAddress2.Location = new System.Drawing.Point(19, 80);
+            this.lblVitaCheatAddress2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatAddress2.Name = "lblVitaCheatAddress2";
-            this.lblVitaCheatAddress2.Size = new System.Drawing.Size(57, 13);
+            this.lblVitaCheatAddress2.Size = new System.Drawing.Size(76, 17);
             this.lblVitaCheatAddress2.TabIndex = 6;
             this.lblVitaCheatAddress2.Text = "Address 2:";
             // 
             // txtVitaCheatAddress2
             // 
-            this.txtVitaCheatAddress2.Location = new System.Drawing.Point(90, 58);
+            this.txtVitaCheatAddress2.Location = new System.Drawing.Point(120, 71);
+            this.txtVitaCheatAddress2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress2.Name = "txtVitaCheatAddress2";
-            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(155, 20);
+            this.txtVitaCheatAddress2.Size = new System.Drawing.Size(205, 22);
             this.txtVitaCheatAddress2.TabIndex = 5;
             this.txtVitaCheatAddress2.Text = "0x00000000";
             this.txtVitaCheatAddress2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1623,17 +1756,19 @@
             // lblVitaCheatAddress1
             // 
             this.lblVitaCheatAddress1.AutoSize = true;
-            this.lblVitaCheatAddress1.Location = new System.Drawing.Point(14, 39);
+            this.lblVitaCheatAddress1.Location = new System.Drawing.Point(19, 48);
+            this.lblVitaCheatAddress1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatAddress1.Name = "lblVitaCheatAddress1";
-            this.lblVitaCheatAddress1.Size = new System.Drawing.Size(57, 13);
+            this.lblVitaCheatAddress1.Size = new System.Drawing.Size(76, 17);
             this.lblVitaCheatAddress1.TabIndex = 4;
             this.lblVitaCheatAddress1.Text = "Address 1:";
             // 
             // txtVitaCheatAddress1
             // 
-            this.txtVitaCheatAddress1.Location = new System.Drawing.Point(90, 32);
+            this.txtVitaCheatAddress1.Location = new System.Drawing.Point(120, 39);
+            this.txtVitaCheatAddress1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVitaCheatAddress1.Name = "txtVitaCheatAddress1";
-            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(155, 20);
+            this.txtVitaCheatAddress1.Size = new System.Drawing.Size(205, 22);
             this.txtVitaCheatAddress1.TabIndex = 3;
             this.txtVitaCheatAddress1.Text = "0x00000000";
             this.txtVitaCheatAddress1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1641,9 +1776,10 @@
             // lblVitaCheatCodeType
             // 
             this.lblVitaCheatCodeType.AutoSize = true;
-            this.lblVitaCheatCodeType.Location = new System.Drawing.Point(14, 12);
+            this.lblVitaCheatCodeType.Location = new System.Drawing.Point(19, 15);
+            this.lblVitaCheatCodeType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatCodeType.Name = "lblVitaCheatCodeType";
-            this.lblVitaCheatCodeType.Size = new System.Drawing.Size(62, 13);
+            this.lblVitaCheatCodeType.Size = new System.Drawing.Size(81, 17);
             this.lblVitaCheatCodeType.TabIndex = 2;
             this.lblVitaCheatCodeType.Text = "Code Type:";
             // 
@@ -1652,23 +1788,54 @@
             this.comboVitaCheatCodeType.DisplayMember = "0";
             this.comboVitaCheatCodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatCodeType.FormattingEnabled = true;
-            this.comboVitaCheatCodeType.Location = new System.Drawing.Point(90, 6);
+            this.comboVitaCheatCodeType.Location = new System.Drawing.Point(120, 7);
+            this.comboVitaCheatCodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboVitaCheatCodeType.Name = "comboVitaCheatCodeType";
-            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(155, 21);
+            this.comboVitaCheatCodeType.Size = new System.Drawing.Size(205, 24);
             this.comboVitaCheatCodeType.TabIndex = 1;
             this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
             // 
+            // lblVitaCheatB200
+            // 
+            this.lblVitaCheatB200.AutoSize = true;
+            this.lblVitaCheatB200.Location = new System.Drawing.Point(6, 48);
+            this.lblVitaCheatB200.Name = "lblVitaCheatB200";
+            this.lblVitaCheatB200.Size = new System.Drawing.Size(84, 17);
+            this.lblVitaCheatB200.TabIndex = 24;
+            this.lblVitaCheatB200.Text = "B200 Mode:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboVitaCheatB200);
+            this.groupBox1.Controls.Add(this.lblVitaCheatB200);
+            this.groupBox1.Location = new System.Drawing.Point(335, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(243, 256);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Optional Code Types";
+            // 
+            // comboVitaCheatB200
+            // 
+            this.comboVitaCheatB200.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVitaCheatB200.FormattingEnabled = true;
+            this.comboVitaCheatB200.Location = new System.Drawing.Point(100, 45);
+            this.comboVitaCheatB200.Name = "comboVitaCheatB200";
+            this.comboVitaCheatB200.Size = new System.Drawing.Size(131, 24);
+            this.comboVitaCheatB200.TabIndex = 25;
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(769, 609);
+            this.ClientSize = new System.Drawing.Size(1025, 750);
             this.Controls.Add(this.tctrlTabs);
             this.Controls.Add(this.frmStatusStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1704,6 +1871,8 @@
             this.groupVitaCheatAddress2Offset.PerformLayout();
             this.groupVitaCheatAddress1Offset.ResumeLayout(false);
             this.groupVitaCheatAddress1Offset.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1841,5 +2010,8 @@
         private System.Windows.Forms.ComboBox comboVitaCheatButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboVitaCheatCondition;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox comboVitaCheatB200;
+        private System.Windows.Forms.Label lblVitaCheatB200;
     }
 }
