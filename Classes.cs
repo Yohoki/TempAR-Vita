@@ -18,6 +18,13 @@ namespace TempAR
 
     }
 
+    internal class Button2
+    {
+        public int BT2 { get; set; }
+        public String Name { get; set; }
+
+    }
+
     internal class Condition
     {
         public int OP { get; set; }

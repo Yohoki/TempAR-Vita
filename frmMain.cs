@@ -122,6 +122,25 @@ namespace TempAR
             comboVitaCheatButton.DisplayMember = "Name";
             comboVitaCheatButton.ValueMember = "BT";
 
+            //vita cheat 2nd button drop list text and value
+            List<Button2> BT2 = new List<Button2>();
+            BT2.Add(new Button2() { BT2 = 0, Name = "Null" });
+            BT2.Add(new Button2() { BT2 = 1, Name = "Select" });
+            BT2.Add(new Button2() { BT2 = 8, Name = "Start" });
+            BT2.Add(new Button2() { BT2 = 10, Name = "UP" });
+            BT2.Add(new Button2() { BT2 = 20, Name = "Right" });
+            BT2.Add(new Button2() { BT2 = 40, Name = "Down" });
+            BT2.Add(new Button2() { BT2 = 80, Name = "Left" });
+            BT2.Add(new Button2() { BT2 = 100, Name = "L" });
+            BT2.Add(new Button2() { BT2 = 200, Name = "R" });
+            BT2.Add(new Button2() { BT2 = 1000, Name = "Triangle" });
+            BT2.Add(new Button2() { BT2 = 2000, Name = "Circle" });
+            BT2.Add(new Button2() { BT2 = 4000, Name = "Cross" });
+            BT2.Add(new Button2() { BT2 = 8000, Name = "Square" });
+            comboVitaCheatButton2.DataSource = BT2;
+            comboVitaCheatButton2.DisplayMember = "Name";
+            comboVitaCheatButton2.ValueMember = "BT2";
+
             //vita cheat Condition drop list text and value
             List<Condition> OP1 = new List<Condition>();
             OP1.Add(new Condition() { OP = 0, Name = "(=) Equal to X 8bit" });
@@ -297,6 +316,7 @@ namespace TempAR
             comboVitaCheatPointerLevel.SelectedIndex = 0;
             comboVitaCheatButtonType.SelectedIndex = 0;
             comboVitaCheatButton.SelectedIndex = 0;
+            comboVitaCheatButton2.SelectedIndex = 0;
         }
 
         //
@@ -973,6 +993,7 @@ namespace TempAR
             var VCValue = Utils.ParseNum(txtVitaCheatValue.Text);
             var VCBtntype = Utils.ParseNum(comboVitaCheatButtonType.SelectedValue.ToString());
             var VCBtn = Utils.ParseNum(comboVitaCheatButton.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
+            var VCBtn2 = Utils.ParseNum(comboVitaCheatButton2.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
             var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
             var VCRelLin = Utils.ParseNum("1");
             var VCSeg = Utils.ParseNum("1");
@@ -1119,7 +1140,8 @@ namespace TempAR
                     break;
 
                 case VC_GEN_BTNPAD:
-                    var VCGenBTNPAD1 = $"$C{bittype}00 {VCBtntype:X08} {VCBtn:X08}\r\n";
+                    var VCBtnMath = VCBtn + VCBtn2;
+                    var VCGenBTNPAD1 = $"$C{bittype}00 {VCBtntype:X08} {VCBtnMath:X08}\r\n";
                     var VCGenBTNPAD2 = $"$0{bittype}00 {VCAddr1:X08} {VCValue:X08}\r\n";
                     txtVitaCheatCode.Text = VCstr1 + VCGenBTNPAD1 + VCGenBTNPAD2;
                     break;
