@@ -1020,8 +1020,27 @@ namespace TempAR
                     break;
 
                 default:
-                    var VCBtnMath = VCBtn + VCBtn2;
-                    VCstr1 = VCstr1 + $"$C200 {VCBtntype:X08} {VCBtnMath:X08}\r\n";
+                    var ButtonLines = 1;
+                    var VCGenptroff1 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                    switch (comboVitaCheatCodeType.Text)
+                    {
+                        case VC_GEN_COMP:
+                            ButtonLines = 2;
+                            break;
+                        case VC_GEN_PNTR:
+                            ButtonLines = (comboVitaCheatPointerLevel.SelectedIndex + 1) + 1;
+                            break;
+                        case VC_GEN_PTRMOV:
+                            ButtonLines = ButtonLines = 2 * (comboVitaCheatPointerLevel.SelectedIndex + 1) + 2; ;
+                            break;
+                        case VC_GEN_PTRCOM:
+                            ButtonLines = ButtonLines = (comboVitaCheatPointerLevel.SelectedIndex + 1) + 2; ;
+                            break;
+                        default:
+                            break;
+                    }
+                            var VCBtnMath = VCBtn + VCBtn2;
+                    VCstr1 = VCstr1 + $"$C20{ButtonLines:X01} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
                     break;
             }
 
