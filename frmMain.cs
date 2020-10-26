@@ -94,6 +94,7 @@ namespace TempAR
 
             //vita cheat button type drop list text and value
             List<ButtonType> BTT1 = new List<ButtonType>();
+            BTT1.Add(new ButtonType() { BTT = 9, Name = "None" });
             BTT1.Add(new ButtonType() { BTT = 0, Name = "Undefined" });
             BTT1.Add(new ButtonType() { BTT = 1, Name = "PSVita" });
             BTT1.Add(new ButtonType() { BTT = 2, Name = "PSTV" });
@@ -788,7 +789,21 @@ namespace TempAR
         private void ComboVitaCheatB200_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+        private void ComboVitaCheatButtonType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (comboVitaCheatButtonType.SelectedValue)
+            {
+                case 9:
+                    comboVitaCheatButton.Enabled = false;
+                    comboVitaCheatButton2.Enabled = false;
+                    break;
 
+                default:
+                    comboVitaCheatButton.Enabled = true;
+                    comboVitaCheatButton2.Enabled = true;
+                    break;
+            }
+        }
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Git Wiki url
@@ -1001,7 +1016,7 @@ namespace TempAR
             //
             switch (VCBtntype)
             {
-                case 0:
+                case 9:
                     break;
 
                 default:
@@ -1009,7 +1024,6 @@ namespace TempAR
                     VCstr1 = VCstr1 + $"$C200 {VCBtntype:X08} {VCBtnMath:X08}\r\n";
                     break;
             }
-
 
             //
             //Get Bit Type from radio buttons
