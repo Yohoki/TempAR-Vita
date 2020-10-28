@@ -1008,7 +1008,7 @@ namespace TempAR
             if (comboVitaCheatCondition.Text != "None")
             {
                 var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
-                var VCGenCNDTN1 = $"$D{VCOperators}0{RelatedLines} {VCAddr1:X08} {VCAddr1:X08}\r\n"; //Needs new address boxes
+                var VCGenCNDTN1 = $"$D{VCOperators:X01}{RelatedLines:X02} {VCAddr1:X08} {VCAddr1:X08}\r\n"; //Needs new address boxes
                 VCstr1 = VCstr1 + VCGenCNDTN1;
             }
 
@@ -1029,7 +1029,7 @@ namespace TempAR
 
                 default:
                     var VCBtnMath = VCBtn + VCBtn2;
-                    VCstr1 = VCstr1 + $"$C20{RelatedLines:X01} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
+                    VCstr1 = VCstr1 + $"$C2{RelatedLines:X02} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
                     break;
             }
 

@@ -1323,10 +1323,10 @@
             // 
             this.comboVitaCheatCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatCondition.FormattingEnabled = true;
-            this.comboVitaCheatCondition.Location = new System.Drawing.Point(100, 191);
+            this.comboVitaCheatCondition.Location = new System.Drawing.Point(77, 191);
             this.comboVitaCheatCondition.Margin = new System.Windows.Forms.Padding(4);
             this.comboVitaCheatCondition.Name = "comboVitaCheatCondition";
-            this.comboVitaCheatCondition.Size = new System.Drawing.Size(131, 24);
+            this.comboVitaCheatCondition.Size = new System.Drawing.Size(154, 24);
             this.comboVitaCheatCondition.TabIndex = 22;
             // 
             // label4
