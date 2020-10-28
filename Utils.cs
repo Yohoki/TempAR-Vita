@@ -139,11 +139,11 @@ namespace TempAR
         ///
         public static int RelatedLines(int PtrLvl, string CodeType, uint ButtonType, int ConCheck)
         {
-            var Lines = 1;
+            var Lines = 0;
             if (ConCheck == 1)
             {
                 if (ButtonType == 9) { ButtonType = 1; } // If ButtonPad is set to 'None', still count lines as if it wasn't
-                else { Lines = 2; }
+                else { Lines = 1; }
             }
             switch (ButtonType)
             {
@@ -166,7 +166,7 @@ namespace TempAR
                             Lines = Lines + (PtrLvl + 1) + 2; ;
                             return Lines;
                         default:
-                            return Lines;
+                            return Lines + 1;
                     }
             }
         }
