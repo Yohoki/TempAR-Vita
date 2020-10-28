@@ -133,5 +133,42 @@ namespace TempAR
             }
             dataSource.Sort(comparison);
         }
+
+        ///
+        /// Count lines for Conditionals and ButtonPad
+        ///
+        public static int RelatedLines(int PtrLvl, string CodeType, uint ButtonType, int ConCheck)
+        {
+            var Lines = 1;
+            if (ConCheck == 1)
+            {
+                if (ButtonType == 9) { ButtonType = 1; } // If ButtonPad is set to 'None', still count lines as if it wasn't
+                else { Lines = 2; }
+            }
+            switch (ButtonType)
+            {
+                case 9:
+                    return 0;
+
+                default:
+                    switch (CodeType)
+                    {
+                        case "Compress ($4...)":
+                            Lines = Lines + 2;
+                            return Lines;
+                        case "Pointer Write ($3...)":
+                            Lines = Lines + (PtrLvl + 1) + 1;
+                            return Lines;
+                        case "Pointer MOV ($8...)":
+                            Lines = Lines + 2 * (PtrLvl + 1) + 2;
+                            return Lines;
+                        case "Pointer Compress ($7...)":
+                            Lines = Lines + (PtrLvl + 1) + 2; ;
+                            return Lines;
+                        default:
+                            return Lines;
+                    }
+            }
+        }
     }
 }

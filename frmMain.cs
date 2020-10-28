@@ -144,6 +144,7 @@ namespace TempAR
 
             //vita cheat Condition drop list text and value
             List<Condition> OP1 = new List<Condition>();
+            OP1.Add(new Condition() { OP = 99, Name = "None" });
             OP1.Add(new Condition() { OP = 0, Name = "(=) Equal to X 8bit" });
             OP1.Add(new Condition() { OP = 1, Name = "(=) Equal to X 16bit" });
             OP1.Add(new Condition() { OP = 2, Name = "(=) Equal to X 32bit" });
@@ -819,7 +820,6 @@ namespace TempAR
             {
                 case VC_GEN_WRITE: // Write
                     strPage = "Write";
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "WRITE\r\nCreates a code that locks the value at an address to the specified number.\r\n\r\nPut the desired address in the 'Address 1' box and put your desired value in the box marked 'Desired Value'\r\n\r\nFor example, to lock your HP at 100, we need to put our HP's address (I'll use 83001337) into 'Address 1' and 100 into 'Desired Value'.\r\n\r\nThis generates the code:\r\n_V0 Infinite HP\r\n$0200 83001337 00000064\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -827,7 +827,6 @@ namespace TempAR
                     strPage = "MOV";
                     txtVitaCheatAddress2.Enabled = true;
                     txtVitaCheatValue.Enabled = false;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "MOV\r\nMOV codes simply copies the value from one address to another.\r\n\r\nPut the address you want changed into 'Address 1' and the address that you want to copy from in 'Copy From'.\r\n\r\nExample:\r\nTo make an 'Always Full HP' code, we can put the address for our current HP (83001337) into 'Address 1'. Then put the address for our Max HP (83001333) into 'Copy From'. The code generator will give the following code:\r\n_V0 Always Full HP\r\n$5200 83001337 83001333\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -836,7 +835,6 @@ namespace TempAR
                     groupVitaCheatCompression.Enabled = true;
                     numericVitaCheatCompressionLevelOffset.Enabled = false;
                     lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "COMPRESS\r\nCompress is an advanced code that applies the 'Write' code several times in different places in an ordered manner.\r\n\r\nType the first address in the 'Address 1' box as well as the desired value in 'Desired Value'.\r\n\r\nFind out how far away the second address is. You can use a hex Calculator to subtract these two. Place that offset into the box labeled 'Address Gap'\r\n\r\nIf you would like to have the value increased each time the code is applied, use 'Value Gap' to increase it.\r\n\r\nFinally, select or type the number of times you need this code to repeat in the '# of Compressions' box.\r\n\r\nExample:\r\nTo give 99 of each potion type, we will first find the address for the 1st potion (We'll use 83001337) in the game and know how many potions there are. We'll pretend there are normal, greater and high potions, so 3 compressions total. The greater potion is at 83001347 and high is at 83001357. This puts the Value offset at 0x00000010. We want them all to be 99, so the desired value will be 99 and the Value Gap will remain 0. The generated code will then be:\r\n_V0 Infinite Potions\r\n$4200 83001337 00000063\r\n$0003 00000010 00000000\r\n\r\nThis has the same effect as the following code:\r\n_V0 Infinite Potions\r\n$0200 83001337 00000063\r\n$0200 83001347 00000063\r\n$0200 83001357 00000063\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -844,7 +842,6 @@ namespace TempAR
                     strPage = "Pointer-Write";
                     comboVitaCheatPointerLevel.Enabled = true;
                     groupVitaCheatAddress1Offset.Enabled = true;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "POINTER Write\r\nPointers are advanced codes that write to addresses that move around.\r\n\r\nSometimes developers move blocks of RAM around.To keep track of this movement, a specific address keeps track of that block's starting point. The location of an address within that block is called an Offset and is the distance from the start of the block to the desired location. Often, that location is another pointer, leading to a new movable block. To follow a second, third or more pointers, use the pointer level.\r\n\r\nPut the pointer's Address into the 'Address 1' box.And the value you would like in the 'Desired Value' box.\r\n\r\nSelect how many pointers you need to follow in the 'Pointer Level' box and put each of their offsets into an offset box.The first offset is at the top, and the last offset is at the bottom.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -855,7 +852,6 @@ namespace TempAR
                     groupVitaCheatAddress2Offset.Enabled = true;
                     txtVitaCheatValue.Enabled = false;
                     txtVitaCheatAddress2.Enabled = true;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "POINTER MOV\r\nPointer MOV copies one address to another, but uses pointers as the starting points.\r\n\r\nExamples\r\n\r\nExample of a level 1 pointer MOV:\r\n\r\n_V0 Infinite MP\r\n$8201 818714E8 00000E0C\r\n$8800 00000000 00000000\r\n$8601 815715D9 00000FDC\r\n$8900 00000000 00000000\r\n\r\nCopy (32bit) value from 0x815715D9 + 0xFDC to 0x818714E8 + 0xE0C.\r\n\r\nExample of a level 3 pointer MOV:\r\n\r\n_V0 Infinite MP\r\n$8203 818714E8 00000E0C\r\n$8200 00000000 0000000D\r\n$8200 00000000 0000124D\r\n$8800 00000000 00000000\r\n$8603 815715D9 00000FDC\r\n$8600 00000000 0000000C\r\n$8600 00000000 00001255\r\n$8900 00000000 00000000\r\n\r\nCopy (32bit) value from 0x815715D9 + 0xFDC + 0x0C + 0x1255 to 0x818714E8 + 0xE0C + 0x0D + 0x124D.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -866,7 +862,6 @@ namespace TempAR
                     groupVitaCheatCompression.Enabled = true;
                     numericVitaCheatCompressionLevelOffset.Enabled = true;
                     lblVitaCheatCompressionLevelOffset.Enabled = true;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "POINTER COMPRESS\r\nCreates several Write codes in an ordered manner with a pointer as the starting point.\r\n\r\nMake sure to set which level you want the code to Compres at. Leaving it at '1' will apply the compression at the first offset.\r\nLeaving it at '0' will change the ADDRESS value by the selected offset gap, not it's offset.\r\n\r\nExample:\r\n\r\n_V0 Max Stats\r\n$7203 818714E8 00000FDC\r\n$7200 00000000 0000000C\r\n$7200 00000000 000005DD\r\n$7703 00000000 000003E6\r\n$0002 00000004 00000000\r\n\r\nCompress the third pointer offset which is 0x05DD with the address gap of 0x04. Number of compression is 0x02.\r\n\r\nThe code above is equivalent to:\r\n\r\n$3203 818714E8 00000FDC\r\n$3200 00000000 0000000C\r\n$3200 00000000 000005DD\r\n$3300 00000000 000003E6\r\n\r\n\r\n$3203 818714E8 00000FDC\r\n$3200 00000000 0000000C\r\n$3200 00000000 000005E1\r\n$3300 00000000 000003E6\r\n #INCREMENT ADDRESS GAP:`0x05DD`+`0x04`=`0x05E1`\r\n#VALUE IS STATIC 3E6\r\nC\r\nChange Address with known address gap\r\n\r\n_V0 WH Item Slot Modifier\r\n$7201 862BFEC8 0000001C\r\n$7700 00000000 00000032\r\n$0060 00000004 00000000\r\n\r\nCompress the pointer Address which is 0x862BFEC8 with the address gap of 0x04. Number of compression is 0x60.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -874,7 +869,6 @@ namespace TempAR
                     strPage = "ARM-Write";
                     txtVitaCheatAddress2.Enabled = true;
                     txtVitaCheatValue.Enabled = false;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "ARM Write\r\nWrite ARM instructions. ARM Write can also be used to store the original value of what is being overwritten, and restored when the code is deactivated.\r\n\r\nIt's like a switch for ON and OFF for a cheat to restore it to its former value.\r\n\r\nNote: The ARM architecture uses the Little-endian storage format.\r\n\r\nExample:\r\n\r\n_V0 EXTRA MAX\r\n$A100 8114C8A2 0000BF00\r\n\r\nWrite 0x00BF to 0x8114C8A2 (16bit), default is off.\r\n\r\n0x00BF means NOP in ARM (Thumb-2 HEX).\r\n\r\n_V1 Branch Test\r\n$A200 81132EA8 EA01D709\r\n\r\nWrite 0x75F012BE to 0x81132EA8 (32bit), default is on.\r\n\r\n0x09D701EA means b #0x75C24 in ARM (ARM GBD/LLBD).\r\n\r\n_V0 Walk Thru Walls\r\n$A000 810A12A6 00000001\r\n\r\n\r\nWrites 0x01 to address 0x810A12A6, Default is 0x00\r\nWhen the code is turned off, it is restored to the original value of 0x00.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -885,19 +879,17 @@ namespace TempAR
                     groupVitaCheatCompression.Enabled = false;
                     numericVitaCheatCompressionLevelOffset.Enabled = false;
                     lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "Button PAD\r\nThis code type is useful when you want your code to be activated based on the button input.\r\n\r\nButton Type\r\n\r\n0000 - Undefined\r\n0001 - Vita (Default)\r\n0002 - PSTV\r\n0004 - DualShock 3\r\n0008 - DualShock 4\r\n\r\nButtons\r\n00000001 - psvita-select\r\n00000008 - psvita-start\r\n00000010 - psvita-up\r\n00000020 - psvita-right\r\n00000040 - psvita-down\r\n00000080 - psvita-left\r\n00000100 - psvita-L\r\n00000200 - psvita-R\r\n00001000 - psvita-triangle\r\n00002000 - psvita-circle\r\n00004000 - psvita-cross\r\n00008000 - psvita-square\r\n00000000 - null\r\n\r\nExample:\r\n\r\n_V0 Button PAD\r\n$C201 00000001 00000300\r\n$0200 8xxxxxxx xxxxxxxx\r\n\r\nPressing the psvita-L + psvita-R will execute the following 0x01 related lines of code $0200 8xxxxxxx xxxxxxxx.\r\n\r\nButton Combo\r\npsvita-square + psvita-select:\r\n\r\n_V0 Button PAD\r\n$C201 00000001 00008001\r\n$0200 8xxxxxxx xxxxxxxx\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_CNDTN: // Condition
                     strPage = "Condition";
                     comboVitaCheatPointerLevel.Enabled = false;
-                    groupVitaCheatAddress1Offset.Enabled = true;
+                    groupVitaCheatAddress1Offset.Enabled = false;
                     groupVitaCheatCompression.Enabled = false;
                     numericVitaCheatCompressionLevelOffset.Enabled = false;
                     lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    comboVitaCheatCondition.Enabled = true;
-                    txtVitaCheatAddress2.Enabled = true;
+                    txtVitaCheatAddress2.Enabled = false;
                     txtVCInstructions.Text = "Condition\r\nThe condition code type checks if the specific requirement is met then execute the code. Read Conditional (computer programming) for more details.\r\n\r\nCurrently only support static address.\r\n\r\nX: Operators\r\n0 - (=) Equal to X 8bit\r\n1 - (=) Equal to X 16bit\r\n2 - (=) Equal to X 32bit\r\n3 - (<>) Unequal to X (8bit)\r\n4 - (<>) Unequal to X (16bit)\r\n5 - (<>) Unequal to X (32bit)\r\n6 - (>) Greater than X (8bit)\r\n7 - (>) Greater than X (16bit)\r\n8 - (>) Greater than X (32bit)\r\n9 - (<) Less than X (8bit)\r\nA - (<) Less than X (16bit)\r\nB - (<) Less than X (32bit)\r\n\r\nExamples\r\n\r\nOperators: Equal to X (=)\r\n\r\n_V0 Condition Operators\r\n$D201 81000000 FFA8FF2D #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n\r\nIf 0x81000000's value is equal to 0xFFA8FF2D (32bit) then execute the following 0x01 related lines of code.\r\n\r\nOperators: Greater than X (>)\r\n\r\n__V0 Condition Operators\r\n$D605 81000000 00000005 #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n$0200 8xxxxxxx xxxxxxxx #LINE #2\r\n$0200 8xxxxxxx xxxxxxxx #LINE #3\r\n$0200 8xxxxxxx xxxxxxxx #LINE #4\r\n$0200 8xxxxxxx xxxxxxxx #LINE #5\r\n\r\nIf 0x81000000's value is greater than 0x00000005 (8bit) then execute the following 0x05 related lines of code.\r\n\r\nOperators: Less than X (<)\r\n\r\n_V0 Condition Operators\r\n$D90A 81000000 00000005 #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n$0200 8xxxxxxx xxxxxxxx #LINE #2\r\n$0200 8xxxxxxx xxxxxxxx #LINE #3\r\n$0200 8xxxxxxx xxxxxxxx #LINE #4\r\n$0200 8xxxxxxx xxxxxxxx #LINE #5\r\n$0200 8xxxxxxx xxxxxxxx #LINE #6\r\n$0200 8xxxxxxx xxxxxxxx #LINE #7\r\n$0200 8xxxxxxx xxxxxxxx #LINE #8\r\n$0200 8xxxxxxx xxxxxxxx #LINE #9\r\n$0200 8xxxxxxx xxxxxxxx #LINE #10\r\nIf 0x81000000's value is less than 0x00000005 (8bit) then execute the following 0x0A related lines of code.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
@@ -908,7 +900,6 @@ namespace TempAR
                     groupVitaCheatCompression.Enabled = false;
                     numericVitaCheatCompressionLevelOffset.Enabled = false;
                     lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    comboVitaCheatCondition.Enabled = false;
                     txtVCInstructions.Text = "B2 Code\r\nThis code type basically makes all address into relative. For example, the absolute address 0x816652E0 becomes a relative address 0x000652E0 and the base (segX) 0x816 is automatically obtained by VitaCheat. To view the segX information, browse the memory then press the R-Stick + Up button.\r\n\r\nSuper useful to find pointer addresses when cheat addresses are in the 0x81000000 - 0x83000000 range since 99% of the time it can be used to make pointer addresses without TempAR by just substractin the address of the found cheat and the Seg1 data.\r\n\r\nExample\r\n_V0 inf.HP Talis\r\n$B200 00000001 00000000\r\n$0200 00017B3C 0000270F\r\n\r\nThis was found by substracting the 81317B3C address - 81300000 Seg1 = 17B3C\r\n\r\nAlso this type of code solves the situation where the base of different version occurs.\r\n\r\nNote: The $B2 Code type does not function on Firmware 3.60. You must be using z05 or z06 (preferably) on 3.65 or VitaCheat will crash when used.\r\n\r\nExamples\r\nFor example: the mai version of the PCSH00181 Ys: Memories of Celceta has a different offset from the vitamin version.\r\n\r\nPCSH00181 伊苏树海-1.00-MAI5 by dask\r\n\r\n_V0 Money MAX\r\n$A100 810C6872 0000BF00\r\nSeg0:81000000-811F9188\r\n\r\n# PCSH00181 伊苏树海-1.00-vitamin by dask\r\n\r\nV0 Money MAX\r\n$A100 810C68D2 0000BF00\r\nSeg0:81000060-811F91E8\r\n\r\n\r\nYou can solve this problem with the B format code.\r\n\r\n# PCSH00181 伊苏树海-1.00 by dask\r\n\r\n_V0 Money MAX\r\n$B200 00000000 00000000\r\n$A100 000C6872 0000BF00\r\n\r\nThe above is an example of seg0. The application of seg1 can try Ninja Dragon Sword 2+ on its own. With $B200, it can be used in the European version (PCSB00294) and Hong Kong version (PCSG00157).\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
             }
@@ -989,7 +980,6 @@ namespace TempAR
             var VCBtntype = Utils.ParseNum(comboVitaCheatButtonType.SelectedValue.ToString());
             var VCBtn = Utils.ParseNum(comboVitaCheatButton.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
             var VCBtn2 = Utils.ParseNum(comboVitaCheatButton2.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
-            var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
             var VCRelLin = Utils.ParseNum("1");
             var VCSeg = Utils.ParseNum("1");
             var VCNull = Utils.ParseNum("0");
@@ -1012,36 +1002,14 @@ namespace TempAR
             }
 
             //
-            //Get Button Pad State And Apply to VCstr1
+            // Get Conditional State and apply to VCstr1
             //
-            switch (VCBtntype)
+            var RelatedLines = Utils.RelatedLines(comboVitaCheatPointerLevel.SelectedIndex, comboVitaCheatCodeType.Text, VCBtntype, 1);
+            if (comboVitaCheatCondition.Text != "None")
             {
-                case 9:
-                    break;
-
-                default:
-                    var ButtonLines = 1;
-                    var VCGenptroff1 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    switch (comboVitaCheatCodeType.Text)
-                    {
-                        case VC_GEN_COMP:
-                            ButtonLines = 2;
-                            break;
-                        case VC_GEN_PNTR:
-                            ButtonLines = (comboVitaCheatPointerLevel.SelectedIndex + 1) + 1;
-                            break;
-                        case VC_GEN_PTRMOV:
-                            ButtonLines = ButtonLines = 2 * (comboVitaCheatPointerLevel.SelectedIndex + 1) + 2; ;
-                            break;
-                        case VC_GEN_PTRCOM:
-                            ButtonLines = ButtonLines = (comboVitaCheatPointerLevel.SelectedIndex + 1) + 2; ;
-                            break;
-                        default:
-                            break;
-                    }
-                            var VCBtnMath = VCBtn + VCBtn2;
-                    VCstr1 = VCstr1 + $"$C20{ButtonLines:X01} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
-                    break;
+                var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
+                var VCGenCNDTN1 = $"$D{VCOperators}0{RelatedLines} {VCAddr1:X08} {VCAddr1:X08}\r\n"; //Needs new address boxes
+                VCstr1 = VCstr1 + VCGenCNDTN1;
             }
 
             //
@@ -1049,6 +1017,21 @@ namespace TempAR
             //
             var bittype = 2;
             bittype = rdbVitaCheatBitType8Bit.Checked ? 0 : rdbVitaCheatBitType16Bit.Checked ? 1 : 2;
+
+            //
+            //Get Button Pad State And Apply to VCstr1
+            //
+            RelatedLines = Utils.RelatedLines(comboVitaCheatPointerLevel.SelectedIndex, comboVitaCheatCodeType.Text, VCBtntype, 0);
+            switch (VCBtntype)
+            {
+                case 9:
+                    break;
+
+                default:
+                    var VCBtnMath = VCBtn + VCBtn2;
+                    VCstr1 = VCstr1 + $"$C20{RelatedLines:X01} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
+                    break;
+            }
 
             //
             // Generate code Types
@@ -1172,12 +1155,12 @@ namespace TempAR
                     txtVitaCheatCode.Text = VCstr1 + VCGenBTNPAD1 + VCGenBTNPAD2;
                     break;
 
-                case VC_GEN_CNDTN:
-                    var VCGenptroff3 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    var VCGenCNDTN1 = $"$D{VCOperators}0{VCRelLin} {VCAddr1:X08} {VCGenptroff3:X08}\r\n";
-                    var VCGenCNDTN2 = $"$0{bittype}00 {VCAddr2:X08} {VCValue:X08}\r\n";
-                    txtVitaCheatCode.Text = VCstr1 + VCGenCNDTN1 + VCGenCNDTN2;
-                    break;
+                //case VC_GEN_CNDTN:
+                //    var VCGenptroff3 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
+                //    var VCGenCNDTN1 = $"$D{VCOperators}0{VCRelLin} {VCAddr1:X08} {VCGenptroff3:X08}\r\n";
+                //    var VCGenCNDTN2 = $"$0{bittype}00 {VCAddr2:X08} {VCValue:X08}\r\n";
+                //    txtVitaCheatCode.Text = VCstr1 + VCGenCNDTN1 + VCGenCNDTN2;
+                //    break;
 
                 case VC_GEN_B2COD:
                     var VCGenptroff4 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
