@@ -831,6 +831,8 @@ namespace TempAR
             groupVitaCheatAddress1Offset.Enabled = false;
             groupVitaCheatAddress2Offset.Enabled = false;
             groupVitaCheatCompression.Enabled = false;
+            pnlVitaCheatMain.Enabled = true;
+            btnVitaCheatGenerate.Enabled = true;
             switch (comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE: // Write
@@ -889,32 +891,22 @@ namespace TempAR
 
                 case VC_GEN_BTNPAD: // Button Pad
                     strPage = "Button-PAD";
-                    comboVitaCheatPointerLevel.Enabled = false;
-                    groupVitaCheatAddress1Offset.Enabled = false;
-                    groupVitaCheatCompression.Enabled = false;
-                    numericVitaCheatCompressionLevelOffset.Enabled = false;
-                    lblVitaCheatCompressionLevelOffset.Enabled = false;
+                    pnlVitaCheatMain.Enabled = false;
+                    btnVitaCheatGenerate.Enabled = false;
                     txtVCInstructions.Text = "Button PAD\r\nThis code type is useful when you want your code to be activated based on the button input.\r\n\r\nButton Type\r\n\r\n0000 - Undefined\r\n0001 - Vita (Default)\r\n0002 - PSTV\r\n0004 - DualShock 3\r\n0008 - DualShock 4\r\n\r\nButtons\r\n00000001 - psvita-select\r\n00000008 - psvita-start\r\n00000010 - psvita-up\r\n00000020 - psvita-right\r\n00000040 - psvita-down\r\n00000080 - psvita-left\r\n00000100 - psvita-L\r\n00000200 - psvita-R\r\n00001000 - psvita-triangle\r\n00002000 - psvita-circle\r\n00004000 - psvita-cross\r\n00008000 - psvita-square\r\n00000000 - null\r\n\r\nExample:\r\n\r\n_V0 Button PAD\r\n$C201 00000001 00000300\r\n$0200 8xxxxxxx xxxxxxxx\r\n\r\nPressing the psvita-L + psvita-R will execute the following 0x01 related lines of code $0200 8xxxxxxx xxxxxxxx.\r\n\r\nButton Combo\r\npsvita-square + psvita-select:\r\n\r\n_V0 Button PAD\r\n$C201 00000001 00008001\r\n$0200 8xxxxxxx xxxxxxxx\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_CNDTN: // Condition
                     strPage = "Condition";
-                    comboVitaCheatPointerLevel.Enabled = false;
-                    groupVitaCheatAddress1Offset.Enabled = false;
-                    groupVitaCheatCompression.Enabled = false;
-                    numericVitaCheatCompressionLevelOffset.Enabled = false;
-                    lblVitaCheatCompressionLevelOffset.Enabled = false;
-                    txtVitaCheatAddress2.Enabled = false;
+                    pnlVitaCheatMain.Enabled = false;
+                    btnVitaCheatGenerate.Enabled = false;
                     txtVCInstructions.Text = "Condition\r\nThe condition code type checks if the specific requirement is met then execute the code. Read Conditional (computer programming) for more details.\r\n\r\nCurrently only support static address.\r\n\r\nX: Operators\r\n0 - (=) Equal to X 8bit\r\n1 - (=) Equal to X 16bit\r\n2 - (=) Equal to X 32bit\r\n3 - (<>) Unequal to X (8bit)\r\n4 - (<>) Unequal to X (16bit)\r\n5 - (<>) Unequal to X (32bit)\r\n6 - (>) Greater than X (8bit)\r\n7 - (>) Greater than X (16bit)\r\n8 - (>) Greater than X (32bit)\r\n9 - (<) Less than X (8bit)\r\nA - (<) Less than X (16bit)\r\nB - (<) Less than X (32bit)\r\n\r\nExamples\r\n\r\nOperators: Equal to X (=)\r\n\r\n_V0 Condition Operators\r\n$D201 81000000 FFA8FF2D #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n\r\nIf 0x81000000's value is equal to 0xFFA8FF2D (32bit) then execute the following 0x01 related lines of code.\r\n\r\nOperators: Greater than X (>)\r\n\r\n__V0 Condition Operators\r\n$D605 81000000 00000005 #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n$0200 8xxxxxxx xxxxxxxx #LINE #2\r\n$0200 8xxxxxxx xxxxxxxx #LINE #3\r\n$0200 8xxxxxxx xxxxxxxx #LINE #4\r\n$0200 8xxxxxxx xxxxxxxx #LINE #5\r\n\r\nIf 0x81000000's value is greater than 0x00000005 (8bit) then execute the following 0x05 related lines of code.\r\n\r\nOperators: Less than X (<)\r\n\r\n_V0 Condition Operators\r\n$D90A 81000000 00000005 #CODE-TYPE IDENTIFIER\r\n$0200 8xxxxxxx xxxxxxxx #LINE #1\r\n$0200 8xxxxxxx xxxxxxxx #LINE #2\r\n$0200 8xxxxxxx xxxxxxxx #LINE #3\r\n$0200 8xxxxxxx xxxxxxxx #LINE #4\r\n$0200 8xxxxxxx xxxxxxxx #LINE #5\r\n$0200 8xxxxxxx xxxxxxxx #LINE #6\r\n$0200 8xxxxxxx xxxxxxxx #LINE #7\r\n$0200 8xxxxxxx xxxxxxxx #LINE #8\r\n$0200 8xxxxxxx xxxxxxxx #LINE #9\r\n$0200 8xxxxxxx xxxxxxxx #LINE #10\r\nIf 0x81000000's value is less than 0x00000005 (8bit) then execute the following 0x0A related lines of code.\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
 
                 case VC_GEN_B2COD: // B2 Code
                     strPage = "B2-Code";
-                    comboVitaCheatPointerLevel.Enabled = false;
-                    groupVitaCheatAddress1Offset.Enabled = false;
-                    groupVitaCheatCompression.Enabled = false;
-                    numericVitaCheatCompressionLevelOffset.Enabled = false;
-                    lblVitaCheatCompressionLevelOffset.Enabled = false;
+                    pnlVitaCheatMain.Enabled = false;
+                    btnVitaCheatGenerate.Enabled = false;
                     txtVCInstructions.Text = "B2 Code\r\nThis code type basically makes all address into relative. For example, the absolute address 0x816652E0 becomes a relative address 0x000652E0 and the base (segX) 0x816 is automatically obtained by VitaCheat. To view the segX information, browse the memory then press the R-Stick + Up button.\r\n\r\nSuper useful to find pointer addresses when cheat addresses are in the 0x81000000 - 0x83000000 range since 99% of the time it can be used to make pointer addresses without TempAR by just substractin the address of the found cheat and the Seg1 data.\r\n\r\nExample\r\n_V0 inf.HP Talis\r\n$B200 00000001 00000000\r\n$0200 00017B3C 0000270F\r\n\r\nThis was found by substracting the 81317B3C address - 81300000 Seg1 = 17B3C\r\n\r\nAlso this type of code solves the situation where the base of different version occurs.\r\n\r\nNote: The $B2 Code type does not function on Firmware 3.60. You must be using z05 or z06 (preferably) on 3.65 or VitaCheat will crash when used.\r\n\r\nExamples\r\nFor example: the mai version of the PCSH00181 Ys: Memories of Celceta has a different offset from the vitamin version.\r\n\r\nPCSH00181 伊苏树海-1.00-MAI5 by dask\r\n\r\n_V0 Money MAX\r\n$A100 810C6872 0000BF00\r\nSeg0:81000000-811F9188\r\n\r\n# PCSH00181 伊苏树海-1.00-vitamin by dask\r\n\r\nV0 Money MAX\r\n$A100 810C68D2 0000BF00\r\nSeg0:81000060-811F91E8\r\n\r\n\r\nYou can solve this problem with the B format code.\r\n\r\n# PCSH00181 伊苏树海-1.00 by dask\r\n\r\n_V0 Money MAX\r\n$B200 00000000 00000000\r\n$A100 000C6872 0000BF00\r\n\r\nThe above is an example of seg0. The application of seg1 can try Ninja Dragon Sword 2+ on its own. With $B200, it can be used in the European version (PCSB00294) and Hong Kong version (PCSG00157).\r\n\r\nMore information at: " + strWiki + strPage;
                     break;
             }
@@ -1165,31 +1157,6 @@ namespace TempAR
                     var VCGenARMWRT1 = $"$A{bittype}00 {VCAddr1:X08} {VCAddr2:X08}\r\n";
                     txtVitaCheatCode.Text = VCstr1 + VCGenARMWRT1;
                     break;
-
-                case VC_GEN_BTNPAD:
-                    var VCBtnMath = VCBtn + VCBtn2;
-                    var VCGenBTNPAD1 = $"$C{bittype}00 {VCBtntype:X08} {VCBtnMath:X08}\r\n";
-                    var VCGenBTNPAD2 = $"$0{bittype}00 {VCAddr1:X08} {VCValue:X08}\r\n";
-                    txtVitaCheatCode.Text = VCstr1 + VCGenBTNPAD1 + VCGenBTNPAD2;
-                    break;
-
-                //case VC_GEN_CNDTN:
-                //    var VCGenptroff3 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                //    var VCGenCNDTN1 = $"$D{VCOperators}0{VCRelLin} {VCAddr1:X08} {VCGenptroff3:X08}\r\n";
-                //    var VCGenCNDTN2 = $"$0{bittype}00 {VCAddr2:X08} {VCValue:X08}\r\n";
-                //    txtVitaCheatCode.Text = VCstr1 + VCGenCNDTN1 + VCGenCNDTN2;
-                //    break;
-
-                case VC_GEN_B2COD:
-                    var VCGenptroff4 = Utils.ParseNum(txtVitaCheatAddress1Offset1.Text, NumberStyles.AllowHexSpecifier);
-                    var VCGenB2COD1 = $"$B200 {VCSeg:X08} {VCNull:X08}\r\n";
-                    var VCGenB2COD2 = $"$0{bittype}00 {VCAddr2:X08} {VCValue:X08}\r\n";
-                    txtVitaCheatCode.Text = VCstr1 + VCGenB2COD1 + VCGenB2COD2;
-                    break;
-
-
-
-
             }
         }
     }
