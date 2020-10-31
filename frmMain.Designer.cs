@@ -1922,7 +1922,7 @@
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TempAR - Vita Edition  V3.5.5";
+            this.Text = "TempAR - Vita Edition  V4";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.pnlConvertFormat.ResumeLayout(false);
             this.pnlConvertFormat.PerformLayout();
