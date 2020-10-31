@@ -787,9 +787,6 @@ namespace TempAR
         {
             System.Diagnostics.Process.Start(e.LinkText);
         }
-        private void ComboVitaCheatB200_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
         private void ComboVitaCheatButtonType_SelectedValueChanged(object sender, EventArgs e)
         {
             switch (comboVitaCheatButtonType.SelectedValue)
@@ -805,6 +802,24 @@ namespace TempAR
                     break;
             }
         }
+
+        private void ComboVitaCheatCondition_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (comboVitaCheatCondition.SelectedValue)
+            {
+                case 99:
+                    txtVitaCheatCondAddr.Enabled = false;
+                    txtVitaCheatCondValue.Enabled = false;
+                    break;
+
+                default:
+                    txtVitaCheatCondAddr.Enabled = true;
+                    txtVitaCheatCondValue.Enabled = true;
+                    break;
+
+            }
+        }
+
         private void ComboVitaCheatCodeType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Git Wiki url
@@ -1007,8 +1022,11 @@ namespace TempAR
             var RelatedLines = Utils.RelatedLines(comboVitaCheatPointerLevel.SelectedIndex, comboVitaCheatCodeType.Text, VCBtntype, 1);
             if (comboVitaCheatCondition.Text != "None")
             {
+
+                var VCCondAddr = Utils.ParseNum(txtVitaCheatCondAddr.Text, NumberStyles.AllowHexSpecifier);
+                var VCCondVal = Utils.ParseNum(txtVitaCheatCondValue.Text);
                 var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
-                var VCGenCNDTN1 = $"$D{VCOperators:X01}{RelatedLines:X02} {VCAddr1:X08} {VCAddr1:X08}\r\n"; //Needs new address boxes
+                var VCGenCNDTN1 = $"$D{VCOperators:X01}{RelatedLines:X02} {VCCondAddr:X08} {VCCondVal:X08}\r\n"; //Needs new address boxes
                 VCstr1 = VCstr1 + VCGenCNDTN1;
             }
 

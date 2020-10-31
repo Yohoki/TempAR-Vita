@@ -120,6 +120,10 @@
             this.txtPointerSearcherAddress1 = new System.Windows.Forms.TextBox();
             this.tabVitaCheat = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblVitaCheatCondValue = new System.Windows.Forms.Label();
+            this.lblVitaCheatCondAddr = new System.Windows.Forms.Label();
+            this.txtVitaCheatCondValue = new System.Windows.Forms.TextBox();
+            this.txtVitaCheatCondAddr = new System.Windows.Forms.TextBox();
             this.lblVitaCheatButton2 = new System.Windows.Forms.Label();
             this.comboVitaCheatButton2 = new System.Windows.Forms.ComboBox();
             this.comboVitaCheatCondition = new System.Windows.Forms.ComboBox();
@@ -1283,6 +1287,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblVitaCheatCondValue);
+            this.groupBox1.Controls.Add(this.lblVitaCheatCondAddr);
+            this.groupBox1.Controls.Add(this.txtVitaCheatCondValue);
+            this.groupBox1.Controls.Add(this.txtVitaCheatCondAddr);
             this.groupBox1.Controls.Add(this.lblVitaCheatButton2);
             this.groupBox1.Controls.Add(this.comboVitaCheatButton2);
             this.groupBox1.Controls.Add(this.comboVitaCheatCondition);
@@ -1300,10 +1308,50 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Optional Code Types";
             // 
+            // lblVitaCheatCondValue
+            // 
+            this.lblVitaCheatCondValue.AutoSize = true;
+            this.lblVitaCheatCondValue.Location = new System.Drawing.Point(8, 227);
+            this.lblVitaCheatCondValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVitaCheatCondValue.Name = "lblVitaCheatCondValue";
+            this.lblVitaCheatCondValue.Size = new System.Drawing.Size(48, 17);
+            this.lblVitaCheatCondValue.TabIndex = 30;
+            this.lblVitaCheatCondValue.Text = "Value:";
+            // 
+            // lblVitaCheatCondAddr
+            // 
+            this.lblVitaCheatCondAddr.AutoSize = true;
+            this.lblVitaCheatCondAddr.Location = new System.Drawing.Point(8, 190);
+            this.lblVitaCheatCondAddr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVitaCheatCondAddr.Name = "lblVitaCheatCondAddr";
+            this.lblVitaCheatCondAddr.Size = new System.Drawing.Size(64, 17);
+            this.lblVitaCheatCondAddr.TabIndex = 29;
+            this.lblVitaCheatCondAddr.Text = "Address:";
+            // 
+            // txtVitaCheatCondValue
+            // 
+            this.txtVitaCheatCondValue.Location = new System.Drawing.Point(105, 224);
+            this.txtVitaCheatCondValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtVitaCheatCondValue.Name = "txtVitaCheatCondValue";
+            this.txtVitaCheatCondValue.Size = new System.Drawing.Size(131, 22);
+            this.txtVitaCheatCondValue.TabIndex = 28;
+            this.txtVitaCheatCondValue.Text = "99";
+            this.txtVitaCheatCondValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtVitaCheatCondAddr
+            // 
+            this.txtVitaCheatCondAddr.Location = new System.Drawing.Point(105, 190);
+            this.txtVitaCheatCondAddr.Margin = new System.Windows.Forms.Padding(4);
+            this.txtVitaCheatCondAddr.Name = "txtVitaCheatCondAddr";
+            this.txtVitaCheatCondAddr.Size = new System.Drawing.Size(131, 22);
+            this.txtVitaCheatCondAddr.TabIndex = 26;
+            this.txtVitaCheatCondAddr.Text = "0x00000000";
+            this.txtVitaCheatCondAddr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // lblVitaCheatButton2
             // 
             this.lblVitaCheatButton2.AutoSize = true;
-            this.lblVitaCheatButton2.Location = new System.Drawing.Point(128, 124);
+            this.lblVitaCheatButton2.Location = new System.Drawing.Point(129, 76);
             this.lblVitaCheatButton2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatButton2.Name = "lblVitaCheatButton2";
             this.lblVitaCheatButton2.Size = new System.Drawing.Size(65, 17);
@@ -1314,7 +1362,7 @@
             // 
             this.comboVitaCheatButton2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatButton2.FormattingEnabled = true;
-            this.comboVitaCheatButton2.Location = new System.Drawing.Point(132, 145);
+            this.comboVitaCheatButton2.Location = new System.Drawing.Point(128, 103);
             this.comboVitaCheatButton2.Name = "comboVitaCheatButton2";
             this.comboVitaCheatButton2.Size = new System.Drawing.Size(105, 24);
             this.comboVitaCheatButton2.TabIndex = 26;
@@ -1323,16 +1371,17 @@
             // 
             this.comboVitaCheatCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatCondition.FormattingEnabled = true;
-            this.comboVitaCheatCondition.Location = new System.Drawing.Point(77, 191);
+            this.comboVitaCheatCondition.Location = new System.Drawing.Point(10, 152);
             this.comboVitaCheatCondition.Margin = new System.Windows.Forms.Padding(4);
             this.comboVitaCheatCondition.Name = "comboVitaCheatCondition";
-            this.comboVitaCheatCondition.Size = new System.Drawing.Size(154, 24);
+            this.comboVitaCheatCondition.Size = new System.Drawing.Size(226, 24);
             this.comboVitaCheatCondition.TabIndex = 22;
+            this.comboVitaCheatCondition.SelectedValueChanged += new System.EventHandler(this.ComboVitaCheatCondition_SelectedValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 194);
+            this.label4.Location = new System.Drawing.Point(69, 131);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 17);
@@ -1343,7 +1392,7 @@
             // 
             this.comboVitaCheatB200.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatB200.FormattingEnabled = true;
-            this.comboVitaCheatB200.Location = new System.Drawing.Point(100, 45);
+            this.comboVitaCheatB200.Location = new System.Drawing.Point(105, 15);
             this.comboVitaCheatB200.Name = "comboVitaCheatB200";
             this.comboVitaCheatB200.Size = new System.Drawing.Size(131, 24);
             this.comboVitaCheatB200.TabIndex = 25;
@@ -1351,7 +1400,7 @@
             // lblVitaCheatB200
             // 
             this.lblVitaCheatB200.AutoSize = true;
-            this.lblVitaCheatB200.Location = new System.Drawing.Point(7, 48);
+            this.lblVitaCheatB200.Location = new System.Drawing.Point(6, 18);
             this.lblVitaCheatB200.Name = "lblVitaCheatB200";
             this.lblVitaCheatB200.Size = new System.Drawing.Size(84, 17);
             this.lblVitaCheatB200.TabIndex = 24;
@@ -1361,7 +1410,7 @@
             // 
             this.comboVitaCheatButton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatButton.FormattingEnabled = true;
-            this.comboVitaCheatButton.Location = new System.Drawing.Point(10, 145);
+            this.comboVitaCheatButton.Location = new System.Drawing.Point(10, 103);
             this.comboVitaCheatButton.Margin = new System.Windows.Forms.Padding(4);
             this.comboVitaCheatButton.Name = "comboVitaCheatButton";
             this.comboVitaCheatButton.Size = new System.Drawing.Size(105, 24);
@@ -1370,7 +1419,7 @@
             // lblVitaCheatButton
             // 
             this.lblVitaCheatButton.AutoSize = true;
-            this.lblVitaCheatButton.Location = new System.Drawing.Point(7, 124);
+            this.lblVitaCheatButton.Location = new System.Drawing.Point(7, 76);
             this.lblVitaCheatButton.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatButton.Name = "lblVitaCheatButton";
             this.lblVitaCheatButton.Size = new System.Drawing.Size(65, 17);
@@ -1380,7 +1429,7 @@
             // lblVitaCheatButtonType
             // 
             this.lblVitaCheatButtonType.AutoSize = true;
-            this.lblVitaCheatButtonType.Location = new System.Drawing.Point(7, 92);
+            this.lblVitaCheatButtonType.Location = new System.Drawing.Point(7, 49);
             this.lblVitaCheatButtonType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVitaCheatButtonType.Name = "lblVitaCheatButtonType";
             this.lblVitaCheatButtonType.Size = new System.Drawing.Size(89, 17);
@@ -1391,7 +1440,7 @@
             // 
             this.comboVitaCheatButtonType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVitaCheatButtonType.FormattingEnabled = true;
-            this.comboVitaCheatButtonType.Location = new System.Drawing.Point(100, 89);
+            this.comboVitaCheatButtonType.Location = new System.Drawing.Point(105, 42);
             this.comboVitaCheatButtonType.Margin = new System.Windows.Forms.Padding(4);
             this.comboVitaCheatButtonType.Name = "comboVitaCheatButtonType";
             this.comboVitaCheatButtonType.Size = new System.Drawing.Size(131, 24);
@@ -2039,5 +2088,9 @@
         private System.Windows.Forms.Label lblVitaCheatB200;
         private System.Windows.Forms.ComboBox comboVitaCheatButton2;
         private System.Windows.Forms.Label lblVitaCheatButton2;
+        private System.Windows.Forms.Label lblVitaCheatCondValue;
+        private System.Windows.Forms.Label lblVitaCheatCondAddr;
+        private System.Windows.Forms.TextBox txtVitaCheatCondValue;
+        private System.Windows.Forms.TextBox txtVitaCheatCondAddr;
     }
 }
