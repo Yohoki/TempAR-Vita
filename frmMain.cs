@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -328,8 +329,8 @@ namespace TempAR
         //
         private void BtnPointerSearcherFindPointers_Click(object sender, EventArgs e)
         {
-            var num1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
-            var num3 = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
+            var address1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
+            var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
             var seg0Addr = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.AllowHexSpecifier);
             var seg1Addr = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.AllowHexSpecifier);
             var seg0Size = Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.AllowHexSpecifier);
@@ -348,16 +349,16 @@ namespace TempAR
             memdump4 = new PointerSearcher(txtPointerSearcherMemDump4.Text, memory_start);
             memdump5 = new PointerSearcher(txtPointerSearcherMemDump5.Text, memory_start);
             memdump6 = new PointerSearcher(txtPointerSearcherMemDump6.Text, memory_start);
-            AddPointerTree(memdump.FindPointers(num1, num3), treePointerSearcherPointers.SelectedNode);
+            AddPointerTree(memdump.FindPointers(address1, maxOffset), treePointerSearcherPointers.SelectedNode);
         }
 
         private void TreePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
         {
             if (treePointerSearcherPointers.SelectedNode == null) return;
 
-            var num1 = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
+            var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
             treePointerSearcherPointers.SelectedNode.Nodes.Clear();
-            AddPointerTree(memdump.FindPointers(new PointerSearcherLog(treePointerSearcherPointers.SelectedNode.Text, memory_start).Address, num1), treePointerSearcherPointers.SelectedNode);
+            AddPointerTree(memdump.FindPointers(new PointerSearcherLog(treePointerSearcherPointers.SelectedNode.Text, memory_start).Address, maxOffset), treePointerSearcherPointers.SelectedNode);
         }
 
         private void BtnPointerSearcherClear_Click(object sender, EventArgs e)
@@ -448,6 +449,12 @@ namespace TempAR
         {
             if (pointers == null)
                 return;
+
+            var seg0Start = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.HexNumber, "Seg0 Address is not a hex value!");
+            var seg0End = seg0Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
+            var seg1Start = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.HexNumber, "Seg1 Address is not a hex value!");
+            var seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
+
             Utils.SortList<PointerSearcherLog>(pointers, "Address", true);
             if (chkPointerSearcherOptimizePointerPaths.Checked)
             {
@@ -472,6 +479,7 @@ namespace TempAR
             for (int index1 = 0; index1 < pointers.Count; ++index1)
             {
                 var color = Color.Black;
+                var rootedColor = Color.Transparent;
                 var PointerColor = 0;
 
                 if (memdump2 != null)
@@ -591,12 +599,21 @@ namespace TempAR
                         break;
                 }
 
+                if (pointers[index1].Address >= seg0Start && pointers[index1].Address <= seg0End)
+                {
+                    rootedColor = Color.PowderBlue;
+                } else if (pointers[index1].Address >= seg1Start && pointers[index1].Address <= seg1End)
+                {
+                    rootedColor = Color.PowderBlue;
+                }
+
                 if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
                 {
                     var node = new TreeNode
                     {
                         Text = pointers[index1].ToString(chkPointerSearcherRealAddresses.Checked ? 0U : memory_start),
-                        ForeColor = color
+                        ForeColor = color,
+                        BackColor = rootedColor
                     };
                     if (parent == null)
                     {
