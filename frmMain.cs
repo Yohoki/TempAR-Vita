@@ -330,6 +330,10 @@ namespace TempAR
         {
             var num1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
             var num3 = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
+            var seg0Addr = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.AllowHexSpecifier);
+            var seg1Addr = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.AllowHexSpecifier);
+            var seg0Size = Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.AllowHexSpecifier);
+            var seg1Size = Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.AllowHexSpecifier);
             memory_start = Utils.ParseNum(txtBaseAddress.Text);
             PointerBlk = 0;
             PointerGrn = 0;
@@ -566,7 +570,7 @@ namespace TempAR
                         break;
 
                     case 3:
-                        color = Color.Orchid;
+                        color = Color.DarkOrchid;
                         PointerPur += 1;
                         txtColorOrchid.Text = PointerPur.ToString();
                         break;
@@ -578,7 +582,7 @@ namespace TempAR
                         break;
 
                     case 5:
-                        color = Color.Orange;
+                        color = Color.Chocolate;
                         PointerOrn += 1;
                         txtColorOrange.Text = PointerOrn.ToString();
                         break;
