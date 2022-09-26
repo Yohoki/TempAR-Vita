@@ -170,5 +170,18 @@ namespace TempAR
                     }
             }
         }
+
+        public static bool CheckInsideSegments(uint targetAddress, string segStart, string segRange)
+        {
+            uint start = ParseNum(segStart, NumberStyles.AllowHexSpecifier);
+            uint end   = ParseNum(segRange, NumberStyles.AllowHexSpecifier) + start;
+            return targetAddress >= start && targetAddress <= end ? true : false;
+        }
+
+        public static uint OffsetFromSegment(uint targetAddress, string segStart)
+        {
+            uint start = ParseNum(segStart, NumberStyles.AllowHexSpecifier);
+            return targetAddress - start;
+        }
     }
 }

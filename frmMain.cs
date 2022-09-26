@@ -332,10 +332,6 @@ namespace TempAR
         {
             var address1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
             var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
-            var seg0Addr = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.AllowHexSpecifier);
-            var seg1Addr = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.AllowHexSpecifier);
-            var seg0Size = Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.AllowHexSpecifier);
-            var seg1Size = Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.AllowHexSpecifier);
             memory_start = Utils.ParseNum(txtBaseAddress.Text);
             PointerBlk = 0;
             PointerGrn = 0;
@@ -450,11 +446,6 @@ namespace TempAR
         {
             if (pointers == null)
                 return;
-
-            var seg0Start = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.HexNumber, "Seg0 Address is not a hex value!");
-            var seg0End = seg0Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
-            var seg1Start = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.HexNumber, "Seg1 Address is not a hex value!");
-            var seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
 
             Utils.SortList<PointerSearcherLog>(pointers, "Address", true);
             if (chkPointerSearcherOptimizePointerPaths.Checked)
@@ -600,15 +591,26 @@ namespace TempAR
                         break;
                 }
 
-                if (pointers[index1].Address >= seg0Start && pointers[index1].Address <= seg0End)
+
+
+                string seg0Start = txtPointerSearcherSeg0Addr.Text;
+                string seg0Range = txtPointerSearcherSeg0Range.Text;
+                string seg1Start = txtPointerSearcherSeg1Addr.Text;
+                string seg1Range = txtPointerSearcherSeg1Range.Text;
+                /*if (pointers[index1].Address >= seg0Start && pointers[index1].Address <= seg0End)
                 {
                     rootedColor = Color.PowderBlue;
                 } else if (pointers[index1].Address >= seg1Start && pointers[index1].Address <= seg1End)
                 {
                     rootedColor = Color.PowderBlue;
+                }*/
+                if (Utils.CheckInsideSegments(pointers[index1].Address, seg0Start, seg0Range) ||
+                    Utils.CheckInsideSegments(pointers[index1].Address, seg1Start, seg1Range))
+                { 
+                    rootedColor = Color.PowderBlue;
                 }
 
-                if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
+                    if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
                 {
                     var node = new TreeNode
                     {
@@ -744,33 +746,34 @@ namespace TempAR
             if (pointers.Count > 1) str1 += string.Format("");
 
             uint targetAddress = pointers[0].Address;
-            if (chkPointerSearcherB200.Checked)
-            {
-                targetAddress = CheckIfInsideSegments(targetAddress);
-            }
+            string strB200 = "";
+            GenerateB200(pointers, ref targetAddress, ref strB200);
 
             str2 = !pointers[0].Negative ? $"{str2}$3{bittype:X01}{pointers.Count:X02} {targetAddress:X08} {pointers[0].Offset:X08}\n" + str1 : $"{str2}$3{bittype:X01}{pointers.Count:X02} {targetAddress:X08} {(0x100000000L - pointers[0].Offset):X08}\n{str1}";
-
-            string Seg0orSeg1 = "0"; // Needs coded in.
-            string strB200 = (chkPointerSearcherB200.Checked ? "" : $"$B200 0000000{Seg0orSeg1} 00000000\n");
 
             return (!chkPointerSearcherRAWCode.Checked ? $"{strB200}{str2}{str3}" : $"_V0 Generated Code\n{strB200}{str2}{str3}");
         }
 
-        private uint CheckIfInsideSegments(uint targetAddress)
+        private void GenerateB200(List<PointerSearcherLog> pointers, ref uint targetAddress, ref string strB200)
         {
-            uint seg0Start = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.HexNumber);
-            uint seg0End = seg0Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber);
-            uint seg1Start = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.HexNumber);
-            uint seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.HexNumber);
-            if (targetAddress >= seg0Start && targetAddress <= seg0End)
+            if (chkPointerSearcherB200.Checked)
             {
-                targetAddress -= seg0Start;
-            } else if (targetAddress >= seg1Start && targetAddress <= seg1End)
-            {
-                targetAddress -= seg1Start;
+                string seg0Start = txtPointerSearcherSeg0Addr.Text;
+                string seg0Range = txtPointerSearcherSeg0Range.Text;
+                string seg1Start = txtPointerSearcherSeg1Addr.Text;
+                string seg1Range = txtPointerSearcherSeg1Range.Text;
+
+                if (Utils.CheckInsideSegments(pointers[0].Address, seg0Start, seg0Range))
+                {
+                    strB200 = $"$B200 00000000 00000000\n";
+                    targetAddress -= Utils.ParseNum(seg0Start, NumberStyles.AllowHexSpecifier);
+                }
+                else if (Utils.CheckInsideSegments(pointers[0].Address, seg1Start, seg1Range))
+                {
+                    strB200 = $"$B200 00000001 00000000\n";
+                    targetAddress -= Utils.ParseNum(seg1Start, NumberStyles.AllowHexSpecifier);
+                }
             }
-            return targetAddress;
         }
 
         //
