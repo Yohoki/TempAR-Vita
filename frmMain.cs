@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -453,7 +454,7 @@ namespace TempAR
             var seg0Start = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.HexNumber, "Seg0 Address is not a hex value!");
             var seg0End = seg0Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
             var seg1Start = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.HexNumber, "Seg1 Address is not a hex value!");
-            var seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
+            var seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.HexNumber, "Seg0 Size is not a hex value!");
 
             Utils.SortList<PointerSearcherLog>(pointers, "Address", true);
             if (chkPointerSearcherOptimizePointerPaths.Checked)
@@ -702,7 +703,7 @@ namespace TempAR
             for (int index = 0; index < pointers.Count; ++index)
                 str1 = !pointers[index].Negative ? str1 + string.Format("{0:X01}{1:X07} {2:X08}\n", (object)(index == pointers.Count - 1 ? bittype : 11), (object)pointers[index].Offset, (object)(uint)(index == pointers.Count - 1 ? (int)value : 0)) : str1 + string.Format("DC000000 {0:X08}\n{1:X01}0000000 {2:X08}\n", (object)(4294967296L - (long)pointers[index].Offset), (object)(index == pointers.Count - 1 ? bittype : 11), (object)(uint)(index == pointers.Count - 1 ? (int)value : 0));
             string str2 = string.Format("6{0:X07} 00000000\nB{0:X07} 00000000\n{1}D2000000 00000000", (object)pointers[0].Address, (object)str1);
-            return (chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
+            return (!chkPointerSearcherRAWCode.Checked ? "" : "::Generated Code\n") + str2;
 
             
 
@@ -731,6 +732,7 @@ namespace TempAR
                     bittype = 2;
                     break;
             }
+
             var str1 = "";
             var str2 = "";
             var str3 = $"$3300 00000000 {value:X08}\n";
@@ -741,9 +743,34 @@ namespace TempAR
 
             if (pointers.Count > 1) str1 += string.Format("");
 
-            str2 = !pointers[0].Negative ? $"{str2}$3{bittype:X01}{pointers.Count:X02} {pointers[0].Address:X08} {pointers[0].Offset:X08}\n" + str1 : $"{str2}$3{bittype:X01}{pointers.Count:X02} {pointers[0].Address:X08} {(0x100000000L - pointers[0].Offset):X08}\n{str1}";
+            uint targetAddress = pointers[0].Address;
+            if (chkPointerSearcherB200.Checked)
+            {
+                targetAddress = CheckIfInsideSegments(targetAddress);
+            }
 
-            return (chkPointerSearcherRAWCode.Checked ? "" : $"_V0 Generated Code\n{str2}{str3}");
+            str2 = !pointers[0].Negative ? $"{str2}$3{bittype:X01}{pointers.Count:X02} {targetAddress:X08} {pointers[0].Offset:X08}\n" + str1 : $"{str2}$3{bittype:X01}{pointers.Count:X02} {targetAddress:X08} {(0x100000000L - pointers[0].Offset):X08}\n{str1}";
+
+            string Seg0orSeg1 = "0"; // Needs coded in.
+            string strB200 = (chkPointerSearcherB200.Checked ? "" : $"$B200 0000000{Seg0orSeg1} 00000000\n");
+
+            return (!chkPointerSearcherRAWCode.Checked ? $"{strB200}{str2}{str3}" : $"_V0 Generated Code\n{strB200}{str2}{str3}");
+        }
+
+        private uint CheckIfInsideSegments(uint targetAddress)
+        {
+            uint seg0Start = Utils.ParseNum(txtPointerSearcherSeg0Addr.Text, NumberStyles.HexNumber);
+            uint seg0End = seg0Start + Utils.ParseNum(txtPointerSearcherSeg0Range.Text, NumberStyles.HexNumber);
+            uint seg1Start = Utils.ParseNum(txtPointerSearcherSeg1Addr.Text, NumberStyles.HexNumber);
+            uint seg1End = seg1Start + Utils.ParseNum(txtPointerSearcherSeg1Range.Text, NumberStyles.HexNumber);
+            if (targetAddress >= seg0Start && targetAddress <= seg0End)
+            {
+                targetAddress -= seg0Start;
+            } else if (targetAddress >= seg1Start && targetAddress <= seg1End)
+            {
+                targetAddress -= seg1Start;
+            }
+            return targetAddress;
         }
 
         //
@@ -756,14 +783,14 @@ namespace TempAR
             var str1 = "";
             for (int index = 0; index < pointers.Count - 1; ++index)
             {
-                str1 = index % 2 != 0 ? str1 + $" 0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}\n" : $"{str1}{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}";
+                str1 = index % 2 != 0 ? str1 + $" 0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}\n" : $"{str1}{(!chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x{(pointers[index].Negative ? 3 : 2):X01}{pointers[index].Offset:X07}";
             }
 
             if (pointers.Count % 2 == 0) str1 += string.Format(" 0x00000000");
 
-            var str2 = $"{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x6{(uint)((int)pointers[0].Address - (int)memory_start):X07} 0x{value:X08}\n{(chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x000{bittype:X01}{pointers.Count:X04} 0x{pointers[pointers.Count - 1].Offset:X08}\n{str1}";
+            var str2 = $"{(!chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x6{(uint)((int)pointers[0].Address - (int)memory_start):X07} 0x{value:X08}\n{(!chkPointerSearcherRAWCode.Checked ? "" : "_L ")}0x000{bittype:X01}{pointers.Count:X04} 0x{pointers[pointers.Count - 1].Offset:X08}\n{str1}";
 
-            return (chkPointerSearcherRAWCode.Checked ? "" : $"_C0 Generated Code\n{str2}");
+            return (!chkPointerSearcherRAWCode.Checked ? $"{str2}" : $"_C0 Generated Code\n{str2}");
         }
 
         private void TxtFileDragDrop_DragEnter(object sender, DragEventArgs e)

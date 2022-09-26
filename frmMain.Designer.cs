@@ -1126,6 +1126,8 @@
             // chkPointerSearcherRAWCode
             // 
             this.chkPointerSearcherRAWCode.AutoSize = true;
+            this.chkPointerSearcherRAWCode.Checked = true;
+            this.chkPointerSearcherRAWCode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPointerSearcherRAWCode.Location = new System.Drawing.Point(816, 576);
             this.chkPointerSearcherRAWCode.Margin = new System.Windows.Forms.Padding(4);
             this.chkPointerSearcherRAWCode.Name = "chkPointerSearcherRAWCode";
