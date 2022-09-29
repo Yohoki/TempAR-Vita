@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
-using System.Security.Cryptography;
+//using System.Reflection;
+//using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -95,70 +95,78 @@ namespace TempAR
             comboVitaCheatB200.Text = VC_GEN_B2_NONE;
 
             //vita cheat button type drop list text and value
-            List<ButtonType> BTT1 = new List<ButtonType>();
-            BTT1.Add(new ButtonType() { BTT = 9, Name = "None" });
-            BTT1.Add(new ButtonType() { BTT = 0, Name = "Undefined" });
-            BTT1.Add(new ButtonType() { BTT = 1, Name = "PSVita" });
-            BTT1.Add(new ButtonType() { BTT = 2, Name = "PSTV" });
-            BTT1.Add(new ButtonType() { BTT = 4, Name = "DualShock 3" });
-            BTT1.Add(new ButtonType() { BTT = 8, Name = "DualShock 4" });
+            List<ButtonType> BTT1 = new List<ButtonType>
+            {
+                new ButtonType() { BTT = 9, Name = "None" },
+                new ButtonType() { BTT = 0, Name = "Undefined" },
+                new ButtonType() { BTT = 1, Name = "PSVita" },
+                new ButtonType() { BTT = 2, Name = "PSTV" },
+                new ButtonType() { BTT = 4, Name = "DualShock 3" },
+                new ButtonType() { BTT = 8, Name = "DualShock 4" }
+            };
             comboVitaCheatButtonType.DataSource = BTT1;
             comboVitaCheatButtonType.DisplayMember = "Name";
             comboVitaCheatButtonType.ValueMember = "BTT";
 
             //vita cheat button drop list text and value
-            List<Button> BT1 = new List<Button>();
-            BT1.Add(new Button() { BT = 0, Name = "Null" });
-            BT1.Add(new Button() { BT = 1, Name = "Select" });
-            BT1.Add(new Button() { BT = 8, Name = "Start" });
-            BT1.Add(new Button() { BT = 10, Name = "UP" });
-            BT1.Add(new Button() { BT = 20, Name = "Right" });
-            BT1.Add(new Button() { BT = 40, Name = "Down" });
-            BT1.Add(new Button() { BT = 80, Name = "Left" });
-            BT1.Add(new Button() { BT = 100, Name = "L" });
-            BT1.Add(new Button() { BT = 200, Name = "R" });
-            BT1.Add(new Button() { BT = 1000, Name = "Triangle" });
-            BT1.Add(new Button() { BT = 2000, Name = "Circle" });
-            BT1.Add(new Button() { BT = 4000, Name = "Cross" });
-            BT1.Add(new Button() { BT = 8000, Name = "Square" });
+            List<Button> BT1 = new List<Button>
+            {
+                new Button() { BT = 0, Name = "Null" },
+                new Button() { BT = 1, Name = "Select" },
+                new Button() { BT = 8, Name = "Start" },
+                new Button() { BT = 10, Name = "UP" },
+                new Button() { BT = 20, Name = "Right" },
+                new Button() { BT = 40, Name = "Down" },
+                new Button() { BT = 80, Name = "Left" },
+                new Button() { BT = 100, Name = "L" },
+                new Button() { BT = 200, Name = "R" },
+                new Button() { BT = 1000, Name = "Triangle" },
+                new Button() { BT = 2000, Name = "Circle" },
+                new Button() { BT = 4000, Name = "Cross" },
+                new Button() { BT = 8000, Name = "Square" }
+            };
             comboVitaCheatButton.DataSource = BT1;
             comboVitaCheatButton.DisplayMember = "Name";
             comboVitaCheatButton.ValueMember = "BT";
 
             //vita cheat 2nd button drop list text and value
-            List<Button2> BT2 = new List<Button2>();
-            BT2.Add(new Button2() { BT2 = 0, Name = "Null" });
-            BT2.Add(new Button2() { BT2 = 1, Name = "Select" });
-            BT2.Add(new Button2() { BT2 = 8, Name = "Start" });
-            BT2.Add(new Button2() { BT2 = 10, Name = "UP" });
-            BT2.Add(new Button2() { BT2 = 20, Name = "Right" });
-            BT2.Add(new Button2() { BT2 = 40, Name = "Down" });
-            BT2.Add(new Button2() { BT2 = 80, Name = "Left" });
-            BT2.Add(new Button2() { BT2 = 100, Name = "L" });
-            BT2.Add(new Button2() { BT2 = 200, Name = "R" });
-            BT2.Add(new Button2() { BT2 = 1000, Name = "Triangle" });
-            BT2.Add(new Button2() { BT2 = 2000, Name = "Circle" });
-            BT2.Add(new Button2() { BT2 = 4000, Name = "Cross" });
-            BT2.Add(new Button2() { BT2 = 8000, Name = "Square" });
+            List<Button2> BT2 = new List<Button2>
+            {
+                new Button2() { BT2 = 0,    Name = "Null" },
+                new Button2() { BT2 = 1,    Name = "Select" },
+                new Button2() { BT2 = 8,    Name = "Start" },
+                new Button2() { BT2 = 10,   Name = "UP" },
+                new Button2() { BT2 = 20,   Name = "Right" },
+                new Button2() { BT2 = 40,   Name = "Down" },
+                new Button2() { BT2 = 80,   Name = "Left" },
+                new Button2() { BT2 = 100,  Name = "L" },
+                new Button2() { BT2 = 200,  Name = "R" },
+                new Button2() { BT2 = 1000, Name = "Triangle" },
+                new Button2() { BT2 = 2000, Name = "Circle" },
+                new Button2() { BT2 = 4000, Name = "Cross" },
+                new Button2() { BT2 = 8000, Name = "Square" }
+            };
             comboVitaCheatButton2.DataSource = BT2;
             comboVitaCheatButton2.DisplayMember = "Name";
             comboVitaCheatButton2.ValueMember = "BT2";
 
             //vita cheat Condition drop list text and value
-            List<Condition> OP1 = new List<Condition>();
-            OP1.Add(new Condition() { OP = 99, Name = "None" });
-            OP1.Add(new Condition() { OP = 0, Name = "(=) Equal to X 8bit" });
-            OP1.Add(new Condition() { OP = 1, Name = "(=) Equal to X 16bit" });
-            OP1.Add(new Condition() { OP = 2, Name = "(=) Equal to X 32bit" });
-            OP1.Add(new Condition() { OP = 3, Name = "(<>) Unequal to X (8bit)" });
-            OP1.Add(new Condition() { OP = 4, Name = "(<>) Unequal to X (16bit)" });
-            OP1.Add(new Condition() { OP = 5, Name = "(<>) Unequal to X (32bit)" });
-            OP1.Add(new Condition() { OP = 6, Name = "(>) Greater than X (8bit)" });
-            OP1.Add(new Condition() { OP = 7, Name = "(>) Greater than X (16bit)" });
-            OP1.Add(new Condition() { OP = 8, Name = "(>) Greater than X (32bit)" });
-            OP1.Add(new Condition() { OP = 9, Name = "(<) Less than X (8bit)" });
-            OP1.Add(new Condition() { OP = 10, Name = "(<) Less than X (16bit)" });
-            OP1.Add(new Condition() { OP = 11, Name = "(<) Less than X (32bit)" });
+            List<Condition> OP1 = new List<Condition>
+            {
+                new Condition() { OP = 99, Name = "None" },
+                new Condition() { OP = 0,  Name = "(=) Equal to X 8bit" },
+                new Condition() { OP = 1,  Name = "(=) Equal to X 16bit" },
+                new Condition() { OP = 2,  Name = "(=) Equal to X 32bit" },
+                new Condition() { OP = 3,  Name = "(<>) Unequal to X (8bit)" },
+                new Condition() { OP = 4,  Name = "(<>) Unequal to X (16bit)" },
+                new Condition() { OP = 5,  Name = "(<>) Unequal to X (32bit)" },
+                new Condition() { OP = 6,  Name = "(>) Greater than X (8bit)" },
+                new Condition() { OP = 7,  Name = "(>) Greater than X (16bit)" },
+                new Condition() { OP = 8,  Name = "(>) Greater than X (32bit)" },
+                new Condition() { OP = 9,  Name = "(<) Less than X (8bit)" },
+                new Condition() { OP = 10, Name = "(<) Less than X (16bit)" },
+                new Condition() { OP = 11, Name = "(<) Less than X (32bit)" }
+            };
             comboVitaCheatCondition.DataSource = OP1;
             comboVitaCheatCondition.DisplayMember = "Name";
             comboVitaCheatCondition.ValueMember = "OP";
@@ -331,22 +339,22 @@ namespace TempAR
         private void BtnPointerSearcherFindPointers_Click(object sender, EventArgs e)
         {
             var address1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
-            var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text);
-            memory_start = Utils.ParseNum(txtBaseAddress.Text);
-            PointerBlk = 0;
-            PointerGrn = 0;
-            PointerBlu = 0;
-            PointerPur = 0;
-            PointerRed = 0;
-            PointerOrn = 0;
-            treePointerSearcherPointers.Nodes.Clear();
-            memdump = new PointerSearcher(txtPointerSearcherMemDump1.Text, memory_start);
+            var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
+            memory_start = Utils.ParseNum(txtBaseAddress.Text, NumberStyles.AllowHexSpecifier);
+
+            memdump  = new PointerSearcher(txtPointerSearcherMemDump1.Text, memory_start);
             memdump2 = new PointerSearcher(txtPointerSearcherMemDump2.Text, memory_start);
             memdump3 = new PointerSearcher(txtPointerSearcherMemDump3.Text, memory_start);
             memdump4 = new PointerSearcher(txtPointerSearcherMemDump4.Text, memory_start);
             memdump5 = new PointerSearcher(txtPointerSearcherMemDump5.Text, memory_start);
             memdump6 = new PointerSearcher(txtPointerSearcherMemDump6.Text, memory_start);
+
+            ResetPointerCounts();
+
+            treePointerSearcherPointers.BeginUpdate();
+            treePointerSearcherPointers.Nodes.Clear();
             AddPointerTree(memdump.FindPointers(address1, maxOffset), treePointerSearcherPointers.SelectedNode);
+            treePointerSearcherPointers.EndUpdate();
         }
 
         private void TreePointerSearcherPointers_DoubleClick(object sender, EventArgs e)
@@ -360,13 +368,21 @@ namespace TempAR
 
         private void BtnPointerSearcherClear_Click(object sender, EventArgs e)
         {
+            treePointerSearcherPointers.BeginUpdate();
             treePointerSearcherPointers.Nodes.Clear();
+            treePointerSearcherPointers.EndUpdate();
+            ResetPointerCounts();
+        }
+
+        private void ResetPointerCounts()
+        {
             txtColorBlack.Text = "0";
             txtColorGreen.Text = "0";
             txtColorBlue.Text = "0";
             txtColorOrchid.Text = "0";
             txtColorRed.Text = "0";
             txtColorOrange.Text = "0";
+
             PointerBlk = 0;
             PointerGrn = 0;
             PointerBlu = 0;
@@ -470,139 +486,67 @@ namespace TempAR
             }
             for (int index1 = 0; index1 < pointers.Count; ++index1)
             {
-                var color = Color.Black;
-                var rootedColor = Color.Transparent;
-                var PointerColor = 0;
-
-                if (memdump2 != null)
-                {
-                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
-                    var num = Utils.ParseNum(txtPointerSearcherAddress2.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < memory_start) num += memory_start;
-                    var address = 0u;
-                    for (int index2 = 0; index2 < strArray.Length; ++index2)
-                    {
-                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                        if (index2 == 0) address = pointerSearcherLog.Address;
-                        address = memdump2.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-                    }
-                    if ((int)num == (int)address) PointerColor += 1;
-                }
-
-                if (memdump2 != null && memdump3 != null)
-                {
-                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
-                    var num = Utils.ParseNum(txtPointerSearcherAddress3.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < memory_start) num += memory_start;
-                    var address = 0u;
-                    for (int index2 = 0; index2 < strArray.Length; ++index2)
-                    {
-                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                        if (index2 == 0) address = pointerSearcherLog.Address;
-                        address = memdump3.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-                    }
-                    if ((int)num == (int)address) PointerColor += 1;
-                }
-
-                if (memdump2 != null && memdump3 != null && memdump4 != null)
-                {
-                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1].ToString()).Split('\\');
-                    var num = Utils.ParseNum(txtPointerSearcherAddress4.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < memory_start) num += memory_start;
-                    var address = 0u;
-                    for (int index2 = 0; index2 < strArray.Length; ++index2)
-                    {
-                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                        if (index2 == 0) address = pointerSearcherLog.Address;
-                        address = memdump4.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-                    }
-                    if ((int)num == (int)address) PointerColor += 1;
-                }
-
-                if (memdump2 != null && memdump3 != null && memdump4 != null && memdump5 != null)
-                {
-                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
-                    var num = Utils.ParseNum(txtPointerSearcherAddress5.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < memory_start) num += memory_start;
-                    var address = 0u;
-                    for (int index2 = 0; index2 < strArray.Length; ++index2)
-                    {
-                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                        if (index2 == 0) address = pointerSearcherLog.Address;
-                        address = memdump5.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-                    }
-                    if ((int)num == (int)address) PointerColor += 1;
-                }
-
-                if (memdump2 != null && memdump3 != null && memdump4 != null && memdump5 != null && memdump6 != null)
-                {
-                    var strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
-                    var num = Utils.ParseNum(txtPointerSearcherAddress6.Text, NumberStyles.AllowHexSpecifier);
-                    if (num < memory_start) num += memory_start;
-                    var address = 0u;
-                    for (int index2 = 0; index2 < strArray.Length; ++index2)
-                    {
-                        var pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                        if (index2 == 0) address = pointerSearcherLog.Address;
-                        address = memdump6.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
-                    }
-                    if ((int)num == (int)address) PointerColor += 1;
-                }
+                Color color = Color.Black;
+                Color rootedColor = Color.Transparent;
+                int PointerColor = 0;
+                PointerColor = SearchAdditionalDumps(pointers, memdump2, txtPointerSearcherAddress2.Text, index1, PointerColor);
+                PointerColor = SearchAdditionalDumps(pointers, memdump3, txtPointerSearcherAddress3.Text, index1, PointerColor);
+                PointerColor = SearchAdditionalDumps(pointers, memdump4, txtPointerSearcherAddress4.Text, index1, PointerColor);
+                PointerColor = SearchAdditionalDumps(pointers, memdump5, txtPointerSearcherAddress5.Text, index1, PointerColor);
+                PointerColor = SearchAdditionalDumps(pointers, memdump6, txtPointerSearcherAddress6.Text, index1, PointerColor);
 
                 switch (PointerColor)
                 {
                     case 0:
                         color = Color.Black;
                         PointerBlk += 1;
-                        txtColorBlack.Text = PointerBlk.ToString();
+                        //txtColorBlack.Text = PointerBlk.ToString();
                         break;
 
                     case 1:
                         color = Color.Green;
                         PointerGrn += 1;
-                        txtColorGreen.Text = PointerGrn.ToString();
+                        //txtColorGreen.Text = PointerGrn.ToString();
                         break;
 
                     case 2:
                         color = Color.Blue;
                         PointerBlu += 1;
-                        txtColorBlue.Text = PointerBlu.ToString();
+                        //txtColorBlue.Text = PointerBlu.ToString();
                         break;
 
                     case 3:
                         color = Color.DarkOrchid;
                         PointerPur += 1;
-                        txtColorOrchid.Text = PointerPur.ToString();
+                        //txtColorOrchid.Text = PointerPur.ToString();
                         break;
 
                     case 4:
                         color = Color.Red;
                         PointerRed += 1;
-                        txtColorRed.Text = PointerRed.ToString();
+                        //txtColorRed.Text = PointerRed.ToString();
                         break;
 
                     case 5:
                         color = Color.Chocolate;
                         PointerOrn += 1;
-                        txtColorOrange.Text = PointerOrn.ToString();
+                        //txtColorOrange.Text = PointerOrn.ToString();
                         break;
 
                     default:
                         break;
                 }
 
-
-
-                string seg0Start      = txtPointerSearcherSeg0Addr.Text;
-                string seg0Range      = txtPointerSearcherSeg0Range.Text;
-                string seg1Start      = txtPointerSearcherSeg1Addr.Text;
-                string seg1Range      = txtPointerSearcherSeg1Range.Text;
+                string seg0Start = txtPointerSearcherSeg0Addr.Text;
+                string seg0Range = txtPointerSearcherSeg0Range.Text;
+                string seg1Start = txtPointerSearcherSeg1Addr.Text;
+                string seg1Range = txtPointerSearcherSeg1Range.Text;
                 string vitaCheatStart = txtPointerSearcherVitaCheatSeg1Address.Text;
                 string vitaCheatRange = txtPointerSearcherVitaCheatSeg1Range.Text;
 
                 if (Utils.CheckInsideSegments(pointers[index1].Address, seg0Start, seg0Range) ||
                     Utils.CheckInsideSegments(pointers[index1].Address, seg1Start, seg1Range))
-                { 
+                {
                     rootedColor = Color.PowderBlue;
                 }
 
@@ -631,6 +575,38 @@ namespace TempAR
                     }
                 }
             }
+
+            TotalPointersPerColor();
+        }
+
+        private void TotalPointersPerColor()
+        {
+            txtColorBlack.Text  = PointerBlk.ToString();
+            txtColorGreen.Text  = PointerGrn.ToString();
+            txtColorBlue.Text   = PointerBlu.ToString();
+            txtColorOrchid.Text = PointerPur.ToString();
+            txtColorRed.Text    = PointerRed.ToString();
+            txtColorOrange.Text = PointerOrn.ToString();
+        }
+
+        private int SearchAdditionalDumps(List<PointerSearcherLog> pointers, PointerSearcher dump, string txtAddress, int index1, int PointerColor)
+        {
+            if (!String.IsNullOrEmpty(txtAddress))
+            {
+                string[] strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+                uint num = Utils.ParseNum(txtAddress, NumberStyles.AllowHexSpecifier);
+                if (num < memory_start) num += memory_start;
+                uint address = 0u;
+                for (int index2 = 0; index2 < strArray.Length; ++index2)
+                {
+                    PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                    if (index2 == 0) address = pointerSearcherLog.Address;
+                    address = dump.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                }
+                if ((int)num == (int)address) PointerColor += 1;
+            }
+
+            return PointerColor;
         }
 
         private TreeNodeCollection GetParentEqualTree(TreeNodeCollection nodes, int level)
@@ -837,7 +813,7 @@ namespace TempAR
             txtPointerSearcherMemDump5.Enabled = txtPointerSearcherAddress5.Enabled = txtPointerSearcherMemDump4.Text.Length > 0;
             txtPointerSearcherMemDump6.Enabled = txtPointerSearcherAddress6.Enabled = txtPointerSearcherMemDump5.Text.Length > 0;
         }
-        private void txtVCInstructions_LinkClicked(object sender, LinkClickedEventArgs e)
+        private void TxtVCInstructions_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
         }
@@ -878,7 +854,6 @@ namespace TempAR
         {
             //Git Wiki url
             var strWiki = "https://github.com/r0ah/vitacheat/wiki/";
-            var strPage = "";
             txtVitaCheatAddress2.Enabled = false;
             txtVitaCheatValue.Enabled = true;
             comboVitaCheatPointerLevel.Enabled = false;
@@ -887,6 +862,7 @@ namespace TempAR
             groupVitaCheatCompression.Enabled = false;
             pnlVitaCheatMain.Enabled = true;
             btnVitaCheatGenerate.Enabled = true;
+            string strPage;
             switch (comboVitaCheatCodeType.Text)
             {
                 case VC_GEN_WRITE: // Write
@@ -1000,50 +976,22 @@ namespace TempAR
 
         private void BtnVitaCheatGenerate_Click(object sender, EventArgs e)
         {
-            //
-            //Check for hex numbers and give error if bad
-            //
-            var VCadd1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 1, make sure address is a valid hexadecimal number.");
-            var VCadd2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 2 (Copy from), make sure address is a valid hexadecimal number.");
-            var VCaddgap = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
-            var VCvalgap = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
-            var VCcomps = Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "You shouldn't be seeing this error! My bad, dude. Error: Compressions thingy is fucked.");
-
-            foreach (Control x in groupVitaCheatAddress1Offset.Controls)
-            {
-                if (x is TextBox)
-                {
-                    if (x.Enabled)
-                    {
-                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "Wrong Format!");
-                    }
-                }
-            }
-            foreach (Control x in groupVitaCheatAddress2Offset.Controls)
-            {
-                if (x is TextBox)
-                {
-                    if (x.Enabled)
-                    {
-                        var VCgenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier, "Wrong Format!");
-                    }
-                }
-            }
+            CheckValidNumbers();
 
             //Declared variables for the code types
-            var VCstr1 = "_V0 Generated Code\r\n\r\n";
-            var VCAddr1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
-            var VCAddr2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
-            var VCAddGp = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
-            var VCValGp = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
-            var VCComps = Utils.ParseNum(numericVitaCheatCompressions.Text);
-            var VCValue = Utils.ParseNum(txtVitaCheatValue.Text);
-            var VCBtntype = Utils.ParseNum(comboVitaCheatButtonType.SelectedValue.ToString());
-            var VCBtn = Utils.ParseNum(comboVitaCheatButton.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
-            var VCBtn2 = Utils.ParseNum(comboVitaCheatButton2.SelectedValue.ToString(), NumberStyles.AllowHexSpecifier);
-            var VCRelLin = Utils.ParseNum("1");
-            var VCSeg = Utils.ParseNum("1");
-            var VCNull = Utils.ParseNum("0");
+            string VCstr1 = "_V0 Generated Code\r\n\r\n";
+            uint VCAddr1 = Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier);
+            uint VCAddr2 = Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier);
+            uint VCAddGp = Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier);
+            uint VCValGp = Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier);
+            uint VCComps = Utils.ParseNum(numericVitaCheatCompressions.Text);
+            uint VCValue = Utils.ParseNum(txtVitaCheatValue.Text);
+            uint VCBtntype = Utils.ParseNum(comboVitaCheatButtonType.SelectedValue.ToString());
+            uint VCBtn = Utils.ParseNum(comboVitaCheatButton.SelectedValue.ToString());
+            uint VCBtn2 = Utils.ParseNum(comboVitaCheatButton2.SelectedValue.ToString());
+            //uint VCRelLin = Utils.ParseNum("1");
+            //uint VCSeg = Utils.ParseNum("1");
+            //uint VCNull = Utils.ParseNum("0");
 
             //
             //Get Seg0/Seg1 State And Apply to VCstr1
@@ -1051,11 +999,11 @@ namespace TempAR
             switch (comboVitaCheatB200.Text)
             {
                 case VC_GEN_B2_SEG0:
-                    VCstr1 = VCstr1 + "$B200 00000000 00000000\r\n";
+                    VCstr1 += "$B200 00000000 00000000\r\n";
                     break;
 
                 case VC_GEN_B2_SEG1:
-                    VCstr1 = VCstr1 + "$B200 00000001 00000000\r\n";
+                    VCstr1 += "$B200 00000001 00000000\r\n";
                     break;
 
                 case VC_GEN_B2_NONE:
@@ -1065,22 +1013,21 @@ namespace TempAR
             //
             // Get Conditional State and apply to VCstr1
             //
-            var RelatedLines = Utils.RelatedLines(comboVitaCheatPointerLevel.SelectedIndex, comboVitaCheatCodeType.Text, VCBtntype, 1);
+            int RelatedLines = Utils.RelatedLines(comboVitaCheatPointerLevel.SelectedIndex, comboVitaCheatCodeType.Text, VCBtntype, 1);
             if (comboVitaCheatCondition.Text != "None")
             {
 
-                var VCCondAddr = Utils.ParseNum(txtVitaCheatCondAddr.Text, NumberStyles.AllowHexSpecifier);
-                var VCCondVal = Utils.ParseNum(txtVitaCheatCondValue.Text);
-                var VCOperators = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
-                var VCGenCNDTN1 = $"$D{VCOperators:X01}{RelatedLines:X02} {VCCondAddr:X08} {VCCondVal:X08}\r\n"; //Needs new address boxes
-                VCstr1 = VCstr1 + VCGenCNDTN1;
+                uint VCCondAddr    = Utils.ParseNum(txtVitaCheatCondAddr.Text, NumberStyles.AllowHexSpecifier);
+                uint VCCondVal     = Utils.ParseNum(txtVitaCheatCondValue.Text);
+                uint VCOperators   = Utils.ParseNum(comboVitaCheatCondition.SelectedValue.ToString());
+                string VCGenCNDTN1 = $"$D{VCOperators:X01}{RelatedLines:X02} {VCCondAddr:X08} {VCCondVal:X08}\r\n";
+                VCstr1 += VCGenCNDTN1;
             }
 
             //
             //Get Bit Type from radio buttons
             //
-            var bittype = 2;
-            bittype = rdbVitaCheatBitType8Bit.Checked ? 0 : rdbVitaCheatBitType16Bit.Checked ? 1 : 2;
+            int bittype = rdbVitaCheatBitType8Bit.Checked ? 0 : rdbVitaCheatBitType16Bit.Checked ? 1 : 2;
 
             //
             //Get Button Pad State And Apply to VCstr1
@@ -1093,7 +1040,7 @@ namespace TempAR
 
                 default:
                     var VCBtnMath = VCBtn + VCBtn2;
-                    VCstr1 = VCstr1 + $"$C2{RelatedLines:X02} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
+                    VCstr1 += $"$C2{RelatedLines:X02} {VCBtntype:X08} {VCBtnMath:X08}\r\n";
                     break;
             }
 
@@ -1126,15 +1073,12 @@ namespace TempAR
 
                     foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (x is TextBox)
+                        if (x is TextBox box && x.Enabled)
                         {
-                            if (x.Enabled)
+                            var VCGenptr2 = Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier);
+                            if (box.TabIndex != 0)
                             {
-                                var VCGenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                                if (((TextBox)x).TabIndex != 0)
-                                {
-                                    VCGenPtrstr2 = $"$3{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrstr2}";
-                                }
+                                VCGenPtrstr2 = $"$3{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrstr2}";
                             }
                         }
                     }
@@ -1148,15 +1092,12 @@ namespace TempAR
                     var VCGenPtrMov3 = string.Format("$8800 00000000 00000000\r\n");
                     foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (x is TextBox)
+                        if (x is TextBox box && x.Enabled)
                         {
-                            if (x.Enabled)
+                            var VCGenptrmov2 = Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier);
+                            if (box.TabIndex != 0)
                             {
-                                var VCGenptrmov2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                                if (((TextBox)x).TabIndex != 0)
-                                {
-                                    VCGenPtrMovstr2 = $"$8{bittype}00 00000000 {VCGenptrmov2:X08}\r\n{VCGenPtrMovstr2}";
-                                }
+                                VCGenPtrMovstr2 = $"$8{bittype}00 00000000 {VCGenptrmov2:X08}\r\n{VCGenPtrMovstr2}";
                             }
                         }
                     }
@@ -1166,15 +1107,12 @@ namespace TempAR
                     var VCGenPtrMov23 = string.Format("$8900 00000000 00000000");
                     foreach (Control x in groupVitaCheatAddress2Offset.Controls)
                     {
-                        if (x is TextBox)
+                        if (x is TextBox box && x.Enabled)
                         {
-                            if (x.Enabled)
+                            uint VCGenptrmov22 = Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier);
+                            if (box.TabIndex != 0)
                             {
-                                uint VCGenptrmov22 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                                if (((TextBox)x).TabIndex != 0)
-                                {
-                                    VCGenPtr2str2 = $"$8{bittype + 4}00 00000000 {VCGenptrmov22:X08}\r\n{VCGenPtr2str2}";
-                                }
+                                VCGenPtr2str2 = $"$8{bittype + 4}00 00000000 {VCGenptrmov22:X08}\r\n{VCGenPtr2str2}";
                             }
                         }
                     }
@@ -1192,15 +1130,12 @@ namespace TempAR
                     var VCGenPtrCom4 = $"${VCComps:X04} 0000{VCAddGp:X04} 0000{VCValGp:X04}";
                     foreach (Control x in groupVitaCheatAddress1Offset.Controls)
                     {
-                        if (x is TextBox)
+                        if (x is TextBox box && x.Enabled)
                         {
-                            if (x.Enabled)
+                            var VCGenptr2 = Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier);
+                            if (box.TabIndex != 0)
                             {
-                                var VCGenptr2 = Utils.ParseNum(((TextBox)x).Text, NumberStyles.AllowHexSpecifier);
-                                if (((TextBox)x).TabIndex != 0)
-                                {
-                                    VCGenPtrComstr2 = $"$7{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrComstr2}";
-                                }
+                                VCGenPtrComstr2 = $"$7{bittype}00 00000000 {VCGenptr2:X08}\r\n{VCGenPtrComstr2}";
                             }
                         }
                     }
@@ -1211,6 +1146,31 @@ namespace TempAR
                     var VCGenARMWRT1 = $"$A{bittype}00 {VCAddr1:X08} {VCAddr2:X08}\r\n";
                     txtVitaCheatCode.Text = VCstr1 + VCGenARMWRT1;
                     break;
+            }
+        }
+
+        private void CheckValidNumbers()
+        {
+            //
+            //Check for hex numbers and give error if bad
+            //
+            Utils.ParseNum(txtVitaCheatAddress1.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 1, make sure address is a valid hexadecimal number.");
+            Utils.ParseNum(txtVitaCheatAddress2.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address 2 (Copy from), make sure address is a valid hexadecimal number.");
+            Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
+            Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
+            Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "You shouldn't be seeing this error! My bad, dude. Error: Compressions thingy is fucked.");
+            CheckValidNumbers(groupVitaCheatAddress1Offset);
+            CheckValidNumbers(groupVitaCheatAddress2Offset);
+        }
+
+        private void CheckValidNumbers(GroupBox groupBox)
+        {
+            foreach (Control x in groupBox.Controls)
+            {
+                if (x is TextBox box && x.Enabled)
+                {
+                    Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier, "Unable to Parse an Offset, make sure value is a valid hexadecimal number.");
+                }
             }
         }
     }

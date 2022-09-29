@@ -26,7 +26,9 @@ namespace TempAR
         /// <param name="s"></param>
         /// <param name="numstyle"></param>
         /// <returns></returns>
-        public static uint ParseNum(string s, NumberStyles numstyle, string title = "Wrong Format!")
+        public static uint ParseNum(string s, NumberStyles numstyle,
+                                    string message = "Unable to parse, please make sure the value is a valid hexadecimal number.",
+                                    string title   = "Unable to parse: Wrong Format!")
         {
             try
             {
@@ -38,10 +40,11 @@ namespace TempAR
             }
             catch (Exception)
             {
-                MessageBox.Show("Unable to parse, please make sure the value is a valid hexadecimal number.", title);
+                MessageBox.Show(message, title);
                 return 0;
             }
         }
+
 
         /// <summary>
         /// Open Directory
@@ -154,16 +157,16 @@ namespace TempAR
                     switch (CodeType)
                     {
                         case "Compress ($4...)":
-                            Lines = Lines + 2;
+                            Lines += 2;
                             return Lines;
                         case "Pointer Write ($3...)":
-                            Lines = Lines + (PtrLvl + 1) + 1;
+                            Lines += PtrLvl + 2;
                             return Lines;
                         case "Pointer MOV ($8...)":
-                            Lines = Lines + 2 * (PtrLvl + 1) + 2;
+                            Lines += (2 * (PtrLvl + 1)) + 2;
                             return Lines;
                         case "Pointer Compress ($7...)":
-                            Lines = Lines + (PtrLvl + 1) + 2; ;
+                            Lines += PtrLvl + 3;
                             return Lines;
                         default:
                             return Lines + 1;
@@ -175,7 +178,7 @@ namespace TempAR
         {
             uint start = ParseNum(segStart, NumberStyles.AllowHexSpecifier);
             uint end   = ParseNum(segRange, NumberStyles.AllowHexSpecifier) + start;
-            return targetAddress >= start && targetAddress <= end ? true : false;
+            return targetAddress >= start && targetAddress <= end;
         }
 
         public static uint OffsetFromSegment(uint targetAddress, string segStart)

@@ -1198,10 +1198,10 @@
             // treePointerSearcherPointers
             // 
             this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 100);
+            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 103);
             this.treePointerSearcherPointers.Margin = new System.Windows.Forms.Padding(4);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 396);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 393);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.TreePointerSearcherPointers_DoubleClick);
@@ -1681,7 +1681,7 @@
             this.txtVCInstructions.Size = new System.Drawing.Size(408, 687);
             this.txtVCInstructions.TabIndex = 17;
             this.txtVCInstructions.Text = "";
-            this.txtVCInstructions.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtVCInstructions_LinkClicked);
+            this.txtVCInstructions.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.TxtVCInstructions_LinkClicked);
             // 
             // groupVitaCheatCompression
             // 
