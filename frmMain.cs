@@ -600,7 +600,6 @@ namespace TempAR
                 string vitaCheatStart = txtPointerSearcherVitaCheatSeg1Address.Text;
                 string vitaCheatRange = txtPointerSearcherVitaCheatSeg1Range.Text;
 
-                //VitaCheat Seg1 Here
                 if (Utils.CheckInsideSegments(pointers[index1].Address, seg0Start, seg0Range) ||
                     Utils.CheckInsideSegments(pointers[index1].Address, seg1Start, seg1Range))
                 { 
