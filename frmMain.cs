@@ -593,24 +593,28 @@ namespace TempAR
 
 
 
-                string seg0Start = txtPointerSearcherSeg0Addr.Text;
-                string seg0Range = txtPointerSearcherSeg0Range.Text;
-                string seg1Start = txtPointerSearcherSeg1Addr.Text;
-                string seg1Range = txtPointerSearcherSeg1Range.Text;
-                /*if (pointers[index1].Address >= seg0Start && pointers[index1].Address <= seg0End)
-                {
-                    rootedColor = Color.PowderBlue;
-                } else if (pointers[index1].Address >= seg1Start && pointers[index1].Address <= seg1End)
-                {
-                    rootedColor = Color.PowderBlue;
-                }*/
+                string seg0Start      = txtPointerSearcherSeg0Addr.Text;
+                string seg0Range      = txtPointerSearcherSeg0Range.Text;
+                string seg1Start      = txtPointerSearcherSeg1Addr.Text;
+                string seg1Range      = txtPointerSearcherSeg1Range.Text;
+                string vitaCheatStart = txtPointerSearcherVitaCheatSeg1Address.Text;
+                string vitaCheatRange = txtPointerSearcherVitaCheatSeg1Range.Text;
+
+                //VitaCheat Seg1 Here
                 if (Utils.CheckInsideSegments(pointers[index1].Address, seg0Start, seg0Range) ||
                     Utils.CheckInsideSegments(pointers[index1].Address, seg1Start, seg1Range))
                 { 
                     rootedColor = Color.PowderBlue;
                 }
 
-                    if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
+                if (Utils.CheckInsideSegments(pointers[index1].Address, vitaCheatStart, vitaCheatRange))
+                {
+                    if (chkIgnoreDBFiles.Checked) { continue; }
+                    rootedColor = Color.Black;
+                    color = Color.White;
+                }
+
+                if (!pointers[index1].Negative || chkPointerSearcherIncludeNegatives.Checked)
                 {
                     var node = new TreeNode
                     {

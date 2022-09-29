@@ -57,6 +57,7 @@
             this.txtTextInput = new System.Windows.Forms.TextBox();
             this.txtTextOutput = new System.Windows.Forms.TextBox();
             this.tabPointerSearcher = new System.Windows.Forms.TabPage();
+            this.chkPointerSearcherB200 = new System.Windows.Forms.CheckBox();
             this.lblPointerSearcherSeg1Range = new System.Windows.Forms.Label();
             this.lblPointerSearcherSeg0Range = new System.Windows.Forms.Label();
             this.lblPointerSearcherSeg1Address = new System.Windows.Forms.Label();
@@ -182,7 +183,11 @@
             this.txtVitaCheatCode = new System.Windows.Forms.TextBox();
             this.lblVitaCheatCodeType = new System.Windows.Forms.Label();
             this.comboVitaCheatCodeType = new System.Windows.Forms.ComboBox();
-            this.chkPointerSearcherB200 = new System.Windows.Forms.CheckBox();
+            this.lblPointerSearcherVitaCheatSeg1Address = new System.Windows.Forms.Label();
+            this.txtPointerSearcherVitaCheatSeg1Address = new System.Windows.Forms.TextBox();
+            this.lblPointerSearcherVitaCheatSeg1Range = new System.Windows.Forms.Label();
+            this.txtPointerSearcherVitaCheatSeg1Range = new System.Windows.Forms.TextBox();
+            this.chkIgnoreDBFiles = new System.Windows.Forms.CheckBox();
             this.pnlConvertFormat.SuspendLayout();
             this.pnlConvertFile.SuspendLayout();
             this.frmStatusStrip.SuspendLayout();
@@ -475,6 +480,11 @@
             // 
             // tabPointerSearcher
             // 
+            this.tabPointerSearcher.Controls.Add(this.chkIgnoreDBFiles);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherVitaCheatSeg1Range);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherVitaCheatSeg1Range);
+            this.tabPointerSearcher.Controls.Add(this.txtPointerSearcherVitaCheatSeg1Address);
+            this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherVitaCheatSeg1Address);
             this.tabPointerSearcher.Controls.Add(this.chkPointerSearcherB200);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherSeg1Range);
             this.tabPointerSearcher.Controls.Add(this.lblPointerSearcherSeg0Range);
@@ -549,6 +559,19 @@
             this.tabPointerSearcher.Text = "Pointer Searcher";
             this.tabPointerSearcher.UseVisualStyleBackColor = true;
             // 
+            // chkPointerSearcherB200
+            // 
+            this.chkPointerSearcherB200.AutoSize = true;
+            this.chkPointerSearcherB200.Checked = true;
+            this.chkPointerSearcherB200.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPointerSearcherB200.Location = new System.Drawing.Point(25, 423);
+            this.chkPointerSearcherB200.Margin = new System.Windows.Forms.Padding(4);
+            this.chkPointerSearcherB200.Name = "chkPointerSearcherB200";
+            this.chkPointerSearcherB200.Size = new System.Drawing.Size(315, 20);
+            this.chkPointerSearcherB200.TabIndex = 62;
+            this.chkPointerSearcherB200.Text = "Generate $B200 Codes (Only for VitaCheat z05+)";
+            this.chkPointerSearcherB200.UseVisualStyleBackColor = true;
+            // 
             // lblPointerSearcherSeg1Range
             // 
             this.lblPointerSearcherSeg1Range.AutoSize = true;
@@ -574,7 +597,7 @@
             // lblPointerSearcherSeg1Address
             // 
             this.lblPointerSearcherSeg1Address.AutoSize = true;
-            this.lblPointerSearcherSeg1Address.Location = new System.Drawing.Point(458, 44);
+            this.lblPointerSearcherSeg1Address.Location = new System.Drawing.Point(445, 44);
             this.lblPointerSearcherSeg1Address.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherSeg1Address.Name = "lblPointerSearcherSeg1Address";
             this.lblPointerSearcherSeg1Address.Size = new System.Drawing.Size(142, 16);
@@ -584,7 +607,8 @@
             // 
             // txtPointerSearcherSeg1Range
             // 
-            this.txtPointerSearcherSeg1Range.Location = new System.Drawing.Point(855, 39);
+            this.txtPointerSearcherSeg1Range.BackColor = System.Drawing.Color.PowderBlue;
+            this.txtPointerSearcherSeg1Range.Location = new System.Drawing.Point(867, 39);
             this.txtPointerSearcherSeg1Range.Name = "txtPointerSearcherSeg1Range";
             this.txtPointerSearcherSeg1Range.Size = new System.Drawing.Size(88, 22);
             this.txtPointerSearcherSeg1Range.TabIndex = 58;
@@ -593,7 +617,7 @@
             // lblPointerSearcherSeg0Address
             // 
             this.lblPointerSearcherSeg0Address.AutoSize = true;
-            this.lblPointerSearcherSeg0Address.Location = new System.Drawing.Point(458, 12);
+            this.lblPointerSearcherSeg0Address.Location = new System.Drawing.Point(445, 12);
             this.lblPointerSearcherSeg0Address.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPointerSearcherSeg0Address.Name = "lblPointerSearcherSeg0Address";
             this.lblPointerSearcherSeg0Address.Size = new System.Drawing.Size(142, 16);
@@ -603,7 +627,8 @@
             // 
             // txtPointerSearcherSeg0Range
             // 
-            this.txtPointerSearcherSeg0Range.Location = new System.Drawing.Point(855, 7);
+            this.txtPointerSearcherSeg0Range.BackColor = System.Drawing.Color.PowderBlue;
+            this.txtPointerSearcherSeg0Range.Location = new System.Drawing.Point(867, 7);
             this.txtPointerSearcherSeg0Range.Name = "txtPointerSearcherSeg0Range";
             this.txtPointerSearcherSeg0Range.Size = new System.Drawing.Size(88, 22);
             this.txtPointerSearcherSeg0Range.TabIndex = 56;
@@ -611,6 +636,7 @@
             // 
             // txtPointerSearcherSeg1Addr
             // 
+            this.txtPointerSearcherSeg1Addr.BackColor = System.Drawing.Color.PowderBlue;
             this.txtPointerSearcherSeg1Addr.Location = new System.Drawing.Point(607, 39);
             this.txtPointerSearcherSeg1Addr.Name = "txtPointerSearcherSeg1Addr";
             this.txtPointerSearcherSeg1Addr.Size = new System.Drawing.Size(88, 22);
@@ -619,7 +645,7 @@
             // 
             // txtPointerSearcherSeg0Addr
             // 
-            this.txtPointerSearcherSeg0Addr.BackColor = System.Drawing.SystemColors.Window;
+            this.txtPointerSearcherSeg0Addr.BackColor = System.Drawing.Color.PowderBlue;
             this.txtPointerSearcherSeg0Addr.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtPointerSearcherSeg0Addr.Location = new System.Drawing.Point(607, 7);
             this.txtPointerSearcherSeg0Addr.Name = "txtPointerSearcherSeg0Addr";
@@ -1008,7 +1034,7 @@
             this.pnlPointerSearcherCodeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPointerSearcherCodeType.Controls.Add(this.lblPntCodeTypes);
             this.pnlPointerSearcherCodeType.Controls.Add(this.cbPntCodeTypes);
-            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(12, 494);
+            this.pnlPointerSearcherCodeType.Location = new System.Drawing.Point(12, 515);
             this.pnlPointerSearcherCodeType.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPointerSearcherCodeType.Name = "pnlPointerSearcherCodeType";
             this.pnlPointerSearcherCodeType.Size = new System.Drawing.Size(372, 33);
@@ -1100,13 +1126,13 @@
             // txtPointerSearcherCode
             // 
             this.txtPointerSearcherCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.txtPointerSearcherCode.Location = new System.Drawing.Point(12, 535);
+            this.txtPointerSearcherCode.Location = new System.Drawing.Point(12, 556);
             this.txtPointerSearcherCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtPointerSearcherCode.Multiline = true;
             this.txtPointerSearcherCode.Name = "txtPointerSearcherCode";
             this.txtPointerSearcherCode.ReadOnly = true;
             this.txtPointerSearcherCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPointerSearcherCode.Size = new System.Drawing.Size(371, 177);
+            this.txtPointerSearcherCode.Size = new System.Drawing.Size(371, 156);
             this.txtPointerSearcherCode.TabIndex = 25;
             this.txtPointerSearcherCode.WordWrap = false;
             // 
@@ -1149,7 +1175,7 @@
             // 
             // btnPointerSearcherClear
             // 
-            this.btnPointerSearcherClear.Location = new System.Drawing.Point(112, 458);
+            this.btnPointerSearcherClear.Location = new System.Drawing.Point(115, 479);
             this.btnPointerSearcherClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnPointerSearcherClear.Name = "btnPointerSearcherClear";
             this.btnPointerSearcherClear.Size = new System.Drawing.Size(100, 28);
@@ -1160,7 +1186,7 @@
             // 
             // btnPointerSearcherFindPointers
             // 
-            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(220, 458);
+            this.btnPointerSearcherFindPointers.Location = new System.Drawing.Point(223, 479);
             this.btnPointerSearcherFindPointers.Margin = new System.Windows.Forms.Padding(4);
             this.btnPointerSearcherFindPointers.Name = "btnPointerSearcherFindPointers";
             this.btnPointerSearcherFindPointers.Size = new System.Drawing.Size(161, 28);
@@ -1172,10 +1198,10 @@
             // treePointerSearcherPointers
             // 
             this.treePointerSearcherPointers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 71);
+            this.treePointerSearcherPointers.Location = new System.Drawing.Point(389, 108);
             this.treePointerSearcherPointers.Margin = new System.Windows.Forms.Padding(4);
             this.treePointerSearcherPointers.Name = "treePointerSearcherPointers";
-            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 425);
+            this.treePointerSearcherPointers.Size = new System.Drawing.Size(615, 388);
             this.treePointerSearcherPointers.TabIndex = 23;
             this.treePointerSearcherPointers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreePointerSearcherPointers_AfterSelect);
             this.treePointerSearcherPointers.DoubleClick += new System.EventHandler(this.TreePointerSearcherPointers_DoubleClick);
@@ -2005,18 +2031,60 @@
             this.comboVitaCheatCodeType.TabIndex = 1;
             this.comboVitaCheatCodeType.SelectedIndexChanged += new System.EventHandler(this.ComboVitaCheatCodeType_SelectedIndexChanged);
             // 
-            // chkPointerSearcherB200
+            // lblPointerSearcherVitaCheatSeg1Address
             // 
-            this.chkPointerSearcherB200.AutoSize = true;
-            this.chkPointerSearcherB200.Checked = true;
-            this.chkPointerSearcherB200.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPointerSearcherB200.Location = new System.Drawing.Point(25, 423);
-            this.chkPointerSearcherB200.Margin = new System.Windows.Forms.Padding(4);
-            this.chkPointerSearcherB200.Name = "chkPointerSearcherB200";
-            this.chkPointerSearcherB200.Size = new System.Drawing.Size(315, 20);
-            this.chkPointerSearcherB200.TabIndex = 62;
-            this.chkPointerSearcherB200.Text = "Generate $B200 Codes (Only for VitaCheat z05+)";
-            this.chkPointerSearcherB200.UseVisualStyleBackColor = true;
+            this.lblPointerSearcherVitaCheatSeg1Address.AutoSize = true;
+            this.lblPointerSearcherVitaCheatSeg1Address.Location = new System.Drawing.Point(445, 76);
+            this.lblPointerSearcherVitaCheatSeg1Address.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPointerSearcherVitaCheatSeg1Address.Name = "lblPointerSearcherVitaCheatSeg1Address";
+            this.lblPointerSearcherVitaCheatSeg1Address.Size = new System.Drawing.Size(147, 16);
+            this.lblPointerSearcherVitaCheatSeg1Address.TabIndex = 63;
+            this.lblPointerSearcherVitaCheatSeg1Address.Text = "Vitacheat Seg 1 (vaddr)";
+            this.lblPointerSearcherVitaCheatSeg1Address.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtPointerSearcherVitaCheatSeg1Address
+            // 
+            this.txtPointerSearcherVitaCheatSeg1Address.BackColor = System.Drawing.SystemColors.WindowText;
+            this.txtPointerSearcherVitaCheatSeg1Address.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtPointerSearcherVitaCheatSeg1Address.Location = new System.Drawing.Point(607, 71);
+            this.txtPointerSearcherVitaCheatSeg1Address.Name = "txtPointerSearcherVitaCheatSeg1Address";
+            this.txtPointerSearcherVitaCheatSeg1Address.Size = new System.Drawing.Size(88, 22);
+            this.txtPointerSearcherVitaCheatSeg1Address.TabIndex = 64;
+            this.txtPointerSearcherVitaCheatSeg1Address.Text = "0x00000000";
+            // 
+            // lblPointerSearcherVitaCheatSeg1Range
+            // 
+            this.lblPointerSearcherVitaCheatSeg1Range.AutoSize = true;
+            this.lblPointerSearcherVitaCheatSeg1Range.Location = new System.Drawing.Point(720, 76);
+            this.lblPointerSearcherVitaCheatSeg1Range.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPointerSearcherVitaCheatSeg1Range.Name = "lblPointerSearcherVitaCheatSeg1Range";
+            this.lblPointerSearcherVitaCheatSeg1Range.Size = new System.Drawing.Size(120, 16);
+            this.lblPointerSearcherVitaCheatSeg1Range.TabIndex = 65;
+            this.lblPointerSearcherVitaCheatSeg1Range.Text = " Vitacheat (memsz)";
+            this.lblPointerSearcherVitaCheatSeg1Range.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtPointerSearcherVitaCheatSeg1Range
+            // 
+            this.txtPointerSearcherVitaCheatSeg1Range.BackColor = System.Drawing.SystemColors.WindowText;
+            this.txtPointerSearcherVitaCheatSeg1Range.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtPointerSearcherVitaCheatSeg1Range.Location = new System.Drawing.Point(867, 71);
+            this.txtPointerSearcherVitaCheatSeg1Range.Name = "txtPointerSearcherVitaCheatSeg1Range";
+            this.txtPointerSearcherVitaCheatSeg1Range.Size = new System.Drawing.Size(88, 22);
+            this.txtPointerSearcherVitaCheatSeg1Range.TabIndex = 66;
+            this.txtPointerSearcherVitaCheatSeg1Range.Text = "0x00000000";
+            // 
+            // chkIgnoreDBFiles
+            // 
+            this.chkIgnoreDBFiles.AutoSize = true;
+            this.chkIgnoreDBFiles.Checked = true;
+            this.chkIgnoreDBFiles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIgnoreDBFiles.Location = new System.Drawing.Point(25, 451);
+            this.chkIgnoreDBFiles.Margin = new System.Windows.Forms.Padding(4);
+            this.chkIgnoreDBFiles.Name = "chkIgnoreDBFiles";
+            this.chkIgnoreDBFiles.Size = new System.Drawing.Size(274, 20);
+            this.chkIgnoreDBFiles.TabIndex = 67;
+            this.chkIgnoreDBFiles.Text = "Ignore Vitacheat DB files (VitaCheat z05+)";
+            this.chkIgnoreDBFiles.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -2225,5 +2293,10 @@
         private System.Windows.Forms.Label lblPointerSearcherSeg0Range;
         private System.Windows.Forms.Label lblPointerSearcherSeg1Address;
         private System.Windows.Forms.CheckBox chkPointerSearcherB200;
+        private System.Windows.Forms.CheckBox chkIgnoreDBFiles;
+        private System.Windows.Forms.TextBox txtPointerSearcherVitaCheatSeg1Range;
+        private System.Windows.Forms.Label lblPointerSearcherVitaCheatSeg1Range;
+        private System.Windows.Forms.TextBox txtPointerSearcherVitaCheatSeg1Address;
+        private System.Windows.Forms.Label lblPointerSearcherVitaCheatSeg1Address;
     }
 }
