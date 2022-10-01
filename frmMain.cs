@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TempAR
@@ -456,7 +458,7 @@ namespace TempAR
             }
         }
 
-        private void AddPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
+        private async void AddPointerTree(List<PointerSearcherLog> pointers, TreeNode parent)
         {
             if (pointers == null)
                 return;
@@ -487,48 +489,44 @@ namespace TempAR
                 Color color = Color.Black;
                 Color rootedColor = Color.Transparent;
                 int PointerColor = 0;
-                PointerColor = SearchAdditionalDumps(pointers, memdump2, txtPointerSearcherAddress2.Text, index1, PointerColor);
-                PointerColor = SearchAdditionalDumps(pointers, memdump3, txtPointerSearcherAddress3.Text, index1, PointerColor);
-                PointerColor = SearchAdditionalDumps(pointers, memdump4, txtPointerSearcherAddress4.Text, index1, PointerColor);
-                PointerColor = SearchAdditionalDumps(pointers, memdump5, txtPointerSearcherAddress5.Text, index1, PointerColor);
-                PointerColor = SearchAdditionalDumps(pointers, memdump6, txtPointerSearcherAddress6.Text, index1, PointerColor);
+                string[] strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
+
+                PointerColor = await SearchAdditionalDumps(memdump2, txtPointerSearcherAddress2.Text, strArray, PointerColor);
+                PointerColor = await SearchAdditionalDumps(memdump3, txtPointerSearcherAddress3.Text, strArray, PointerColor);
+                PointerColor = await SearchAdditionalDumps(memdump4, txtPointerSearcherAddress4.Text, strArray, PointerColor);
+                PointerColor = await SearchAdditionalDumps(memdump5, txtPointerSearcherAddress5.Text, strArray, PointerColor);
+                PointerColor = await SearchAdditionalDumps(memdump6, txtPointerSearcherAddress6.Text, strArray, PointerColor);
 
                 switch (PointerColor)
                 {
                     case 0:
                         color = Color.Black;
                         PointerBlk += 1;
-                        //txtColorBlack.Text = PointerBlk.ToString();
                         break;
 
                     case 1:
                         color = Color.Green;
                         PointerGrn += 1;
-                        //txtColorGreen.Text = PointerGrn.ToString();
                         break;
 
                     case 2:
                         color = Color.Blue;
                         PointerBlu += 1;
-                        //txtColorBlue.Text = PointerBlu.ToString();
                         break;
 
                     case 3:
                         color = Color.DarkOrchid;
                         PointerPur += 1;
-                        //txtColorOrchid.Text = PointerPur.ToString();
                         break;
 
                     case 4:
                         color = Color.Red;
                         PointerRed += 1;
-                        //txtColorRed.Text = PointerRed.ToString();
                         break;
 
                     case 5:
                         color = Color.Chocolate;
                         PointerOrn += 1;
-                        //txtColorOrange.Text = PointerOrn.ToString();
                         break;
 
                     default:
@@ -539,14 +537,15 @@ namespace TempAR
                 string seg0Range = txtPointerSearcherSeg0Range.Text;
                 string seg1Start = txtPointerSearcherSeg1Addr.Text;
                 string seg1Range = txtPointerSearcherSeg1Range.Text;
-                string vitaCheatStart = txtPointerSearcherVitaCheatSeg1Address.Text;
-                string vitaCheatRange = txtPointerSearcherVitaCheatSeg1Range.Text;
 
                 if (Utils.CheckInsideSegments(pointers[index1].Address, seg0Start, seg0Range) ||
                     Utils.CheckInsideSegments(pointers[index1].Address, seg1Start, seg1Range))
                 {
                     rootedColor = Color.PowderBlue;
                 }
+
+                string vitaCheatStart = txtPointerSearcherVitaCheatSeg1Address.Text;
+                string vitaCheatRange = txtPointerSearcherVitaCheatSeg1Range.Text;
 
                 if (Utils.CheckInsideSegments(pointers[index1].Address, vitaCheatStart, vitaCheatRange))
                 {
@@ -587,23 +586,24 @@ namespace TempAR
             txtColorOrange.Text = PointerOrn.ToString();
         }
 
-        private int SearchAdditionalDumps(List<PointerSearcherLog> pointers, PointerSearcher dump, string txtAddress, int index1, int PointerColor)
+        private async Task<int> SearchAdditionalDumps(PointerSearcher dump, string txtAddress, string[] strArray, int PointerColor)
         {
-            if (!String.IsNullOrEmpty(txtAddress))
+            await Task.Run(() =>
             {
-                string[] strArray = ((treePointerSearcherPointers.SelectedNode == null ? "" : treePointerSearcherPointers.SelectedNode.FullPath + "\\") + pointers[index1]).Split('\\');
-                uint num = Utils.ParseNum(txtAddress, NumberStyles.AllowHexSpecifier);
-                if (num < memory_start) num += memory_start;
-                uint address = 0u;
-                for (int index2 = 0; index2 < strArray.Length; ++index2)
+                if (!String.IsNullOrEmpty(txtAddress))
                 {
-                    PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
-                    if (index2 == 0) address = pointerSearcherLog.Address;
-                    address = dump.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    uint num = Utils.ParseNum(txtAddress, NumberStyles.AllowHexSpecifier);
+                    if (num < memory_start) num += memory_start;
+                    uint address = 0u;
+                    for (int index2 = 0; index2 < strArray.Length; ++index2)
+                    {
+                        PointerSearcherLog pointerSearcherLog = new PointerSearcherLog(strArray[strArray.Length - 1 - index2], memory_start);
+                        if (index2 == 0) address = pointerSearcherLog.Address;
+                        address = dump.GetPointerAddress(address, pointerSearcherLog.Offset, pointerSearcherLog.Negative);
+                    }
+                    if ((int)num == (int)address) PointerColor += 1;
                 }
-                if ((int)num == (int)address) PointerColor += 1;
-            }
-
+            });
             return PointerColor;
         }
 
