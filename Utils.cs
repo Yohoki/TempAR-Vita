@@ -45,6 +45,17 @@ namespace TempAR
             }
         }
 
+        public static void ParseGroupNums(GroupBox groupBox)
+        {
+            foreach (Control x in groupBox.Controls)
+            {
+                if (x is TextBox box && x.Enabled)
+                {
+                    Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier, "Unable to Parse an Offset, make sure value is a valid hexadecimal number.");
+                }
+            }
+        }
+
 
         /// <summary>
         /// Open Directory

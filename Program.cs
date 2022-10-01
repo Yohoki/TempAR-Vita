@@ -10,7 +10,7 @@ namespace TempAR
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            using (var frmMain1 = new frmMain())
+            using (var frmMain1 = new FrmMain())
             {
                 Application.Run(frmMain1);
             }

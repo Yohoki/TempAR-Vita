@@ -1,6 +1,6 @@
 ﻿namespace TempAR
 {
-    partial class frmMain
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variables.
@@ -33,7 +33,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlConvertFormat = new System.Windows.Forms.Panel();
             this.lblCnvCodeTypes = new System.Windows.Forms.Label();
             this.cbCnvCodeTypes = new System.Windows.Forms.ComboBox();

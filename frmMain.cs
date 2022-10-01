@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-//using System.Reflection;
-//using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TempAR
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
-        private PointerSearcher memdump;
-        private PointerSearcher memdump2;
-        private PointerSearcher memdump3;
-        private PointerSearcher memdump4;
-        private PointerSearcher memdump5;
-        private PointerSearcher memdump6;
-        private uint memory_start;
-
         // Code types for converter tab
         private const string CT_CNV_CWCHEATPOPS = "CWCheat POPS";
 
@@ -56,7 +46,7 @@ namespace TempAR
         public int PointerRed { get; private set; }
         public int PointerOrn { get; private set; }
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
 
@@ -95,81 +85,81 @@ namespace TempAR
             comboVitaCheatB200.Text = VC_GEN_B2_NONE;
 
             //vita cheat button type drop list text and value
-            List<ButtonType> BTT1 = new List<ButtonType>
+            List<VitaCheatData> ControllerType = new List<VitaCheatData>
             {
-                new ButtonType() { BTT = 9, Name = "None" },
-                new ButtonType() { BTT = 0, Name = "Undefined" },
-                new ButtonType() { BTT = 1, Name = "PSVita" },
-                new ButtonType() { BTT = 2, Name = "PSTV" },
-                new ButtonType() { BTT = 4, Name = "DualShock 3" },
-                new ButtonType() { BTT = 8, Name = "DualShock 4" }
+                new VitaCheatData() { Type = 9, Name = "None" },
+                new VitaCheatData() { Type = 0, Name = "Undefined" },
+                new VitaCheatData() { Type = 1, Name = "PSVita" },
+                new VitaCheatData() { Type = 2, Name = "PSTV" },
+                new VitaCheatData() { Type = 4, Name = "DualShock 3" },
+                new VitaCheatData() { Type = 8, Name = "DualShock 4" }
             };
-            comboVitaCheatButtonType.DataSource = BTT1;
+            comboVitaCheatButtonType.DataSource = ControllerType;
             comboVitaCheatButtonType.DisplayMember = "Name";
-            comboVitaCheatButtonType.ValueMember = "BTT";
+            comboVitaCheatButtonType.ValueMember = "Type";
 
             //vita cheat button drop list text and value
-            List<Button> BT1 = new List<Button>
+            List<VitaCheatData> ButtonType1 = new List<VitaCheatData>
             {
-                new Button() { BT = 0, Name = "Null" },
-                new Button() { BT = 1, Name = "Select" },
-                new Button() { BT = 8, Name = "Start" },
-                new Button() { BT = 10, Name = "UP" },
-                new Button() { BT = 20, Name = "Right" },
-                new Button() { BT = 40, Name = "Down" },
-                new Button() { BT = 80, Name = "Left" },
-                new Button() { BT = 100, Name = "L" },
-                new Button() { BT = 200, Name = "R" },
-                new Button() { BT = 1000, Name = "Triangle" },
-                new Button() { BT = 2000, Name = "Circle" },
-                new Button() { BT = 4000, Name = "Cross" },
-                new Button() { BT = 8000, Name = "Square" }
+                new VitaCheatData() { Type = 0,    Name = "Null" },
+                new VitaCheatData() { Type = 1,    Name = "Select" },
+                new VitaCheatData() { Type = 8,    Name = "Start" },
+                new VitaCheatData() { Type = 10,   Name = "UP" },
+                new VitaCheatData() { Type = 20,   Name = "Right" },
+                new VitaCheatData() { Type = 40,   Name = "Down" },
+                new VitaCheatData() { Type = 80,   Name = "Left" },
+                new VitaCheatData() { Type = 100,  Name = "L" },
+                new VitaCheatData() { Type = 200,  Name = "R" },
+                new VitaCheatData() { Type = 1000, Name = "Triangle" },
+                new VitaCheatData() { Type = 2000, Name = "Circle" },
+                new VitaCheatData() { Type = 4000, Name = "Cross" },
+                new VitaCheatData() { Type = 8000, Name = "Square" }
             };
-            comboVitaCheatButton.DataSource = BT1;
+            comboVitaCheatButton.DataSource = ButtonType1;
             comboVitaCheatButton.DisplayMember = "Name";
-            comboVitaCheatButton.ValueMember = "BT";
+            comboVitaCheatButton.ValueMember = "Type";
 
             //vita cheat 2nd button drop list text and value
-            List<Button2> BT2 = new List<Button2>
+            List<VitaCheatData> ButtonType2 = new List<VitaCheatData>
             {
-                new Button2() { BT2 = 0,    Name = "Null" },
-                new Button2() { BT2 = 1,    Name = "Select" },
-                new Button2() { BT2 = 8,    Name = "Start" },
-                new Button2() { BT2 = 10,   Name = "UP" },
-                new Button2() { BT2 = 20,   Name = "Right" },
-                new Button2() { BT2 = 40,   Name = "Down" },
-                new Button2() { BT2 = 80,   Name = "Left" },
-                new Button2() { BT2 = 100,  Name = "L" },
-                new Button2() { BT2 = 200,  Name = "R" },
-                new Button2() { BT2 = 1000, Name = "Triangle" },
-                new Button2() { BT2 = 2000, Name = "Circle" },
-                new Button2() { BT2 = 4000, Name = "Cross" },
-                new Button2() { BT2 = 8000, Name = "Square" }
+                new VitaCheatData() { Type = 0,    Name = "Null" },
+                new VitaCheatData() { Type = 1,    Name = "Select" },
+                new VitaCheatData() { Type = 8,    Name = "Start" },
+                new VitaCheatData() { Type = 10,   Name = "UP" },
+                new VitaCheatData() { Type = 20,   Name = "Right" },
+                new VitaCheatData() { Type = 40,   Name = "Down" },
+                new VitaCheatData() { Type = 80,   Name = "Left" },
+                new VitaCheatData() { Type = 100,  Name = "L" },
+                new VitaCheatData() { Type = 200,  Name = "R" },
+                new VitaCheatData() { Type = 1000, Name = "Triangle" },
+                new VitaCheatData() { Type = 2000, Name = "Circle" },
+                new VitaCheatData() { Type = 4000, Name = "Cross" },
+                new VitaCheatData() { Type = 8000, Name = "Square" }
             };
-            comboVitaCheatButton2.DataSource = BT2;
+            comboVitaCheatButton2.DataSource = ButtonType2;
             comboVitaCheatButton2.DisplayMember = "Name";
-            comboVitaCheatButton2.ValueMember = "BT2";
+            comboVitaCheatButton2.ValueMember = "Type";
 
             //vita cheat Condition drop list text and value
-            List<Condition> OP1 = new List<Condition>
+            List<VitaCheatData> ConditionalType = new List<VitaCheatData>
             {
-                new Condition() { OP = 99, Name = "None" },
-                new Condition() { OP = 0,  Name = "(=) Equal to X 8bit" },
-                new Condition() { OP = 1,  Name = "(=) Equal to X 16bit" },
-                new Condition() { OP = 2,  Name = "(=) Equal to X 32bit" },
-                new Condition() { OP = 3,  Name = "(<>) Unequal to X (8bit)" },
-                new Condition() { OP = 4,  Name = "(<>) Unequal to X (16bit)" },
-                new Condition() { OP = 5,  Name = "(<>) Unequal to X (32bit)" },
-                new Condition() { OP = 6,  Name = "(>) Greater than X (8bit)" },
-                new Condition() { OP = 7,  Name = "(>) Greater than X (16bit)" },
-                new Condition() { OP = 8,  Name = "(>) Greater than X (32bit)" },
-                new Condition() { OP = 9,  Name = "(<) Less than X (8bit)" },
-                new Condition() { OP = 10, Name = "(<) Less than X (16bit)" },
-                new Condition() { OP = 11, Name = "(<) Less than X (32bit)" }
+                new VitaCheatData() { Type = 99, Name = "None" },
+                new VitaCheatData() { Type = 0,  Name = "(=) Equal to X 8bit" },
+                new VitaCheatData() { Type = 1,  Name = "(=) Equal to X 16bit" },
+                new VitaCheatData() { Type = 2,  Name = "(=) Equal to X 32bit" },
+                new VitaCheatData() { Type = 3,  Name = "(<>) Unequal to X (8bit)" },
+                new VitaCheatData() { Type = 4,  Name = "(<>) Unequal to X (16bit)" },
+                new VitaCheatData() { Type = 5,  Name = "(<>) Unequal to X (32bit)" },
+                new VitaCheatData() { Type = 6,  Name = "(>) Greater than X (8bit)" },
+                new VitaCheatData() { Type = 7,  Name = "(>) Greater than X (16bit)" },
+                new VitaCheatData() { Type = 8,  Name = "(>) Greater than X (32bit)" },
+                new VitaCheatData() { Type = 9,  Name = "(<) Less than X (8bit)" },
+                new VitaCheatData() { Type = 10, Name = "(<) Less than X (16bit)" },
+                new VitaCheatData() { Type = 11, Name = "(<) Less than X (32bit)" }
             };
-            comboVitaCheatCondition.DataSource = OP1;
+            comboVitaCheatCondition.DataSource = ConditionalType;
             comboVitaCheatCondition.DisplayMember = "Name";
-            comboVitaCheatCondition.ValueMember = "OP";
+            comboVitaCheatCondition.ValueMember = "Type";
 
         }
 
@@ -336,10 +326,18 @@ namespace TempAR
         // Pointer Searcher Tab starts here
         //
         //
+        private PointerSearcher memdump;
+        private PointerSearcher memdump2;
+        private PointerSearcher memdump3;
+        private PointerSearcher memdump4;
+        private PointerSearcher memdump5;
+        private PointerSearcher memdump6;
+        private uint memory_start;
+
         private void BtnPointerSearcherFindPointers_Click(object sender, EventArgs e)
         {
-            var address1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
-            var maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
+            uint address1 = Utils.ParseNum(txtPointerSearcherAddress1.Text, NumberStyles.AllowHexSpecifier);
+            uint maxOffset = Utils.ParseNum(txtPointerSearcherMaxOffset.Text, NumberStyles.AllowHexSpecifier);
             memory_start = Utils.ParseNum(txtBaseAddress.Text, NumberStyles.AllowHexSpecifier);
 
             memdump  = new PointerSearcher(txtPointerSearcherMemDump1.Text, memory_start);
@@ -1159,19 +1157,8 @@ namespace TempAR
             Utils.ParseNum(txtVitaCheatAddressGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Address Gap, make sure value is a valid hexadecimal number.");
             Utils.ParseNum(txtVitaCheatValueGap.Text, NumberStyles.AllowHexSpecifier, "Unable to parse Value Gap, make sure value is a valid hexadecimal number.");
             Utils.ParseNum(numericVitaCheatCompressions.Text, NumberStyles.AllowHexSpecifier, "You shouldn't be seeing this error! My bad, dude. Error: Compressions thingy is fucked.");
-            CheckValidNumbers(groupVitaCheatAddress1Offset);
-            CheckValidNumbers(groupVitaCheatAddress2Offset);
-        }
-
-        private void CheckValidNumbers(GroupBox groupBox)
-        {
-            foreach (Control x in groupBox.Controls)
-            {
-                if (x is TextBox box && x.Enabled)
-                {
-                    Utils.ParseNum(box.Text, NumberStyles.AllowHexSpecifier, "Unable to Parse an Offset, make sure value is a valid hexadecimal number.");
-                }
-            }
+            Utils.ParseGroupNums(groupVitaCheatAddress1Offset);
+            Utils.ParseGroupNums(groupVitaCheatAddress2Offset);
         }
     }
 }
